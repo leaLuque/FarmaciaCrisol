@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>baseDatos.productos.loteProducto</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;baseDatos ::
+        Package&nbsp;productos ::
+        Module&nbsp;loteProducto
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="baseDatos.productos.loteProducto-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="baseDatos.productos.loteProducto-module.html">Module baseDatos.productos.loteProducto</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-docstring">'waldo'</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">baseDatos</tt><tt class="py-op">.</tt><tt class="py-name">productos</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module baseDatos.productos.objetoBase=baseDatos.productos.objetoBase-module.html"><a title="baseDatos.productos.objetoBase" class="py-name" href="#" onclick="return doclink('link-0', 'objetoBase', 'link-0');">objetoBase</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class baseDatos.productos.objetoBase.ObjetoBase=baseDatos.productos.objetoBase.ObjetoBase-class.html"><a title="baseDatos.productos.objetoBase.ObjetoBase" class="py-name" href="#" onclick="return doclink('link-1', 'ObjetoBase', 'link-1');">ObjetoBase</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">sqlalchemy</tt><tt class="py-op">.</tt><tt class="py-name">orm</tt> <tt class="py-keyword">import</tt> <tt class="py-name">aliased</tt> </tt>
+<a name="LoteProducto"></a><div id="LoteProducto-def"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="LoteProducto-toggle" onclick="return toggle('LoteProducto');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html">LoteProducto</a><tt class="py-op">(</tt><tt class="py-base-class">ObjetoBase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LoteProducto-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable baseDatos.clientes.cliente.Cliente.requeridos=baseDatos.clientes.cliente.Cliente-class.html#requeridos,Variable baseDatos.productos.loteProducto.LoteProducto.requeridos=baseDatos.productos.loteProducto.LoteProducto-class.html#requeridos,Variable baseDatos.productos.medicamento.Medicamento.requeridos=baseDatos.productos.medicamento.Medicamento-class.html#requeridos,Variable baseDatos.productos.medicamento.Monodroga.requeridos=baseDatos.productos.medicamento.Monodroga-class.html#requeridos,Variable baseDatos.productos.producto.Lote.requeridos=baseDatos.productos.producto.Lote-class.html#requeridos,Variable baseDatos.productos.producto.Presentacion.requeridos=baseDatos.productos.producto.Presentacion-class.html#requeridos,Variable baseDatos.productos.producto.Producto.requeridos=baseDatos.productos.producto.Producto-class.html#requeridos"><a title="baseDatos.clientes.cliente.Cliente.requeridos
+baseDatos.productos.loteProducto.LoteProducto.requeridos
+baseDatos.productos.medicamento.Medicamento.requeridos
+baseDatos.productos.medicamento.Monodroga.requeridos
+baseDatos.productos.producto.Lote.requeridos
+baseDatos.productos.producto.Presentacion.requeridos
+baseDatos.productos.producto.Producto.requeridos" class="py-name" href="#" onclick="return doclink('link-2', 'requeridos', 'link-2');">requeridos</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"cod_barra"</tt><tt class="py-op">,</tt> <tt class="py-string">"cod_lote"</tt><tt class="py-op">)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable baseDatos.clientes.cliente.Cliente.noRequeridos=baseDatos.clientes.cliente.Cliente-class.html#noRequeridos,Variable baseDatos.productos.loteProducto.LoteProducto.noRequeridos=baseDatos.productos.loteProducto.LoteProducto-class.html#noRequeridos,Variable baseDatos.productos.medicamento.Medicamento.noRequeridos=baseDatos.productos.medicamento.Medicamento-class.html#noRequeridos,Variable baseDatos.productos.medicamento.Monodroga.noRequeridos=baseDatos.productos.medicamento.Monodroga-class.html#noRequeridos,Variable baseDatos.productos.producto.Lote.noRequeridos=baseDatos.productos.producto.Lote-class.html#noRequeridos,Variable baseDatos.productos.producto.Presentacion.noRequeridos=baseDatos.productos.producto.Presentacion-class.html#noRequeridos,Variable baseDatos.productos.producto.Producto.noRequeridos=baseDatos.productos.producto.Producto-class.html#noRequeridos"><a title="baseDatos.clientes.cliente.Cliente.noRequeridos
+baseDatos.productos.loteProducto.LoteProducto.noRequeridos
+baseDatos.productos.medicamento.Medicamento.noRequeridos
+baseDatos.productos.medicamento.Monodroga.noRequeridos
+baseDatos.productos.producto.Lote.noRequeridos
+baseDatos.productos.producto.Presentacion.noRequeridos
+baseDatos.productos.producto.Producto.noRequeridos" class="py-name" href="#" onclick="return doclink('link-3', 'noRequeridos', 'link-3');">noRequeridos</a></tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.__init__"></a><div id="LoteProducto.__init__-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="LoteProducto.__init__-toggle" onclick="return toggle('LoteProducto.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id_lote</tt><tt class="py-op">,</tt> <tt class="py-param">id_producto</tt><tt class="py-op">,</tt> <tt class="py-param">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.__init__-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">=</tt> <tt class="py-name">id_lote</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">=</tt> <tt class="py-name">id_producto</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt> <tt class="py-op">=</tt> <tt class="py-name">cantidad</tt> </tt>
+</div><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.getIdLote"></a><div id="LoteProducto.getIdLote-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="LoteProducto.getIdLote-toggle" onclick="return toggle('LoteProducto.getIdLote');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#getIdLote">getIdLote</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.getIdLote-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.getIdLote-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.getIdProducto"></a><div id="LoteProducto.getIdProducto-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="LoteProducto.getIdProducto-toggle" onclick="return toggle('LoteProducto.getIdProducto');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#getIdProducto">getIdProducto</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.getIdProducto-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.getIdProducto-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.getCantidad"></a><div id="LoteProducto.getCantidad-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="LoteProducto.getCantidad-toggle" onclick="return toggle('LoteProducto.getCantidad');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#getCantidad">getCantidad</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.getCantidad-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.getCantidad-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt> </tt>
+</div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.setIdLote"></a><div id="LoteProducto.setIdLote-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="LoteProducto.setIdLote-toggle" onclick="return toggle('LoteProducto.setIdLote');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#setIdLote">setIdLote</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id_lote</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.setIdLote-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.setIdLote-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">=</tt> <tt class="py-name">id_lote</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.setIdProducto"></a><div id="LoteProducto.setIdProducto-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="LoteProducto.setIdProducto-toggle" onclick="return toggle('LoteProducto.setIdProducto');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#setIdProducto">setIdProducto</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id_producto</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.setIdProducto-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.setIdProducto-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">=</tt> <tt class="py-name">id_producto</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.setCantidad"></a><div id="LoteProducto.setCantidad-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="LoteProducto.setCantidad-toggle" onclick="return toggle('LoteProducto.setCantidad');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#setCantidad">setCantidad</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.setCantidad-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.setCantidad-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt> <tt class="py-op">=</tt> <tt class="py-name">cantidad</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="LoteProducto.buscarTodosLoteProducto"></a><div id="LoteProducto.buscarTodosLoteProducto-def"><a name="L33"></a><tt class="py-lineno">33</tt> <a class="py-toggle" href="#" id="LoteProducto.buscarTodosLoteProducto-toggle" onclick="return toggle('LoteProducto.buscarTodosLoteProducto');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#buscarTodosLoteProducto">buscarTodosLoteProducto</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">sesion</tt><tt class="py-op">,</tt> <tt class="py-param">producto</tt><tt class="py-op">,</tt> <tt class="py-param">lote</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.buscarTodosLoteProducto-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.buscarTodosLoteProducto-expanded"><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sesion</tt><tt class="py-op">.</tt><tt class="py-name">query</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name" targets="Module baseDatos.productos.producto=baseDatos.productos.producto-module.html"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-4', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-5', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-6', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                 <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">==</tt> <tt id="link-7" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-7', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">==</tt> <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-8', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">baja</tt> <tt class="py-op">==</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">order_by</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-9', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="LoteProducto.buscarLoteProductoPorProducto"></a><div id="LoteProducto.buscarLoteProductoPorProducto-def"><a name="L40"></a><tt class="py-lineno">40</tt> <a class="py-toggle" href="#" id="LoteProducto.buscarLoteProductoPorProducto-toggle" onclick="return toggle('LoteProducto.buscarLoteProductoPorProducto');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#buscarLoteProductoPorProducto">buscarLoteProductoPorProducto</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">sesion</tt><tt class="py-op">,</tt> <tt class="py-param">producto</tt><tt class="py-op">,</tt> <tt class="py-param">lote</tt><tt class="py-op">,</tt> <tt class="py-param">varBusq</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.buscarLoteProductoPorProducto-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.buscarLoteProductoPorProducto-expanded"><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sesion</tt><tt class="py-op">.</tt><tt class="py-name">query</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-10', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-11', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-12', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                 <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">==</tt> <tt id="link-13" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-13', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">==</tt> <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">               <tt id="link-14" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-14', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt> <tt class="py-op">==</tt> <tt class="py-name">varBusq</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">order_by</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-15', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="LoteProducto.buscarLoteProductoPorLote"></a><div id="LoteProducto.buscarLoteProductoPorLote-def"><a name="L48"></a><tt class="py-lineno">48</tt> <a class="py-toggle" href="#" id="LoteProducto.buscarLoteProductoPorLote-toggle" onclick="return toggle('LoteProducto.buscarLoteProductoPorLote');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#buscarLoteProductoPorLote">buscarLoteProductoPorLote</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">sesion</tt><tt class="py-op">,</tt> <tt class="py-param">producto</tt><tt class="py-op">,</tt> <tt class="py-param">lote</tt><tt class="py-op">,</tt> <tt class="py-param">varBusq</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.buscarLoteProductoPorLote-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.buscarLoteProductoPorLote-expanded"><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sesion</tt><tt class="py-op">.</tt><tt class="py-name">query</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-16', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-17', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-18', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                 <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">==</tt> <tt id="link-19" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-19', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">==</tt> <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">               <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt> <tt class="py-op">==</tt> <tt class="py-name">varBusq</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">order_by</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-20', 'producto', 'link-4');">producto</a></tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.descontarCantidad"></a><div id="LoteProducto.descontarCantidad-def"><a name="L56"></a><tt class="py-lineno">56</tt> <a class="py-toggle" href="#" id="LoteProducto.descontarCantidad-toggle" onclick="return toggle('LoteProducto.descontarCantidad');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#descontarCantidad">descontarCantidad</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.descontarCantidad-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.descontarCantidad-expanded"><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">&lt;</tt><tt class="py-name">cantidad</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">=</tt><tt class="py-number">0</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">-=</tt><tt class="py-name">cantidad</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="LoteProducto.aumentarCantidad"></a><div id="LoteProducto.aumentarCantidad-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="LoteProducto.aumentarCantidad-toggle" onclick="return toggle('LoteProducto.aumentarCantidad');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#aumentarCantidad">aumentarCantidad</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.aumentarCantidad-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.aumentarCantidad-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">+=</tt><tt class="py-name">cantidad</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="LoteProducto.buscarLoteProducto"></a><div id="LoteProducto.buscarLoteProducto-def"><a name="L66"></a><tt class="py-lineno">66</tt> <a class="py-toggle" href="#" id="LoteProducto.buscarLoteProducto-toggle" onclick="return toggle('LoteProducto.buscarLoteProducto');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#buscarLoteProducto">buscarLoteProducto</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">sesion</tt><tt class="py-op">,</tt> <tt class="py-param">var1</tt><tt class="py-op">,</tt> <tt class="py-param">var2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.buscarLoteProducto-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.buscarLoteProducto-expanded"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sesion</tt><tt class="py-op">.</tt><tt class="py-name">query</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt> <tt class="py-op">==</tt> <tt class="py-name">var1</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">==</tt> <tt class="py-name">var2</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">classmethod</tt> </tt>
+<a name="LoteProducto.buscarFraccionable"></a><div id="LoteProducto.buscarFraccionable-def"><a name="L70"></a><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="LoteProducto.buscarFraccionable-toggle" onclick="return toggle('LoteProducto.buscarFraccionable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="baseDatos.productos.loteProducto.LoteProducto-class.html#buscarFraccionable">buscarFraccionable</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-param">sesion</tt><tt class="py-op">,</tt> <tt class="py-param">producto</tt><tt class="py-op">,</tt> <tt class="py-param">lote</tt><tt class="py-op">,</tt> <tt class="py-param">presentacion</tt><tt class="py-op">,</tt> <tt class="py-param">var</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LoteProducto.buscarFraccionable-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LoteProducto.buscarFraccionable-expanded"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-name">producto_1</tt> <tt class="py-op">=</tt> <tt class="py-name">aliased</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-21', 'producto', 'link-4');">producto</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-name">producto_2</tt> <tt class="py-op">=</tt> <tt class="py-name">aliased</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="baseDatos.productos.producto" class="py-name" href="#" onclick="return doclink('link-22', 'producto', 'link-4');">producto</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sesion</tt><tt class="py-op">.</tt><tt class="py-name">query</tt><tt class="py-op">(</tt><tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt><tt class="py-op">,</tt> <tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt><tt class="py-op">,</tt> <tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                            <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">,</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">cantidad</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">producto_1</tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt> <tt class="py-op">==</tt> <tt class="py-name">presentacion</tt><tt class="py-op">.</tt><tt class="py-name">tipo</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">producto_1</tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt> <tt class="py-op">==</tt> <tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">id_medicamento</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">presentacion</tt><tt class="py-op">.</tt><tt class="py-name">sub_presentacion</tt> <tt class="py-op">==</tt> <tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">id_presentacion</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt> <tt class="py-op">==</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_producto</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">id_lote</tt> <tt class="py-op">==</tt> <tt class="py-name">lote</tt><tt class="py-op">.</tt><tt class="py-name">codigo</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">producto_1</tt><tt class="py-op">.</tt><tt class="py-name">codigo_barra</tt> <tt class="py-op">==</tt> <tt class="py-name">var</tt><tt class="py-op">)</tt><tt class="py-op">.</tt>\ </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">producto_2</tt><tt class="py-op">.</tt><tt class="py-name">baja</tt><tt class="py-op">==</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 23 15:12:08 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
