@@ -1,0 +1,78 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+            <img src="logo.png" width="300" height="100">
+        </div>
+        <div class="col-xs-4 text-rright">
+          <h2><strong>REMITO</strong></h2>
+          <h10> Número: {numero} </h10><br>
+          <h10> Fecha: {fecha} </h10>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Datos Cliente</h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Nombre: {nombre} <br>
+                Apellido: {apellido}<br>
+                Direccion: {direccion}<br>
+                Telefono: {telefono} <br>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- / end client details section -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <h4>Descripcion</h4>
+            </th>
+            <th>
+              <h4>Cantidad</h4>
+            </th>
+            <th>
+              <h4>Precio Unitario</h4>
+            </th>
+            <th>
+              <h4>Sub Total</h4>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {contenido}
+
+        </tbody>
+      </table>
+      <div class="row text-right">
+        <div class="col-xs-2 col-xs-offset-8">
+          <p>
+            <strong>
+            Total: <br>
+            </strong>
+          </p>
+        </div>
+        <div class="col-xs-2">
+          <strong>
+          {total} <br>
+          </strong>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

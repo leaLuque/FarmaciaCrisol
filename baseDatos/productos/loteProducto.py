@@ -1,0 +1,81 @@
+__author__ = 'waldo'
+from baseDatos.objetoBase import ObjetoBase
+from sqlalchemy.orm import aliased
+
+class LoteProducto(ObjetoBase):
+    requeridos = ("cod_barra", "cod_lote")
+    noRequeridos=()
+
+    def __init__(self, id_lote, id_producto, cantidad):
+        self.id_lote = id_lote
+        self.id_producto = id_producto
+        self.cantidad = cantidad
+
+    def getIdLote(self):
+        return self.id_lote
+
+    def getIdProducto(self):
+        return self.id_producto
+
+    def getCantidad(self):
+        return self.cantidad
+
+    def setIdLote(self, id_lote):
+        self.id_lote = id_lote
+
+    def setIdProducto(self, id_producto):
+        self.id_producto = id_producto
+
+    def setCantidad(self, cantidad):
+        self.cantidad = cantidad
+
+    @classmethod
+    def buscarTodosLoteProducto(cls, sesion, producto, lote):
+        return sesion.query(producto.codigo_barra, producto.id_medicamento, producto.id_presentacion,
+                 lote.codigo, cls.cantidad).\
+        filter(cls.id_producto == producto.codigo_barra, cls.id_lote == lote.codigo, producto.baja == False).\
+        order_by(producto.codigo_barra)
+
+    @classmethod
+    def buscarLoteProductoPorProducto(cls, sesion, producto, lote, varBusq):
+        return sesion.query(producto.codigo_barra, producto.id_medicamento, producto.id_presentacion,
+                 lote.codigo, cls.cantidad).\
+        filter(cls.id_producto == producto.codigo_barra, cls.id_lote == lote.codigo,
+               producto.codigo_barra == varBusq).\
+        order_by(producto.codigo_barra)
+
+    @classmethod
+    def buscarLoteProductoPorLote(cls, sesion, producto, lote, varBusq):
+        return sesion.query(producto.codigo_barra, producto.id_medicamento, producto.id_presentacion,
+                 lote.codigo, cls.cantidad).\
+        filter(cls.id_producto == producto.codigo_barra, cls.id_lote == lote.codigo,
+               lote.codigo == varBusq).\
+        order_by(producto.codigo_barra)
+
+
+    def descontarCantidad(self,cantidad):
+        if self.cantidad<cantidad:
+            self.cantidad=0
+        else:
+            self.cantidad-=cantidad
+
+    def aumentarCantidad(self,cantidad):
+        self.cantidad+=cantidad
+
+    @classmethod
+    def buscarLoteProducto(cls, sesion, var1, var2):
+        return sesion.query(cls).filter(cls.id_producto == var1, cls.id_lote == var2)
+
+    @classmethod
+    def buscarFraccionable(cls, sesion, producto, lote, presentacion, var):
+        producto_1 = aliased(producto)
+        producto_2 = aliased(producto)
+        return sesion.query(producto_2.codigo_barra, producto_2.id_medicamento, producto_2.id_presentacion,
+                            lote.codigo, cls.cantidad).\
+                filter(producto_1.id_presentacion == presentacion.tipo).\
+                filter(producto_1.id_medicamento == producto_2.id_medicamento).\
+                filter(presentacion.sub_presentacion == producto_2.id_presentacion).\
+                filter(producto_2.codigo_barra == cls.id_producto).\
+                filter(cls.id_lote == lote.codigo).\
+                filter(producto_1.codigo_barra == var).\
+                filter(producto_2.baja==False)
