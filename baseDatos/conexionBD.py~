@@ -1,7 +1,9 @@
-__author__ = 'waldo'
+__author__ = 'leandro'
 
 from sqlalchemy import *
 from sqlalchemy.orm import *
+from psycopg2 import connect
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from baseDatos.productos import Presentacion, Producto, Lote, Medicamento, Monodroga, LoteProducto
 from baseDatos.clientes import Cliente
@@ -9,20 +11,67 @@ from baseDatos.ventas import Remito, DetalleRemito, Factura, DetalleFactura, Not
 from baseDatos.obraSocial import ObraSocial, Descuento, FacturaLiquidacion, CobroObraSocial
 from baseDatos.usuario import Usuario
 
+
 class Conexion():
-    def __init__(self):
-        self.engine = create_engine('postgresql://postgres:password@localhost:5432/farmacia')
+
+    """
+        Clase encargada de establecer la comunicacion de la
+        aplicacion con el motor de Base de Datos
+    """
+
+
+    def __init__(self,user="postgres", host="localhost", password="password"):
+        """
+            Establece la conexion con la Base de Datos PostgreSQL
+        :param user Nombre de usuario de PostgreSQL:
+        :param host Host de la BD PostgreSQL:
+        :param password Password de la BD PostgreSQL:
+        :return:
+        """
+
+        try:
+            con = None
+            con = connect(user=user, host=host, password=password)
+            dbnombre = 'farmacia'
+            con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+            cur = con.cursor()
+            cur.execute('CREATE DATABASE ' + dbnombre)
+            cur.close()
+            con.close()
+        except:
+            pass
+
+        cadena_conexion = "postgresql://" + user + ":" + password + "@" + host + ":5432/farmacia"
+        self.engine = create_engine(cadena_conexion)
         self.metadata = MetaData(self.engine)
 
     def crearSesion(self):
+        """
+            Crea la sesion correspondiente para poder
+            interactuar con la BD.
+        :return Sesion con la BD:
+        """
         Session = sessionmaker(bind=self.engine)
         session = Session()
         return session
 
 class CreacionTabla():
 
-    def __init__(self):
-        bd = Conexion()
+    """
+        Clase encargada de la creacion de las tablas en la Base de Datos
+    """
+
+    def __init__(self, user="postgres", host="localhost", password="password"):
+        """
+            Establece una conexion con la BD y define todas las tablas
+            que seran usadas por la aplicacion. Si las tablas ya se encuentran
+            creadas las mismas no se vuelven a crear.
+        :param user Usuario de la BD:
+        :param host Host de la BD:
+        :param password Password de la BD:
+        :return:
+        """
+        bd = Conexion(user,host,password)
         metadata = MetaData()
 
         Lote.tabla = Table('lote', metadata,
@@ -115,7 +164,9 @@ class CreacionTabla():
             Column('nro_nota',Integer,ForeignKey("nota_credito.numero"),primary_key=True),
             Column('nro_linea',Integer,primary_key=True),
             Column('nro_factura',Integer),
-            Column('linea_factura',Integer)
+            Column('linea_factura',Integer),
+            Column('descuento',Float),
+            Column('importe',Float)
         )
 
         Factura.tabla=Table('factura',metadata,

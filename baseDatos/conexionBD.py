@@ -215,6 +215,7 @@ class CreacionTabla():
 		)
 
         metadata.create_all(bd.engine)
+		##Mapeo de clases a sus tablas correspondientes
         mapper(Medicamento, Medicamento.tabla)
         mapper(Producto, Producto.tabla)
         mapper(Monodroga, Monodroga.tabla)
