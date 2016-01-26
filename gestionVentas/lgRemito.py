@@ -21,7 +21,6 @@ from genComprobantes import generarFactura, generarRremito
 from validarDatos import ValidarDatos
 
 
-
 class Remito(CRUDWidget,Ui_vtnRemito):
     """
         Clase que modela la logica de las operaciones
@@ -645,7 +644,11 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 self.obraSocialSeleccionada=None
 
     def validadores(self):
-        pass
+        ##Esta parte analiza los campos requeridos para el cliente
+        camposRequeridos = [ getattr(self, "lineRazonSocial") ]
+        ValidarDatos.setValidador(camposRequeridos)
+        camposRequeridos = [ getattr(self, "lineNumero") ]
+        ValidarDatos.setValidador(camposRequeridos)
 
     def cargar_obras(self):
         """
@@ -758,8 +761,8 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 self.factura=FacturaModel(FacturaModel.generarNumero(self.sesion))
                 self.factura.guardar(self.sesion)
             self.remitosAgregados+=1
-            if self.obraSocialSeleccionada==None:
-                obraSocial=None
+            if self.obraSocialSeleccionada == None:
+                obraSocial = None
             else:
                 obraSocial=ObraSocialModel.getObraSocial(self.obraSocialSeleccionada,self.sesion)
             for row,item in enumerate(self.obtenerValoresTabla(self.tableRemitos)):
@@ -831,14 +834,15 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             cuando el usuario indica que quiere cancelar la operacion
         :return:
         """
-        if self.factura!=None:
-            ok=QtGui.QMessageBox.warning(self,"Aviso","Existe una factura creada")
+        if self.factura != None:
+            ok = QtGui.QMessageBox.warning(self,"Aviso","Existe una factura creada")
             if ok:
+                self.factura.anular()
                 self.limpiarForm()
                 for remito in self.remitosCobrados:
                     remito.setCobrado(None)
                     remito.modificar(self.sesion)
-                self.factura.anular()
+
 
 
 

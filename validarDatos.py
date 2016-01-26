@@ -46,6 +46,10 @@ class ValidarDatos():
                 regexp = QRegExp("[a-zA-Zéáúóíñ0-9\-\, ]*")
             elif c == "fmedicamento":
                 regexp = QRegExp("[a-zA-Zéáúóíñ0-9 ]*")
+            elif c == "frazonsocial":
+                regexp = QRegExp("[a-zA-Zéáúóíñ0-9 ]*")
+            elif c == "fnroremito":
+                regexp = QRegExp("[0-9]*")
 
             validator = QRegExpValidator(regexp)
             campo.setValidator(validator)

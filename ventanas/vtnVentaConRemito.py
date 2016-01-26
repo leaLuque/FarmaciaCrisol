@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaConRemito.ui'
 #
-# Created: Tue Jan 26 17:25:00 2016
+# Created: Tue Jan 26 19:47:45 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!

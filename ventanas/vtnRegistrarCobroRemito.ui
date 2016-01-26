@@ -36,7 +36,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineRazonSocial"/>
+         <widget class="QLineEdit" name="lineRazonSocial">
+          <property name="accessibleDescription">
+           <string>frazonsocial</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnBuscarOs">
@@ -97,7 +101,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineNumero"/>
+         <widget class="QLineEdit" name="lineNumero">
+          <property name="accessibleDescription">
+           <string>fnroremito</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="btnBuscarRemito">

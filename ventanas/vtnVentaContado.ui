@@ -107,7 +107,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineMedicamento"/>
+         <widget class="QLineEdit" name="lineMedicamento">
+          <property name="statusTip">
+           <string>Ingrese nombre del medicamento (solo letras y números)</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fmedicamento</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_3">
@@ -117,7 +124,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineMonodroga"/>
+         <widget class="QLineEdit" name="lineMonodroga">
+          <property name="statusTip">
+           <string>Ingrese nombre de la monodroga</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fmonodroga</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

@@ -50,7 +50,10 @@ class Remito(ObjetoBase):
         :return True(cobrado) o False(no cobrado):
         :rtype Boolean:
         """
-        return self.cobrado
+        if self.cobrado == None:
+            return False
+        else:
+            return True
 
     def setCobrado(self,numeroFactura):
         """

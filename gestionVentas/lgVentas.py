@@ -22,6 +22,7 @@ from baseDatos.ventas import NotaCredito as NotaCreditoModel
 from baseDatos.ventas import DetalleNotaCredito as DetalleNCModel
 from baseDatos.ventas import CobroCliente as CobroClienteModel
 from genComprobantes import generarNotaCredito,generarFactura
+from validarDatos import ValidarDatos
 
 
 
@@ -625,7 +626,12 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             self.gbProducto.hide()
 
     def validadores(self):
-        pass
+
+        camposRequeridos = [getattr(self,"lineMonodroga")]
+        ValidarDatos.setValidador(camposRequeridos)
+
+        camposRequeridos = [getattr(self,"lineMedicamento")]
+        ValidarDatos.setValidador(camposRequeridos)
 
     def cargar_obras(self):
         """

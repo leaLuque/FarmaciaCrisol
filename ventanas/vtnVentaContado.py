@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaContado.ui'
 #
-# Created: Sat Jan 23 13:23:12 2016
+# Created: Tue Jan 26 19:51:44 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -193,7 +193,11 @@ class Ui_vtnVentaContado(object):
         item.setText(_translate("vtnVentaContado", "Direccion", None))
         self.gbProducto.setTitle(_translate("vtnVentaContado", "Producto", None))
         self.label.setText(_translate("vtnVentaContado", "Medicamento", None))
+        self.lineMedicamento.setStatusTip(_translate("vtnVentaContado", "Ingrese nombre del medicamento (solo letras y números)", None))
+        self.lineMedicamento.setAccessibleDescription(_translate("vtnVentaContado", "fmedicamento", None))
         self.label_3.setText(_translate("vtnVentaContado", "Monodroga", None))
+        self.lineMonodroga.setStatusTip(_translate("vtnVentaContado", "Ingrese nombre de la monodroga", None))
+        self.lineMonodroga.setAccessibleDescription(_translate("vtnVentaContado", "fmonodroga", None))
         item = self.tableProductos.horizontalHeaderItem(0)
         item.setText(_translate("vtnVentaContado", "Codigo de Barra", None))
         item = self.tableProductos.horizontalHeaderItem(1)
