@@ -42,6 +42,10 @@ class ValidarDatos():
                 regexp = QRegExp(".+\d{0,5}")
             elif c == "nya":
                 regexp = QRegExp("[a-zA-Zéáúóíñ]{2,15}(\s[a-zA-Zéáúóíñ]{2,15})*")
+            elif c == "fmonodroga":
+                regexp = QRegExp("[a-zA-Zéáúóíñ0-9\-\, ]*")
+            elif c == "fmedicamento":
+                regexp = QRegExp("[a-zA-Zéáúóíñ0-9 ]*")
 
             validator = QRegExpValidator(regexp)
             campo.setValidator(validator)

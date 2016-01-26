@@ -38,7 +38,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineNombre"/>
+           <widget class="QLineEdit" name="lineNombre">
+            <property name="statusTip">
+             <string>Ingrese Nombre del cliente (solo letras)</string>
+            </property>
+            <property name="accessibleDescription">
+             <string>nya</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="lblApellido">
@@ -48,7 +55,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineApellido"/>
+           <widget class="QLineEdit" name="lineApellido">
+            <property name="statusTip">
+             <string>Ingrese Apellido del cliente (solo letras)</string>
+            </property>
+            <property name="accessibleDescription">
+             <string>nya</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -62,7 +76,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineDni"/>
+           <widget class="QLineEdit" name="lineDni">
+            <property name="statusTip">
+             <string>Ingrese DNI del cliente (exactamente 8 números)</string>
+            </property>
+            <property name="accessibleDescription">
+             <string>dni</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="btnBuscarCliente">
@@ -122,38 +143,46 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <item row="1" column="0" colspan="2">
-         <widget class="QGroupBox" name="gbMonodroga">
-          <property name="title">
-           <string>Monodroga</string>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Medicamento</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="lineEdit_4"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_10">
-               <property name="text">
-                <string>Nombre</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QPushButton" name="btnBuscarProducto">
-               <property name="text">
-                <string>Buscar</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
+        <item>
+         <widget class="QLineEdit" name="lineMedicamento">
+          <property name="statusTip">
+           <string>Ingrese nombre del medicamento (solo letras y números)</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fMedicamento</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Monodroga</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineMonodroga">
+          <property name="statusTip">
+           <string>Ingrese nombre de la monodroga</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fmonodroga</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0" colspan="2">
          <widget class="QTableWidget" name="tableProductos">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -202,30 +231,7 @@
           </column>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QGroupBox" name="gbMedicamento">
-          <property name="title">
-           <string>Medicamento</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <item>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_9">
-               <property name="text">
-                <string>Nombre Comercial</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="lineEdit_3"/>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="3" column="0">
+        <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <spacer name="horizontalSpacer_3">
@@ -358,6 +364,21 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineNombre</tabstop>
+  <tabstop>lineApellido</tabstop>
+  <tabstop>lineDni</tabstop>
+  <tabstop>btnBuscarCliente</tabstop>
+  <tabstop>tableClientes</tabstop>
+  <tabstop>lineMedicamento</tabstop>
+  <tabstop>lineMonodroga</tabstop>
+  <tabstop>tableProductos</tabstop>
+  <tabstop>btnActualizar</tabstop>
+  <tabstop>tableRemito</tabstop>
+  <tabstop>btnEliminar</tabstop>
+  <tabstop>btnAceptar</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

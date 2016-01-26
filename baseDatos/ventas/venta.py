@@ -1,37 +1,82 @@
 # -*- coding:utf-8 -*-
-from baseDatos.productos import ObjetoBase
-from baseDatos.productos import Producto
+__author__ = "leandro"
+
 from datetime import date
 
+from baseDatos.productos import ObjetoBase
+from baseDatos.productos import Producto
+
+
 class Remito(ObjetoBase):
+    """
+        Clase que modela la logica del Remito
+    """
+
     def __init__(self, numero,cliente):
+        """
+            Constructor de la clase Remito
+        :param numero Numero de Remito:
+        :param cliente DNI del cliente:
+        :return:
+        """
         ObjetoBase.__init__(self)
-        self.numero=numero
-        self.cliente=cliente
-        self.fecha_emision=date.today()
-        self.cobrado=None
-        self.anulado=False
+        self.numero = numero
+        self.cliente = cliente
+        self.fecha_emision = date.today()
+        self.cobrado = None
+        self.anulado = False
 
     def getFechaEmision(self):
+        """
+            Devuelve la fecha de emision del Remito
+        :return Fecha de Emitsion:
+        :rtype Datetime:
+        """
         return self.fecha_emision
 
     def getCliente(self):
+        """
+            Devuelve el Dni del cliente asociado con
+            el Remito
+        :return DNI del cliente:
+        :rtype Integer:
+        """
         return self.cliente
 
     def getCobrado(self):
+        """
+            Devuelve si el Remito se encuentra
+            cobrado o no
+        :return True(cobrado) o False(no cobrado):
+        :rtype Boolean:
+        """
         return self.cobrado
 
     def setCobrado(self,numeroFactura):
+        """
+            Indica como cobrado al Remito
+        :param numeroFactura Numero de Factura asociada al Remito:
+        :return:
+        """
         self.cobrado=numeroFactura
 
     def anular(self):
+        """
+            Anula el Remito
+        :return:
+        """
         self.anulado=True
-
-    def estoyCobrado(self):
-        return self.cobrado
 
     @classmethod
     def getRemito(cls,numero,sesion):
+        """
+            Devuelve el Remito con el numero dado. Si no
+            existe devuelve None
+        :param numero Numero de Sesion:
+        :param sesion Sesion actual con la Base de Datos:
+        :return Remito:
+        :rtype Objeto de Tipo Remito:
+        """
         query=sesion.query(Remito).filter(Remito.numero==numero, Remito.baja==False)
         if query.count()==0:
             return None
@@ -41,12 +86,28 @@ class Remito(ObjetoBase):
 
     @classmethod
     def buscarDetalles(self,numero,sesion):
+        """
+            Devuelve los detalles asociados con el numero
+            de remito provisto
+        :param numero Numero de Remito:
+        :param sesion Sesion actual con la Base de Datos:
+        :return DetalleRemito:
+        :rtype Objeto de DetalleRemito:
+        """
         return sesion.query(DetalleRemito).filter(DetalleRemito.id_remito==numero, DetalleRemito.baja==False)
 
     @classmethod
     def existeRemito(cls,numero,sesion):
-        query=sesion.query(Remito).filter(Remito.numero==numero,Remito.baja==False)
-        if query.count()==0:
+        """
+            Indica si el numero de remito pasado como
+            parametro, existe en el sistema
+        :param numero:
+        :param sesion:
+        :return Remito:
+        :rtype Objeto de tipo Remito:
+        """
+        query = sesion.query(Remito).filter(Remito.numero == numero,Remito.baja == False)
+        if query.count() == 0:
             return None
         else:
             for a in query:
@@ -54,18 +115,50 @@ class Remito(ObjetoBase):
 
     @classmethod
     def obtenerNumero(cls,sesion):
+        """
+            Obtiene el siguiente numero de remito
+        :param sesion:
+        :return Numero de Remito:
+        :rtype Integer:
+        """
         return sesion.query(cls).count()+1
 
     @classmethod
     def getDetalle(cls,remito,linea,sesion):
+        """
+            Devuelve el detalle particular de un remito dado
+        :param remito Numero de remito:
+        :param linea Numero de linea del remito:
+        :param sesion Sesion actual con la Base de Datos:
+        :return :
+        :rtype :
+        """
         return sesion.query(DetalleRemito).filter(DetalleRemito.id_remito==remito,
                                                   DetalleRemito.nro_linea==linea)
+
     @classmethod
     def obtenerTodosRemitos(cls,sesion):
+        """
+            Obtiene todos los Remitos en el sistema
+        :param sesion Sesion Actual con la Base de Datos:
+        :return Remtiso actuales en el sistema:
+        :rtype Coleccion de objetos tipo Remito:
+        """
         return sesion.query(cls).filter(cls.anulado==False).filter(cls.baja==False)
 
 class DetalleRemito(ObjetoBase):
+    """
+        Clase que modela la logica del Detalle de Remito
+    """
     def __init__(self,id_remito,nro_linea,producto,cantidad):
+        """
+            Constructor de la Clase Detalle Remito
+        :param id_remito:
+        :param nro_linea:
+        :param producto:
+        :param cantidad:
+        :return:
+        """
         ObjetoBase.__init__(self)
         self.id_remito=id_remito
         self.nro_linea=nro_linea
@@ -73,43 +166,102 @@ class DetalleRemito(ObjetoBase):
         self.cantidad=cantidad
 
     def getIdRemito(self):
+        """
+            Devuelve el numero de remito al cual
+            pertenece el Detalles
+        :return Numeo de Remito:
+        :rtype Integer:
+        """
         return self.id_remito
 
-    def subTotal(self,sesion):
-        query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
-        print (query.importe)
+    ###def subTotal(self,sesion):
+    ###    query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
+    ###    print (query.importe)
 
 class Factura(ObjetoBase):
+    """
+        Clase que modela la lógica de Factura
+    """
     def __init__(self,numero):
+        """
+            Constructor de la clase Factura
+        :param numero Numero de la Factura:
+        :return:
+        """
         self.numero=numero
         self.fecha_emision=date.today()
         self.anulado=False
         self.nota_credito=None
 
     def getFechaEmision(self):
+        """
+            Devuelve la fecha emision de la Factura
+        :return Fecha de emision:
+        :rtype Datetime:
+        """
         return self.fecha_emision
 
     def getDetalles(self,sesion):
+        """
+            Devuelve los detalles correspondientes a una factura
+        :param sesion Sesion actual con la Base de Datos:
+        :return Coleccion de los detalles de Factura:
+        :rtype Coleccion de objetos tipo DetalleFactura:
+        """
         return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==self.numero)
 
     def anular(self):
+        """
+            Anula la factura
+        :return:
+        """
         self.anulado=True
 
     def setNC(self,nota):
+        """
+            Establece el numero de Nota de Credito
+            a la Factura
+        :param nota Numero de Nota de Crédito:
+        :return:
+        """
         self.nota_credito=nota
 
     def getNC(self):
+        """
+            Devuelve la Nota de Crédito asociada
+            con la factura
+        :return Numero de la Nota de Crédito:
+        :rtype Integer:
+        """
         return self.nota_credito
 
     def getFechaEmision(self):
+        """
+            Devuelve la fecha de emision de la factura
+        :return Fecha de emision de la factura:
+        :rtype Datetime:
+        """
         return self.fecha_emision
 
-    @classmethod
-    def buscarDetalles(self,numero,sesion):
-        return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==numero)
+    ##@classmethod
+    ##def buscarDetalles(self,numero,sesion):
+    ##    """
+    ##        Devuelve los detalles asocias
+    ##   :return:
+    ##    :rtype:
+    ##    """
+    ##   return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==numero)
 
     @classmethod
     def existeFactura(cls,numero,sesion):
+        """
+            Indica si una determinada factura existe o no. Si existe
+            devuelve la Factura en cuestion, sino None.
+        :param numero Número de Factura:
+        :param sesion Sesion actual con la Base de Datos:
+        :return Factura:
+        :rtype Objeto de tipo Factura:
+        """
         query=sesion.query(Factura).filter(Factura.numero==numero)
         if query.count()==0:
             return None
@@ -119,43 +271,92 @@ class Factura(ObjetoBase):
 
     @classmethod
     def generarNumero(cls,sesion):
+        """
+            Genera el numero de la Factura
+        :param sesion Sesion actual con la Base de Datos:
+        :return Número de Factura:
+        :rtype Integer:
+        """
         return sesion.query(cls).count()+1
 
 class DetalleFactura(ObjetoBase):
+    """
+        Clase que modela la logica del Detalle de Factura
+    """
 
     def __init__(self,id_factura,producto,cantidad,importe, descuento, nro_linea):
+        """
+            Constructor de la clase DetalleFactura
+        :param id_factura Numero de factura:
+        :param producto Código de barra del producto:
+        :param cantidad Cantidad de Producto:
+        :param importe Importe Unitario de Producto:
+        :param descuento Descuento de Producto:
+        :param nro_linea Núḿero de linea del Detalle:
+        :return:
+        """
         self.id_factura=id_factura
-        #TODO Resolver el problema de la enumeracion de la linea
-        self.producto=producto
-        self.cantidad=cantidad
-        self.descuento=descuento
-        self.importe=importe
-        self.nro_linea=nro_linea
+        self.producto = producto
+        self.cantidad = cantidad
+        self.descuento = descuento
+        self.importe = importe
+        self.nro_linea = nro_linea
 
     def getDescuento(self):
+        """
+            Devuelve el descuento asociado con el detalle
+        :return Descuento del Detalle:
+        :rtype Float
+        """
         return self.descuento
 
     def getIdFactura(self):
+        """
+            Devuelve el numero de factura asociado con
+            el detalle
+        :return NUmero de Factura del Detalle:
+        :rtype Integer:
+        """
         return self.id_factura
 
-    def subTotal(self,sesion):
-        query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
-        return query.importe*self.cantidad
+    ##def subTotal(self,sesion):
+    ##    """
+    ##
+    ##    :param sesion Sesion actual con la Base de Datos:
+    ##    :return Subtotal:
+    ##    :rtype Float:
+    ##    """
+    ##    query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
+    ##    return query.importe*self.cantidad
 
 class NotaCredito(ObjetoBase):
+    """
+        Clase que modela la lógica de la Nota de Crédito
+    """
 
     def __init__(self,numero):
+        """
+            Constructor de la clase Nota de Crédito
+        :param numero Número de la Nota de Crédito:
+        :return:
+        """
         self.numero=numero
         self.fecha_emision=date.today()
         self.anulado=False
 
-    def getDetalles(self,sesion):
-        pass
-
     def anular(self):
+        """
+            Anula la Nota de Crédito
+        """
         self.anulado = True
 
     def getTotal(self,sesion):
+        """
+            Devuelve el total de la Nota de Crédito
+        :param sesion Sesion actual con la Base de Datos:
+        :return Total de la Nota de Crédito:
+        :rtype Float:
+        """
         query = sesion.query(DetalleNotaCredito).filter(DetalleNotaCredito.nro_nota == self.numero)
         total = 0
         for value in query:
@@ -164,20 +365,52 @@ class NotaCredito(ObjetoBase):
 
     @classmethod
     def generarNumero(cls,sesion):
+        """
+            Genera el número de la Nota de Crédito
+        :param sesion Sesion actual con la Base de Datos:
+        :return Número actual de la Nota de Crédito:
+        :rtype Integer:
+        """
         return sesion.query(cls).count()+1
 
-    def getDetalle(cls,nota,linea,sesion):
-        return sesion.query(DetalleNotaCredito).filter(DetalleNotaCredito.nro_nota==nota,
-                                                       DetalleNotaCredito.nro_linea==linea)
+    ##@classmethod
+    ##def getDetalle(cls,nota,linea,sesion):
+    ##    """
+    ##        Obtiene un detalle particular de un determinada
+    ##        Nota Credito
+    ##    :param nota Número de Nota de Crédito:
+    ##    :param linea Número de Linea de la Nota de Crédito:
+    ##    :param sesion Sesion actual con la Base de Datos:
+    ##    :return:
+    ##    :rtype Objeto de tipo DetalleNotaCredito:
+    ##    """
+    ##    return sesion.query(DetalleNotaCredito).filter(DetalleNotaCredito.nro_nota==nota,
+    ##                                                       DetalleNotaCredito.nro_linea==linea)
 
     @classmethod
     def getNotaCredito(cls,sesion,numero):
+        """
+            Devuelve una Nota de Crédito particular
+        :param sesion Sesion actual con la Base de Datos:
+        :param numero Número de la Nota de Crédito:
+        :return Nota de Crédito:
+        :rtype Objeto de tipo NotaCrédito
+        """
         return sesion.query(NotaCredito).filter(NotaCredito.numero == numero).first()
 
-
 class DetalleNotaCredito(ObjetoBase):
-
+    """
+        Clase que modela la lógica del Detalle de la Nota de Crédito
+    """
     def __init__(self,nro_nota,nro_linea,nro_factura,linea_factura):
+        """
+            Constructor de la clase DetalleNotaCredito
+        :param nro_nota Número de la Nota de Crédito:
+        :param nro_linea Número de la linea del Detalles:
+        :param nro_factura Número de la Factura:
+        :param linea_factura Número de la linea del Detalle de Factura:
+        :return:
+        """
         self.nro_nota=nro_nota
         self.nro_linea=nro_linea
         self.nro_factura=nro_factura
@@ -186,14 +419,37 @@ class DetalleNotaCredito(ObjetoBase):
         self.descuento=0
 
     def setImporte(self,importe):
+        """
+            Establece el valor del importe del Detalle de
+            la Nota de Crédito
+        :param importe Valor de Importe:
+        :return:
+        """
         self.importe=importe
 
     def setDescuento(self,descuento):
+        """
+            Establece el valor del descuento del Detalle de
+            la Nota de Crédito
+        :param descuento Valor de Descuento:
+        :return:
+        """
         self.descuento=descuento
 
 class CobroCliente(ObjetoBase):
+    """
+        Clase que modela la logica del Cobro al Cliente
+    """
 
     def __init__(self,numero,factura,tipo,importe):
+        """
+            Constructor de la clase CobroCliente
+        :param numero Número de cobro:
+        :param factura Número de factura:
+        :param tipo Tipo de Cobro:
+        :param importe Importe cobrado:
+        :return:
+        """
         self.numero=numero
         self.id_factura=factura
         self.tipo=tipo
@@ -201,10 +457,23 @@ class CobroCliente(ObjetoBase):
         self.nota_credito=None
 
     def setNC(self,nro_nota):
+        """
+            Establece el número de nota de crédito
+            asociado con el cobro.
+        :param nro_nota Número de Nota de Crédito:
+        :return:
+        """
         self.nota_credito=nro_nota
 
     @classmethod
     def obtenerNumero(cls,sesion):
+        """
+            Obtiene el numero actual del cobro
+            a emplear.
+        :param sesion Sesion actual con la Base de Datos:
+        :return Número de cobro:
+        :rtype Integer:
+        """
         return sesion.query(cls).count()+1
 
     @classmethod
@@ -213,9 +482,10 @@ class CobroCliente(ObjetoBase):
             Retorna el total de todas las facturas
             abonadas con el numero de Nota de Credito
             pasado como parametro
-        :param sesion:
-        :param notac:
-        :return:
+        :param sesion Sesion actual con la Base de Datos:
+        :param notac Numero de la Nota de Credito:
+        :return Total de la Nota de Crédito:
+        :rtype Integer:
         """
         query = sesion.query(CobroCliente).filter(CobroCliente.nota_credito == notac)
         total = 0

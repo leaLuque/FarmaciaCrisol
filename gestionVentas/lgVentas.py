@@ -1,8 +1,12 @@
 # -*- coding:utf-8 -*-
 __author__ = 'leandro'
 
-from baseDatos.ventas.venta import NotaCredito
+
+from datetime import *
+
 from PyQt4 import QtGui
+
+from baseDatos.ventas.venta import NotaCredito
 from gui import MdiWidget
 from ventanas import Ui_vtnDevolucionDeCliente, Ui_vtnReintegroCliente, Ui_vtnVentaContado
 from baseDatos.obraSocial import ObraSocial as ObraSocialModel
@@ -17,8 +21,27 @@ from baseDatos.ventas import DetalleFactura as DetalleFacturaModel
 from baseDatos.ventas import NotaCredito as NotaCreditoModel
 from baseDatos.ventas import DetalleNotaCredito as DetalleNCModel
 from baseDatos.ventas import CobroCliente as CobroClienteModel
-from datetime import *
 from genComprobantes import generarNotaCredito,generarFactura
+
+
+
+def getContenidoTabla(tabla):
+    """
+        Devuelve la informacion actual de la tabla en
+        un arreglo que contiene info de cada fila
+    :param tabla QTableWidget de la ventana:
+    :return Arreglo con informacion:
+    """
+    dataRow = []
+    dataTable = []
+
+    for row in range(0,tabla.rowCount()):
+        for col in range(0,tabla.columnCount()):
+            dataRow.append(str(tabla.item(row,col).text()))
+        dataTable.append(dataRow)
+        dataRow = []
+
+    return dataTable
 
 class DevolucionDeCliente(MdiWidget, Ui_vtnDevolucionDeCliente):
 
@@ -426,16 +449,18 @@ class VentaContado(MdiWidget, Ui_vtnVentaContado):
         self.cargar_obras()
         self.lineCuit.setEnabled(False)
         self.lineObra.setEnabled(False)
+        self.lineMedicamento.returnPressed.connect(self.buscarXMedicamento)
+        self.lineMonodroga.returnPressed.connect(self.buscarXMonodroga)
         self.btnBuscar.setEnabled(False)
         self.tableObra.setVisible(False)
         self.tableObra.itemDoubleClicked.connect(self.cargarObra)
         self.tableProductos.itemDoubleClicked.connect(self.agregarProducto)
         self.btnBuscar.pressed.connect(self.limpiarObra)
-        self.productosAgregados=0
         self.btnAceptar.pressed.connect(self.confirmarOperacion)
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
         self.rbtnObra.pressed.connect(self.habilitarObras)
         self.btnActualizar.pressed.connect(self.actualizar)
+        self.productosAgregados=0
         self.lotesVentas={}
         self.facturaCobrada=False
         self.obraSocialSeleccionada=None
@@ -443,6 +468,50 @@ class VentaContado(MdiWidget, Ui_vtnVentaContado):
         self.data = []
         self.cargarProductosSinObra()
 
+
+    def buscarXMonodroga(self):
+        """
+            Filtra los productos segun la
+            Monodroga indicada por el usuario
+        :return:
+        """
+
+        nombreMonodroga = str(self.lineMonodroga.text())
+        if len(nombreMonodroga) == 0:
+            if self.obraSocialSeleccionada == None:
+                self.cargarProductosSinObra()
+            else:
+                self.cargar_productos(self.obraSocialSeleccionada)
+        else:
+            data = getContenidoTabla(self.tableProductos)
+            data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
+            self.limpiarTabla(self.tableProductos)
+            for row, value in enumerate(data):
+                self.tableProductos.insertRow(row)
+                for col in range(0,self.tableProductos.columnCount()):
+                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+
+    def buscarXMedicamento(self):
+        """
+            Filtra los productos segun el
+            Medicamento indicada por el usuario
+        :return:
+        """
+
+        nombreMedicamento= str(self.lineMedicamento.text())
+        if len(nombreMedicamento) == 0:
+            if self.obraSocialSeleccionada == None:
+                self.cargarProductosSinObra()
+            else:
+                self.cargar_productos(self.obraSocialSeleccionada)
+        else:
+            data = getContenidoTabla(self.tableProductos)
+            data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
+            self.limpiarTabla(self.tableProductos)
+            for row, value in enumerate(data):
+                self.tableProductos.insertRow(row)
+                for col in range(0,self.tableProductos.columnCount()):
+                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
 
     def actualizar(self):
         """

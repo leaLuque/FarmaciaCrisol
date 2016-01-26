@@ -18,7 +18,7 @@ from baseDatos.ventas import CobroCliente as CobroClienteModel
 from baseDatos.ventas import Factura as FacturaModel
 from baseDatos.ventas import DetalleFactura as DetalleFacturaModel
 from genComprobantes import generarFactura, generarRremito
-
+from validarDatos import ValidarDatos
 
 def getContenidoTabla(tabla):
     """
@@ -39,6 +39,10 @@ def getContenidoTabla(tabla):
     return dataTable
 
 class Remito(CRUDWidget,Ui_vtnRemito):
+    """
+        Clase que modela la logica de las operaciones
+        Devolucion y Modificacion de Remito
+    """
 
     def __init__(self, mdi):
         MdiWidget.__init__(self, mdi)
@@ -200,14 +204,18 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         gui.lineNumero.returnPressed.connect(gui.buscarRemito)
         return gui
 
-class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
+class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
     """
         Clase que modela la logica de la operacion
         de Venta con Remito
     """
 
-
     def __init__(self, mdi):
+        """
+            Setea las propiedades de la ventana y variables
+        :param mdi Ventana Contenedora:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
@@ -215,8 +223,9 @@ class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
         self.lineDni.returnPressed.connect(self.buscarClienteXDNI)
         self.lineApellido.returnPressed.connect(self.buscarClienteXApellido)
         self.lineNombre.returnPressed.connect(self.buscarClienteXNombre)
+        self.lineMedicamento.returnPressed.connect(self.buscarXMedicamento)
+        self.lineMonodroga.returnPressed.connect(self.buscarXMonodroga)
         self.tableClientes.itemDoubleClicked.connect(self.cargarLines)
-        self.btnBuscarProducto.pressed.connect(self.buscarProducto)
         self.tableProductos.itemDoubleClicked.connect(self.agregarProducto)
         self.tableRemito.itemDoubleClicked.connect(self.cambiarCantidad)
         self.btnEliminar.pressed.connect(self.eliminarDetalle)
@@ -259,12 +268,16 @@ class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
         )
 
     def validadores(self):
-        pass
-        #TODO HACER ESTO
-        ##Esta parte analiza los campos requeridos para el cliente
-        #self.camposRequeridos = [ getattr(self, "line%s" % campo.title()) for campo in ClienteModel.requeridos ]
-        #self.validarDatos = ValidarDatos()
-        #ValidarDatos.setValidador(self.camposRequeridos)
+         ##Esta parte analiza los campos requeridos para el cliente
+        requeridos = ["nombre", "apellido", "dni"]
+        camposRequeridos = [ getattr(self, "line%s" % campo.title()) for campo in requeridos ]
+        ValidarDatos.setValidador(camposRequeridos)
+
+        camposRequeridos = [getattr(self,"lineMonodroga")]
+        ValidarDatos.setValidador(camposRequeridos)
+
+        camposRequeridos = [getattr(self,"lineMedicamento")]
+        ValidarDatos.setValidador(camposRequeridos)
 
     def buscarCliente(self):
         """
@@ -343,6 +356,46 @@ class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
                     for col in range(0,self.tableClientes.columnCount()):
                          self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
 
+    def buscarXMonodroga(self):
+        """
+            Filtra los productos segun la
+            Monodroga indicada por el usuario
+        :return:
+        """
+
+        nombreMonodroga = str(self.lineMonodroga.text())
+        if len(nombreMonodroga) == 0:
+            self.limpiarTabla(self.tableProductos)
+            self.cargar_productos()
+        else:
+            data = getContenidoTabla(self.tableProductos)
+            data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
+            self.limpiarTabla(self.tableProductos)
+            for row, value in enumerate(data):
+                self.tableProductos.insertRow(row)
+                for col in range(0,self.tableProductos.columnCount()):
+                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+
+    def buscarXMedicamento(self):
+        """
+            Filtra los productos segun el
+            Medicamento indicada por el usuario
+        :return:
+        """
+
+        nombreMedicamento= str(self.lineMedicamento.text())
+        if len(nombreMedicamento) == 0:
+            self.limpiarTabla(self.tableProductos)
+            self.cargar_productos()
+        else:
+            data = getContenidoTabla(self.tableProductos)
+            data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
+            self.limpiarTabla(self.tableProductos)
+            for row, value in enumerate(data):
+                self.tableProductos.insertRow(row)
+                for col in range(0,self.tableProductos.columnCount()):
+                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+
     def cargarLines(self):
         """
             Carga los lines correspondientes con la informacion
@@ -367,9 +420,6 @@ class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
         self.tableClientes.hide()
         self.gbProducto.setVisible(True)
         self.gbRemito.setVisible(True)
-
-    def buscarProducto(self):
-        print("Buscando producto")
 
     def descontarCantidad(self,detalle,producto,cantidad):
         """
@@ -465,8 +515,8 @@ class VentaConRemito(MdiWidget, Ui_vtnVentaConRemito):
         self.lineNombre.clear()
         self.lineApellido.setEnabled(True)
         self.lineApellido.clear()
-        self.lineEdit_3.clear()
-        self.lineEdit_4.clear()
+        self.lineMedicamento.clear()
+        self.lineMonodroga.clear()
         self.lineEdit_3.setEnabled(True)
         self.lineEdit_4.setEnabled(True)
         self.limpiarTabla(self.tableClientes)
@@ -636,11 +686,11 @@ class RegistrarCobroRemito(MdiWidget, Ui_vtnRegistrarCobroRemito):
             if len(numeroRemito)==0:
                 self.showMsjEstado("No se ha ingresado numero de remito")
             else:
-                self.remitoActual=RemitoModel.existeRemito(int(numeroRemito),self.sesion)
+                self.remitoActual = RemitoModel.existeRemito(int(numeroRemito),self.sesion)
                 if self.remitoActual== None:
                     QtGui.QMessageBox.warning(self,"Advertencia","El remito ingresado no existe")
                 else:
-                    if self.remitoActual.estoyCobrado()!=None:
+                    if self.remitoActual.getCobrado() == True:
                         QtGui.QMessageBox.information(self,"Aviso","El remito ingresado ya sido cobrado")
                     else:
                         detallesRemitos=RemitoModel.buscarDetalles(int(numeroRemito),self.sesion)
@@ -807,5 +857,5 @@ class RegistrarCobroRemito(MdiWidget, Ui_vtnRegistrarCobroRemito):
                 self.factura.anular()
 
 
-    #TODO CONTROLAR QUE NO SE PUEDE SELECCIONAR OTRA OBRA SI EXISTE UNA FACTURA
+
 
