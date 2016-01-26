@@ -116,3 +116,21 @@ class MdiWidget(QtGui.QWidget):
         :return:
         """
         return str(tabla.item(tabla.currentItem().row(), 0).text())
+
+    def getContenidoTabla(self,tabla):
+        """
+            Devuelve la informacion actual de la tabla en
+            un arreglo que contiene info de cada fila
+        :param tabla QTableWidget de la ventana:
+        :return Arreglo con informacion:
+        """
+        dataRow = []
+        dataTable = []
+
+        for row in range(0,tabla.rowCount()):
+            for col in range(0,tabla.columnCount()):
+                dataRow.append(str(tabla.item(row,col).text()))
+            dataTable.append(dataRow)
+            dataRow = []
+
+        return dataTable

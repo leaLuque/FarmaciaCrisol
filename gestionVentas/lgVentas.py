@@ -7,7 +7,7 @@ from datetime import *
 from PyQt4 import QtGui
 
 from baseDatos.ventas.venta import NotaCredito
-from gui import MdiWidget
+from gui import CRUDWidget,MdiWidget
 from ventanas import Ui_vtnDevolucionDeCliente, Ui_vtnReintegroCliente, Ui_vtnVentaContado
 from baseDatos.obraSocial import ObraSocial as ObraSocialModel
 from baseDatos.productos import Producto as ProductoModel
@@ -25,25 +25,7 @@ from genComprobantes import generarNotaCredito,generarFactura
 
 
 
-def getContenidoTabla(tabla):
-    """
-        Devuelve la informacion actual de la tabla en
-        un arreglo que contiene info de cada fila
-    :param tabla QTableWidget de la ventana:
-    :return Arreglo con informacion:
-    """
-    dataRow = []
-    dataTable = []
-
-    for row in range(0,tabla.rowCount()):
-        for col in range(0,tabla.columnCount()):
-            dataRow.append(str(tabla.item(row,col).text()))
-        dataTable.append(dataRow)
-        dataRow = []
-
-    return dataTable
-
-class DevolucionDeCliente(MdiWidget, Ui_vtnDevolucionDeCliente):
+class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
 
     """
         Clase encargada de modelar la funcionalidad de Devolucion al Cliente
@@ -258,7 +240,7 @@ class DevolucionDeCliente(MdiWidget, Ui_vtnDevolucionDeCliente):
         else:
             self.limpiarVentana()
 
-class ReintegroCliente(MdiWidget, Ui_vtnReintegroCliente):
+class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
 
     """
     Clase encargada de modelar la funcionalidad de Reintegro al cliente
@@ -435,7 +417,7 @@ class ReintegroCliente(MdiWidget, Ui_vtnReintegroCliente):
         self.tableOs.setEnabled(True)
         self.lineNumeroFac.setEnabled(True)
 
-class VentaContado(MdiWidget, Ui_vtnVentaContado):
+class VentaContado(CRUDWidget, Ui_vtnVentaContado):
 
     """
         Clase encargada de modelar el comportamiento de Venta al Contado
@@ -483,7 +465,7 @@ class VentaContado(MdiWidget, Ui_vtnVentaContado):
             else:
                 self.cargar_productos(self.obraSocialSeleccionada)
         else:
-            data = getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos)
             data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -505,7 +487,7 @@ class VentaContado(MdiWidget, Ui_vtnVentaContado):
             else:
                 self.cargar_productos(self.obraSocialSeleccionada)
         else:
-            data = getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos)
             data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):

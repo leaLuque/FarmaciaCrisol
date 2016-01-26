@@ -6,7 +6,7 @@ from datetime import date
 from PyQt4 import QtGui
 
 from ventanas import Ui_vtnRegistrarCobroRemito, Ui_vtnVentaConRemito, Ui_vtnRemito
-from gui import MdiWidget,CRUDWidget
+from gui import CRUDWidget,MdiWidget
 from baseDatos.clientes import Cliente as ClienteModel
 from baseDatos import Producto as ProductoModel
 from baseDatos.ventas import Remito as RemitoModel
@@ -20,23 +20,7 @@ from baseDatos.ventas import DetalleFactura as DetalleFacturaModel
 from genComprobantes import generarFactura, generarRremito
 from validarDatos import ValidarDatos
 
-def getContenidoTabla(tabla):
-    """
-        Devuelve la informacion actual de la tabla en
-        un arreglo que contiene info de cada fila
-    :param tabla QTableWidget de la ventana:
-    :return Arreglo con informacion:
-    """
-    dataRow = []
-    dataTable = []
 
-    for row in range(0,tabla.rowCount()):
-        for col in range(0,tabla.columnCount()):
-            dataRow.append(str(tabla.item(row,col).text()))
-        dataTable.append(dataRow)
-        dataRow = []
-
-    return dataTable
 
 class Remito(CRUDWidget,Ui_vtnRemito):
     """
@@ -310,7 +294,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
         else:
-            data = getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes)
             newData = filter(lambda x: x[0]==dni, data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -329,7 +313,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
         else:
-            data = getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes)
             newData = filter(lambda x: x[1].upper() == nombre.upper(), data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -348,7 +332,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
          else:
-            data = getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes)
             newData = filter(lambda x: x[2]==apellido, data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -368,7 +352,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableProductos)
             self.cargar_productos()
         else:
-            data = getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos)
             data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -388,7 +372,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableProductos)
             self.cargar_productos()
         else:
-            data = getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos)
             data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -576,7 +560,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.productosAgregados=0
         self.limpiarVentana()
 
-class RegistrarCobroRemito(MdiWidget, Ui_vtnRegistrarCobroRemito):
+class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 
     def __init__(self, mdi):
         MdiWidget.__init__(self, mdi)
