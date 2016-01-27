@@ -49,7 +49,8 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
         self.data = []
 
     def validadores(self):
-        pass
+        camposRequeridos = [getattr(self,"lineNumero")]
+        ValidarDatos.setValidador(camposRequeridos)
 
     def buscarFactura(self):
         """
@@ -252,6 +253,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.cargarObras()
+        self.validadores()
         self.btnBuscarOs.pressed.connect(self.buscarOs)
         self.tableOs.itemDoubleClicked.connect(self.obtenerObra)
         self.btnBuscarFac.pressed.connect(self.buscarFactura)
@@ -271,6 +273,23 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
             ObraSocialModel.buscarTodos("razon_social", self.sesion).all(),
             ("razon_social", "cuit", "direccion")
         )
+
+    def validadores(self):
+        """
+            Setea los validadores correspondientes a
+            los campos de la ventana
+        :return:
+        """
+
+        camposRequeridos = [getattr(self,"lineRazon")]
+        ValidarDatos.setValidador(camposRequeridos)
+
+        camposRequeridos = [getattr(self,"lineCuit")]
+        ValidarDatos.setValidador(camposRequeridos)
+
+        camposRequeridos = [getattr(self,"lineNumeroFac")]
+        ValidarDatos.setValidador(camposRequeridos)
+
 
     def buscarOs(self):
         """
@@ -450,7 +469,6 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.factura = None
         self.data = []
         self.cargarProductosSinObra()
-
 
     def buscarXMonodroga(self):
         """

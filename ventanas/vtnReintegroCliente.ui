@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>480</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,14 @@
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineRazon"/>
+         <widget class="QLineEdit" name="lineRazon">
+          <property name="statusTip">
+           <string>Ingrese nombre de Obra Social</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>frazonsocial</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="2">
          <widget class="QPushButton" name="btnBuscarOs">
@@ -50,7 +57,14 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineCuit"/>
+         <widget class="QLineEdit" name="lineCuit">
+          <property name="statusTip">
+           <string>Ingrese CUIT de la Obra Social</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fcuit</string>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0" colspan="3">
          <widget class="QTableWidget" name="tableOs">
@@ -97,7 +111,14 @@
       <item>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineNumeroFac"/>
+         <widget class="QLineEdit" name="lineNumeroFac">
+          <property name="statusTip">
+           <string>Ingrese número de factura</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>fnroremito</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="2">
          <widget class="QPushButton" name="btnBuscarFac">

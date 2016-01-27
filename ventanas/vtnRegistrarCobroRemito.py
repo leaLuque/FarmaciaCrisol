@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnRegistrarCobroRemito.ui'
 #
-# Created: Tue Jan 26 20:09:44 2016
+# Created: Tue Jan 26 20:20:44 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -153,6 +153,7 @@ class Ui_vtnRegistrarCobroRemito(object):
         vtnRegistrarCobroRemito.setWindowTitle(_translate("vtnRegistrarCobroRemito", "Registrar Cobro Remito", None))
         self.gbObraSocial.setTitle(_translate("vtnRegistrarCobroRemito", "Obra Social", None))
         self.rbtnRazonSocial.setText(_translate("vtnRegistrarCobroRemito", "Razón Social", None))
+        self.lineRazonSocial.setStatusTip(_translate("vtnRegistrarCobroRemito", "Ingrese nombre de la Obra Social", None))
         self.lineRazonSocial.setAccessibleDescription(_translate("vtnRegistrarCobroRemito", "frazonsocial", None))
         self.btnBuscarOs.setText(_translate("vtnRegistrarCobroRemito", "Buscar", None))
         item = self.tableObras.horizontalHeaderItem(0)
@@ -163,6 +164,7 @@ class Ui_vtnRegistrarCobroRemito(object):
         item.setText(_translate("vtnRegistrarCobroRemito", "Dirección", None))
         self.gbRemitos.setTitle(_translate("vtnRegistrarCobroRemito", "Remito", None))
         self.label.setText(_translate("vtnRegistrarCobroRemito", "Numero", None))
+        self.lineNumero.setStatusTip(_translate("vtnRegistrarCobroRemito", "Ingrese número de remito", None))
         self.lineNumero.setAccessibleDescription(_translate("vtnRegistrarCobroRemito", "fnroremito", None))
         self.btnBuscarRemito.setText(_translate("vtnRegistrarCobroRemito", "Buscar", None))
         item = self.tableRemitos.horizontalHeaderItem(0)

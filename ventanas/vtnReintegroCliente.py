@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnReintegroCliente.ui'
 #
-# Created: Wed Apr  1 14:28:27 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Wed Jan 27 12:22:13 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_vtnReintegroCliente(object):
     def setupUi(self, vtnReintegroCliente):
         vtnReintegroCliente.setObjectName(_fromUtf8("vtnReintegroCliente"))
-        vtnReintegroCliente.resize(640, 480)
+        vtnReintegroCliente.resize(640, 512)
         self.verticalLayout = QtGui.QVBoxLayout(vtnReintegroCliente)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gbObraSocial = QtGui.QGroupBox(vtnReintegroCliente)
@@ -142,9 +142,13 @@ class Ui_vtnReintegroCliente(object):
     def retranslateUi(self, vtnReintegroCliente):
         vtnReintegroCliente.setWindowTitle(_translate("vtnReintegroCliente", "Reintegro Cliente", None))
         self.gbObraSocial.setTitle(_translate("vtnReintegroCliente", "Obra Social", None))
+        self.lineRazon.setStatusTip(_translate("vtnReintegroCliente", "Ingrese nombre de Obra Social", None))
+        self.lineRazon.setAccessibleDescription(_translate("vtnReintegroCliente", "frazonsocial", None))
         self.btnBuscarOs.setText(_translate("vtnReintegroCliente", "Buscar", None))
         self.label_2.setText(_translate("vtnReintegroCliente", "CUIT", None))
         self.label_3.setText(_translate("vtnReintegroCliente", "Razón Social", None))
+        self.lineCuit.setStatusTip(_translate("vtnReintegroCliente", "Ingrese CUIT de la Obra Social", None))
+        self.lineCuit.setAccessibleDescription(_translate("vtnReintegroCliente", "fcuit", None))
         item = self.tableOs.horizontalHeaderItem(0)
         item.setText(_translate("vtnReintegroCliente", "Razón Social", None))
         item = self.tableOs.horizontalHeaderItem(1)
@@ -152,6 +156,8 @@ class Ui_vtnReintegroCliente(object):
         item = self.tableOs.horizontalHeaderItem(2)
         item.setText(_translate("vtnReintegroCliente", "Dirección", None))
         self.gbFactura.setTitle(_translate("vtnReintegroCliente", "Factura", None))
+        self.lineNumeroFac.setStatusTip(_translate("vtnReintegroCliente", "Ingrese número de factura", None))
+        self.lineNumeroFac.setAccessibleDescription(_translate("vtnReintegroCliente", "fnroremito", None))
         self.btnBuscarFac.setText(_translate("vtnReintegroCliente", "Buscar", None))
         self.label_4.setText(_translate("vtnReintegroCliente", "Número", None))
         item = self.tableFactura.horizontalHeaderItem(0)
@@ -169,14 +175,4 @@ class Ui_vtnReintegroCliente(object):
         item.setText(_translate("vtnReintegroCliente", "Importe", None))
         self.btnAceptar.setText(_translate("vtnReintegroCliente", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnReintegroCliente", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnReintegroCliente = QtGui.QWidget()
-    ui = Ui_vtnReintegroCliente()
-    ui.setupUi(vtnReintegroCliente)
-    vtnReintegroCliente.show()
-    sys.exit(app.exec_())
 

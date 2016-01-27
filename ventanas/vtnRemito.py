@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnRemito.ui'
 #
-# Created: Wed Apr  1 14:28:26 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Tue Jan 26 20:22:03 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -107,6 +107,8 @@ class Ui_vtnRemito(object):
 
     def retranslateUi(self, vtnRemito):
         self.label.setText(_translate("vtnRemito", "Numero", None))
+        self.lineNumero.setStatusTip(_translate("vtnRemito", "Ingrese número de remito", None))
+        self.lineNumero.setAccessibleDescription(_translate("vtnRemito", "fnroremito", None))
         self.btnBuscar.setText(_translate("vtnRemito", "Buscar", None))
         item = self.tableRemito.horizontalHeaderItem(0)
         item.setText(_translate("vtnRemito", "Numero", None))
@@ -126,14 +128,4 @@ class Ui_vtnRemito(object):
         self.btnAceptar.setText(_translate("vtnRemito", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnRemito", "Cancelar", None))
         self.lblDetalles.setText(_translate("vtnRemito", "Detalles de Remito", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnRemito = QtGui.QWidget()
-    ui = Ui_vtnRemito()
-    ui.setupUi(vtnRemito)
-    vtnRemito.show()
-    sys.exit(app.exec_())
 

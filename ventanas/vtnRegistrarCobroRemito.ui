@@ -37,6 +37,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineRazonSocial">
+          <property name="statusTip">
+           <string>Ingrese nombre de la Obra Social</string>
+          </property>
           <property name="accessibleDescription">
            <string>frazonsocial</string>
           </property>
@@ -102,6 +105,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineNumero">
+          <property name="statusTip">
+           <string>Ingrese número de remito</string>
+          </property>
           <property name="accessibleDescription">
            <string>fnroremito</string>
           </property>

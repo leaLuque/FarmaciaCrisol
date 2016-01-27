@@ -30,6 +30,7 @@ class Remito(CRUDWidget,Ui_vtnRemito):
     def __init__(self, mdi):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
+        self.validadores()
 
     def actualizar(self):
         """
@@ -153,6 +154,15 @@ class Remito(CRUDWidget,Ui_vtnRemito):
                 if not self.tableRemito.item(i,0).text() == valor:
                     self.tableRemito.hideRow(i)
 
+    def validadores(self):
+        """
+            Setea los validadores para los campos
+            de la ventana
+        :return:
+        """
+        camposRequeridos = [getattr(self,"lineNumero")]
+        ValidarDatos.setValidador(camposRequeridos)
+
     @classmethod
     def delete(cls, mdi):
         """
@@ -251,6 +261,11 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         )
 
     def validadores(self):
+        """
+            Setea los validadores correspondientes
+            para los campos de la ventana
+        :return:
+        """
          ##Esta parte analiza los campos requeridos para el cliente
         requeridos = ["nombre", "apellido", "dni"]
         camposRequeridos = [ getattr(self, "line%s" % campo.title()) for campo in requeridos ]
@@ -644,6 +659,11 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 self.obraSocialSeleccionada=None
 
     def validadores(self):
+        """
+            Setea los validadores correspondientes para
+            los campos de la ventana
+        :return:
+        """
         ##Esta parte analiza los campos requeridos para el cliente
         camposRequeridos = [ getattr(self, "lineRazonSocial") ]
         ValidarDatos.setValidador(camposRequeridos)

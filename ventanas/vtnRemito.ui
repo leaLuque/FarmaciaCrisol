@@ -24,7 +24,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineNumero"/>
+      <widget class="QLineEdit" name="lineNumero">
+       <property name="statusTip">
+        <string>Ingrese número de remito</string>
+       </property>
+       <property name="accessibleDescription">
+        <string>fnroremito</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnBuscar">

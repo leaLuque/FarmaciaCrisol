@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnDevolucionDeCliente.ui'
 #
-# Created: Wed Apr  1 14:28:26 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Wed Jan 27 12:23:34 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -102,6 +102,8 @@ class Ui_vtnDevolucionDeCliente(object):
     def retranslateUi(self, vtnDevolucionDeCliente):
         vtnDevolucionDeCliente.setWindowTitle(_translate("vtnDevolucionDeCliente", "Devolución de Cliente", None))
         self.gbFactura.setTitle(_translate("vtnDevolucionDeCliente", "Factura", None))
+        self.lineNumero.setStatusTip(_translate("vtnDevolucionDeCliente", "Ingrese número de factura", None))
+        self.lineNumero.setAccessibleDescription(_translate("vtnDevolucionDeCliente", "fnroremito", None))
         self.btnBuscar.setText(_translate("vtnDevolucionDeCliente", "Buscar", None))
         item = self.tableFactura.horizontalHeaderItem(0)
         item.setText(_translate("vtnDevolucionDeCliente", "Código Barra", None))
@@ -119,14 +121,4 @@ class Ui_vtnDevolucionDeCliente(object):
         item.setText(_translate("vtnDevolucionDeCliente", "Cantidad", None))
         item = self.tableNC.horizontalHeaderItem(2)
         item.setText(_translate("vtnDevolucionDeCliente", "Importe", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnDevolucionDeCliente = QtGui.QWidget()
-    ui = Ui_vtnDevolucionDeCliente()
-    ui.setupUi(vtnDevolucionDeCliente)
-    vtnDevolucionDeCliente.show()
-    sys.exit(app.exec_())
 
