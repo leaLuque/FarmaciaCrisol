@@ -220,7 +220,6 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.lineMonodroga.returnPressed.connect(self.buscarXMonodroga)
         self.tableClientes.itemDoubleClicked.connect(self.cargarLines)
         self.tableProductos.itemDoubleClicked.connect(self.agregarProducto)
-        self.tableRemito.itemDoubleClicked.connect(self.cambiarCantidad)
         self.btnEliminar.pressed.connect(self.eliminarDetalle)
         self.btnAceptar.pressed.connect(self.aceptar)
         self.btnCancelar.pressed.connect(self.cancelar)
@@ -240,6 +239,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             sistema en la Tabla de Productos
         :return:
         """
+
+        self.limpiarTabla(self.tableProductos)
         for n, obj in enumerate(ProductoModel.buscarTodos("codigo_barra",self.sesion).all()):
             self.tableProductos.insertRow(n)
             self.tableProductos.setItem(n, 0, QtGui.QTableWidgetItem(str(obj.codigo_barra)))
@@ -477,30 +478,36 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
 
                     self.detalles.append([codigo,cantidad,subtotal])
 
-                    self.detalle=DetalleRemitoModel(self.remito.numero,self.productosAgregados,
+                    detalle=DetalleRemitoModel(self.remito.numero,self.productosAgregados,
                         int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
-                    self.descontarCantidad(self.detalle,int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
-                    self.detalle.guardar(self.sesion)
-                    self.limpiarTabla(self.tableProductos)
+                    self.descontarCantidad(detalle,int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
+                    detalle.guardar(self.sesion)
                     self.cargar_productos()
 
-    def cambiarCantidad(self):
-        """
-            Modifica la cantidad de un producto en
-            la Tabla de Productos
-        :return:
-        """
-        itemActual=self.tableRemito.currentItem()
-        cantidad, ok=QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
-        if ok:
-            importeUnitario=float(self.tableRemito.item(itemActual.row(),2).text())/int(self.tableRemito.item(itemActual.row(),1).text())
-            itemCantidad=self.tableRemito.item(itemActual.row(),1)
-            itemCantidad.setText(str(cantidad))
-            itemImporte=self.tableRemito.item(itemActual.row(),2)
-            itemImporte.setText(str(int(cantidad)*importeUnitario))
+    #def cambiarCantidad(self):
+    #    """
+    #        Modifica la cantidad de un producto en
+    #        la Tabla de Productos
+    #    :return:
+    #    """
+    #    itemActual=self.tableRemito.currentItem()
+    #    cantidad, ok=QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
+    #    if ok:
+    #        importeUnitario=float(self.tableRemito.item(itemActual.row(),2).text())/int(self.tableRemito.item(itemActual.row(),1).text())
+    #        itemCantidad=self.tableRemito.item(itemActual.row(),1)
+    #        itemCantidad.setText(str(cantidad))
+    #        itemImporte=self.tableRemito.item(itemActual.row(),2)
+    #        itemImporte.setText(str(int(cantidad)*importeUnitario))
 
     def eliminarDetalle(self):
-        print("Eliminando Detalle")
+
+        itemActual = self.tableRemito.currentIndex()
+        for a in self.lotesVentas.keys():
+            print a.id_remito
+            print a.nro_linea
+            print a.producto
+            print a.cantidad
+
 
     def limpiarVentana(self):
         """
