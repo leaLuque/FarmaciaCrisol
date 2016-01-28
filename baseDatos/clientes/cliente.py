@@ -100,3 +100,19 @@ class Cliente (ObjetoBase):
         :return:
         """
         self.telefono=telefono
+
+    @classmethod
+    def getDatosCliente(cls,session,dni):
+        """
+            Devuelve los datos de un cliente determinado
+        :param dni:
+        :param session:
+        :return Diccionario con datos del cliente:
+        """
+        temp = {}
+        cliente = session.query(cls).filter(cls.dni == dni).first()
+        temp["nombre"] = str(cliente.nombre)
+        temp["apellido"] =str(cliente.apellido)
+        temp["direccion"] = str(cliente.direccion)
+        temp["telefono"] = str(cliente.telefono)
+        return temp

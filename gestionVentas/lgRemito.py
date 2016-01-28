@@ -515,8 +515,6 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.lineApellido.clear()
         self.lineMedicamento.clear()
         self.lineMonodroga.clear()
-        self.lineEdit_3.setEnabled(True)
-        self.lineEdit_4.setEnabled(True)
         self.limpiarTabla(self.tableClientes)
         self.limpiarTabla(self.tableProductos)
         self.limpiarTabla(self.tableRemito)
