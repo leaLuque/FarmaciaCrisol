@@ -118,7 +118,7 @@ def generarRremito(data):
         producto = dato[0]
         cantidad = dato[1]
         importe = dato[2]
-        unitario = float(importe)/cantidad
+        unitario = float(importe)/int(cantidad)
         total+=float(importe)
         cadena = """<tr>
 

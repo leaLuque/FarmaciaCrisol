@@ -231,7 +231,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.productosAgregados=0
         self.lotesVentas={}
         self.dniCliente = None
-        self.detalles = [] #Arreglo que mantiene todos los detalles agregados al Remito
+        self.detalles = [] #Arreglo que mantiene todos los detalles agregados al Remito para ser impresos
+        self.detallesTabla = {} #Diccionario que vincula el row de la tabla con el obj DetalleRemito Correspondiente
 
     def cargar_productos(self):
         """
@@ -476,38 +477,32 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                     self.tableRemito.setItem(rows, 1, QtGui.QTableWidgetItem(str(cantidad)))
                     self.tableRemito.setItem(rows, 2, QtGui.QTableWidgetItem(str(subtotal)))
 
-                    self.detalles.append([codigo,cantidad,subtotal])
-
                     detalle=DetalleRemitoModel(self.remito.numero,self.productosAgregados,
                         int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
                     self.descontarCantidad(detalle,int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
                     detalle.guardar(self.sesion)
+                    self.detallesTabla[rows] = detalle
                     self.cargar_productos()
 
-    #def cambiarCantidad(self):
-    #    """
-    #        Modifica la cantidad de un producto en
-    #        la Tabla de Productos
-    #    :return:
-    #    """
-    #    itemActual=self.tableRemito.currentItem()
-    #    cantidad, ok=QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
-    #    if ok:
-    #        importeUnitario=float(self.tableRemito.item(itemActual.row(),2).text())/int(self.tableRemito.item(itemActual.row(),1).text())
-    #        itemCantidad=self.tableRemito.item(itemActual.row(),1)
-    #        itemCantidad.setText(str(cantidad))
-    #        itemImporte=self.tableRemito.item(itemActual.row(),2)
-    #        itemImporte.setText(str(int(cantidad)*importeUnitario))
-
     def eliminarDetalle(self):
+        """
+            Elimina el detalle seleccionado por el usuario y actualiza
+            el stock del producto en particular.
+        :return:
+        """
 
-        itemActual = self.tableRemito.currentIndex()
-        for a in self.lotesVentas.keys():
-            print a.id_remito
-            print a.nro_linea
-            print a.producto
-            print a.cantidad
-
+        itemActual = self.tableRemito.currentItem()
+        if itemActual == None:
+            self.showMsjEstado("Debe seleccionar un item para dar de baja")
+        else:
+            detalle = self.detallesTabla[itemActual.row()]
+            for loteVenta in self.lotesVentas[detalle]:
+                loteVenta[0].aumentarCantidad(loteVenta[1])
+                loteVenta[0].modificar(self.sesion)
+            detalle.borrar(self.sesion)
+            del self.lotesVentas[detalle]
+            self.tableRemito.hideRow(itemActual.row())
+            self.cargar_productos()
 
     def limpiarVentana(self):
         """
@@ -540,16 +535,15 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             QtGui.QMessageBox.information(self,"Venta con Remito","No se ha efectuado ninguna venta")
         else:
             QtGui.QMessageBox.information(None,"Venta","La venta se ha realizado con exito")
-
-            self.limpiarTabla(self.tableRemito)
-
             ##Se envian los datos necesarios para generar el comprobante
             data = {}
             data["numero"] = self.remito.numero
             data["fecha"] = self.remito.fecha_emision
             data["datosCliente"] = ClienteModel.getDatosCliente(self.sesion,self.dniCliente)
-            data["detalles"] = self.detalles
+            print self.getContenidoTabla(self.tableRemito)
+            data["detalles"] = self.getContenidoTabla(self.tableRemito)
             generarRremito(data)
+            self.limpiarTabla(self.tableRemito)
 
         self.remito=None
         self.productosAgregados=0
