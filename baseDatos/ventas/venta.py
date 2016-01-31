@@ -265,7 +265,7 @@ class Factura(ObjetoBase):
         :return Factura:
         :rtype Objeto de tipo Factura:
         """
-        query=sesion.query(Factura).filter(Factura.numero==numero)
+        query=sesion.query(Factura).filter(Factura.numero == numero).filter(Factura.anulado == False)
         if query.count()==0:
             return None
         else:

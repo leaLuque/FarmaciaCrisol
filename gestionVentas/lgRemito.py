@@ -231,7 +231,6 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.productosAgregados=0
         self.lotesVentas={}
         self.dniCliente = None
-        self.detalles = [] #Arreglo que mantiene todos los detalles agregados al Remito para ser impresos
         self.detallesTabla = {} #Diccionario que vincula el row de la tabla con el obj DetalleRemito Correspondiente
 
     def cargar_productos(self):

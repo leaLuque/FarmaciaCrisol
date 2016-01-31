@@ -48,6 +48,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
         self.lotesDevueltos = {}
         self.data = []
 
+
     def validadores(self):
         camposRequeridos = [getattr(self,"lineNumero")]
         ValidarDatos.setValidador(camposRequeridos)
@@ -58,7 +59,10 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             al Nro de Factura ingresado.
         :return:
         """
-        if not self.lineNumero.isEnabled():
+
+        if not self.lineNumero.isEnabled() and self.facturaSeleccionada != None:
+            QtGui.QMessageBox.information(self,"Aviso","Ya se ha seleccionado una factura")
+        elif not self.lineNumero.isEnabled():
             self.lineNumero.setEnabled(True)
             self.lineNumero.clear()
             self.limpiarTabla(self.tableFactura)
@@ -70,14 +74,13 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.warning(self,"Aviso","La factura seleccionada no existe")
+                elif self.facturaSeleccionada.getNC()!=None:
+                    QtGui.QMessageBox.information(self,"Aviso","La factura ya ha sido devuelta")
+                    self.facturaSeleccionada = None
                 else:
-                    #TODO CARGAR SOLO LOS DETALLES DE FACTURA QUE NO ESTAN UNA NOTA DE CREDITO
-                    if self.facturaSeleccionada.getNC()!=None:
-                        QtGui.QMessageBox.information(self,"Aviso","La factura ya ha sido devuelta")
-                    else:
-                        self.lineNumero.setEnabled(False)
-                        self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
-                        ["producto","cantidad","importe"])
+                    self.lineNumero.setEnabled(False)
+                    self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
+                    ["producto","cantidad","importe"])
 
     def obtenerValoresItem(self,row):
         """
@@ -257,6 +260,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.btnBuscarOs.pressed.connect(self.buscarOs)
         self.tableOs.itemDoubleClicked.connect(self.obtenerObra)
         self.btnBuscarFac.pressed.connect(self.buscarFactura)
+        self.lineNumeroFac.returnPressed.connect(self.buscarFactura)
         self.btnAceptar.pressed.connect(self.confirmarOperacion)
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
         self.tableFactura.itemDoubleClicked.connect(self.agregarProducto)
@@ -289,7 +293,6 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
 
         camposRequeridos = [getattr(self,"lineNumeroFac")]
         ValidarDatos.setValidador(camposRequeridos)
-
 
     def buscarOs(self):
         """
@@ -331,7 +334,6 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
             self.lineNumeroFac.clear()
             self.limpiarTabla(self.tableFactura)
         else:
-            print "hola"
             self.numeroFacturaActual=str(self.lineNumeroFac.text())
             if len(self.numeroFacturaActual)==0:
                 self.showMsjEstado("No se ha ingresado numero de factura")
@@ -339,17 +341,14 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura seleccionada no existe")
+                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
+                    QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
+                elif self.facturaSeleccionada.getNC()!=None:
+                    QtGui.QMessageBox.information(self,"Aviso","La factura ya posee una Nota de Crédito")
                 else:
-                    #TODO CORREGIR LA PARTE DE LAS FECHAS
-                    if self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
-                        #TODO CHEQUEAR ESTA PARTE PORQUE HAY DUDAS
-                        #QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
-                        pass
-
-                    else:
-                        self.lineNumeroFac.setEnabled(False)
-                        self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
-                            ["producto","cantidad","importe"])
+                    self.lineNumeroFac.setEnabled(False)
+                    self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
+                        ["producto","cantidad","importe"])
 
     def agregarProducto(self):
         """
@@ -781,15 +780,21 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             Tarjeta de Debito
         :return:
         """
-        efectivo,ok=QtGui.QInputDialog.getText(self,"Cobro Tarjeta Debito",("El importe total es: $%.2f. Por favor ingrese monto" % self.calcularTotal()))
+
+        efectivo,ok=QtGui.QInputDialog.getText(self,"Cobro Tarjeta Débito",("El importe total es: $%.2f. Por favor número de tarjeta" % self.calcularTotal()))
 
         try:
-            if float(efectivo) == self.calcularTotal():
-                cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Tarjeta Debito",self.calcularTotal())
-                cobroCliente.guardar(self.sesion)
-                self.facturaCobrada=True
-            else:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no coincide con el total de la factura")
+            #print float(efectivo)
+            #print self.calcularTotal()
+            #print type(float(efectivo))
+            #print type(self.calcularTotal())
+            #print float(efectivo) == float(self.calcularTotal())
+            #if float(efectivo) == self.calcularTotal():
+            cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Tarjeta Debito",self.calcularTotal())
+            cobroCliente.guardar(self.sesion)
+            self.facturaCobrada=True
+            #else:
+            #    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no coincide con el total de la factura")
         except ValueError:
             pass
 
