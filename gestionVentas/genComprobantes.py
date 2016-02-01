@@ -23,7 +23,7 @@ def generarNotaCredito(data):
     for dato in data["detalles"]:
         producto = dato[0]
         cantidad = dato[1]
-        descuento = dato[2]
+        descuento = dato[2] * 100
         importe = "%.2f" % dato[3]
         total+=float(importe)
         cadena = """<tr>

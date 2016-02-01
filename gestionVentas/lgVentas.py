@@ -343,7 +343,9 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
             En caso de no existir, notifica lo mismo
         :return:
         """
-        if not self.lineNumeroFac.isEnabled():
+        if not self.lineNumeroFac.isEnabled() and self.tableNC.rowCount() != 0:
+            QtGui.QMessageBox.information(self,"Aviso","Ya se ha seleccionado una factura")
+        elif not self.lineNumeroFac.isEnabled():
             self.lineNumeroFac.setEnabled(True)
             self.lineNumeroFac.clear()
             self.limpiarTabla(self.tableFactura)
@@ -376,8 +378,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         cantidad = int(self.tableFactura.item(itemActual.row(), 1).text())
         importe = float(self.tableFactura.item(itemActual.row(), 2).text()) - \
                     float(self.tableFactura.item(itemActual.row(), 2).text())*descuento
-        medio = float(self.tableFactura.item(itemActual.row(),2).text())- importe
-        importeEfectivo = float("%.2f" % (medio))
+        #medio = float(self.tableFactura.item(itemActual.row(),2).text())- importe
+        importeEfectivo = float("%.2f" % (importe))
         row = self.tableNC.rowCount()
         self.tableNC.insertRow(row)
         self.tableNC.setItem(row, 0, QtGui.QTableWidgetItem(str(producto)))
@@ -420,6 +422,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 data["detalles"] = self.detallesImprimibles
                 generarNotaCredito(data)
                 self.obraSocial = None
+                self.facturaSeleccionada = None
                 self.detallesReintegrables = []
                 self.detallesImprimibles = []
                 self.limpiarVentana()
@@ -440,6 +443,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
             self.detallesImprimibles = []
             self.obraSocial = None
             self.limpiarVentana()
+            self.facturaSeleccionada = None
 
     def limpiarVentana(self):
         """
