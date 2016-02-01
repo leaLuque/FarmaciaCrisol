@@ -12,7 +12,10 @@ Listados
 
 Para emplear el software es preciso las siguientes dependencias
 
-| Command | Description |
+| Dependencia | Version |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| psycopg2 | ==2.4.5 |
+| pdfkit | ==0.5.0 |
+| XlsxWriter | ==0.8.4 |
+| SQLAlchemy | ==1.0.8 |
+| PyQt4 | Stable |
