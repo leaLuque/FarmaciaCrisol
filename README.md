@@ -20,3 +20,6 @@ Para emplear el software es preciso las siguientes dependencias
 | XlsxWriter | ==0.8.4 |
 | SQLAlchemy | ==1.0.8 |
 | PyQt4 | Stable |
+| pycha | 7.0 |
+| python2.7-dev | 2.7 |
+| wkhhtmltopdf | 0.2 |
