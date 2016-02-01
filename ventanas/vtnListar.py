@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnListar.ui'
 #
-# Created: Wed Nov 18 12:19:05 2015
+# Created: Mon Feb  1 10:18:27 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,12 +50,12 @@ class Ui_vtnListar(object):
         self.formLayout.setLayout(2, QtGui.QFormLayout.FieldRole, self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.deFechaHasta = QtGui.QLabel(vtnListar)
+        self.label_2 = QtGui.QLabel(vtnListar)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.horizontalLayout_2.addWidget(self.label_2)
+        self.deFechaHasta = QtGui.QDateEdit(vtnListar)
         self.deFechaHasta.setObjectName(_fromUtf8("deFechaHasta"))
         self.horizontalLayout_2.addWidget(self.deFechaHasta)
-        self.dateEdit_2 = QtGui.QDateEdit(vtnListar)
-        self.dateEdit_2.setObjectName(_fromUtf8("dateEdit_2"))
-        self.horizontalLayout_2.addWidget(self.dateEdit_2)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.formLayout.setLayout(4, QtGui.QFormLayout.FieldRole, self.horizontalLayout_2)
@@ -89,7 +89,7 @@ class Ui_vtnListar(object):
         self.cbTipoListado.setItemText(2, _translate("vtnListar", "Ventas Realizadas", None))
         self.cbTipoListado.setItemText(3, _translate("vtnListar", "Clientes", None))
         self.label.setText(_translate("vtnListar", "Fecha Desde", None))
-        self.deFechaHasta.setText(_translate("vtnListar", "Fecha Hasta", None))
+        self.label_2.setText(_translate("vtnListar", "Fecha Hasta", None))
         self.btnListar.setText(_translate("vtnListar", "Listar", None))
         self.rbtnPDF.setText(_translate("vtnListar", "PDF", None))
         self.rbtnExcel.setText(_translate("vtnListar", "Planilla Excel", None))

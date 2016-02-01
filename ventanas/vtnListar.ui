@@ -71,14 +71,14 @@
    <item row="4" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="deFechaHasta">
+      <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Fecha Hasta</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDateEdit" name="dateEdit_2"/>
+      <widget class="QDateEdit" name="deFechaHasta"/>
      </item>
      <item>
       <spacer name="horizontalSpacer_2">
