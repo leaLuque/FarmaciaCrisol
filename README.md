@@ -12,8 +12,7 @@ Listados
 
 Para emplear el software es preciso las siguientes dependencias
 
-PYQT4
-SQLALCHEMY
-PDFKIT
-XLSXWRITER
-PSYCOPG2
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
