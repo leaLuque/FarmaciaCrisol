@@ -264,8 +264,13 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.btnAceptar.pressed.connect(self.confirmarOperacion)
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
         self.tableFactura.itemDoubleClicked.connect(self.agregarProducto)
+        self.gbFactura.setEnabled(False)
+        self.gbNotaCredito.setEnabled(False)
         self.detallesReintegrables = []
         self.detallesImprimibles = []
+        self.obraSocial = None
+        self.facturaSeleccionada = None
+
 
     def cargarObras(self):
         """
@@ -300,9 +305,16 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
             a los criterios del usuario
         :return:
         """
+
         if self.lineRazon.isEnabled():
             print("buscar por filtrado")
+
+        elif not self.lineRazon.isEnabled() and self.tableNC.rowCount() != 0:
+            QtGui.QMessageBox.information(self,"Aviso","Imposible cambiar de Obra Social. Ya se ha seleccionado\
+                                                       una")
         else:
+            self.gbNotaCredito.setEnabled(False)
+            self.gbFactura.setEnabled(False)
             self.lineRazon.clear()
             self.lineRazon.setEnabled(True)
             self.lineCuit.clear()
@@ -322,6 +334,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.lineCuit.setText(str(self.tableOs.item(rowActual,1).text()))
         self.lineCuit.setEnabled(False)
         self.tableOs.setEnabled(False)
+        self.gbFactura.setEnabled(True)
+        self.gbNotaCredito.setEnabled(True)
 
     def buscarFactura(self):
         """
@@ -380,32 +394,38 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         :return:
         """
 
-        ok = QtGui.QMessageBox.information(self,"Confirmacion","¿Desea generar la Nota Crédito?",\
-                                           QtGui.QMessageBox.Cancel, QtGui.QMessageBox.Accepted)
+        if self.tableNC.rowCount() == 0 :
+            QtGui.QMessageBox.information(self,"Aviso","No se han agregado productos a la Nota de Crédito")
 
-        if (ok==1):
-            notaCredito = NotaCreditoModel(NotaCredito.generarNumero(self.sesion))
-            notaCredito.guardar(self.sesion)
-            for lineaNC, data in enumerate(self.detallesReintegrables):
-                detalleNC = DetalleNCModel(notaCredito.numero, lineaNC+1, data[0], data[1])
-                detalleNC.setImporte(data[3])
-                detalleNC.setDescuento(data[2])
-                detalleNC.guardar(self.sesion)
-            QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito ha sido generada con exito")
-
-            #Se genera un diccionario con los datos necesarios para imprimir la nota de credito
-            data = {}
-            data["numero"] = notaCredito.numero
-            data["fecha"] = notaCredito.fecha_emision
-            data["detalles"] = self.detallesImprimibles
-            generarNotaCredito(data)
         else:
-            QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito no ha sido generada")
+            ok = QtGui.QMessageBox.information(self,"Confirmacion","¿Desea generar la Nota Crédito?",\
+                                               QtGui.QMessageBox.Cancel, QtGui.QMessageBox.Accepted)
 
-        self.obraSocial = None
-        self.detallesReintegrables = []
-        self.detallesImprimibles = []
-        self.limpiarVentana()
+            if (ok==1):
+                notaCredito = NotaCreditoModel(NotaCredito.generarNumero(self.sesion))
+                notaCredito.guardar(self.sesion)
+                for lineaNC, data in enumerate(self.detallesReintegrables):
+                    detalleNC = DetalleNCModel(notaCredito.numero, lineaNC+1, data[0], data[1])
+                    detalleNC.setImporte(data[3])
+                    detalleNC.setDescuento(data[2])
+                    detalleNC.guardar(self.sesion)
+                QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito ha sido generada con exito")
+                self.facturaSeleccionada.setNC(notaCredito.numero)
+                self.facturaSeleccionada.modificar(self.sesion)
+
+                #Se genera un diccionario con los datos necesarios para imprimir la nota de credito
+                data = {}
+                data["numero"] = notaCredito.numero
+                data["fecha"] = notaCredito.fecha_emision
+                data["detalles"] = self.detallesImprimibles
+                generarNotaCredito(data)
+                self.obraSocial = None
+                self.detallesReintegrables = []
+                self.detallesImprimibles = []
+                self.limpiarVentana()
+
+            else:
+                QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito no ha sido generada")
 
     def cancelarOperacion(self):
         """
@@ -435,6 +455,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.lineRazon.setEnabled(True)
         self.tableOs.setEnabled(True)
         self.lineNumeroFac.setEnabled(True)
+        self.gbFactura.setEnabled(False)
+        self.gbFactura.setEnabled(False)
 
 class VentaContado(CRUDWidget, Ui_vtnVentaContado):
 
