@@ -497,3 +497,24 @@ class CobroCliente(ObjetoBase):
 
         return total
 
+class LoteDetallado(ObjetoBase):
+    """
+        Clase que modela la logica de los lotes que pertenecen
+        a un detalle de venta remito o venta contado
+    """
+
+    def __init__(self,nro_detalle,linea_detalle,lote,cantidad,es_remito):
+        """
+            Constructor de la clase LoteDetallado
+        :param nro_detalle:
+        :param linea_detalle:
+        :param lote:
+        :param cantidad:
+        :param es_remito:
+        :return:
+        """
+        self.nro_detalle = nro_detalle
+        self.linea_detalle = linea_detalle
+        self.lote = lote
+        self.cantidad = cantidad
+        self.es_remito = es_remito

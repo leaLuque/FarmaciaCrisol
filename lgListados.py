@@ -55,8 +55,8 @@ class Listar(MdiWidget, Ui_vtnListar):
                 pdfkit.from_file('reportes/listadoProductosStock.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
         elif (self.listado=="Ventas Realizadas"):
-            fechaDesde = self.deFechaDesde.dateTime()
-            fechaHasta = self.deFechaHasta.dateTime()
+            fechaDesde = self.deFechaDesde.dateTime().toPyDateTime().date()
+            fechaHasta = self.deFechaHasta.dateTime().toPyDateTime().date()
 
             if fechaDesde > fechaHasta:
                 QtGui.QMessageBox.information(self,"Aviso","La fecha Hasta es mayor que la fecha Desde")
@@ -442,6 +442,7 @@ class Listar(MdiWidget, Ui_vtnListar):
                     ventas[factura.fecha_emision]+=1
                 else:
                     ventas[factura.fecha_emision]=1
+
         for remito in (RemitoModel.buscarTodos("numero",self.sesion).all()):
             if remito.fecha_emision >= fechaDesde and remito.fecha_emision <= fechaHasta:
                 if (remito.fecha_emision in ventas):

@@ -7,7 +7,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from baseDatos.productos import Presentacion, Producto, Lote, Medicamento, Monodroga, LoteProducto
 from baseDatos.clientes import Cliente
-from baseDatos.ventas import Remito, DetalleRemito, Factura, DetalleFactura, NotaCredito, DetalleNotaCredito, CobroCliente
+from baseDatos.ventas import Remito, DetalleRemito, Factura, DetalleFactura, NotaCredito, DetalleNotaCredito, CobroCliente, LoteDetallado
 from baseDatos.obraSocial import ObraSocial, Descuento, FacturaLiquidacion, CobroObraSocial
 from baseDatos.usuario import Usuario
 
@@ -214,6 +214,16 @@ class CreacionTabla():
 			Column('role',String)
 		)
 
+        LoteDetallado.tabla = Table('lote_detallado',metadata,
+            Column('id_lotedetallado',Integer,primary_key=True,autoincrement=True),
+            Column('nro_detalle',Integer,nullable=False),
+            Column('linea_detalle',Integer, nullable=False),
+            Column('cantidad',Integer, nullable=False),
+            Column('es_remito',Boolean,nullable=False),
+            Column('lote',String,ForeignKey("lote.codigo"))
+
+        )
+
         metadata.create_all(bd.engine)
 		##Mapeo de clases a sus tablas correspondientes
         mapper(Medicamento, Medicamento.tabla)
@@ -235,3 +245,4 @@ class CreacionTabla():
         mapper(FacturaLiquidacion, FacturaLiquidacion.tabla)
         mapper(CobroObraSocial, CobroObraSocial.tabla)
         mapper(Usuario, Usuario.tabla)
+        mapper(LoteDetallado,LoteDetallado.tabla)
