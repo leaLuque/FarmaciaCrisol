@@ -31,6 +31,7 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
+        self.detalles_a_devolver = []
 
     def actualizar(self):
         """
@@ -80,9 +81,51 @@ class Remito(CRUDWidget,Ui_vtnRemito):
             Elimina un detalle especifico del remito seleccionado por el usuario
         :return:
         """
-        itemActual=self.tableDetalles.currentItem()
-        ok=QtGui.QMessageBox.information(self,"Confirmacion","¿Desea eliminar este item?")
-        if ok:
+        rowActual=self.tableDetalles.currentItem().row()
+        signal = QtGui.QMessageBox.information(self,"Confirmacion","¿Desea eliminar este item?",\
+                                               QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
+
+        if signal == QtGui.QMessageBox.Ok:
+
+            cantidad_detalle = int(self.tableDetalles.item(rowActual,2).text())
+            linea = int(self.tableDetalles.item(rowActual,0).text())
+            nro_remito = int(self.lineNumero.text())
+            detalle = RemitoModel.getDetalle(nro_remito,linea,self.sesion)
+            lotes_detalle = detalle.devolverLotes(self.sesion)
+            temp = lotes_detalle
+
+            finalize_actualizacion = False
+            cantidad_restante = cantidad_detalle
+
+            while not finalize_actualizacion:
+
+                cantidad, ok = QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
+                if ok == False:
+                    finalize_actualizacion = True
+                    self.tableDetalles.item(rowActual,2).setText(str(cantidad_detalle))
+                    break
+                lote, ok=QtGui.QInputDialog.getText(self,"Lote","Ingrese lote")
+                if ok == False:
+                    finalize_actualizacion = True
+                    self.tableDetalles.item(rowActual,2).setText(str(cantidad_detalle))
+                    break
+                if not lote in lotes_detalle.keys():
+                    QtGui.QMessageBox.information(self,"Aviso","El lote ingresado no es valido para este detalle")
+                elif lotes_detalle[str(lote)] == 0:
+                    QtGui.QMessageBox.information(self,"Aviso","Los productos de este lote ya han sido devueltos")
+                elif cantidad > lotes_detalle[str(lote)]:
+                    QtGui.QMessageBox.information(self,"Aviso","La cantidad ingresada es mayor a la esperada para este lote")
+                else:
+                    temp[str(lote)] -= cantidad
+                    cantidad_restante -= cantidad
+                    self.tableDetalles.item(rowActual,2).setText(str(cantidad_restante))
+
+                    if sum(map(lambda x: temp[x],temp)) == 0:
+                        detalle.devolver(self.sesion)
+                        self.tableDetalles.removeRow(rowActual)
+                        finalize_actualizacion = True
+
+        """if ok:
             linea=int(self.tableDetalles.item(itemActual.row(),0).text())
             producto=int(self.tableDetalles.item(itemActual.row(),1).text())
             cantidadRemito=int(self.tableDetalles.item(itemActual.row(),2).text())
@@ -109,13 +152,15 @@ class Remito(CRUDWidget,Ui_vtnRemito):
                                 self.tableDetalles.item(itemActual.row(),2).setText(str(cantidadRemito))
                                 if cantidadRemito==0:
                                     finalizeActualizacion=True
+
             detalle=RemitoModel.getDetalle(int(self.lineNumero.text()),int(linea),self.sesion).first()
-            detalle.borrar(self.sesion)
 
-            self.tableDetalles.removeRow(itemActual.row())
+            ##TODO TRABAJAR EN LA DEVOLUCION PARA CADA LOTE
 
-        else:
-            return
+            print detalle.devolverLotes(self.sesion)
+            #detalle.borrar(self.sesion)
+
+            #self.tableDetalles.removeRow(itemActual.row())"""
 
     def eliminar(self):
         """
@@ -229,7 +274,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.gbRemito.hide()
         self.remito=None
         self.productosAgregados=0
-        self.lotesVentas={}
+        self.lotesVentas = {}
         self.dniCliente = None
         self.detallesTabla = {} #Diccionario que vincula el row de la tabla con el obj DetalleRemito Correspondiente
 
@@ -444,6 +489,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                 loteProducto.descontarCantidad(loteProducto.cantidad)
                 loteProducto.modificar(self.sesion)
         self.lotesVentas[detalle]=valores
+        detalle.agregarLotes(self.sesion,self.lotesVentas[detalle])
 
     def agregarProducto(self):
         """
@@ -498,10 +544,12 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             for loteVenta in self.lotesVentas[detalle]:
                 loteVenta[0].aumentarCantidad(loteVenta[1])
                 loteVenta[0].modificar(self.sesion)
+            detalle.eliminarLotesAsociados(self.sesion)
             detalle.borrar(self.sesion)
             del self.lotesVentas[detalle]
             self.tableRemito.hideRow(itemActual.row())
             self.cargar_productos()
+            self.productosAgregados -=1
 
     def limpiarVentana(self):
         """
@@ -530,8 +578,12 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             Si no se ha efectuado ninguna venta, se notifica
         :return:
         """
+
         if self.remito==None:
-            QtGui.QMessageBox.information(self,"Venta con Remito","No se ha efectuado ninguna venta")
+            QtGui.QMessageBox.information(self,"Aviso","No se ha efectuado ninguna venta")
+        elif self.productosAgregados == 0:
+            QtGui.QMessageBox.information(self,"Aviso","No se ha agregado ningun producto al remito")
+
         else:
             QtGui.QMessageBox.information(None,"Venta","La venta se ha realizado con exito")
             ##Se envian los datos necesarios para generar el comprobante
@@ -539,16 +591,15 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             data["numero"] = self.remito.numero
             data["fecha"] = self.remito.fecha_emision
             data["datosCliente"] = ClienteModel.getDatosCliente(self.sesion,self.dniCliente)
-            print self.getContenidoTabla(self.tableRemito)
             data["detalles"] = self.getContenidoTabla(self.tableRemito)
             generarRremito(data)
             self.limpiarTabla(self.tableRemito)
-
-        self.remito=None
-        self.productosAgregados=0
-        self.limpiarVentana()
-        self.detalles = []
-        self.dniCliente = None
+            self.remito=None
+            self.productosAgregados=0
+            self.lotesVentas = {}
+            self.limpiarVentana()
+            self.detalles = []
+            self.dniCliente = None
 
     def cancelar(self):
         """

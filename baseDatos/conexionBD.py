@@ -220,7 +220,8 @@ class CreacionTabla():
             Column('linea_detalle',Integer, nullable=False),
             Column('cantidad',Integer, nullable=False),
             Column('es_remito',Boolean,nullable=False),
-            Column('lote',String,ForeignKey("lote.codigo"))
+            Column('lote',String,ForeignKey("lote.codigo")),
+            Column('baja',Boolean,nullable=False)
 
         )
 

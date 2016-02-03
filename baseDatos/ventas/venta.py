@@ -5,6 +5,7 @@ from datetime import date
 
 from baseDatos.productos import ObjetoBase
 from baseDatos.productos import Producto
+from baseDatos.productos import LoteProducto
 
 
 class Remito(ObjetoBase):
@@ -136,9 +137,9 @@ class Remito(ObjetoBase):
         :return :
         :rtype :
         """
-        return sesion.query(DetalleRemito).filter(DetalleRemito.id_remito==remito,
-                                                  DetalleRemito.nro_linea==linea)
-
+        return sesion.query(DetalleRemito).filter(DetalleRemito.id_remito == remito,
+                                                  DetalleRemito.nro_linea == linea,
+                                                  DetalleRemito.baja == False).first()
     @classmethod
     def obtenerTodosRemitos(cls,sesion):
         """
@@ -177,9 +178,67 @@ class DetalleRemito(ObjetoBase):
         """
         return self.id_remito
 
-    ###def subTotal(self,sesion):
-    ###    query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
-    ###    print (query.importe)
+    def agregarLotes(self,sesion,lotes):
+        """
+            Agrega los lotes correspondientes en la conformacion
+            de la cantidad del detalle
+            :param sesion Sesion actual con la Base de Datos:
+            :param lotes Diccionario que tiene el código de lote y la cantidad
+            :return:
+        """
+
+        for lote in lotes:
+            temp = LoteDetallado(self.id_remito,self.nro_linea,lote[0].id_lote,lote[1],True)
+            temp.guardar(sesion)
+
+    def devolverLotes(self,sesion):
+        """
+            Devuelve todos los lotes que conforman la cantidad
+            del Detalle
+            :param sesion Sesion actual con la Base de Datos
+            :return Diccionario con los lotes y sus cantidades
+        """
+
+        query = sesion.query(LoteDetallado.lote,LoteDetallado.cantidad).filter(LoteDetallado.nro_detalle == self.id_remito).\
+                            filter(LoteDetallado.linea_detalle == self.nro_linea).filter(LoteDetallado.es_remito == True).\
+                            filter(LoteDetallado.baja == False)
+
+        temp = {}
+
+        for value in query:
+            temp[value[0]] = value[1]
+
+        return temp
+
+    def eliminarLotesAsociados(self,sesion):
+        """
+            Elimina las entradas en el tabla LoteDetallado
+            para el Detalle en Particular
+        :param sesion Sesion actual con la Base de Datos:
+        :return:
+        """
+        query = sesion.query(LoteDetallado).filter(LoteDetallado.nro_detalle == self.id_remito).\
+                            filter(LoteDetallado.linea_detalle == self.nro_linea).filter(LoteDetallado.es_remito == True).\
+                            filter(LoteDetallado.baja == False)
+
+        for value in query:
+            value.setBaja(True)
+            value.modificar(sesion)
+
+    def devolver(self,sesion):
+        """
+            Devuelve el detalle correspondiente
+            :param sesion Sesion actual con la Base de Datos:
+            :return:
+        """
+        lotes_detalle = self.devolverLotes(sesion)
+        for lote in lotes_detalle:
+            loteP = LoteProducto.buscarLoteProducto(sesion,self.producto,lote).first()
+            loteP.aumentarCantidad(lotes_detalle[lote])
+            loteP.modificar(sesion)
+        self.eliminarLotesAsociados(sesion)
+        self.borrar(sesion)
+
 
 class Factura(ObjetoBase):
     """
@@ -322,15 +381,67 @@ class DetalleFactura(ObjetoBase):
         """
         return self.id_factura
 
-    ##def subTotal(self,sesion):
-    ##    """
-    ##
-    ##    :param sesion Sesion actual con la Base de Datos:
-    ##    :return Subtotal:
-    ##    :rtype Float:
-    ##    """
-    ##    query=sesion.query(Producto).filter(Producto.codigoBarra==self.producto)
-    ##    return query.importe*self.cantidad
+    def agregarLotes(self,sesion,lotes):
+        """
+            Agrega los lotes correspondientes en la conformacion
+            de la cantidad del detalle
+            :param sesion Sesion actual con la Base de Datos:
+            :param lotes Diccionario que tiene el código de lote y la cantidad
+            :return:
+        """
+
+        for lote in lotes:
+            temp = LoteDetallado(self.id_factura,self.nro_linea,lote[0].id_lote,lote[1],False)
+            temp.guardar(sesion)
+
+    def devolverLotes(self,sesion):
+        """
+            Devuelve todos los lotes que conforman la cantidad
+            del Detalle
+            :param sesion Sesion actual con la Base de Datos
+            :return Diccionario con los lotes y sus cantidades
+        """
+
+        query = sesion.query(LoteDetallado.lote,LoteDetallado.cantidad).filter(LoteDetallado.nro_detalle == self.id_factura).\
+                            filter(LoteDetallado.linea_detalle == self.nro_linea).filter(LoteDetallado.es_remito == False).\
+                            filter(LoteDetallado.baja == False)
+
+        temp = {}
+
+        for value in query:
+            temp[value[0]] = value[1]
+
+        return temp
+
+    def eliminarLotesAsociados(self,sesion):
+        """
+            Elimina las entradas en el tabla LoteDetallado
+            para el Detalle en Particular
+        :param sesion Sesion actual con la Base de Datos:
+        :return:
+        """
+        query = sesion.query(LoteDetallado).filter(LoteDetallado.nro_detalle == self.id_factura).\
+                            filter(LoteDetallado.linea_detalle == self.nro_linea).filter(LoteDetallado.es_remito == False).\
+                            filter(LoteDetallado.baja == False)
+
+        for value in query:
+            value.setBaja(True)
+            value.modificar(sesion)
+
+    def devolver(self,sesion):
+        """
+            Devuelve el detalle correspondiente
+            :param sesion Sesion actual con la Base de Datos:
+            :return:
+        """
+        lotes_detalle = self.devolverLotes(sesion)
+        for lote in lotes_detalle:
+            loteP = LoteProducto.buscarLoteProducto(sesion,self.producto,lote).first()
+            loteP.aumentarCantidad(lotes_detalle[lote])
+            loteP.modificar(sesion)
+        self.eliminarLotesAsociados(sesion)
+        self.borrar(sesion)
+
 
 class NotaCredito(ObjetoBase):
     """
@@ -518,3 +629,4 @@ class LoteDetallado(ObjetoBase):
         self.lote = lote
         self.cantidad = cantidad
         self.es_remito = es_remito
+        self.baja = False

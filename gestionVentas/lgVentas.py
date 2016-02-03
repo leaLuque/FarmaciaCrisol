@@ -711,6 +711,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 loteProducto.descontarCantidad(loteProducto.cantidad)
                 loteProducto.modificar(self.sesion)
         self.lotesVentas[detalle]=valores
+        detalle.agregarLotes(self.sesion,self.lotesVentas[detalle])
 
     def agregarProducto(self):
         """

@@ -128,9 +128,10 @@ class MdiWidget(QtGui.QWidget):
         dataTable = []
 
         for row in range(0,tabla.rowCount()):
-            for col in range(0,tabla.columnCount()):
-                dataRow.append(str(tabla.item(row,col).text()))
-            dataTable.append(dataRow)
-            dataRow = []
+            if not tabla.isRowHidden(row):
+                for col in range(0,tabla.columnCount()):
+                    dataRow.append(str(tabla.item(row,col).text()))
+                dataTable.append(dataRow)
+                dataRow = []
 
         return dataTable
