@@ -125,43 +125,6 @@ class Remito(CRUDWidget,Ui_vtnRemito):
                         self.tableDetalles.removeRow(rowActual)
                         finalize_actualizacion = True
 
-        """if ok:
-            linea=int(self.tableDetalles.item(itemActual.row(),0).text())
-            producto=int(self.tableDetalles.item(itemActual.row(),1).text())
-            cantidadRemito=int(self.tableDetalles.item(itemActual.row(),2).text())
-            finalizeActualizacion=False
-            while not finalizeActualizacion:
-                cantidad, ok=QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
-                if not ok:
-                    QtGui.QMessageBox.information(self,"Aviso","No se ingreso cantidad")
-                else:
-                    if cantidad > cantidadRemito:
-                        QtGui.QMessageBox.information(self,"Aviso","La cantidad ingresada supera la esperada")
-                    else:
-                        lote, ok=QtGui.QInputDialog.getText(self,"Lote","Ingrese lote")
-                        if not ok:
-                            QtGui.QMessageBox.information(self,"Aviso","No se ingreso lote")
-                        else:
-                            loteP=LoteProductoModel.buscarLoteProducto(self.sesion,producto,str(lote)).first()
-                            if loteP==None:
-                                QtGui.QMessageBox.information(self,"Aviso","El lote ingresado no se corresponde con el producto")
-                            else:
-                                loteP.aumentarCantidad(cantidad)
-                                loteP.modificar(self.sesion)
-                                cantidadRemito-=cantidad
-                                self.tableDetalles.item(itemActual.row(),2).setText(str(cantidadRemito))
-                                if cantidadRemito==0:
-                                    finalizeActualizacion=True
-
-            detalle=RemitoModel.getDetalle(int(self.lineNumero.text()),int(linea),self.sesion).first()
-
-            ##TODO TRABAJAR EN LA DEVOLUCION PARA CADA LOTE
-
-            print detalle.devolverLotes(self.sesion)
-            #detalle.borrar(self.sesion)
-
-            #self.tableDetalles.removeRow(itemActual.row())"""
-
     def eliminar(self):
         """
             Elimina un remito seleccionado, una vez que fueron dado de baja todos
@@ -240,6 +203,8 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         gui.tableDetalles.itemDoubleClicked.connect(gui.eliminarDetalle)
         gui.btnBuscar.pressed.connect(gui.buscarRemito)
         gui.lineNumero.returnPressed.connect(gui.buscarRemito)
+        gui.btnAceptar.setHidden(True)
+        gui.btnCancelar.setHidden(True)
         return gui
 
 class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
