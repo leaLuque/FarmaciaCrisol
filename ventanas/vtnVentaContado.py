@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaContado.ui'
 #
-# Created: Tue Jan 26 19:51:44 2016
+# Created: Fri Feb  5 16:41:20 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -151,17 +151,7 @@ class Ui_vtnVentaContado(object):
         self.tableFactura.verticalHeader().setCascadingSectionResizes(False)
         self.tableFactura.verticalHeader().setSortIndicatorShown(False)
         self.tableFactura.verticalHeader().setStretchLastSection(False)
-        self.gridLayout_6.addWidget(self.tableFactura, 0, 0, 1, 3)
-        self.cboPago = QtGui.QComboBox(self.gbFactura)
-        self.cboPago.setObjectName(_fromUtf8("cboPago"))
-        self.cboPago.addItem(_fromUtf8(""))
-        self.cboPago.addItem(_fromUtf8(""))
-        self.cboPago.addItem(_fromUtf8(""))
-        self.cboPago.addItem(_fromUtf8(""))
-        self.gridLayout_6.addWidget(self.cboPago, 1, 2, 1, 1, QtCore.Qt.AlignLeft)
-        self.label_10 = QtGui.QLabel(self.gbFactura)
-        self.label_10.setObjectName(_fromUtf8("label_10"))
-        self.gridLayout_6.addWidget(self.label_10, 1, 1, 1, 1, QtCore.Qt.AlignRight)
+        self.gridLayout_6.addWidget(self.tableFactura, 0, 0, 1, 2)
         self.verticalLayout_6.addLayout(self.gridLayout_6)
         self.verticalLayout.addWidget(self.gbFactura)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
@@ -220,11 +210,6 @@ class Ui_vtnVentaContado(object):
         item.setText(_translate("vtnVentaContado", "Cantidad", None))
         item = self.tableFactura.horizontalHeaderItem(2)
         item.setText(_translate("vtnVentaContado", "Importe", None))
-        self.cboPago.setItemText(0, _translate("vtnVentaContado", "Tarjeta de Crédito", None))
-        self.cboPago.setItemText(1, _translate("vtnVentaContado", "Tarjeta de Débito", None))
-        self.cboPago.setItemText(2, _translate("vtnVentaContado", "Efectivo", None))
-        self.cboPago.setItemText(3, _translate("vtnVentaContado", "Nota de Crédito", None))
-        self.label_10.setText(_translate("vtnVentaContado", "Forma de Pago", None))
         self.btnAceptar.setText(_translate("vtnVentaContado", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnVentaContado", "Cancelar", None))
 

@@ -740,7 +740,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         if self.lineNumero.isEnabled():
             numeroRemito=self.lineNumero.text()
             if len(numeroRemito)==0:
-                self.showMsjEstado("No se ha ingresado numero de remito")
+                QtGui.QMessageBox.information(self,"Aviso","No se ha ingresado numero de remito")
             else:
                 self.remitoActual = RemitoModel.existeRemito(int(numeroRemito),self.sesion)
                 if self.remitoActual== None:
@@ -824,7 +824,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         :return:
         """
         if self.tableRemitos.rowCount()==0:
-            self.showMsjEstado("No se ha seleccionado remito para agregar")
+            QtGui.QMessageBox.information(self,"Aviso","No se ha seleccionado remito para agregar")
         else:
             if self.remitosAgregados==0:
                 self.factura=FacturaModel(FacturaModel.generarNumero(self.sesion))

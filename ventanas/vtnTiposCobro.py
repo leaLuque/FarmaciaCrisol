@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnTiposCobro.ui'
 #
-# Created: Thu Feb  4 14:29:42 2016
+# Created: Fri Feb  5 12:49:55 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,14 +32,12 @@ class Ui_Dialog(object):
         self.tablePagos.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.tablePagos.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.tablePagos.setObjectName(_fromUtf8("tablePagos"))
-        self.tablePagos.setColumnCount(3)
+        self.tablePagos.setColumnCount(2)
         self.tablePagos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tablePagos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
         self.tablePagos.setHorizontalHeaderItem(1, item)
-        item = QtGui.QTableWidgetItem()
-        self.tablePagos.setHorizontalHeaderItem(2, item)
         self.tablePagos.horizontalHeader().setStretchLastSection(True)
         self.tablePagos.verticalHeader().setSortIndicatorShown(False)
         self.tablePagos.verticalHeader().setStretchLastSection(False)
@@ -59,7 +57,8 @@ class Ui_Dialog(object):
         self.rbtnNC.setObjectName(_fromUtf8("rbtnNC"))
         self.horizontalLayout.addWidget(self.rbtnNC)
         self.rbtnEfectivo = QtGui.QRadioButton(self.horizontalLayoutWidget)
-        self.rbtnEfectivo.setChecked(True)
+        self.rbtnEfectivo.setCheckable(True)
+        self.rbtnEfectivo.setChecked(False)
         self.rbtnEfectivo.setObjectName(_fromUtf8("rbtnEfectivo"))
         self.horizontalLayout.addWidget(self.rbtnEfectivo)
         self.horizontalLayoutWidget_3 = QtGui.QWidget(Dialog)
@@ -100,10 +99,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
         item = self.tablePagos.horizontalHeaderItem(0)
-        item.setText(_translate("Dialog", "Número", None))
-        item = self.tablePagos.horizontalHeaderItem(1)
         item.setText(_translate("Dialog", "Tipo de Pago", None))
-        item = self.tablePagos.horizontalHeaderItem(2)
+        item = self.tablePagos.horizontalHeaderItem(1)
         item.setText(_translate("Dialog", "Importe", None))
         self.rbtnTC.setText(_translate("Dialog", "Tarjeta de Crédito", None))
         self.rbtnTD.setText(_translate("Dialog", "Tarjeta de Débito", None))

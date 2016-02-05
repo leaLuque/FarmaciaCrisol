@@ -491,6 +491,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.lotesVentas={}
         self.facturaCobrada=False
         self.obraSocialSeleccionada=None
+        self.formapago = None
         self.factura = None
         self.data = []
         self.cargarProductosSinObra()
@@ -783,100 +784,6 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         importeTotal=sum(subtotales)
         return importeTotal
 
-    def cobrarEfectivo(self):
-        """
-            Vincula la factura con un cobro con
-            Efectivo
-        :return:
-        """
-        efectivo,ok=QtGui.QInputDialog.getText(self,"Cobro Efectivo",("El importe total es: $%.2f. Por favor ingrese monto" % self.calcularTotal()))
-        try:
-            if float(efectivo)>=self.calcularTotal():
-                QtGui.QMessageBox.information(self,"Cobro Efectivo","Su vuelto es:%.2f" % (float(efectivo)-self.calcularTotal()))
-                cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.calcularTotal())
-                cobroCliente.guardar(self.sesion)
-                self.facturaCobrada=True
-            else:
-                QtGui.QMessageBox.information(self,"Cobro Efectivo","El importe seleccionado es menor al total")
-        except ValueError:
-            pass
-
-    def cobrarTarjDebito(self):
-        """
-            Vincula la factura con un cobro con
-            Tarjeta de Debito
-        :return:
-        """
-
-        efectivo,ok=QtGui.QInputDialog.getText(self,"Cobro Tarjeta Débito",("El importe total es: $%.2f. Por favor número de tarjeta" % self.calcularTotal()))
-
-        try:
-            #print float(efectivo)
-            #print self.calcularTotal()
-            #print type(float(efectivo))
-            #print type(self.calcularTotal())
-            #print float(efectivo) == float(self.calcularTotal())
-            #if float(efectivo) == self.calcularTotal():
-            cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Tarjeta Debito",self.calcularTotal())
-            cobroCliente.guardar(self.sesion)
-            self.facturaCobrada=True
-            #else:
-            #    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no coincide con el total de la factura")
-        except ValueError:
-            pass
-
-    def cobrarNC(self):
-        """
-            Efectua el cobro de la factura empleando
-            la Nota de Credito indicada por el usuario
-        :return:
-        """
-        totalFactura = self.calcularTotal()
-        numero,ok = QtGui.QInputDialog.getText(self,"Cobro c/Nota de Crédito","Ingrese número de Nota de Crédito")
-        notaCredito = NotaCreditoModel.getNotaCredito(self.sesion,int(numero))
-        if notaCredito == None:
-            QtGui.QMessageBox.information(self,"Aviso","La Nota de Crédito ingresada no existe")
-        elif notaCredito.getTotal(self.sesion) < totalFactura:
-            QtGui.QMessageBox.information(self,"Aviso","El monto de la Nota de Credito es insuficiente")
-        elif notaCredito.getTotal(self.sesion) - CobroClienteModel.getTotalNC(self.sesion,notaCredito.numero) < totalFactura:
-             dif = notaCredito.getTotal(self.sesion) - CobroClienteModel.getTotalNC(self.sesion,notaCredito.numero)
-             QtGui.QMessageBox.information(self,"Aviso","La Nota solo posee $" + str(dif))
-        else:
-            cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Nota Credito",totalFactura)
-            cobroCliente.setNC(notaCredito.numero)
-            cobroCliente.guardar(self.sesion)
-            self.facturaCobrada=True
-
-    def cobrarTarjCredito(self):
-        """
-            Vincula la factura con un cobro
-            con Tarjeta de Credito
-        :return:
-        """
-        cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Tarjeta Credito",self.calcularTotal())
-        cobroCliente.guardar(self.sesion)
-        self.facturaCobrada=True
-
-    def cobrar(self):
-        """
-            Establece que metodo emplear para cobrar, en funcion
-            de la seleccion del usuario
-        :return:
-        """
-
-        opcionActual=str(self.cboPago.currentText().toUtf8())
-
-        if opcionActual=="Efectivo":
-            self.cobrarEfectivo()
-        elif opcionActual=="Nota de Crédito":
-            self.cobrarNC()
-        elif opcionActual=="Tarjeta de Débito":
-            self.cobrarTarjDebito()
-        else:
-            self.cobrarTarjCredito()
-
-        return opcionActual
-
     def confirmarOperacion(self):
         """
             Confirma la operacion si todo ha sido exitoso.
@@ -887,23 +794,15 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         if self.factura==None:
             QtGui.QMessageBox.information(self,"Aviso","No se ha efectuado ninguna venta")
         else:
-
-            ventana = Cobrar(self.calcularTotal())
-            signal = ventana.exec_()
-
-            if signal:
-                print "acepte los cobros"
-            else:
-                print "no acepte los cobros"
-
-            #formapago = self.cobrar()
+            ventana = Cobrar(self,self.calcularTotal(),self.factura,self.sesion)
+            ventana.exec_()
             if self.facturaCobrada:
                 QtGui.QMessageBox.information(self,"Venta","La venta se ha realizado con exito")
                 data = {}
                 data["numero"] = self.factura.numero
                 data["fecha"] = self.factura.fecha_emision
                 data["detalles"] = self.data
-                data["formaPago"] = formapago
+                data["formaPago"] = self.formapago
                 generarFactura(data)
                 self.factura = None
                 self.facturaCobrada = False
@@ -934,52 +833,170 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.data = []
         self.limpiarVentana()
 
-
 class Cobrar(QtGui.QDialog, Ui_Dialog):
     """
         Clase que modela la lógica de cobro de una factura
     """
 
-    def __init__(self,total,parent=None):
+    def __init__(self,ventana_padre, total, factura,sesion):
         """
             Constuctor de la clase Cobrar
-        :param total:
-        :param parent:
+        :param ventana_padre Referncia a la ventana padre:
+        :param total Total a pagar:
         :return:
         """
-        QtGui.QDialog.__init__(self,parent)
+        QtGui.QDialog.__init__(self,ventana_padre)
         self.setupUi(self)
         self.total_a_pagar = total
-        self.actualizar_total(total)
-        self.btnAceptar.pressed.connect(self.accept)
-        self.btnCancelar.pressed.connect(self.reject)
+        self.padre = ventana_padre
+        self.factura = factura
+        self.sesion = sesion
+        self.actualizar_total()
+        self.listado_de_cobros = []
+        self.btnAceptar.pressed.connect(self.confirmar)
+        self.btnCancelar.pressed.connect(self.cancelar)
         self.rbtnEfectivo.pressed.connect(self.cobroEfectivo)
         self.rbtnNC.pressed.connect(self.cobroNC)
         self.rbtnTC.pressed.connect(self.cobroTC)
         self.rbtnTD.pressed.connect(self.cobroTD)
 
-    def actualizar_total(self,total):
+    def actualizar_total(self):
         """
             Actualiza el importe a pagar en
             el line de la ventana
         :param total:
         :return:
         """
-        self.lblImporte.setText("Importe a Pagar: $%.2f" % total)
+        self.lblImporte.setText("Importe a Pagar: $%.2f" % self.total_a_pagar)
 
     def cobroNC(self):
-        pass
+        """
+            Cobro con Nota de Crédito
+        :return:
+        """
+        self.rbtnNC.setChecked(True)
+        totalFactura = self.total_a_pagar
+        numero,ok = QtGui.QInputDialog.getText(self,"Cobro c/Nota de Crédito","Ingrese número de Nota de Crédito")
+        if ok:
+            notaCredito = NotaCreditoModel.getNotaCredito(self.padre.sesion,int(numero))
+            if notaCredito == None:
+                QtGui.QMessageBox.information(self,"Aviso","La Nota de Crédito ingresada no existe")
+            elif notaCredito.getTotal(self.padre.sesion) < totalFactura:
+                QtGui.QMessageBox.information(self,"Aviso","El monto de la Nota de Credito es insuficiente")
+            elif notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero) < totalFactura:
+                 dif = notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero)
+                 QtGui.QMessageBox.information(self,"Aviso","La Nota solo posee $" + str(dif))
+            else:
+                self.listado_de_cobros.append(["Nota de Crédito",self.total_a_pagar,notaCredito.numero])
+                self.total_a_pagar = 0
+                self.actualizar_total()
+                self.actualizar_tabla()
+
+            #cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Nota Credito",totalFactura)
+            #cobroCliente.setNC(notaCredito.numero)
+            #cobroCliente.guardar(self.sesion)
+            #self.facturaCobrada=True
 
     def cobroTC(self):
-        pass
+        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Crédito","Ingrese monto a pagar",0,0,2000,2)
+        if ok:
+            if monto_a_pagar > self.total_a_pagar:
+                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
+            elif monto_a_pagar == 0:
+                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+            else:
+                self.listado_de_cobros.append(["Tarjeta de Crédito",monto_a_pagar])
+                self.total_a_pagar -= monto_a_pagar
+                self.actualizar_total()
+                self.actualizar_tabla()
 
     def cobroTD(self):
 
-        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Débito","Ingrese monto a pagar",1,1,2000,5)
+        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Débito","Ingrese monto a pagar",0,0,2000,2)
         if ok:
-            nro_tarjeta,ok1=QtGui.QInputDialog.getText(self,"Cobro Tarjeta Débito","Ingrese numero tarjeta de dédito")
-
-
+            if monto_a_pagar > self.total_a_pagar:
+                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
+            elif monto_a_pagar == 0:
+                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+            else:
+                self.listado_de_cobros.append(["Tarjeta de Débito",monto_a_pagar])
+                self.total_a_pagar -= monto_a_pagar
+                self.actualizar_total()
+                self.actualizar_tabla()
 
     def cobroEfectivo(self):
-        pass
+        """
+            Se encarga de efectuar el cobro en efectivo del cliente
+        :return:
+        """
+        self.rbtnEfectivo.setChecked(True)
+        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Efectivo","Ingrese monto a pagar",0,0,2000,2)
+
+        if ok:
+            if monto_a_pagar >= self.total_a_pagar:
+                QtGui.QMessageBox.information(self,"Cobro Efectivo","Su vuelto es:%.2f" % (monto_a_pagar - self.total_a_pagar))
+                self.listado_de_cobros.append(["Efectivo",self.total_a_pagar])
+                self.total_a_pagar = 0
+            elif monto_a_pagar == 0:
+                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+            else:
+                self.listado_de_cobros.append(["Efectivo",monto_a_pagar])
+                self.total_a_pagar -= monto_a_pagar
+
+            self.actualizar_total()
+            self.actualizar_tabla()
+
+    def actualizar_tabla(self):
+        """
+            Actualiza la tabla de cobros
+        :return:
+        """
+
+        self.padre.limpiarTabla(self.tablePagos)
+        for row, cobro in enumerate(self.listado_de_cobros):
+            self.tablePagos.insertRow(row)
+            self.tablePagos.setItem(row,0,QtGui.QTableWidgetItem(cobro[0]))
+            self.tablePagos.setItem(row,1,QtGui.QTableWidgetItem("$"+str(cobro[1])))
+
+    def confirmar(self):
+        """
+            Confirma los cobros efectuados
+        :return Tupla con la señal indicando exito y lista de cobros:
+        """
+
+        if self.total_a_pagar == 0:
+
+            for cobro in self.listado_de_cobros:
+                if len(cobro) == 3:
+                    cobroCliente = CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,\
+                                                     cobro[0],cobro[1])
+                    cobroCliente.setNC(cobro[2])
+                else:
+                    cobroCliente = CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,\
+                                                     cobro[0],cobro[1])
+
+                cobroCliente.guardar(self.sesion)
+
+            if len(self.listado_de_cobros)>1:
+                self.padre.formapago = "Varios"
+            else:
+                self.padre.formapago = self.listado_de_cobros[0][0]
+
+            self.padre.facturaCobrada = True
+            self.accept()
+        else:
+            QtGui.QMessageBox.information(self,"Aviso","Restan $%.2f por pagar" % self.total_a_pagar)
+
+    def cancelar(self):
+        """
+            Cancela la operacion de cobrar
+        :return Tupla con la señal indicando cancelacion y None:
+        """
+
+        signal = QtGui.QMessageBox.information(self,"Aviso","¿Desea cancelar la operacion?",\
+                                           QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
+        if signal == QtGui.QMessageBox.Ok:
+            self.listado_de_cobros = []
+            self.padre.limpiarTabla(self.tablePagos)
+            self.close()
+        #self.parentWidget()
