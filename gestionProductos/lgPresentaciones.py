@@ -1,13 +1,23 @@
-__author__ = 'waldo'
 # coding: latin-1
+__author__ = 'waldo'
+from PyQt4 import QtGui
+
 from gui import MdiWidget, CRUDWidget
 from ventanas import Ui_vtnPresentacion
 from validarDatos import ValidarDatos
 from baseDatos import Presentacion as PresentacionModel
 from baseDatos import Producto as ProductoModel
-from PyQt4 import QtGui
+
 class Presentacion(CRUDWidget, Ui_vtnPresentacion):
+    """
+    Lógica del ABM de presentación.
+    """
     def __init__(self, mdi):
+        """
+        Coonstructor de la clase Presentación.
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores(PresentacionModel)
@@ -16,24 +26,39 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         self.subPresentacionOld = None
 
     def cargarFraccionables(self):
+        """
+        Carga los datos de las presentaciones que pueden fraccionarse en la tabla de la ventana.
+        :return:
+        """
         self.cargarObjetos(self.tablaFraccionable,
             PresentacionModel.listarFraccionables(self.sesion).all(),
             ("tipo", "unidad_medida", "cantidad_fracciones")
         )
 
     def cargarPresentaciones(self):
+        """
+        Carga los datos de las presentaciones en la tabla de la ventana.
+        :return:
+        """
         self.cargarObjetos(self.tablaPresentacion,
             PresentacionModel.buscarTodos("tipo", self.sesion).all(),
             ("tipo", "unidad_medida", "cantidad_fracciones", "sub_presentacion", "super_presentacion")
         )
 
     def crear(self):
+        """
+        Da de alta una presentación nueva y la almacena en la base de datos.
+        :return:
+        """
         if ValidarDatos.validarCamposVacios(self.camposRequeridos):
             if self.validarFracciones():
-                presentacion = PresentacionModel(str(self.lineTipo.text()), str(self.lineUnidad_Medida.text()),
-                                str(self.spinCantidad.value()), self.subPresentacion, self.superPresentacion)
+                presentacion = PresentacionModel(str(self.lineTipo.text()),
+                                                 str(self.lineUnidad_Medida.text()),
+                                                 str(self.spinCantidad.value()),
+                                                 self.subPresentacion, self.superPresentacion)
                 if presentacion.guardar(self.sesion):
-                    self.showMsjEstado("La Presentación fue dada de alta.")
+                    QtGui.QMessageBox.information(self, 'Info',
+                                                  'La Presentación fue dada de alta.', 'Aceptar')
                     if self.subPresentacion != None:
                         self.setSuperPresentacion(str(self.lineTipo.text()))
                     self.objectCreated.emit()
@@ -51,34 +76,44 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
                                 presentacion.modificar(self.sesion)
                                 superPres = presentacion.getTipo()
                                 presentacion = PresentacionModel.buscar(PresentacionModel.tipo, self.sesion,
-                                                      self.subPresentacion).first()
+                                                                        self.subPresentacion).first()
                                 presentacion.setSuperPresentacion(superPres)
                                 presentacion.modificar(self.sesion)
-                                self.showMsjEstado("La Presentación fue dada de alta.")
+                                QtGui.QMessageBox.information(self, 'Info',
+                                                              'La Presentación fue dada de alta.', 'Aceptar')
                                 self.limpiarCampos()
                                 self.objectCreated.emit()
                             else:
-                                self.showMsjEstado("Seleccione la Presentación en la cual puede "
-                                               "fraccionarse la Presentación actual.")
+                                QtGui.QMessageBox.warning(self, 'Atención',
+                                                          'Seleccione la Presentación en la cual puede'
+                                                          'fraccionarse la Presentación actual.', 'Aceptar')
                         else:
                             presentacion.setBaja(False)
                             presentacion.modificar(self.sesion)
-                            self.showMsjEstado("La Presentación fue dada de alta.")
+                            QtGui.QMessageBox.information(self, 'Info',
+                                                          'La Presentación fue dada de alta.', 'Aceptar')
                             self.limpiarCampos()
                             self.objectCreated.emit()
                     else:
                         QtGui.QMessageBox.critical(self, 'Error', 'La Presentación ya existe.', 'Aceptar')
             else:
-                self.showMsjEstado("Seleccione la Presentación en la cual puede fraccionarse la Presentación actual.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Seleccione la Presentación en la cual puede'
+                                          'fraccionarse la Presentación actual.', 'Aceptar')
         else:
-            self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+            QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
+                                      'Aceptar')
 
     #TODO tener en cuenta si un producto figura en un remito,
     # al dar de baja la presentencion sse da de baja el producto idem para medicamento
     def eliminar(self):
+        """
+        Da de baja la presentación seleccionada.
+        :return:
+        """
         itemActual = self.tablaPresentacion.currentItem()
         if itemActual == None:
-            self.showMsjEstado("No se ha seleccionado ninguna Presentación de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado ninguna Presentación de la tabla.',
+                                      'Aceptar')
         else:
             row = itemActual.row()
             tipo = str(self.tablaPresentacion.item(row, 0).text())
@@ -86,7 +121,7 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
                 self.presentacion = PresentacionModel.buscarAlta(PresentacionModel.tipo,
                                                                  self.sesion, tipo).first()
                 self.presentacion.borrar(self.sesion)
-                self.showMsjEstado("La Presentación ha sido eliminada")
+                QtGui.QMessageBox.information(self, 'Info', 'La Presentación ha sido eliminada.', 'Aceptar')
                 tipo = self.presentacion.getSubPresentacion()
                 if tipo:
                     self.presentacion.setSubPresentacion(None)
@@ -111,6 +146,10 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
                                                           'esta asignada a 1 ó más productos', 'Aceptar')
 
     def modificar(self):
+        """
+        Modifica los datos de la presentación seleccionada.
+        :return:
+        """
         presActual = self.tablaPresentacion.currentItem()
         if presActual != None:
             if ValidarDatos.validarCamposVacios(self.camposRequeridos):
@@ -128,22 +167,27 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
                         self.subPresentacion = self.subPresentacionOld
                         self.setSuperPresentacion(None)
                     self.presentacion.modificar(self.sesion)
-                    self.showMsjEstado("La Presentación fue modificada")
+                    QtGui.QMessageBox.information(self, 'Info', 'La Presentación fue modificada.', 'Aceptar')
                     self.objectModified.emit()
                     self.actualizar()
                 else:
-                    self.showMsjEstado("Seleccione la Presentación en la cual puede fraccionarse la Presentación actual.")
+                    QtGui.QMessageBox.warning(self, 'Atención', 'Seleccione la Presentación en la '
+                                              'cual puede fraccionarse la Presentación actual.', 'Aceptar')
             else:
-                self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no '
+                                          'fueron completados.', 'Aceptar')
         else:
-            self.showMsjEstado("No se ha seleccionado una Presentación de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado una Presentación de la tabla',
+                                      'Aceptar')
 
 
     def cargarCampos(self):
+        """
+        Carga los campos con los datos de la presentación seleccionada.
+        :return:
+        """
         #Deshabilitar los lines restantes
         self.lineTipo.setEnabled(False)
-        self.spinCantidad.setEnabled(False)
-        self.lineUnidad_Medida.setEnabled(False)
         #Recuperar la informacion de un item
         row = self.tablaPresentacion.currentItem().row()
         infoItem = []
@@ -155,6 +199,10 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         self.spinCantidad.setValue(int(infoItem[2]))
 
     def buscar(self):
+        """
+        Busca y carga en la tabla los datos de una presentación para un tipo ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaPresentacion)
         self.cargarObjetos(self.tablaPresentacion,
             PresentacionModel.buscarLike(PresentacionModel.tipo, self.sesion,
@@ -163,11 +211,19 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         )
 
     def actualizar(self):
+        """
+        Actualiza la ventana (campos y tablas).
+        :return:
+        """
         self.limpiarCampos()
         self.limpiarTabla(self.tablaPresentacion)
         self.cargarPresentaciones()
 
     def limpiarCampos(self):
+        """
+        Vacia los campos de la ventana.
+        :return:
+        """
         self.lineTipo.clear()
         self.lineTipo.setEnabled(True)
         self.spinCantidad.setValue(1)
@@ -181,6 +237,10 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         self.cargarFraccionables()
 
     def modificarItem(self):
+        """
+        Carga los campos con los datos de la presentación seleccionada.
+        :return:
+        """
         self.lineTipo.setEnabled(False)
         row = self.tablaPresentacion.currentItem().row()
         infoItem = []
@@ -205,10 +265,18 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
             self.tablaFraccionable.setEnabled(False)
 
     def setFraccionable(self):
+        """
+        Setea la referencia a la presentación con la presentación seleccionado.
+        :return:
+        """
         row = self.tablaFraccionable.currentItem().row()
         self.subPresentacion = str(self.tablaFraccionable.item(row, 0).text())
 
     def validarFracciones(self):
+        """
+        Verifica que la presentación sea fraccionable.
+        :return:
+        """
         if self.spinCantidad.value() > 1:
             if self.subPresentacion != None:
                 return True
@@ -221,6 +289,11 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
             return True
 
     def setSuperPresentacion(self, superPresentacion):
+        """
+        Setea la referencia a la presentación fraccionable.
+        :param superPresentacion: referencia a la presentación fraccionable.
+        :return:
+        """
         presentacion = PresentacionModel.buscarAlta(PresentacionModel.tipo, self.sesion,
                                              self.subPresentacion).first()
         presentacion.setSuperPresentacion(superPresentacion)
@@ -229,6 +302,11 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
 
     @classmethod
     def create(cls, mdi):
+        """
+        Configuración de la ventana Alta Presentación.
+        :param mdi: referencia a la ventana Alta Presentación.
+        :return: gui
+        """
         gui = super(Presentacion, cls).create(mdi)
         gui.groupPresentacion.hide()
         gui.btnBuscar.hide()
@@ -240,6 +318,11 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
 
     @classmethod
     def delete(cls, mdi):
+        """
+        Configuración de la ventana Baja Presentación.
+        :param mdi: referencia a la ventana Baja Presentación.
+        :return: gui
+        """
         gui = super(Presentacion, cls).delete(mdi)
         gui.lineUnidad_Medida.setEnabled(False)
         gui.spinCantidad.setEnabled(False)
@@ -254,6 +337,11 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
 
     @classmethod
     def update(cls, mdi):
+        """
+        Configuración de la ventana Modificación Presentación.
+        :param mdi: referencia a la ventana Modificación Presentación.
+        :return: gui
+        """
         gui = super(Presentacion, cls).update(mdi)
         gui.cargarPresentaciones()
         gui.cargarFraccionables()
@@ -264,245 +352,3 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         gui.btnCancelar.pressed.connect(gui.actualizar)
         gui.tablaFraccionable.itemClicked.connect(gui.setFraccionable)
         return gui
-#
-# class AltaPresentacion(MdiWidget, Ui_vtnAltaPresentacion):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.columnHeaders = ["Tipo", "Unidad de Medida", "Cantidad de Fracciones", "Fraccionable"]
-#         self.campos = [self.lineTipo, self.lineUnidadMedida, self.lineCantFracc]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.tablaPresentacion.itemClicked.connect(self.setSubPresentacion)
-#         self.inicializarTabla()
-#         self.subPresentacion = None
-#         self.superPresentacion = None
-#
-#     def inicializarTabla(self):
-#         presentaciones = self.buscarPresentaciones()
-#         self.cargarTabla(self.tablaPresentacion, presentaciones, self.columnHeaders)
-#
-#     def buscarPresentaciones(self):
-#         presentaciones = {}
-#         i = 0
-#         query = Presentacion.buscarTodos(Presentacion.tipo, self.sesion)
-#         for instance in query:
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#         return presentaciones
-#
-#     def setSubPresentacion(self):
-#         self.subPresentacion = self.itemSeleccionado(self.tablaPresentacion)
-#         self.superPresentacion = str(self.lineTipo.text())
-#
-#     def confirmarOperacion(self):
-#         if self.validarDatos.validarCamposVacios(self.campos):
-#             if self.validarFracciones():
-#                 presentacion = Presentacion(str(self.lineTipo.text()),  str(self.lineUnidadMedida.text()),
-#                                     str(self.lineCantFracc.text()), self.subPresentacion, None)
-#                 if presentacion.guardar(self.sesion):
-#                     self.showMsjEstado("La Presentación fue dada de alta.")
-#                     self.actualizarFraccionable()
-#                     self.actualizarVentana()
-#                     self.subPresentacion = None
-#                     self.superPresentacion = None
-#                 else:
-#                     self.showMsjEstado("La Presentación ya existe.")
-#             else:
-#                 self.showMsjEstado("Seleccione la Presentación en la cual puede fraccionarse la Presentación actual.")
-#         else:
-#             self.showMsjEstado("Unos o más datos obligatorios no fueron completados.")
-#
-#     def validarFracciones(self):
-#         if int(self.lineCantFracc.text()) > 1:
-#             if self.subPresentacion != None:
-#                 return True
-#             else:
-#                 return False
-#         else:
-#             self.subPresentacion = None
-#             self.superPresentacion = None
-#             return True
-#
-#     def actualizarFraccionable(self):
-#         if self.superPresentacion != None:
-#             tipo = self.itemSeleccionado(self.tablaPresentacion)
-#             query = Presentacion.buscar(Presentacion.tipo, self.sesion, tipo)
-#             for instance in query.all():
-#                  presentacion = instance
-#             presentacion.superPresentacion = self.superPresentacion
-#             self.sesion.commit()
-#
-#     def actualizarVentana(self):
-#         self.lineTipo.setText("")
-#         self.lineUnidadMedida.setText("")
-#         self.lineCantFracc.setText("")
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeaders)
-#         self.inicializarTabla()
-#
-# class BajaPresentacion(MdiWidget, Ui_vtnBajaPresentacion):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.columnHeaders = ["Tipo", "Unidad de Medida", "Cantidad de Fracciones", "Fraccionable"]
-#         self.campos = [self.lineTipo]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.tablaPresentacion.itemClicked.connect(self.obtenerPresentacion)
-#         self.presentacion = None
-#         self.btnBuscar.pressed.connect(self.buscarPresentacion)
-#         self.lineTipo.returnPressed.connect(self.buscarPresentacion)
-#
-#     def buscarPresentacion(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeaders)
-#         presentaciones = {}
-#         query = Presentacion.buscarLike(Presentacion.tipo, self.sesion, str(self.lineTipo.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#             self.presentacion = instance
-#         if len(presentaciones.items()) < 1:
-#             self.showMsjEstado("No existen Presentaciones que coincidan con el tipo ingresado en la busqueda.")
-#         elif len(presentaciones.items()) > 1:
-#             self.presentacion = None
-#         self.cargarTabla(self.tablaPresentacion, presentaciones, self.columnHeaders)
-#
-#     def obtenerPresentacion(self):
-#         tipo = self.itemSeleccionado(self.tablaPresentacion)
-#         query = Presentacion.buscar(Presentacion.tipo, self.sesion, tipo)
-#         for instance in query.all():
-#              self.presentacion = instance
-#
-#     def confirmarOperacion(self):
-#         if self.tablaPresentacion.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione una Presentación de la tabla.")
-#         else:
-#             if self.presentacion == None:
-#                 self.showMsjEstado("Seleccione una Presentación de la tabla.")
-#             else:
-#                 self.presentacion.borrar(self.sesion)
-#                 self.showMsjEstado("La Presentación fue dada de baja.")
-#                 self.actualizarVentana()
-#                 self.monodroga = None
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeaders)
-#         self.lineTipo.setText("")
-#
-# class ModificarPresentacion(MdiWidget, Ui_vtnModificarPresentacion):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.columnHeaders = ["Tipo", "Unidad de Medida", "Cantidad de Fracciones", "Fraccionable"]
-#         self.campos = [self.lineTipo, self.lineUnidadMedida, self.lineCantFracc]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.tablaPresentacion.itemClicked.connect(self.obtenerPresentacion)
-#         self.tablaPresFracc.itemClicked.connect(self.setSubPresentacion)
-#         self.presentacion = None
-#         self.subPresentacion = None
-#         self.btnBuscar.pressed.connect(self.buscarPresentacion)
-#         self.lineTipo.returnPressed.connect(self.buscarPresentacion)
-#         self.inicializarTabla()
-#
-#     def inicializarTabla(self):
-#         presentaciones = self.buscarPresentaciones()
-#         self.limpiarTabla(self.tablaPresFracc, self.columnHeaders)
-#         self.cargarTabla(self.tablaPresFracc, presentaciones, self.columnHeaders)
-#
-#     def buscarPresentaciones(self):
-#         presentaciones = {}
-#         i = 0
-#         query = Presentacion.buscarTodos(Presentacion.tipo, self.sesion)
-#         for instance in query:
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#         return presentaciones
-#
-#     def buscarPresentacion(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeaders)
-#         presentaciones = {}
-#         query = Presentacion.buscarLike(Presentacion.tipo, self.sesion, str(self.lineTipo.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#             self.presentacion = instance
-#             self.subPresentacion = instance.subPresentacion
-#         self.limpiarCampos()
-#         if len(presentaciones.items()) < 1:
-#             self.showMsjEstado("No existen Presentaciones que coincidan con el tipo ingresado en la busqueda.")
-#         elif len(presentaciones.items()) > 1:
-#             self.presentacion = None
-#             self.subPresentacion = None
-#         else:
-#             self.cargarCampos()
-#         self.cargarTabla(self.tablaPresentacion, presentaciones, self.columnHeaders)
-#
-#     def obtenerPresentacion(self):
-#         tipo = self.itemSeleccionado(self.tablaPresentacion)
-#         query = Presentacion.buscar(Presentacion.tipo, self.sesion, tipo)
-#         for instance in query.all():
-#             self.presentacion = instance
-#             self.subPresentacion = instance.subPresentacion
-#         self.cargarCampos()
-#
-#     def cargarCampos(self):
-#         self.lineTipo.setText(self.presentacion.tipo)
-#         self.lineUnidadMedida.setText(self.presentacion.unidadMedida)
-#         self.lineCantFracc.setText(str(self.presentacion.cantidadFracciones))
-#
-#     def limpiarCampos(self):
-#         self.lineTipo.setText("")
-#         self.lineUnidadMedida.setText("")
-#         self.lineCantFracc.setText("")
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeaders)
-#         self.limpiarCampos()
-#         presentacion = {}
-#         presentacion[0] = [self.presentacion.tipo, self.presentacion.unidadMedida,
-#                          self.presentacion.cantidadFracciones, self.presentacion.subPresentacion]
-#         self.cargarTabla(self.tablaPresentacion, presentacion, self.columnHeaders)
-#         self.inicializarTabla()
-#
-#     def setSubPresentacion(self):
-#         self.subPresentacion = self.itemSeleccionado(self.tablaPresFracc)
-#
-#     def confirmarOperacion(self):
-#         if self.tablaPresentacion.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione una Presentación de la tabla.")
-#         else:
-#             if self.presentacion == None:
-#                 self.showMsjEstado("Seleccione una Presentacion de la tabla.")
-#             else:
-#                 if self.validarDatos.validarCamposVacios(self.campos):
-#                     if self.validarFracciones():
-#                         self.presentacion.tipo = str(self.lineTipo.text())
-#                         self.presentacion.unidadMedida = str(self.lineUnidadMedida.text())
-#                         self.presentacion.cantidadFracciones = str(self.lineCantFracc.text())
-#                         self.presentacion.subPresentacion = self.subPresentacion
-#                         self.presentacion.modificar(self.sesion)
-#                         self.showMsjEstado("Los datos de la Presentación fueron modificados.")
-#                         self.actualizarVentana()
-#                         self.presentacion = None
-#                         self.subPresentacion = None
-#                     else:
-#                         self.showMsjEstado("Seleccione la Presentación en la cual puede fraccionarse la Presentación actual.")
-#                 else:
-#                     self.showMsjEstado("No pueden haber datos sin completar.")
-#
-#     def validarFracciones(self):
-#         if int(self.lineCantFracc.text()) > 1:
-#             if self.subPresentacion != None:
-#                 return True
-#             else:
-#                 return False
-#         else:
-#             self.subPresentacion = None
-#             return True

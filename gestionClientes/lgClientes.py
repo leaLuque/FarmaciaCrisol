@@ -1,5 +1,6 @@
 # coding: latin-1
 __author__ = 'waldo'
+
 from PyQt4 import QtGui
 
 from gui import MdiWidget, CRUDWidget
@@ -7,6 +8,24 @@ from ventanas import Ui_vtnCliente
 from validarDatos import ValidarDatos
 from baseDatos import Cliente as ClienteModel
 from baseDatos import Remito as RemitoModel
+
+def getContenidoTabla(tabla):
+    """
+        Devuelve la informacion actual de la tabla en
+        un arreglo que contiene info de cada fila
+    :param tabla QTableWidget de la ventana:
+    :return Arreglo con informacion:
+    """
+    dataRow = []
+    dataTable = []
+
+    for row in range(0,tabla.rowCount()):
+        for col in range(0,tabla.columnCount()):
+            dataRow.append(str(tabla.item(row,col).text()))
+        dataTable.append(dataRow)
+        dataRow = []
+
+    return dataTable
 
 class Cliente(CRUDWidget, Ui_vtnCliente):
     """
@@ -130,6 +149,9 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         self.lineApellido.setEnabled(False)
         self.cargarCamposMod()
 
+    #TODO supone que tenes : Leandro Luque , Leandro Williams, Eloy Williams en la tabla de clientes
+    #si pones en el filtro de nombre leandro, te trae leandro williams y leandro luque
+    #y si en el filtro de apellido le agregas williams te trae eloy williams y leandro williams
     def buscar(self):
         """
         Busca al cliente de acuerdo a la información ingresada y carga los datos en la tabla (Baja y Modificaión).
@@ -247,11 +269,31 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui = super(Cliente, cls).update(mdi)
         gui.cargarClientes()
         gui.tableClientes.itemClicked.connect(gui.cargarCamposMod)
-        gui.lineDni.returnPressed.connect(gui.buscar)
-        gui.lineNombre.returnPressed.connect(gui.buscar)
-        gui.lineApellido.returnPressed.connect(gui.buscar)
+        gui.lineDni.returnPressed.connect(gui.buscarClt)
+        gui.lineNombre.returnPressed.connect(gui.buscarClt)
+        gui.lineApellido.returnPressed.connect(gui.buscarClt)
         gui.btnAceptar.pressed.connect(gui.modificar)
         gui.btnCancelar.pressed.connect(gui.actualizar)
-        gui.btnBuscar.pressed.connect(gui.buscar)
+        gui.btnBuscar.pressed.connect(gui.buscarClt)
         return gui
 
+    def buscarClt(self):
+        dni = str(self.lineDni.text())
+        nombre = str(self.lineNombre.text())
+        apellido = str(self.lineApellido.text())
+        data = getContenidoTabla(self.tableClientes)
+        #TODO kargs()
+        if dni != "":
+            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data)
+        if nombre != "":
+            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), data)
+        if apellido != "":
+            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), data)
+
+        for row, value in enumerate(dataApell):
+            newDataNomb = filter(lambda x: x[2].upper() == value[2].upper(), dataNomb)
+        self.limpiarTabla(self.tableClientes)
+        for row, value in enumerate(newDataNomb):
+            self.tableClientes.insertRow(row)
+            for col in range(0, self.tableClientes.columnCount()):
+                self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))

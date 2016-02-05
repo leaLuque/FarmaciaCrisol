@@ -21,62 +21,40 @@
 	<div id="topnavi">
 		<div class="spacing1">
 			<ul>
-				<li class="selected"><a href="#" title="item" onclick="menu_usuario();">Usuario</a></li>
-				<li><a href="#" title="item" onclick="menu_venta();">Venta</a></li>
-				<li><a href="#" title="item" onclick="menu_producto();">Producto</a></li>
-				<li><a href="#" title="item" onclick="menu_cliente();">Cliente</a></li>
-				<li><a href="#" title="item" onclick="menu_listado();">Listado</a></li>
-				<li><a href="#" title="item" onclick="menu_ayuda();">Ayuda</a></li>
+				<li><a href="#" id="id_menu_usuario" onclick="menu_usuario()">Usuario</a></li>
+				<li><a href="#" id="id_menu_venta" onclick="menu_venta()">Venta</a></li>
+				<li><a href="#" id="id_menu_producto" onclick="menu_producto()">Producto</a></li>
+				<li><a href="#" id="id_menu_cliente" onclick="menu_cliente()">Cliente</a></li>
+				<li><a href="#" id="id_menu_listado" onclick="menu_listado()">Listado</a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="bodybox">
 		<div id="subnavi">
 			<ul id="indice">
-				<li><a class="selected" href="javascript:ingresar()" id="id_ing">» Ingresar</a></li>
-				<li><a href="javascript:salir()" id="id_salir">» Salir</a></li>
+				<li> <a href="#" id=id_ing onclick=ingresar()>» Ingresar</a></li><li> <a href="#" id=id_salir onclick=salir()>» Salir</a></li>
 			</ul>
 		</div>
-		<div class="ic"></div>	
+		<div class="ic"></div>
 		<div id="content">
-			<h1 id="titulo">Ingresar</h1>
-			<div class="imgbox">
-				<img src="img/content_img.jpg" alt="me" />
-				<br/>
-				<p>That’s me and the pictures of
-				this template are selfmade and
-				license free.</p>
-			</div>
-			<p><strong>"Blue Ice" is a free, tableless, W3C-compliant web design layout by PSP Spiele. 
-			This template has been tested and proven compatible with all major browser environments 
-			and operating systems. You are free to modify the design to suit your tastes in any way 
-			you like.We only ask you to not remove "PSP Spiele" and the link hhttp://www.pspspiele.org/ 
-			from the footer of the template. Have fun! ;)</strong></p>
-			
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod 
-			tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis 
-			nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-			Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel 
-			illum dolore eu feugiat nulla facilisis at vero et accumsan et iusto odio dignissim qui blandit 
-			praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor 
-			sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet 
-			dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
-			ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum 
-			iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu 
-			feugiat nulla facilisis at vero et accumsan et iusto odio dignissim qui blandit praesent 
-			luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
-			
-			<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod 
-			mazim placerat facer possim assum. Duis autem vel eum iriure dolor in hendrerit in vulputate 
-			velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero et accumsan 
-			et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te 
-			feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam 
-			nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-
-			<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis 
-			nisl ut aliquip ex ea commodo consequat. </p>
-            <p id="parraf"></p>
-            <p><object type="text/plain" data="cta_certificado.pdf"></object></p>
+			<h1 id="titulo"> Ingresar </h1>
+            <div class="imgbox">
+                <img src= img/capturas/ingresar.png />
+                <br/>
+                <p> Figura 1 </p>
+            </div><p><strong> 
+ </strong></p><p><strong> 
+Para acceder al sistema se debe en primer lugar ingresar el usuario en la pantalla indicada (Figura 1).
+Cada usuario tiene un tipo de rol dentro de la farmacia (Farmacéutico - Técnico Farmacéutico - Administrador).
+Luego debe ingresarse la contraseña correspondiente.
+Si estos dos pasos se cumplieron correctamente, el usuario tendrá acceso a las funcionalidades que le corresponden a su
+rol en la farmacia y será libre de trabajar acorde.
+ </strong></p><p><strong> 
+El campo "Usuario" admite solo letras, máximo 10.
+El campo "Contraseña" admite cualquier carácter incluidos espacios, máximo de 15.
+El botón "Aceptar" confirma la operación.
+El botón "Cancelar" cancela la operación y limpia los campos.
+ </strong></p>
 		</div>
 	</div>
 	<div id="footer">

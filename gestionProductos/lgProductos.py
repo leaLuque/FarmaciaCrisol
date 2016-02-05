@@ -1,5 +1,9 @@
-__author__ = 'waldo'
 # coding: latin-1
+__author__ = 'waldo'
+
+from datetime import datetime
+from PyQt4 import QtCore, QtGui
+
 from gui import MdiWidget, CRUDWidget
 from ventanas import Ui_vtnProducto, Ui_vtnFraccionarProducto, Ui_vtnAjusteNegativoStock
 from validarDatos import ValidarDatos
@@ -10,14 +14,20 @@ from baseDatos import Producto as ProductoModel
 from baseDatos import Medicamento as MedicamentoModel
 from baseDatos import DetalleRemito as DetalleRemitoModel
 from baseDatos import Remito as RemitoModel
-from baseDatos import Factura as FacturaModel
 from baseDatos import DetalleFactura as DetalleFacturaModel
 from baseDatos import FacturaLiquidacion as FacturaLiquidacionModel
 from baseDatos import CobroObraSocial  as CobroObraSocialModel
-from datetime import datetime
-from PyQt4 import QtCore, QtGui
+
 class Producto(CRUDWidget, Ui_vtnProducto):
+    """
+    Lógica del ABM de producto.
+    """
     def __init__(self, mdi):
+        """
+        Constructor de la clase Producto.
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores(ProductoModel)
@@ -25,21 +35,32 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.cantLoteProd = False
 
     def cargarProductos(self):
+        """
+        Carga los datos de los productos en la tabla de la ventana.
+        :return:
+        """
         self.cargarObjetos(self.tablaProducto,
             ProductoModel.buscarTodos("codigo_barra", self.sesion).all(),
             ("codigo_barra", "id_medicamento", "id_presentacion", "importe")
         )
 
+    #TODO consultar por el medicamento que se da de alta si el lote ya tiene asociado un medicamento.
+    #si es actron 600 solo se le puede asociar actron 600 a ese lote.
     def crear(self):
+        """
+        Da de alta un producto nuevo y lo almacena en la base de datos.
+        :return:
+        """
         itemActualMed = self.tablaMedicamento.currentItem()
         if itemActualMed == None:
-            self.showMsjEstado("No se ha seleccionado ningun Medicamento de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado ningun Medicamento de la tabla.', 'Aceptar')
         else:
             row = itemActualMed.row()
             medicamento = str(self.tablaMedicamento.item(row, 0).text())
             itemActualPres = self.tablaPresentacion.currentItem()
             if itemActualPres == None:
-                self.showMsjEstado("No se ha seleccionado ninguna Presentación de la tabla")
+                QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado ninguna Presentación de la tabla.',
+                                          'Aceptar')
             else:
                 row = itemActualPres.row()
                 presentacion = str(self.tablaPresentacion.item(row, 0).text())
@@ -48,47 +69,71 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                         producto = ProductoModel(str(self.lineCodigo_Barra.text()), medicamento,
                                                  presentacion, str(self.lineImporte.text()))
                         if producto.guardar(self.sesion):
-                            self.showMsjEstado("El Producto fue dado de alta.")
+                            QtGui.QMessageBox.information(self, 'Info', 'El Producto fue dado de alta.', 'Aceptar')
                             if self.lote == None:
                                 self.lote = LoteModel(str(self.lineCod_Lote.text()),
                                                       str(self.dateFechVenc.text()))
                                 if self.lote.guardar(self.sesion):
-                                    self.showMsjEstado("El Lote fue dado de alta.")
+                                    QtGui.QMessageBox.information(self, 'Info', 'El Lote fue dado de alta.', 'Aceptar')
                                 else:
-                                    self.showMsjEstado("El Lote ya existe.")
+                                    QtGui.QMessageBox.critical(self, 'Error', 'El Lote ya existe.', 'Aceptar')
                             loteProducto = LoteProductoModel(self.lote.getCodigo(),
                                                              str(self.lineCodigo_Barra.text()),
                                                              int(self.spinCantidad.value()))
                             if loteProducto.guardar(self.sesion):
-                                self.showMsjEstado("Lote/Producto fue dado de alta.")
+                                QtGui.QMessageBox.information(self, 'Info', 'Lote/Producto fue dado de alta.', 'Aceptar')
                             else:
-                                self.showMsjEstado("Lote/Producto ya existe.")
+                                QtGui.QMessageBox.critical(self, 'Error', 'Lote/Producto ya existe.', 'Aceptar')
                             self.actualizar()
                             self.objectCreated.emit()
                         else:
-                            self.showMsjEstado("El Producto ya existe.")
+                            QtGui.QMessageBox.critical(self, 'Error', 'El Producto ya existe.', 'Aceptar')
                     else:
-                        self.showMsjEstado("El Lote ya fue asignado a dos productos.")
+                        QtGui.QMessageBox.critical(self, 'Error', 'El Lote ya fue asignado a dos productos.',
+                                                  'Aceptar')
                 else:
-                    self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                    QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
+                                              'Aceptar')
 
     def eliminar(self):
+        """
+        Da de baja el producto seleccionado.
+        :return:
+        """
+        #TODO consultar si hay stock antes de dar de baja.
         itemActual = self.tablaProducto.currentItem()
         if itemActual == None:
-            self.showMsjEstado("No se ha seleccionado ningun Producto de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado ningun Producto de la tabla.', 'Aceptar')
         else:
             row = itemActual.row()
             codigo_barra = str(self.tablaProducto.item(row, 0).text())
             if self.bajaValida(codigo_barra):
                 self.producto = ProductoModel.buscarAlta(ProductoModel.codigo_barra,
                                                          self.sesion, codigo_barra).first()
+                self.actualizarLoteProd(self.producto.getCodigoBarra())
                 self.producto.borrar(self.sesion)
-                self.showMsjEstado("El Producto ha sido dado de baja")
+                QtGui.QMessageBox.information(self, 'Info', 'El Producto ha sido dado de baja.', 'Aceptar')
                 self.tablaProducto.removeRow(row)
                 self.objectDeleted.emit()
                 self.actualizar()
 
+    def actualizarLoteProd(self, producto):
+        """
+        Actualiza la cantidad de un producto para un lote determinado.
+        :param producto: referencia del producto al cual se le actualiza la cantidad.
+        :return:
+        """
+        lote_producto = LoteProductoModel.buscar(LoteProductoModel.id_producto,
+                                                 self.sesion, producto).all()
+        for lp in lote_producto:
+            lp.setCantidad(0)
+            lp.modificar(self.sesion)
+
     def modificar(self):
+        """
+        Modifica los datos del producto seleccionada.
+        :return:
+        """
         itemActual = self.tablaProducto.currentItem()
         if itemActual != None:
             if ValidarDatos.validarCamposVacios([self.lineImporte]):
@@ -98,15 +143,21 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                                                          self.sesion, codigo_barra).first()
                 self.producto.setImporte(str(self.lineImporte.text()))
                 self.producto.modificar(self.sesion)
-                self.showMsjEstado("El Producto fue modificado")
+                QtGui.QMessageBox.information(self, 'Info', 'El Producto fue modificado.', 'Aceptar')
                 self.objectModified.emit()
                 self.actualizar()
             else:
-                self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.', 'Aceptar')
         else:
-            self.showMsjEstado("No se ha seleccionado un Producto de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Producto de la tabla.', 'Aceptar')
 
     def bajaValida(self, codigo_barra):
+        """
+        Verifica que el producto no figure en remitos pendientes de pago, facturas liquidadas pendientes de pago o
+        facturas pendientes de liquidación.
+        :param codigo_barra:
+        :return:
+        """
         detalleRemito = DetalleRemitoModel.buscarAlta(DetalleRemitoModel.producto,
                                                       self.sesion, codigo_barra).all()
         for dr in detalleRemito:
@@ -136,25 +187,24 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                     return False
         return True
 
-    def cargarCampos(self):
-        #Deshabilitar los lines restantes
-        self.lineCodigo_Barra.setEnabled(False)
+    def cargarCamposBaja(self):
+        """
+        Carga los campos con los datos del producto seleccionado.
+        :return:
+        """
         self.spinCantidad.setEnabled(False)
         self.lineNomb_Med.setEnabled(False)
         self.lineTipo_Pres.setEnabled(False)
         self.lineImporte.setEnabled(False)
         self.dateFechVenc.setEnabled(False)
         self.lineCod_Lote.setEnabled(False)
-        #Recuperar la informacion de un item
-        row = self.tablaProducto.currentItem().row()
-        infoItem = []
-        for col in range(0, self.tablaProducto.columnCount()):
-            infoItem.append(self.tablaProducto.item(row, col).text())
-        #Cargar la info del item en los lines
-        self.lineCodigo_Barra.setText(infoItem[0])
-        self.lineImporte.setText(infoItem[3])
+        self.cargarCamposMod()
 
     def buscarProducto(self):
+        """
+        Busca y carga en la tabla los datos de un producto para un código de barra ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaProducto)
         self.cargarObjetos(self.tablaProducto,
             ProductoModel.buscarAlta(ProductoModel.codigo_barra, self.sesion,
@@ -164,6 +214,10 @@ class Producto(CRUDWidget, Ui_vtnProducto):
 
 
     def buscarPresentacion(self):
+        """
+        Busca y carga en la tabla los datos de una presentación para un tipo ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaPresentacion)
         self.cargarObjetos(self.tablaPresentacion,
             PresentacionModel.buscarLike(PresentacionModel.tipo, self.sesion,
@@ -172,6 +226,10 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         )
 
     def buscarMedicamento(self):
+        """
+        Busca y carga en la tabla los datos de un medicamento para un nombre comercial ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaMedicamento)
         self.cargarObjetos(self.tablaMedicamento,
             MedicamentoModel.buscarLike(MedicamentoModel.nombre_comercial, self.sesion,
@@ -180,6 +238,10 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         )
 
     def buscarLote(self):
+        """
+        Busca y carga en la tabla los datos de un lote para un código ingresado.
+        :return:
+        """
         self.lote = LoteModel.buscar(LoteModel.codigo, self.sesion, str(self.lineCod_Lote.text())).first()
         if self.lote != None:
             loteProducto = LoteProductoModel.buscar(LoteProductoModel.id_lote, self.sesion,
@@ -202,6 +264,10 @@ class Producto(CRUDWidget, Ui_vtnProducto):
             self.dateFechVenc.setEnabled(True)
 
     def setFecha(self):
+        """
+        Setea la fecha del Date Edit (campo de la fecha) con la fecha actual.
+        :return:
+        """
         formato = "%d/%m/%y"  # Asigna un formato dia mes año
         fechaAct = datetime.today()
         fechaVenc = fechaAct.strftime(formato)
@@ -210,6 +276,10 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.dateFechVenc.setDate(fecha)
 
     def actualizar(self):
+        """
+        Actualiza la ventana (campos y tablas).
+        :return:
+        """
         self.limpiarCampos()
         self.limpiarTabla(self.tablaProducto)
         self.cargarProductos()
@@ -217,14 +287,26 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.actualizarInfoPres()
 
     def actualizarInfoPres(self):
+        """
+        Actualiza la tabla de las presentaciones con los datos modificados.
+        :return:
+        """
         self.limpiarTabla(self.tablaPresentacion)
         self.cargarPresentaciones()
 
     def actualizarInfoMed(self):
+        """
+        Actualiza la tabla de los medicamentos con los datos modificados.
+        :return:
+        """
         self.limpiarTabla(self.tablaMedicamento)
         self.cargarMedicamentos()
 
     def limpiarCampos(self):
+        """
+        Vacia los campos de la ventana.
+        :return:
+        """
         self.lineCodigo_Barra.clear()
         self.lineCodigo_Barra.setEnabled(True)
         self.lineImporte.clear()
@@ -240,7 +322,11 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.cantLoteProd = False
         self.dateFechVenc.setEnabled(False)
 
-    def modificarItem(self):
+    def cargarCamposMod(self):
+        """
+        Carga los campos con los datos del producto seleccionado.
+        :return:
+        """
         self.lineCodigo_Barra.setEnabled(False)
         row = self.tablaProducto.currentItem().row()
         infoItem = []
@@ -251,29 +337,50 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.lineImporte.setText(infoItem[3])
 
     def cargarPresentaciones(self):
+        """
+        Carga la tabla de las presentaciones con los datos de todos las presentaciones disponibles.
+        :return:
+        """
         self.cargarObjetos(self.tablaPresentacion,
             PresentacionModel.buscarTodos("tipo", self.sesion).all(),
             ("tipo", "unidad_medida", "cantidad_fracciones", "sub_presentacion")
         )
 
     def cargarMedicamentos(self):
+        """
+        Carga la tabla de los medicamentos con los datos de todos los medicamentos disponibles.
+        :return:
+        """
         self.cargarObjetos(self.tablaMedicamento,
             MedicamentoModel.buscarTodos("nombre_comercial", self.sesion).all(),
             ("nombre_comercial", "id_monodroga", "cantidad_monodroga")
         )
 
     def setMedicamento(self):
+        """
+        Setea la referencia al medicamento con el medicamento seleccionado.
+        :return:
+        """
         row = self.tablaMedicamento.currentItem().row()
         self.medicamento = str(self.tablaMedicamento.item(row, 0).text())
         self.lineNomb_Med.setText(self.medicamento)
 
     def setPresentacion(self):
+        """
+        Setea la referencia a la presentación con la presentación seleccionada.
+        :return:
+        """
         row = self.tablaPresentacion.currentItem().row()
         self.presentacion = str(self.tablaPresentacion.item(row, 0).text())
         self.lineTipo_Pres.setText(self.presentacion)
 
     @classmethod
     def create(cls, mdi):
+        """
+        Configuración de la ventana Alta Producto.
+        :param mdi: referencia a la ventana Alta Producto.
+        :return: gui
+        """
         gui = super(Producto, cls).create(mdi)
         gui.tablaProducto.hide()
         gui.btnBuscarProd.hide()
@@ -297,6 +404,11 @@ class Producto(CRUDWidget, Ui_vtnProducto):
 
     @classmethod
     def delete(cls, mdi):
+        """
+        Configuración de la ventana Baja Producto.
+        :param mdi: referencia a la ventana Baja Producto.
+        :return: gui
+        """
         gui = super(Producto, cls).delete(mdi)
         gui.lineImporte.setEnabled(False)
         gui.gbMedicamento.hide()
@@ -310,14 +422,19 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         gui.cargarProductos()
         gui.btnAceptar.pressed.connect(gui.eliminar)
         gui.btnCancelar.pressed.connect(gui.actualizar)
-        gui.tablaProducto.itemClicked.connect(gui.cargarCampos)
+        gui.tablaProducto.itemClicked.connect(gui.cargarCamposBaja)
         return gui
 
     @classmethod
     def update(cls, mdi):
+        """
+        Configuración de la ventana Modificación Producto.
+        :param mdi: referencia a la ventana Modificación Producto.
+        :return: gui
+        """
         gui = super(Producto, cls).update(mdi)
         gui.cargarProductos()
-        gui.tablaProducto.itemClicked.connect(gui.modificarItem)
+        gui.tablaProducto.itemClicked.connect(gui.cargarCamposMod)
         gui.gbMedicamento.hide()
         gui.gbPresentacion.hide()
         gui.gbLote.hide()
@@ -331,30 +448,52 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         return gui
 
 class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
+    """
+    Lógica del Fraccionado de productos.
+    """
     def __init__(self, mdi):
+        """
+        Cosntructor de la clase FraccionarProducto.
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
         self.lineCod_Barra.returnPressed.connect(self.buscarPorProducto)
         self.btnBuscar.pressed.connect(self.buscarPorProducto)
         self.cargarProductos()
-        self.tablaProducto.itemClicked.connect(self.cargarCampos)
+        self.tablaProducto.itemClicked.connect(self.cargarFraccionables)
         self.btnActualizar.pressed.connect(self.actualizarInfo)
         self.btnAceptar.pressed.connect(self.fraccionar)
         self.btnCancelar.pressed.connect(self.actualizar)
 
     def validadores(self):
+        """
+        Setea los campos obligatorios, junto con los validadores de cada campo.
+        :return:
+        """
         ##Esta parte analiza los campos requeridos para el cliente
         self.camposRequeridos = [self.lineCod_Barra]
         ValidarDatos.setValidador(self.camposRequeridos)
 
     def cargarProductos(self):
+        """
+        Carga la tabla de los productos con los datos de todos los productos disponibles,
+        junto con el lote al que pertenecen.
+        :return:
+        """
         self.cargarObjetos(self.tablaProducto,
             LoteProductoModel.buscarTodosLoteProducto(self.sesion, ProductoModel, LoteModel).all(),
             ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
         )
 
     def fraccionar(self):
+        """
+        Fracciona un producto. Da de alta y almacena un nuevo producto en la base de datos
+        de acuerdo al producto seleccionado para fraccionar, o si ya existe actualiza la cantidad.
+        :return:
+        """
         itemActual = self.tablaProducto.currentItem()
         if itemActual != None:
             if ValidarDatos.validarCamposVacios(self.camposRequeridos):
@@ -367,8 +506,8 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
                         self.loteProducto = LoteProductoModel.buscarLoteProducto(self.sesion, codigo_barra,
                                                                                   codigo_lote).first()
                         if int(self.spinCantidad.value()) > int(self.loteProducto.getCantidad()):
-                            self.showMsjEstado("La cantidad ingresada no puede ser mayor a la "
-                                               "cantidad del Producto.")
+                            QtGui.QMessageBox.warning(self, 'Atención', 'La cantidad ingresada no puede ser mayor a la '
+                                                        'cantidad del Producto.', 'Aceptar')
                         else:
                             resto = int(self.loteProducto.getCantidad()) - int(self.spinCantidad.value())
                             self.loteProducto.setCantidad(resto)
@@ -388,21 +527,28 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
                                 loteProducto = LoteProductoModel(codigo_lote, codigo_barra,
                                                                      int(cantidadFracciones))
                                 if loteProducto.guardar(self.sesion):
-                                    self.showMsjEstado("Lote/Producto fue dado de alta.")
+                                    QtGui.QMessageBox.information(self, 'Info', 'Lote/Producto fue dado de alta.', 'Aceptar')
                                 else:
-                                    self.showMsjEstado("Lote/Producto ya existe.")
-                            self.showMsjEstado("La cantidad fue modificada")
+                                    QtGui.QMessageBox.critical(self, 'Error', 'Lote/Producto ya existe.', 'Aceptar')
+                            QtGui.QMessageBox.information(self, 'Info', 'La cantidad fue modificada.', 'Aceptar')
                             self.actualizar()
                     else:
-                        self.showMsjEstado("No se ha seleccionado un Fraccionable de la tabla.")
+                        QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Fraccionable de la tabla.', 'Aceptar')
                 else:
-                    self.showMsjEstado("El Producto seleccionado no puede fraccionarse.")
+                    QtGui.QMessageBox.critical(self, 'Error', 'El Producto seleccionado no puede fraccionarse.', 'Aceptar')
             else:
-                self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.', 'Aceptar')
         else:
-            self.showMsjEstado("No se ha seleccionado un Producto de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Producto de la tabla.', 'Aceptar')
 
     def cantidadFracciones(self, codigo, cantidad):
+        """
+        Calcula y devuelve la cantidad del poducto (subproducto, fracciones del producto fraccionable),
+        número de fracciones * cantidad a fraccionar.
+        :param codigo: Código del producto a fraccionar.
+        :param cantidad: Cantidad a fraccionar.
+        :return: resultado
+        """
         producto = ProductoModel.buscarAlta(ProductoModel.codigo_barra, self.sesion, codigo).first()
         presentacion = PresentacionModel.buscarAlta(PresentacionModel.tipo, self.sesion,
                                                     producto.id_presentacion).first()
@@ -410,18 +556,35 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
         return resultado
 
     def actualizar(self):
+        """
+        Actualiza la ventana (campos y tablas).
+        :return:
+        """
         self.limpiarCampos()
         self.actualizarInfo()
         self.limpiarTabla(self.tablaFraccionable)
 
     def actualizarInfo(self):
+        """
+        Actualiza la tabla de los productos con los datos modificados.
+        :return:
+        """
         self.limpiarTabla(self.tablaProducto)
         self.cargarProductos()
 
     def limpiarCampos(self):
+        """
+        Vacia los campos de la ventana.
+        :return:
+        """
         self.lineCod_Barra.clear()
 
-    def cargarCampos(self):
+    def cargarFraccionables(self):
+        """
+        Carga la tabla de los productos (subproducto, fracciones del producto fraccionable),
+        con los datos de todos los productos (subproducto, fraacciones del producto fraccionable).
+        :return:
+        """
         #Recuperar la informacion de un item
         row = self.tablaProducto.currentItem().row()
         infoItem = []
@@ -437,6 +600,10 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
         )
 
     def buscarPorProducto(self):
+        """
+        Busca y carga en la tabla los datos de un producto y su/s lote/s para un código de barra ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaProducto)
         self.cargarObjetos(self.tablaProducto,
             LoteProductoModel.buscarLoteProductoPorProducto(self.sesion, ProductoModel, LoteModel,
@@ -445,7 +612,15 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
         )
 
 class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
+    """
+    Lógica del ajuste negativo del stock de los productos.
+    """
     def __init__(self, mdi):
+        """
+        Constructor de la clase AjusteNegativoStock.
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores(LoteProductoModel)
@@ -459,12 +634,20 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         self.btnCancelar.pressed.connect(self.actualizar)
 
     def cargarLoteProducto(self):
+        """
+        Carga los datos de los productos y su/s lote/s en la tabla de la ventana.
+        :return:
+        """
         self.cargarObjetos(self.tablaLoteProducto,
             LoteProductoModel.buscarTodosLoteProducto(self.sesion, ProductoModel, LoteModel).all(),
             ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
         )
 
     def buscar(self):
+        """
+        Busca y carga en la tabla los datos de un producto y su/s lote/s.
+        :return:
+        """
         obj = self.sender().objectName()
         if obj == 'lineCod_Barra':
             loteProducto = LoteProductoModel.buscarLoteProductoPorProducto(self.sesion, ProductoModel, LoteModel,
@@ -480,31 +663,19 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
                 loteProducto = LoteProductoModel.buscarLoteProductoPorLote(self.sesion, ProductoModel, LoteModel,
                                                         str(self.lineCod_Lote.text())).all()
             else:
-                self.showMsjEstado("Ingrese Código de Barra del Producto o Código del Lote para realizar la"
-                                   " busqueda.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Ingrese Código de Barra del Producto o '
+                                                            'Código del Lote para realizar la busqueda.', 'Aceptar')
                 return
         self.limpiarTabla(self.tablaLoteProducto)
         self.cargarObjetos(self.tablaLoteProducto, loteProducto,
             ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
         )
 
-    # def buscarPorProducto(self):
-    #     self.limpiarTabla(self.tablaLoteProducto)
-    #     self.cargarObjetos(self.tablaLoteProducto,
-    #         LoteProductoModel.buscarLoteProductoPorProducto(self.sesion, ProductoModel, LoteModel,
-    #                                                         str(self.lineCod_Barra.text())).all(),
-    #         ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
-    #     )
-    #
-    # def buscarPorLote(self):
-    #     self.limpiarTabla(self.tablaLoteProducto)
-    #     self.cargarObjetos(self.tablaLoteProducto,
-    #         LoteProductoModel.buscarLoteProductoPorLote(self.sesion, ProductoModel, LoteModel,
-    #                                                     str(self.lineCod_Lote.text())).all(),
-    #         ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
-    #     )
-
     def ajuste(self):
+        """
+        Actualiza la cantidad del producto seleccionado para realizar el ajuste negativo de stock.
+        :return:
+        """
         itemActual = self.tablaLoteProducto.currentItem()
         if itemActual != None:
             if ValidarDatos.validarCamposVacios(self.camposRequeridos):
@@ -515,31 +686,49 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
                                                                          codigo_lote).first()
                 resto = int(self.loteProducto.getCantidad()) - int(self.spinCantidad.value())
                 if resto < 0:
-                    self.showMsjEstado("La cantidad ingresada no puede ser mayor a la cantidad del Producto")
+                    QtGui.QMessageBox.critical(self, 'Error', 'La cantidad ingresada no puede ser mayor '
+                                                                'a la cantidad del Producto.', 'Aceptar')
                 else:
                     self.loteProducto.setCantidad(resto)
                     self.loteProducto.modificar(self.sesion)
-                    self.showMsjEstado("La cantidad fue modificada")
+                    QtGui.QMessageBox.information(self, 'Info', 'La cantidad fue modificada.', 'Aceptar')
                     self.actualizar()
             else:
-                self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
+                                          'Aceptar')
         else:
-            self.showMsjEstado("No se ha seleccionado un Lote/Producto de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Lote/Producto de la tabla.', 'Aceptar')
 
     def actualizar(self):
+        """
+        Actualiza la ventana (campos y tablas).
+        :return:
+        """
         self.limpiarCampos()
         self.actualizarInfo()
 
     def actualizarInfo(self):
+        """
+        Actualiza la tabla de los productos con los datos modificados.
+        :return:
+        """
         self.limpiarTabla(self.tablaLoteProducto)
         self.cargarLoteProducto()
 
     def limpiarCampos(self):
+        """
+        Vacia los campos de la ventana.
+        :return:
+        """
         self.lineCod_Barra.clear()
         self.lineCod_Lote.clear()
         self.spinCantidad.setValue(1)
 
     def cargarCampos(self):
+        """
+        Carga los campos con los datos del producto seleccionado.
+        :return:
+        """
         #Recuperar la informacion de un item
         row = self.tablaLoteProducto.currentItem().row()
         infoItem = []
@@ -548,289 +737,3 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         #Cargar la info del item en los lines
         self.lineCod_Barra.setText(infoItem[0])
         self.lineCod_Lote.setText(infoItem[3])
-
-#         self.campos = [self.lineNombMed, self.lineTipoPres, self.lineCodBarra, self.lineImp]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.btnBuscarMed.pressed.connect(self.buscarMedicamento)
-#         self.btnBuscarPres.pressed.connect(self.buscarPresentacion)
-#         self.lineNombMed.returnPressed.connect(self.buscarMedicamento)
-#         self.lineTipoPres.returnPressed.connect(self.buscarPresentacion)
-#         self.tablaMedicamento.itemClicked.connect(self.setMedicamento)
-#         self.tablaPresentacion.itemClicked.connect(self.setPresentacion)
-#         self.columnHeadersPres = ["Tipo", "Unidad de Medida", "Cantidad de Fracciones", "Fraccionable"]
-#         self.columnHeadersMed = ["Nombre Comercial", "Monodroga", "Cantidad de Monodroga"]
-#         self.medicamento = None
-#         self.presentacion = None
-#
-#     def buscarMedicamento(self):
-#         self.limpiarTabla(self.tablaMedicamento, self.columnHeadersMed)
-#         medicamentos = {}
-#         query = Medicamento.buscarLike(Medicamento.nombreComercial, self.sesion, str(self.lineNombMed.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.nombreComercial, instance.id_monodroga, instance.cantidadMonodroga]
-#             medicamentos[i] = item
-#             i += 1
-#             self.medicamento = instance.nombreComercial
-#         if len(medicamentos.items()) < 1:
-#             self.showMsjEstado("No existen Medicamentos que coincidan con el nombre ingresado en la busqueda.")
-#         elif len(medicamentos.items()) > 1:
-#             self.medicamento = None
-#         else:
-#             self.lineNombMed.setText(self.medicamento)
-#         self.cargarTabla(self.tablaMedicamento, medicamentos, self.columnHeadersMed)
-#
-#     def buscarPresentacion(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeadersPres)
-#         presentaciones = {}
-#         query = Presentacion.buscarLike(Presentacion.tipo, self.sesion, str(self.lineTipoPres.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#             self.presentacion = instance.tipo
-#         if len(presentaciones.items()) < 1:
-#             self.showMsjEstado("No existen Presentaciones que coincidan con el tipo ingresado en la busqueda.")
-#         elif len(presentaciones.items()) > 1:
-#             self.presentacion = None
-#         else:
-#             self.lineTipoPres.setText(self.presentacion)
-#         self.cargarTabla(self.tablaPresentacion, presentaciones, self.columnHeadersPres)
-#
-#     def setPresentacion(self):
-#         self.presentacion = self.itemSeleccionado(self.tablaPresentacion)
-#         self.lineTipoPres.setText(self.presentacion)
-#
-#     def setMedicamento(self):
-#         self.medicamento = self.itemSeleccionado(self.tablaMedicamento)
-#         self.lineNombMed.setText(self.medicamento)
-#
-#     def confirmarOperacion(self):
-#         if self.tablaMedicamento.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione un Medicamento de la tabla.")
-#         else:
-#             if self.medicamento == None:
-#                     self.showMsjEstado("Seleccione un Medicamento de la tabla.")
-#             else:
-#                 if self.tablaPresentacion.rowCount() < 1:
-#                     self.showMsjEstado("Realice una nueva busqueda y seleccione una Presentación de la tabla.")
-#                 else:
-#                     if self.presentacion == None:
-#                         self.showMsjEstado("Seleccione una Presentacion de la tabla.")
-#                     else:
-#                         if self.validarDatos.validarCamposVacios(self.campos):
-#                             producto = Producto(str(self.lineCodBarra.text()),  str(self.lineNombMed.text()),
-#                                     str(self.lineTipoPres.text()), str(self.lineImp.text()))
-#                             if producto.guardar(self.sesion):
-#                                 self.showMsjEstado("El Producto fue dado de alta.")
-#                                 self.actualizarVentana()
-#                                 self.presentacion = None
-#                                 self.medicamento = None
-#                             else:
-#                                 self.showMsjEstado("El Producto ya existe.")
-#                         else:
-#                             self.showMsjEstado("Uno o más datos obligatorios no fueron completados.")
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaMedicamento, self.columnHeadersMed)
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeadersPres)
-#         self.lineNombMed.setText("")
-#         self.lineTipoPres.setText("")
-#         self.lineCodBarra.setText("")
-#         self.lineImp.setText("")
-#
-# class BajaProducto(MdiWidget, Ui_vtnBajaProducto):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.campos = [self.lineCodBarra]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.columnHeaders = ["Código de Barra", "Medicamento", "Presentación", "Importe"]
-#         self.tablaProducto.itemClicked.connect(self.obtenerProducto)
-#         self.btnBuscar.pressed.connect(self.buscarProductos)
-#         self.lineCodBarra.returnPressed.connect(self.buscarProductos)
-#         self.producto = None
-#
-#     def buscarProductos(self):
-#         productos = {}
-#         if self.validarDatos.validarCamposVacios(self.campos):
-#             self.limpiarTabla(self.tablaProducto, self.columnHeaders)
-#             query = Producto.buscar(Producto.codigoBarra, self.sesion, str(self.lineCodBarra.text()))
-#             i = 0
-#             for instance in query.all():
-#                 item = [instance.codigoBarra, instance.id_medicamento, instance.id_presentacion, instance.importe]
-#                 productos[i] = item
-#                 i += 1
-#                 self.producto = instance
-#             if len(productos.items()) < 1:
-#                 self.showMsjEstado("No existen Productos que coincidan con el código de barra ingresado en la busqueda.")
-#         else:
-#             self.showMsjEstado("Ingrese el código de barra del Producto para poder realizar la busqueda.")
-#         self.cargarTabla(self.tablaProducto, productos, self.columnHeaders)
-#
-#     def obtenerProducto(self):
-#         codBarra = self.itemSeleccionado(self.tablaProducto)
-#         query = Producto.buscar(Producto.codigoBarra, self.sesion, codBarra)
-#         for instance in query.all():
-#              self.producto = instance
-#
-#     def confirmarOperacion(self):
-#         if self.tablaProducto.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione un Producto de la tabla.")
-#         else:
-#             if self.producto == None:
-#                 self.showMsjEstado("Seleccione un Producto de la tabla.")
-#             else:
-#                 self.producto.borrar(self.sesion)
-#                 self.showMsjEstado("El Producto fue dado de baja.")
-#                 self.actualizarVentana()
-#                 self.producto = None
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaProducto, self.columnHeaders)
-#         self.lineCodBarra.setText("")
-#
-# class ModificarProducto(MdiWidget, Ui_vtnModificarProducto):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.campos = [self.lineCodBarra, self.lineNombMed, self.lineTipoPres, self.lineImp]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.columnHeadersProd = ["Código de Barra", "Medicamento", "Presentación", "Importe"]
-#         self.tablaProducto.itemClicked.connect(self.obtenerProducto)
-#         self.btnBuscarProd.pressed.connect(self.buscarProductos)
-#         self.lineCodBarra.returnPressed.connect(self.buscarProductos)
-#         self.producto = None
-#         self.columnHeadersMed = ["Nombre Comercial", "Monodroga", "Cantidad de Monodroga"]
-#         self.tablaMedicamento.itemClicked.connect(self.setMedicamento)
-#         self.btnBuscarMed.pressed.connect(self.buscarMedicamento)
-#         self.lineNombMed.returnPressed.connect(self.buscarMedicamento)
-#         self.medicamento = None
-#         self.columnHeadersPres = ["Tipo", "Unidad de Medida", "Cantidad de Fracciones", "Fraccionable"]
-#         self.tablaPresentacion.itemClicked.connect(self.setPresentacion)
-#         self.btnBuscarPres.pressed.connect(self.buscarPresentacion)
-#         self.lineTipoPres.returnPressed.connect(self.buscarPresentacion)
-#         self.presentacion = None
-#
-#     def buscarProductos(self):
-#         cod = [self.lineCodBarra]
-#         productos = {}
-#         if self.validarDatos.validarCamposVacios(cod):
-#             self.limpiarTabla(self.tablaProducto, self.columnHeadersProd)
-#             query = Producto.buscar(Producto.codigoBarra, self.sesion, str(self.lineCodBarra.text()))
-#             i = 0
-#             for instance in query.all():
-#                 item = [instance.codigoBarra, instance.id_medicamento, instance.id_presentacion, instance.importe]
-#                 productos[i] = item
-#                 i += 1
-#                 self.producto = instance
-#                 self.medicamento = self.producto.id_medicamento
-#                 self.presentacion = self.producto.id_presentacion
-#             if len(productos.items()) < 1:
-#                 self.showMsjEstado("No existen Productos que coincidan con el código de barra ingresado en la busqueda.")
-#             else:
-#                 self.cargarCampos()
-#         else:
-#             self.showMsjEstado("Ingrese el código de barra del Producto para poder realizar la busqueda.")
-#         self.cargarTabla(self.tablaProducto, productos, self.columnHeadersProd)
-#
-#     def obtenerProducto(self):
-#         codBarra = self.itemSeleccionado(self.tablaProducto)
-#         query = Producto.buscar(Producto.codigoBarra, self.sesion, codBarra)
-#         for instance in query.all():
-#             self.producto = instance
-#             self.medicamento = self.producto.id_medicamento
-#             self.presentacion = self.producto.id_presentacion
-#             self.cargarCampos()
-#
-#     def cargarCampos(self):
-#         self.lineCodBarra.setText(str(self.producto.codigoBarra))
-#         self.lineImp.setText(str(self.producto.importe))
-#         self.lineNombMed.setText(str(self.producto.id_medicamento))
-#         self.lineTipoPres.setText(str(self.producto.id_presentacion))
-#
-#     def buscarMedicamento(self):
-#         self.limpiarTabla(self.tablaMedicamento, self.columnHeadersMed)
-#         medicamentos = {}
-#         query = Medicamento.buscarLike(Medicamento.nombreComercial, self.sesion, str(self.lineNombMed.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.nombreComercial, instance.id_monodroga, instance.cantidadMonodroga]
-#             medicamentos[i] = item
-#             i += 1
-#             self.medicamento = instance.nombreComercial
-#         if len(medicamentos.items()) < 1:
-#             self.showMsjEstado("No existen Medicamentos que coincidan con el nombre ingresado en la busqueda.")
-#         elif len(medicamentos.items()) > 1:
-#             self.medicamento = None
-#         else:
-#             self.lineNombMed.setText(self.medicamento)
-#         self.cargarTabla(self.tablaMedicamento, medicamentos, self.columnHeadersMed)
-#
-#     def buscarPresentacion(self):
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeadersPres)
-#         presentaciones = {}
-#         query = Presentacion.buscarLike(Presentacion.tipo, self.sesion, str(self.lineTipoPres.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.tipo, instance.unidadMedida, instance.cantidadFracciones, instance.subPresentacion]
-#             presentaciones[i] = item
-#             i += 1
-#             self.presentacion = instance.tipo
-#         if len(presentaciones.items()) < 1:
-#             self.showMsjEstado("No existen Presentaciones que coincidan con el tipo ingresado en la busqueda.")
-#         elif len(presentaciones.items()) > 1:
-#             self.presentacion = None
-#         else:
-#             self.lineTipoPres.setText(self.presentacion)
-#         self.cargarTabla(self.tablaPresentacion, presentaciones, self.columnHeadersPres)
-#
-#     def setPresentacion(self):
-#         self.presentacion = self.itemSeleccionado(self.tablaPresentacion)
-#         self.lineTipoPres.setText(self.presentacion)
-#
-#     def setMedicamento(self):
-#         self.medicamento = self.itemSeleccionado(self.tablaMedicamento)
-#         self.lineNombMed.setText(self.medicamento)
-#
-#
-#     def confirmarOperacion(self):
-#         if self.tablaProducto.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda de un Producto.")
-#         else:
-#             if self.validarDatos.validarCamposVacios(self.campos):
-#                 if self.medicamento != None:
-#                     if self.presentacion != None:
-#                         self.producto.codigoBarra = str(self.lineCodBarra.text())
-#                         self.producto.id_medicamento = self.medicamento
-#                         self.producto.id_presentacion = self.presentacion
-#                         self.producto.importe = str(self.lineImp.text())
-#                         self.producto.modificar(self.sesion)
-#                         self.showMsjEstado("Los datos del Producto fueron modificados.")
-#                         self.actualizarVentana()
-#                         self.medicamento = None
-#                         self.producto = None
-#                         self.presentacion = None
-#                     else:
-#                         self.showMsjEstado("Realice una nueva busqueda y seleccione una Presentación.")
-#                 else:
-#                     self.showMsjEstado("Realice una nueva busqueda y seleccione un Medicamento.")
-#             else:
-#                 self.showMsjEstado("No pueden haber datos sin completar.")
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaMedicamento, self.columnHeadersMed)
-#         self.limpiarTabla(self.tablaProducto, self.columnHeadersProd)
-#         self.limpiarTabla(self.tablaPresentacion, self.columnHeadersPres)
-#         self.lineImp.setText("")
-#         self.lineNombMed.setText("")
-#         self.lineTipoPres.setText("")
-#         self.lineCodBarra.setText("")
-#         producto = {}
-#         producto[0] = [self.producto.codigoBarra, self.producto.id_medicamento,
-#                          self.producto.id_presentacion, self.producto.importe]
-#         self.cargarTabla(self.tablaProducto, producto, self.columnHeadersProd)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnMonodroga.ui'
 #
-# Created: Tue Jan 19 19:46:49 2016
+# Created: Mon Jan 25 16:32:31 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -110,8 +110,8 @@ class Ui_vtnMonodroga(object):
     def retranslateUi(self, vtnMonodroga):
         vtnMonodroga.setWindowTitle(_translate("vtnMonodroga", "Alta Monodroga", None))
         self.label_4.setText(_translate("vtnMonodroga", "Tipo de Venta", None))
-        self.lineNombre.setStatusTip(_translate("vtnMonodroga", "Ingrese el nombre de la monodroga (solo letras)", None))
-        self.lineNombre.setAccessibleDescription(_translate("vtnMonodroga", "palabra", None))
+        self.lineNombre.setStatusTip(_translate("vtnMonodroga", "Ingrese el nombre de la monodroga", None))
+        self.lineNombre.setAccessibleDescription(_translate("vtnMonodroga", "monodroga", None))
         self.btnBuscar.setText(_translate("vtnMonodroga", "Buscar", None))
         self.label.setText(_translate("vtnMonodroga", "Nombre", None))
         self.label_2.setText(_translate("vtnMonodroga", "* Descripción", None))

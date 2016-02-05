@@ -109,10 +109,10 @@
         <item>
          <widget class="QLineEdit" name="lineNombre_Mon">
           <property name="statusTip">
-           <string>Ingrese nombre de la Monodroga (solo letras)</string>
+           <string>Ingrese nombre de la Monodroga</string>
           </property>
           <property name="accessibleDescription">
-           <string>texto</string>
+           <string>monodroga</string>
           </property>
          </widget>
         </item>

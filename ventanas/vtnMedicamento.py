@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnMedicamento.ui'
 #
-# Created: Tue Jan 19 19:47:02 2016
+# Created: Mon Jan 25 16:36:35 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -159,8 +159,8 @@ class Ui_vtnMedicamento(object):
         item.setText(_translate("vtnMedicamento", "Cantidad de Monodroga", None))
         self.gbMonodroga.setTitle(_translate("vtnMedicamento", "Monodroga", None))
         self.label_5.setText(_translate("vtnMedicamento", "* Nombre", None))
-        self.lineNombre_Mon.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre de la Monodroga (solo letras)", None))
-        self.lineNombre_Mon.setAccessibleDescription(_translate("vtnMedicamento", "texto", None))
+        self.lineNombre_Mon.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre de la Monodroga", None))
+        self.lineNombre_Mon.setAccessibleDescription(_translate("vtnMedicamento", "monodroga", None))
         self.btnBuscarMon.setText(_translate("vtnMedicamento", "Buscar", None))
         self.tablaMonodroga.setSortingEnabled(False)
         item = self.tablaMonodroga.horizontalHeaderItem(0)

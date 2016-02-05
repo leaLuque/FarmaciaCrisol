@@ -2,11 +2,10 @@
 __author__ = 'waldo'
 
 import os
-from datetime import datetime
 
 import pycha.bar
-import cairo
 import pycha.line
+import cairo
 import pdfkit
 import xlsxwriter
 from PyQt4 import QtGui
@@ -24,10 +23,11 @@ class Listar(MdiWidget, Ui_vtnListar):
         Genera los listados (varios) en pdf y excel.
     """
     def __init__(self, mdi):
-        """
-        Constructor de la clase Listar.
-        :param mdi:
+        """Constructor de la clase Listar.
+
+        :param mdi: EL mdi referente a la ventana.
         :return:
+
         """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
@@ -46,149 +46,137 @@ class Listar(MdiWidget, Ui_vtnListar):
                 self.generarExcelProductos()
             else:
                 lote_producto = LoteProducto.buscarTodos("id_lote", self.sesion).all()
-                f = open('reportes/listadoProductosStock.html','w')
+                self.listarProductos(lote_producto)
                 data = self.productosStock(lote_producto)
                 self.diagramaBarras(data)
-                message = self.htmlProductosStock(lote_producto)
-                f.write(message)
-                f.close()
                 pdfkit.from_file('reportes/listadoProductosStock.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
         elif (self.listado=="Ventas Realizadas"):
-            fechaDesde = self.deFechaDesde.dateTime().toPyDateTime().date()
-            fechaHasta = self.deFechaHasta.dateTime().toPyDateTime().date()
-
-            if fechaDesde > fechaHasta:
-                QtGui.QMessageBox.information(self,"Aviso","La fecha Hasta es mayor que la fecha Desde")
-
-            elif self.rbtnExcel.isChecked():
-                self.generarExcelVentas(fechaDesde,fechaHasta)
-
+            if self.rbtnExcel.isChecked():
+                self.generarExcelVentas()
             else:
-                pass
-            """else:
                 facturas = Factura.buscarTodos(Factura.numero, self.sesion).all()
                 remitos = Remito.buscarTodos(Remito.numero, self.sesion).all()
-                data = self.cantidadVentas(facturas, remitos)
-                #self.diagramaLinea(data)
-                f = open('reportes/listadoVentas.html','w')
-                ventas = self.cantidadVentas(facturas, remitos)
-                message = self.htmlVentas(ventas)
-                f.write(message)
-                f.close()
+                ventasFact = self.cantidadVentasContado(facturas)
+                ventasRem = self.cantidadVentasRemito(remitos)
+                self.listarVentas(ventasFact, ventasRem)
                 pdfkit.from_file('reportes/listadoVentas.html', 'reportes/list.pdf')
-                os.system('evince reportes/list.pdf &')"""
+                os.system('evince reportes/list.pdf &')
         else:
             if self.rbtnExcel.isChecked():
                 self.generarExcelClientes()
             else:
                 clientes = Cliente.buscarTodos(Cliente.dni, self.sesion).all()
-                f = open('reportes/listadoClientes.html','w')
-                message = self.htmlCliente(clientes)
-                f.write(message)
-                f.close()
+                self.listarClientes(clientes)
                 pdfkit.from_file('reportes/listadoClientes.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
 
-    def htmlProductosStock(self, lote_producto):
+    def listarProductos(self, lote_producto):
         """
         Genera el html usado para generar el pdf final del listado de los productos en stock.
         :param lote_producto: arreglo que contiene todos los productos y sus diferentes lotes.
-        :return: hmtl
+        :return:
         """
         #TODO esta bien q se de de baja un producto para el q hay stock???
         # hay q listar los dados de baja?? esto depende de la resp a la preg anterior.
+
+        archivo = open("PlantillasListados/productosStock.html", "r")
+        contenido = archivo.read()
+        archivo.close()
+
+        body = ""
         i = 0
-        html = """<html>
-            <head>
-            </head>
-            <body>
-            <div id="contenedor">
-              <header id="encabezado">
-                <h1 align="center">Listado Productos en Stock</h1>
-              </header>
-              <div id="items">
-                <table border width="100%">
-                    <th bgcolor="#38B0DE">Producto</th>
-                    <th bgcolor="#38B0DE">Nro Lote</th>
-                    <th bgcolor="#38B0DE">Descripción</th>
-                    <th bgcolor="#38B0DE">Cantidad</th>"""
+
         for lp in lote_producto:
             if (lp.getCantidad() > 0):
                 i += 1
                 producto = Producto.buscar(Producto.codigo_barra, self.sesion, lp.getIdProducto()).first()
-                html += """<tr><td width="10%">""" + str(i)
-                html += """</td><td width="10%">""" + str(lp.getIdLote())
-                html += """</td><td width="70%">""" + str(producto.getIdMedicamento()) \
-                        + """ """ + str(producto.getIdPresentacion())
-                html += """</td><td width="10%">""" + str(lp.getCantidad())
-                html += """</td></tr>"""
-        html += """</table></div></div></body></html>"""
-        html += """<img src="diagBarra.png">"""
-        return html
+                nr_prod = str(i)
+                id_lote = str(lp.getIdLote())
+                desc = str(producto.getIdMedicamento()) + """ """ + str(producto.getIdPresentacion())
+                cant = str(lp.getCantidad())
+                cadena = """<tr>
 
-    def htmlCliente(self, clientes):
+                <td><strong>{producto}</strong></td>
+                <td class="text-right">{lote}</td>
+                <td><strong>{descripcion}</strong></td>
+                <td class="text-right">{cantidad}</td>
+                </tr>""".format(producto=nr_prod, lote=id_lote, descripcion=desc, cantidad=cant)
+                body += cadena
+        contenido_nuevo = contenido.format(contenido=body)
+
+        archivo = open("reportes/listadoProductosStock.html", "w")
+        archivo.write(contenido_nuevo)
+        archivo.close()
+
+    #TODO en este listado se pueden usar las fechas de los campos de deFechaDesde y deFechaHasta
+    def listarVentas(self, ventasFact, ventasRem):
+        """
+        Genera el html usado para generar el pdf final del listado de las Ventas realizadas.
+        :param ventasFact: arreglo que contiene todas las ventas de contado realizadas.
+        :param ventasRem: arreglo que contiene todas las ventas con remito realizadas.
+        :return:
+        """
+        archivo = open("PlantillasListados/ventas.html", "r")
+        contenido = archivo.read()
+        archivo.close()
+
+        tableFact = ""
+
+        for fecha, cant in ventasFact:
+            cadena = """<tr>
+
+                <td><strong>{fecha}</strong></td>
+                <td class="text-right">{cantidad}</td>
+                </tr>""".format(fecha=str(fecha), cantidad=str(cant))
+            tableFact += cadena
+
+        tableRem = ""
+
+        for fecha, cant in ventasRem:
+            cadena = """<tr>
+
+                <td><strong>{fecha}</strong></td>
+                <td class="text-right">{cantidad}</td>
+                </tr>""".format(fecha=str(fecha), cantidad=str(cant))
+            tableRem += cadena
+
+        contenido_nuevo = contenido.format(contenidoFact=tableFact, contenidoRem=tableRem)
+
+        archivo = open("reportes/listadoVentas.html", "w")
+        archivo.write(contenido_nuevo)
+        archivo.close()
+
+    def listarClientes(self, clientes):
         """
         Genera el html usado para generar el pdf final del listado de los Clientes.
         :param clientes: arreglo que contiene todos los clientes.
-        :return: hmtl
+        :return:
         """
+        archivo = open("PlantillasListados/clientes.html", "r")
+        contenido = archivo.read()
+        archivo.close()
+
+        body = ""
         i = 0
-        html = """<html>
-            <head>
-            </head>
-            <body>
-            <div id="contenedor">
-              <header id="encabezado">
-                <h1 align="center">Listado Clientes</h1>
-              </header>
-              <div id="items">
-                <table border width="100%">
-                    <th bgcolor="#38B0DE">Cliente</th>
-                    <th bgcolor="#38B0DE">Nombre y Apellido</th>
-                    <th bgcolor="#38B0DE">DNI</th>
-                    <th bgcolor="#38B0DE">Domicilio</th>
-                    <th bgcolor="#38B0DE">Teléfono</th>"""
         for cliente in clientes:
             i += 1
-            html += """<tr><td width="10%">""" + str(i)
-            html += """</td><td width="35%">""" + str(cliente.getNombre()) + """ """ + str(cliente.getApellido())
-            html += """</td><td width="10%">""" + str(cliente.getDni())
-            html += """</td><td width="35%">""" + str(cliente.getDireccion())
-            html += """</td><td width="10%">""" + str(cliente.getTelefono())
-            html += """</td></tr>"""
-        html += """</table></div></div></body></html>"""
-        return html
+            nombre= str(cliente.getNombre()) + """ """ + str(cliente.getApellido())
+            cadena = """<tr>
 
-    #TODO html de factura, nota de credito, remito.
+                <td><strong>{cliente}</strong></td>
+                <td><strong>{nombre}</strong></td>
+                <td class="text-right">{dni}</td>
+                <td><strong>{direccion}</strong></td>
+                <td class="text-right">{telefono}</td>
+                </tr>""".format(cliente=str(i), nombre=nombre, dni=str(cliente.getDni()),
+                                direccion=str(cliente.getDireccion()), telefono=str(cliente.getTelefono()))
+            body += cadena
+        contenido_nuevo = contenido.format(contenido=body)
 
-    def htmlVentas(self, ventas):
-        """
-        Genera el html usado para generar el pdf final del listado de las Ventas realizadas.
-        :param ventas: arreglo que contiene todas las ventas realizadas.
-        :return: hmtl
-        """
-        i = 0
-        html = """<html>
-            <head>
-            </head>
-            <body>
-            <div id="contenedor">
-              <header id="encabezado">
-                <h1 align="center">Listado Ventas Realizadas</h1>
-              </header>
-              <div id="items">
-                <table border width="100%">
-                    <th bgcolor="#38B0DE">Fehca de Emision</th>
-                    <th bgcolor="#38B0DE">Cantidad</th>"""
-        for fecha, cant in ventas:
-            i += 1
-            html += """<tr><td width="50%">""" + str(fecha)
-            html += """</td><td width="50%">""" + str(cant)
-            html += """</td></tr>"""
-        html += """</table></div></div></body></html>"""
-        html += """<img src="diagLinea.png">"""
-        return html
+        archivo = open("reportes/listadoClientes.html", "w")
+        archivo.write(contenido_nuevo)
+        archivo.close()
 
     def diagramaBarras(self, data):
         """
@@ -224,7 +212,7 @@ class Listar(MdiWidget, Ui_vtnListar):
             'colorScheme': {
                 'name': 'gradient',
                 'args': {
-                    'initialColor': 'blue',
+                    'initialColor': 'red',
                 },
             },
         }
@@ -249,11 +237,10 @@ class Listar(MdiWidget, Ui_vtnListar):
                 data.append((descripcion, lp.getCantidad()))
         return data
 
-    def cantidadVentas(self, facturas, remitos):
+    def cantidadVentasContado(self, facturas):
         """
-        Devuelve la cantidad de ventas realizadas (factura y remito) por fecha.
+        Devuelve la cantidad de ventas de contado realizadas (por fecha).
         :param facturas: arreglo que contiene todas las facturas correpondientes a las ventas realizadas.
-        :param remitos: arreglo que contiene todos los remitos correpondientes a las ventas realizadas.
         :return: fch_cant
         """
         fch_cant = []
@@ -277,6 +264,15 @@ class Listar(MdiWidget, Ui_vtnListar):
                             fch_cant.append((fecha, cantidad))
                             break
         fch_cant.sort()
+        self.diagramaLinea(fch_cant, 'reportes/diagLineaFact.png', 'Ventas de Contado')
+        return fch_cant
+
+    def cantidadVentasRemito(self, remitos):
+        """
+        Devuelve la cantidad de ventas con remito realizadas (por fecha).
+        :param remitos: arreglo que contiene todos los remitos correpondientes a las ventas realizadas.
+        :return: ventas_rem
+        """
         cantidad = 0
         ventas_rem = []
         for remito in remitos:
@@ -298,30 +294,28 @@ class Listar(MdiWidget, Ui_vtnListar):
                             ventas_rem.append((fecha, cantidad))
                             break
         ventas_rem.sort()
-        self.diagramaLinea(fch_cant, ventas_rem)
-        for fch, cant in ventas_rem:
-            fch_cant.append((fch, cant))
-        return fch_cant
+        self.diagramaLinea(ventas_rem, 'reportes/diagLineaRem.png', 'Ventas con Remito')
+        return ventas_rem
 
-    def diagramaLinea(self, data1, data2):
+    def diagramaLinea(self, data, png, legend):
         """
         Genera un diagraga de lineas en una imagen png a incluir en el pdf,
         de acuerdo a los datos pasados por parametro.
-        :param data1: datos de la línea 1.
-        :param data2: datos de la línea 2
+        :param data: datos de la línea.
+        :param png: dirección de la imagen donde guardar el diagrama.
+        :param legend: leyenda a mostrar en el diagrama.
         :return:
         """
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 800, 400)
 
         dataSet = (
-            ('lines', [(i, l[1]) for i, l in enumerate(data1)]),
-            ('lines_2', [(i, l[1]) for i, l in enumerate(data2)]),
+            (legend, [(i, l[1]) for i, l in enumerate(data)]),
             )
 
         options = {
             'axis': {
                 'x': {
-                    'ticks': [dict(v=i, label=l[0]) for i, l in enumerate(data1)],
+                    'ticks': [dict(v=i, label=l[0]) for i, l in enumerate(data)],
                     'rotate': 25,
                 },
                 'y': {
@@ -335,11 +329,11 @@ class Listar(MdiWidget, Ui_vtnListar):
             'colorScheme': {
                 'name': 'gradient',
                 'args': {
-                'initialColor': 'green',
+                    'initialColor': 'green',
                 },
             },
             'legend': {
-                'hide': True,
+                'hide': False,
             },
         }
         chart = pycha.line.LineChart(surface, options)
@@ -347,7 +341,7 @@ class Listar(MdiWidget, Ui_vtnListar):
         chart.addDataset(dataSet)
         chart.render()
 
-        surface.write_to_png('reportes/diagLinea.png')
+        surface.write_to_png(png)
 
     def generarExcelProductos(self):
         """
@@ -427,28 +421,23 @@ class Listar(MdiWidget, Ui_vtnListar):
         })
         hoja.insert_chart('E3', grafico)
 
-    def generarExcelVentas(self,fechaDesde, fechaHasta):
+    def generarExcelVentas(self):
         """
             Crea el documento Excel correspondiente a las ventas realizadas en
             un periodo de tiempo dado
-        :param fechaDesde Fecha de Inicio de Listado:
-        :param fechaHasta Fecha de Fin de Listado:
         :return None :
         """
         ventas={}
         for factura in (FacturaModel.buscarTodos("numero",self.sesion).all()):
-            if factura.fecha_emision >= fechaDesde and factura.fecha_emision <= fechaHasta:
-                if (factura.fecha_emision in ventas):
-                    ventas[factura.fecha_emision]+=1
-                else:
-                    ventas[factura.fecha_emision]=1
-
+            if (factura.fecha_emision in ventas):
+                ventas[factura.fecha_emision]+=1
+            else:
+                ventas[factura.fecha_emision]=1
         for remito in (RemitoModel.buscarTodos("numero",self.sesion).all()):
-            if remito.fecha_emision >= fechaDesde and remito.fecha_emision <= fechaHasta:
-                if (remito.fecha_emision in ventas):
-                    ventas[remito.fecha_emision]+=1
-                else:
-                    ventas[remito.fecha_emision]=1
+            if (remito.fecha_emision in ventas):
+                ventas[remito.fecha_emision]+=1
+            else:
+                ventas[remito.fecha_emision]=1
 
         documento=xlsxwriter.Workbook('Excel/Ventas.xlsx')
         hoja=documento.add_worksheet('Ventas')
@@ -502,17 +491,17 @@ class Listar(MdiWidget, Ui_vtnListar):
         hoja=documento.add_worksheet('Clientes')
         bold = documento.add_format({'bold': 1,})
         bold.set_align('center')
-        hoja.write('A1','DNI',bold)
-        hoja.write('B1','Nombre',bold)
-        hoja.write('C1','Apellido',bold)
-        hoja.write('D1','Direccion',bold)
-        hoja.write('E1','Telefono',bold)
-        i=2
+        hoja.write('A1', 'DNI', bold)
+        hoja.write('B1', 'Nombre', bold)
+        hoja.write('C1', 'Apellido', bold)
+        hoja.write('D1', 'Direccion', bold)
+        hoja.write('E1', 'Telefono', bold)
+        i = 2
         for cliente in datosClientes:
-            row='A%(numero)d' % {"numero":i}
-            hoja.write_row(row,cliente)
-            i+=1
+            row = 'A%(numero)d' % {"numero":i}
+            hoja.write_row(row, cliente)
+            i += 1
 
         documento.close()
 
-        QtGui.QMessageBox.information(self, "Listado" , "El listado ha sido generado con exito")
+        QtGui.QMessageBox.information(self, "Listado", "El listado ha sido generado con exito")

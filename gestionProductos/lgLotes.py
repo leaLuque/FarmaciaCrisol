@@ -1,57 +1,74 @@
-__author__ = 'waldo'
 # coding: latin-1
+__author__ = 'waldo'
+
+from datetime import datetime
+from PyQt4 import QtCore, QtGui
+
 from gui import MdiWidget, CRUDWidget
 from ventanas import Ui_vtnLote
 from validarDatos import ValidarDatos
 from baseDatos import Lote as LoteModel
 from baseDatos import LoteProducto as LoteProductoModel
 from baseDatos import Producto as ProductoModel
-from datetime import datetime
-from PyQt4 import QtCore, QtGui
+
 class Lote(CRUDWidget, Ui_vtnLote):
+    """
+    Lógica de Alta y Modificación de Lotes.
+    """
     def __init__(self, mdi):
+        """
+        Constructor de la clase Lote.
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
-        self.validadores()
+        self.validadores(LoteModel)
         self.setFecha()
         self.producto = None
 
-    def validadores(self):
-        ##Esta parte analiza los campos requeridos para el cliente
-        self.camposRequeridos = [getattr(self, "line%s" % campo.title()) for campo in LoteModel.requeridos]
-        ValidarDatos.setValidador(self.camposRequeridos)
-        ##Esta parte analiza los campos que son opcionales
-        camposNoRequeridos=[getattr(self, "line%s" % campo.title()) for campo in LoteModel.noRequeridos]
-        ValidarDatos.setValidador(camposNoRequeridos)
-
     def cargarLotes(self):
+        """
+        Carga los datos de los lotes en la tabla de la ventana.
+        :return:
+        """
         self.cargarObjetos(self.tablaLote,
             LoteModel.buscarTodos("codigo", self.sesion).all(),
             ("codigo", "fecha_vencimiento")
         )
 
     def crear(self):
+        """
+        Da de alta un lote nuevo y lo almacena en la base de datos.
+        :return:
+        """
         if self.producto == None:
-            self.showMsjEstado("No se ha seleccionado ningun Producto de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado ningun Producto de la tabla.',
+                                      'Aceptar')
         else:
             if ValidarDatos.validarCamposVacios(self.camposRequeridos):
                 lote = LoteModel(str(self.lineCodigo.text()), str(self.dateFechVenc.text()))
                 if lote.guardar(self.sesion):
-                    self.showMsjEstado("El Lote fue dado de alta.")
+                    QtGui.QMessageBox.information(self, 'Info', 'El Lote fue dado de alta.', 'Aceptar')
                     loteProducto = LoteProductoModel(lote.getCodigo(), self.producto,
                                                              int(self.spinCantidad.value()))
                     if loteProducto.guardar(self.sesion):
-                        self.showMsjEstado("Lote/Producto fue dado de alta.")
+                        QtGui.QMessageBox.information(self, 'Info', 'Lote/Producto fue dado de alta.', 'Aceptar')
                     else:
-                        self.showMsjEstado("Lote/Producto ya existe.")
+                        QtGui.QMessageBox.critical(self, 'Error', 'Lote/Producto ya existe.', 'Aceptar')
                     self.limpiarCampos()
                     self.objectCreated.emit()
                 else:
                     QtGui.QMessageBox.critical(self, 'Error', 'El Lote ya existe.', 'Aceptar')
             else:
-                self.showMsjEstado("Hay datos obligatorios que no fueron completados.")
+                QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
+                                      'Aceptar')
 
     def modificar(self):
+        """
+        Modifica los datos del lote seleccionado.
+        :return:
+        """
         itemActual = self.tablaLote.currentItem()
         if itemActual != None:
             row = itemActual.row()
@@ -59,13 +76,17 @@ class Lote(CRUDWidget, Ui_vtnLote):
             self.lote = LoteModel.buscar(LoteModel.codigo, self.sesion, codigo).first()
             self.lote.setFechaVencimiento(str(self.dateFechVenc.text()))
             self.lote.modificar(self.sesion)
-            self.showMsjEstado("El Lote fue modificado")
+            QtGui.QMessageBox.information(self, 'Info', 'El Lote fue modificado.', 'Aceptar')
             self.objectModified.emit()
             self.actualizar()
         else:
-            self.showMsjEstado("No se ha seleccionado un Lote de la tabla")
+            QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Lote de la tabla.', 'Aceptar')
 
     def buscarLote(self):
+        """
+        Busca y carga en la tabla los datos de un lote para un codigo ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaLote)
         self.cargarObjetos(self.tablaLote,
             LoteModel.buscar(LoteModel.codigo, self.sesion, str(self.lineCodigo.text())).all(),
@@ -73,6 +94,10 @@ class Lote(CRUDWidget, Ui_vtnLote):
         )
 
     def buscarProducto(self):
+        """
+        Busca y carga en la tabla los datos de un producto para un codigo de barra ingresado.
+        :return:
+        """
         self.limpiarTabla(self.tablaProducto)
         self.cargarObjetos(self.tablaProducto,
             ProductoModel.buscarAlta(ProductoModel.codigo_barra, self.sesion,
@@ -81,20 +106,36 @@ class Lote(CRUDWidget, Ui_vtnLote):
         )
 
     def actualizar(self):
+        """
+        Actualiza la ventana (campos y tablas).
+        :return:
+        """
         self.limpiarCampos()
         self.limpiarTabla(self.tablaLote)
         self.cargarLotes()
         self.actualizarProd()
 
     def actualizarProd(self):
+        """
+        Actualiza la tabla que muestra los datos de los productos.
+        :return:
+        """
         self.limpiarTabla(self.tablaProducto)
         self.cargarProductos()
 
     def actualizarLote(self):
+        """
+        Actualiza la tabla que muestra los datos de los productos.
+        :return:
+        """
         self.limpiarTabla(self.tablaLote)
         self.cargarLotes()
 
     def limpiarCampos(self):
+        """
+        Vacia los campos de la ventana.
+        :return:
+        """
         self.lineCodigo.clear()
         self.lineCodigo.setEnabled(True)
         self.lineCod_Barra.clear()
@@ -103,7 +144,11 @@ class Lote(CRUDWidget, Ui_vtnLote):
         self.producto = None
         self.setFecha()
 
-    def modificarItem(self):
+    def cargarCampos(self):
+        """
+        Carga los campos con los datos del lote seleccionado.
+        :return:
+        """
         self.lineCodigo.setEnabled(False)
         row = self.tablaLote.currentItem().row()
         infoItem = []
@@ -120,6 +165,10 @@ class Lote(CRUDWidget, Ui_vtnLote):
         self.dateFechVenc.setDate(fecha)
 
     def setFecha(self):
+        """
+        Setea la fecha del Date Edit (campo de la fecha) con la fecha actual.
+        :return:
+        """
         formato = "%d/%m/%y"  # Asigna un formato dia mes año
         fechaAct = datetime.today()
         fechaVenc = fechaAct.strftime(formato)
@@ -128,18 +177,31 @@ class Lote(CRUDWidget, Ui_vtnLote):
         self.dateFechVenc.setDate(fecha)
 
     def cargarProductos(self):
+        """
+        Carga la tabla de los productos con los datos de todos los productos disponibles.
+        :return:
+        """
         self.cargarObjetos(self.tablaProducto,
             ProductoModel.buscarTodos("codigo_barra", self.sesion).all(),
             ("codigo_barra", "id_medicamento", "id_presentacion", "importe")
         )
 
     def setProducto(self):
+        """
+        Setea la referencia al producto con el producto seleccionado.
+        :return:
+        """
         row = self.tablaProducto.currentItem().row()
         self.producto = str(self.tablaProducto.item(row, 0).text())
         self.lineCod_Barra.setText(self.producto)
 
     @classmethod
     def create(cls, mdi):
+        """
+        Configuración de la ventana Alta Lote.
+        :param mdi: referencia a la ventana Alta Lote.
+        :return: gui
+        """
         gui = super(Lote, cls).create(mdi)
         gui.tablaLote.hide()
         gui.btnBuscarLote.hide()
@@ -155,257 +217,20 @@ class Lote(CRUDWidget, Ui_vtnLote):
 
     @classmethod
     def update(cls, mdi):
+        """
+        Configuración de la ventana Modificación Lote.
+        :param mdi: referencia a la ventana Modificación Lote.
+        :return: gui
+        """
         gui = super(Lote, cls).update(mdi)
         gui.cargarLotes()
         gui.gbProducto.hide()
         gui.labelCantidad.hide()
         gui.spinCantidad.hide()
-        gui.tablaLote.itemClicked.connect(gui.modificarItem)
+        gui.tablaLote.itemClicked.connect(gui.cargarCampos)
         gui.lineCodigo.returnPressed.connect(gui.buscarLote)
         gui.btnBuscarLote.pressed.connect(gui.buscarLote)
         gui.btnAceptar.pressed.connect(gui.modificar)
         gui.btnCancelar.pressed.connect(gui.actualizar)
         gui.btnActualizarLote.pressed.connect(gui.actualizarLote)
         return gui
-
-# class AltaLote(MdiWidget, Ui_vtnAltaLote):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.campos = [self.lineNumero, self.lineCant]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.columnHeaders = ["Código de Barra", "Medicamento", "Presentación", "Importe"]
-#         self.tablaProducto.itemClicked.connect(self.obtenerProducto)
-#         self.btnActualizarProductos.pressed.connect(self.inicializarTabla)
-#         self.producto = None
-#         self.inicializarTabla()
-#
-#     def inicializarTabla(self):
-#         self.limpiarTabla(self.tablaProducto, self.columnHeaders)
-#         productos = {}
-#         i = 0
-#         query = Producto.buscarTodos(Producto.codigoBarra, self.sesion)
-#         for instance in query.all():
-#             item = [instance.codigoBarra, instance.id_medicamento, instance.id_presentacion, instance.importe]
-#             productos[i] = item
-#             i += 1
-#         self.cargarTabla(self.tablaProducto, productos, self.columnHeaders)
-#
-#     def obtenerProducto(self):
-#         self.producto = self.itemSeleccionado(self.tablaProducto)
-#
-#     def confirmarOperacion(self):
-#         if self.producto == None:
-#                 self.showMsjEstado("Seleccione un Producto de la tabla.")
-#         else:
-#             if self.validarDatos.validarCamposVacios(self.campos):
-#                 if self.fechaValida():
-#                     lote = Lote(str(self.lineNumero.text()),  str(self.dateFechVenc.text()),
-#                             str(self.lineCant.text()), str(self.producto))
-#                     if lote.guardar(self.sesion):
-#                         self.showMsjEstado("El Lote fue dado de alta.")
-#                         self.actualizarVentana()
-#                         self.producto = None
-#                     else:
-#                         self.showMsjEstado("El Lote ya existe.")
-#             else:
-#                     self.showMsjEstado("Uno o más datos obligatorios no fueron completados.")
-#
-#     def actualizarVentana(self):
-#         self.lineNumero.setText("")
-#         self.lineCant.setText("")
-#
-#     def fechaValida(self):
-#         fecha = datetime.today() + timedelta(days=90) # Suma a la fecha actual 90 días
-#         formato = "%d/%m/%y"  # Asigna un formato dia mes año
-#         fechaVenc = datetime.strptime(str(self.dateFechVenc.text()), formato)
-#         if fechaVenc < fecha:
-#             self.showMsjEstado("Ingrese una fecha mayor a la de la fecha actual, "
-#                                "más un periodo de 90 días mínimo. Ejemplo: %s" % fecha.strftime(formato))
-#             return False
-#         return True
-#
-#
-#
-# class BajaLote(MdiWidget, Ui_vtnBajaLote):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.campos = [self.lineNumero]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.columnHeaders = ["Número", "Fecha de Vencimiento", "Cantidad", "Producto"]
-#         self.tablaLote.itemClicked.connect(self.obtenerLote)
-#         self.btnBuscar.pressed.connect(self.buscarLotes)
-#         self.lineNumero.returnPressed.connect(self.buscarLotes)
-#         self.lote = None
-#
-#     def buscarLotes(self):
-#         lotes = {}
-#         self.limpiarTabla(self.tablaLote, self.columnHeaders)
-#         query = Lote.buscarLike(Lote.numeroLote, self.sesion, str(self.lineNumero.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.numeroLote, instance.fechaVencimiento, instance.cantidad, instance.id_producto]
-#             lotes[i] = item
-#             i += 1
-#             self.lote = instance
-#         if len(lotes.items()) < 1:
-#             self.showMsjEstado("No existen Lotes que coincidan con el número ingresado en la busqueda.")
-#         elif len(lotes.items()) > 1:
-#             self.lote = None
-#         self.cargarTabla(self.tablaLote, lotes, self.columnHeaders)
-#
-#     def obtenerLote(self):
-#         numero = self.itemSeleccionado(self.tablaLote)
-#         query = Lote.buscar(Lote.numeroLote, self.sesion, numero)
-#         for instance in query.all():
-#              self.lote = instance
-#
-#     def confirmarOperacion(self):
-#         if self.tablaLote.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione un Lote de la tabla.")
-#         else:
-#             if self.lote == None:
-#                 self.showMsjEstado("Seleccione un Lote de la tabla.")
-#             else:
-#                 self.lote.borrar(self.sesion)
-#                 self.showMsjEstado("El Lote fue dado de baja.")
-#                 self.actualizarVentana()
-#                 self.lote = None
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaLote, self.columnHeaders)
-#         self.lineNumero.setText("")
-#
-# class ModificarLote(MdiWidget, Ui_vtnModificarLote):
-#     def __init__(self, mdi):
-#         MdiWidget.__init__(self, mdi)
-#         self.sesion = self.mdi().window().getSesionBD()
-#         self.btnBuscarLote.pressed.connect(self.buscarLotes)
-#         self.lineNumero.returnPressed.connect(self.buscarLotes)
-#         self.btnBuscarProd.pressed.connect(self.buscarProducto)
-#         self.lineCodBarra.returnPressed.connect(self.buscarProducto)
-#         self.tablaLote.itemClicked.connect(self.obtenerLote)
-#         self.tablaProducto.itemClicked.connect(self.setProducto)
-#         self.campos = [self.lineNumero, self.lineCant, self.lineCodBarra]
-#         self.validarDatos = ValidarDatos()
-#         self.validarDatos.setValidator(self.campos)
-#         self.columnHeadersLote = ["Número", "Fecha de Vencimiento", "Cantidad", "Producto"]
-#         self.columnHeadersProd = ["Código de Barra", "Medicamento", "Presentación", "Importe"]
-#         self.lote = None
-#         self.producto = None
-#
-#     def buscarLotes(self):
-#         lotes = {}
-#         self.limpiarTabla(self.tablaLote, self.columnHeadersLote)
-#         query = Lote.buscarLike(Lote.numeroLote, self.sesion, str(self.lineNumero.text()))
-#         i = 0
-#         for instance in query.all():
-#             item = [instance.numeroLote, instance.fechaVencimiento, instance.cantidad, instance.id_producto]
-#             lotes[i] = item
-#             i += 1
-#             self.lote = instance
-#         if len(lotes.items()) < 1:
-#             self.showMsjEstado("No existen Lotes que coincidan con el número ingresado en la busqueda.")
-#             self.limpiarCampos()
-#             self.producto = None
-#         elif len(lotes.items()) > 1:
-#             self.lote = None
-#             self.producto = None
-#         else:
-#             self.cargarCampos()
-#         self.cargarTabla(self.tablaLote, lotes, self.columnHeadersLote)
-#
-#     def obtenerLote(self):
-#         numero = self.itemSeleccionado(self.tablaLote)
-#         query = Lote.buscar(Lote.numeroLote, self.sesion, numero)
-#         for instance in query.all():
-#             self.lote = instance
-#             self.cargarCampos()
-#
-#     def buscarProducto(self):
-#         productos = {}
-#         campo = [self.lineCodBarra]
-#         if self.validarDatos.validarCamposVacios(campo):
-#             self.limpiarTabla(self.tablaProducto, self.columnHeadersProd)
-#             query = Producto.buscar(Producto.codigoBarra, self.sesion, str(self.lineCodBarra.text()))
-#             i = 0
-#             for instance in query.all():
-#                 item = [instance.codigoBarra, instance.id_medicamento, instance.id_presentacion, instance.importe]
-#                 productos[i] = item
-#                 i += 1
-#                 self.producto = instance.codigoBarra
-#             if len(productos.items()) < 1:
-#                 self.showMsjEstado("No existen Productos que coincidan con el código de barra ingresado en la busqueda.")
-#         else:
-#             self.showMsjEstado("Ingrese el código de barra del Producto para poder realizar la busqueda.")
-#         self.cargarTabla(self.tablaProducto, productos, self.columnHeadersProd)
-#
-#     def setProducto(self):
-#         self.producto = self.itemSeleccionado(self.tablaProducto)
-#         self.lineCodBarra.setText(self.producto)
-#
-#     def cargarCampos(self):
-#         self.lineNumero.setText(self.lote.numeroLote)
-#         self.lineCodBarra.setText(str(self.lote.id_producto))
-#         self.lineCant.setText(str(self.lote.cantidad))
-#         formato = "%d/%m/%y"  # Asigna un formato dia mes año
-#         fechaVenc = self.lote.fechaVencimiento.strftime(formato)
-#         formato = "dd/MM/yy"
-#         fecha = QtCore.QDate.fromString(fechaVenc, formato)
-#         self.dateFechVenc.setDate(fecha)
-#         self.producto = self.lote.id_producto
-#
-#     def limpiarCampos(self):
-#         self.lineNumero.setText("")
-#         self.lineCodBarra.setText("")
-#         self.lineCant.setText("")
-#
-#     def confirmarOperacion(self):
-#         if self.tablaLote.rowCount() < 1:
-#             self.showMsjEstado("Realice una nueva busqueda y seleccione un Lote de la tabla.")
-#         else:
-#             if self.lote == None:
-#                 self.showMsjEstado("Seleccione un Lote de la tabla.")
-#             else:
-#                 if self.validarDatos.validarCamposVacios(self.campos):
-#                     if self.fechaValida():
-#                         if self.producto != None:
-#                             self.lote.numeroLote = str(self.lineNumero.text())
-#                             self.lote.fechaVencimiento = str(self.dateFechVenc.text())
-#                             self.lote.cantidad = str(self.lineCant.text())
-#                             self.lote.id_producto = self.producto
-#                             self.lote.modificar(self.sesion)
-#                             self.showMsjEstado("Los datos del Lote fueron modificados.")
-#                             self.actualizarVentana()
-#                             self.lote = None
-#                             self.producto = None
-#                         else:
-#                             self.showMsjEstado("Seleccione un Producto de la tabla.")
-#                 else:
-#                     self.showMsjEstado("No pueden haber datos sin completar.")
-#
-#     def actualizarVentana(self):
-#         self.limpiarTabla(self.tablaLote, self.columnHeadersLote)
-#         self.limpiarTabla(self.tablaProducto, self.columnHeadersProd)
-#         self.limpiarCampos()
-#         lote = {}
-#         lote[0] = [self.lote.numeroLote, self.lote.fechaVencimiento,
-#                          self.lote.cantidad, self.lote.id_producto]
-#         self.cargarTabla(self.tablaLote, lote, self.columnHeadersLote)
-#
-#     def fechaValida(self):
-#         formato = "%d/%m/%y"  # Asigna un formato dia mes año
-#         fechaVencMod = datetime.strptime(str(self.dateFechVenc.text()), formato)
-#         formato = "%Y-%m-%d"
-#         fechaVencAct = datetime.strptime(str(self.lote.fechaVencimiento), formato)
-#         # comprueba si la fecha fue modificada en tal caso comprueba que sea una fecha valida
-#         if fechaVencAct != fechaVencMod:
-#             fecha = datetime.today() + timedelta(days=90) # Suma a la fecha actual 90 días,TODO los 90 obtenerlos de un archivo de config
-#             if fechaVencMod < fecha:
-#                 self.showMsjEstado("Ingrese una fecha mayor a la de la fecha actual, "
-#                                    "más un periodo de 90 días mínimo. Ejemplo: %s" % fecha.strftime(formato))
-#                 return False
-#         return True
