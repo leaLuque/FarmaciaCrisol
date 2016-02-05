@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnDevolucionDeCliente.ui'
 #
-# Created: Wed Jan 27 12:23:34 2016
+# Created: Wed Feb  3 13:48:57 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,12 +43,15 @@ class Ui_vtnDevolucionDeCliente(object):
         self.btnBuscar.setFocusPolicy(QtCore.Qt.TabFocus)
         self.btnBuscar.setObjectName(_fromUtf8("btnBuscar"))
         self.gridLayout_2.addWidget(self.btnBuscar, 0, 2, 1, 1)
+        self.label_2 = QtGui.QLabel(self.gbFactura)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
         self.tableFactura = QtGui.QTableWidget(self.gbFactura)
         self.tableFactura.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableFactura.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.tableFactura.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.tableFactura.setObjectName(_fromUtf8("tableFactura"))
-        self.tableFactura.setColumnCount(3)
+        self.tableFactura.setColumnCount(4)
         self.tableFactura.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableFactura.setHorizontalHeaderItem(0, item)
@@ -56,11 +59,10 @@ class Ui_vtnDevolucionDeCliente(object):
         self.tableFactura.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
         self.tableFactura.setHorizontalHeaderItem(2, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableFactura.setHorizontalHeaderItem(3, item)
         self.tableFactura.horizontalHeader().setStretchLastSection(True)
         self.gridLayout_2.addWidget(self.tableFactura, 1, 0, 1, 3)
-        self.label_2 = QtGui.QLabel(self.gbFactura)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
         self.formLayout_3.setLayout(0, QtGui.QFormLayout.SpanningRole, self.gridLayout_2)
         self.formLayout.setWidget(0, QtGui.QFormLayout.SpanningRole, self.gbFactura)
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -105,13 +107,15 @@ class Ui_vtnDevolucionDeCliente(object):
         self.lineNumero.setStatusTip(_translate("vtnDevolucionDeCliente", "Ingrese número de factura", None))
         self.lineNumero.setAccessibleDescription(_translate("vtnDevolucionDeCliente", "fnroremito", None))
         self.btnBuscar.setText(_translate("vtnDevolucionDeCliente", "Buscar", None))
-        item = self.tableFactura.horizontalHeaderItem(0)
-        item.setText(_translate("vtnDevolucionDeCliente", "Código Barra", None))
-        item = self.tableFactura.horizontalHeaderItem(1)
-        item.setText(_translate("vtnDevolucionDeCliente", "Cantidad", None))
-        item = self.tableFactura.horizontalHeaderItem(2)
-        item.setText(_translate("vtnDevolucionDeCliente", "Importe", None))
         self.label_2.setText(_translate("vtnDevolucionDeCliente", "Número", None))
+        item = self.tableFactura.horizontalHeaderItem(0)
+        item.setText(_translate("vtnDevolucionDeCliente", "Nro. Linea", None))
+        item = self.tableFactura.horizontalHeaderItem(1)
+        item.setText(_translate("vtnDevolucionDeCliente", "Código Barra", None))
+        item = self.tableFactura.horizontalHeaderItem(2)
+        item.setText(_translate("vtnDevolucionDeCliente", "Cantidad", None))
+        item = self.tableFactura.horizontalHeaderItem(3)
+        item.setText(_translate("vtnDevolucionDeCliente", "Importe", None))
         self.btnAceptar.setText(_translate("vtnDevolucionDeCliente", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnDevolucionDeCliente", "Cancelar", None))
         self.gbNotaCredito.setTitle(_translate("vtnDevolucionDeCliente", "Nota de Crédito", None))

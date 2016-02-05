@@ -23,8 +23,7 @@ from baseDatos.ventas import DetalleNotaCredito as DetalleNCModel
 from baseDatos.ventas import CobroCliente as CobroClienteModel
 from genComprobantes import generarNotaCredito,generarFactura
 from validarDatos import ValidarDatos
-
-
+from ventanas import Ui_Dialog
 
 class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
 
@@ -45,9 +44,9 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
         self.facturaSeleccionada = None
         self.notaCredito = None
         self.productosSeleccionados = 0
+        self.detallesDevueltos = {}
         self.lotesDevueltos = {}
-        self.data = []
-
+        self.data = {}
 
     def validadores(self):
         camposRequeridos = [getattr(self,"lineNumero")]
@@ -80,7 +79,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                 else:
                     self.lineNumero.setEnabled(False)
                     self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
-                    ["producto","cantidad","importe"])
+                    ["nro_linea","producto","cantidad","importe"])
 
     def obtenerValoresItem(self,row):
         """
@@ -94,37 +93,22 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             values.append(self.tableFactura.item(row,col).text())
         return values
 
-    def obtenerNumeroLinea(self,value):
-        """
-            Busca el numero de linea correspondiente al
-            producto seleccionado
-        :param value Numero del producto seleccionado:
-        :return Numero de Linea de Factura del producto:
-        """
-        query=self.facturaSeleccionada.getDetalles(self.sesion).\
-            filter(DetalleFacturaModel.id_factura==self.numeroFacturaActual,DetalleFacturaModel.producto==value)
-        for a in query:
-            return a.nro_linea
-
-    def armarItem(self,item,cantidad, nroLineaNC):
+    def armarItem(self,item,cantidad,key):
         """
             Genera y guarda el Detalle de la Nota de Credito
             correspondiente a una devolucion
         :param item Arreglo con informacion del Detalle de Factura:
         :param cantidad Cantidad Devuelta:
-        :param nroLineaNC Nro de Linea en la Nota de Credito:
+        :param key Clave del detalle de factura devuelto:
         :return:
         """
-        linea_factura=self.obtenerNumeroLinea(str(item[0]))
         row=self.tableNC.rowCount()
         self.tableNC.insertRow(row)
-        for col, elemento in enumerate(item):
-            self.tableNC.setItem(row,col,QtGui.QTableWidgetItem(item[col]))
+        for col, elemento in enumerate(item[1:]):
+            self.tableNC.setItem(row,col,QtGui.QTableWidgetItem(item[col+1]))
         self.tableNC.item(row,1).setText(str(cantidad))
-        detalleNC=DetalleNCModel(self.notaCredito.numero,nroLineaNC,self.facturaSeleccionada.numero,linea_factura)
-        detalleNC.guardar(self.sesion)
-
-        self.data.append([str(item[0]),cantidad,0,float(item[2])])
+        #Arreglo que contiene informacion del item agregado
+        self.data[key] = [str(item[1]),cantidad,0,float(item[3])]
 
     def devolverDetalle(self):
         """
@@ -132,43 +116,54 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             por el usuario a la Nota de Credito
         :return:
         """
-        itemActual=self.tableFactura.currentItem()
-        ok=QtGui.QMessageBox.information(self,"Confirmacion","¿Desea devolver este detalle?")
-        if ok:
-            producto=int(self.tableFactura.item(itemActual.row(),0).text())
-            cantOriginal=cantidadFactura=int(self.tableFactura.item(itemActual.row(),1).text())
-            finalizeActualizacion=False
-            if self.productosSeleccionados==0:
-                self.notaCredito=NotaCreditoModel(NotaCreditoModel.generarNumero(self.sesion))
-                self.notaCredito.guardar(self.sesion)
-            while not finalizeActualizacion:
-                cantidad, ok=QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
-                if not ok:
-                    QtGui.QMessageBox.information(self,"Aviso","No se ingreso cantidad")
+
+        rowActual=self.tableFactura.currentItem().row()
+        signal = QtGui.QMessageBox.information(self,"Confirmación","¿Desea eliminar este item?",\
+                                               QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
+
+        if signal == QtGui.QMessageBox.Ok:
+
+            producto =  int(self.tableFactura.item(rowActual,1).text())
+            cantidad_detalle = int(self.tableFactura.item(rowActual,2).text())
+            linea = int(self.tableFactura.item(rowActual,0).text())
+            nro_factura = int(self.lineNumero.text())
+            detalle = FacturaModel.getDetalle(nro_factura,linea,self.sesion)
+            lotes_detalle = detalle.devolverLotes(self.sesion)
+            temp = lotes_detalle
+
+            finalize_actualizacion = False
+            cantidad_restante = cantidad_detalle
+
+            while not finalize_actualizacion:
+
+                cantidad, ok = QtGui.QInputDialog.getInt(self,"Cantidad","Ingrese cantidad del producto",1,1,2000,5)
+                if ok == False:
+                    finalize_actualizacion = True
+                    self.tableFactura.item(rowActual,2).setText(str(cantidad_detalle))
+                    break
+                lote, ok=QtGui.QInputDialog.getText(self,"Lote","Ingrese lote")
+                if ok == False:
+                    finalize_actualizacion = True
+                    self.tableFactura.item(rowActual,2).setText(str(cantidad_detalle))
+                    break
+                if not lote in lotes_detalle.keys():
+                    QtGui.QMessageBox.information(self,"Aviso","El lote ingresado no es valido para este detalle")
+                elif lotes_detalle[str(lote)] == 0:
+                    QtGui.QMessageBox.information(self,"Aviso","Los productos de este lote ya han sido devueltos")
+                elif cantidad > lotes_detalle[str(lote)]:
+                    QtGui.QMessageBox.information(self,"Aviso","La cantidad ingresada es mayor a la esperada para este lote")
                 else:
-                    if cantidad > cantidadFactura:
-                        QtGui.QMessageBox.information(self,"Aviso","La cantidad ingresada supera la esperada")
-                    else:
-                        lote, ok=QtGui.QInputDialog.getText(self,"Lote","Ingrese lote")
-                        if not ok:
-                            QtGui.QMessageBox.information(self,"Aviso","No se ingreso lote")
-                        else:
-                            loteP=LoteProductoModel.buscarLoteProducto(self.sesion,producto,str(lote)).first()
-                            if loteP==None:
-                                QtGui.QMessageBox.information(self,"Aviso","El lote ingresado no se corresponde con el producto")
-                            else:
-                                loteP.aumentarCantidad(cantidad)
-                                loteP.modificar(self.sesion)
-                                self.lotesDevueltos[loteP]=cantidad
-                                cantidadFactura-=cantidad
-                                self.tableFactura.item(itemActual.row(),1).setText(str(cantidadFactura))
-                                if cantidadFactura==0:
-                                    finalizeActualizacion=True
-                                    self.productosSeleccionados+=1
-            self.armarItem(self.obtenerValoresItem(itemActual.row()),cantOriginal,self.productosSeleccionados)
-            self.tableFactura.removeRow(itemActual.row())
-        else:
-            return
+                    temp[str(lote)] -= cantidad
+                    cantidad_restante -= cantidad
+                    self.tableFactura.item(rowActual,2).setText(str(cantidad_restante))
+
+                    if sum(map(lambda x: temp[x],temp)) == 0:
+                        self.productosSeleccionados +=1
+                        key = int(self.tableFactura.item(rowActual,0).text())
+                        self.detallesDevueltos[key] = detalle
+                        self.armarItem(self.obtenerValoresItem(rowActual),cantidad_detalle,self.productosSeleccionados,key)
+                        self.tableFactura.removeRow(rowActual)
+                        finalize_actualizacion = True
 
     def limpiarVentana(self):
         """
@@ -197,31 +192,41 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             usuario confirmo la operacion.
         :return:
         """
-        self.productosSeleccionados=0
-        if self.notaCredito!=None:
-            self.facturaSeleccionada.setNC(self.notaCredito.numero)
+
+        if self.productosSeleccionados != 0:
+
+            nc = NotaCreditoModel(NotaCreditoModel.generarNumero(self.sesion))
+            nc.guardar(self.sesion)
+            for nro_lnc, nro_lfactura in enumerate(self.detallesDevueltos):
+                print nro_lnc
+                print nro_lfactura
+                detalle_nc = DetalleNCModel(nc.numero,nro_lnc+1,self.facturaSeleccionada.numero,nro_lfactura)
+                detalle_nc.setImporte(self.data[nro_lfactura][3])
+                detalle_nc.guardar(self.sesion)
+                self.detallesDevueltos[nro_lfactura].devolver(self.sesion) # Devuelve el detalle asociado de la factura
+            self.facturaSeleccionada.setNC(nc.numero)
             self.facturaSeleccionada.modificar(self.sesion)
-            cobroC=CobroClienteModel.buscar(CobroClienteModel.id_factura,self.sesion,self.facturaSeleccionada.numero).first()
-            if cobroC.tipo=="Efectivo":
+            QtGui.QMessageBox.information(self,"Aviso","La factura ha sido devuelta")
+
+            cobros = self.facturaSeleccionada.getCobros(self.sesion)
+            if len(cobros) == 1 and cobros[0].tipo == "Efectivo":
                 QtGui.QMessageBox.information(self,"Devolucion","El importe en efectivo a entregar es de: $%.2f" % self.calcularTotal())
-            QtGui.QMessageBox.information(self,"Devolucion Cliente","La devolucion ha sido exitosa")
 
             #Se genera un diccionario con los datos necesarios para imprimir la nota de credito
             data = {}
-            data["numero"] = self.notaCredito.numero
-            data["fecha"] = self.notaCredito.fecha_emision
-            data["detalles"] = self.data
+            data["numero"] = nc.numero
+            data["fecha"] = nc.fecha_emision
+            data["detalles"] = self.data.values()
             generarNotaCredito(data)
 
-            self.notaCredito=None
             self.facturaSeleccionada=None
             self.productosSeleccionados=0
+            self.detallesDevueltos = {}
+            self.limpiarVentana()
+            self.data = {}
 
         else:
-            QtGui.QMessageBox.information(self,"Devolucion Cliente","No se ha efectuado ninguna devolucion")
-
-        self.limpiarVentana()
-        self.data = []
+            QtGui.QMessageBox.information(self,"Devolucion Cliente","No se ha agregado ningun producto para devolver")
 
     def cancelarOperacion(self):
         """
@@ -230,19 +235,14 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             Si la Nota de Credito no fue creada limpia la ventana.
             :return:
         """
-        self.productosSeleccionados=0
-        if self.notaCredito!=None:
-            ok=QtGui.QMessageBox.warning(self,"Advertencia","Ya se ha efectuado una nota de credito. ¿Desea Anularla?")
-            if ok:
-                for lote in self.lotesDevueltos:
-                    lote.descontarCantidad(self.lotesDevueltos[lote])
-                    lote.modificar(self.sesion)
-                    self.notaCredito.anular()
-                    self.notaCredito.modificar(self.sesion)
-                self.limpiarVentana()
-                self.lotesDevueltos={}
-                QtGui.QMessageBox.information(self,"Devolucion Cliente","La nota de credito ha sido anulada")
-        else:
+
+        signal = QtGui.QMessageBox.warning(self,"Advertencia","¿Desea cancelar la operación?",\
+                                               QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
+        if signal == QtGui.QMessageBox.Ok:
+            self.data = {}
+            self.facturaSeleccionada = None
+            self.productosSeleccionados = 0
+            self.detallesDevueltos = {}
             self.limpiarVentana()
 
 class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
@@ -887,7 +887,16 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         if self.factura==None:
             QtGui.QMessageBox.information(self,"Aviso","No se ha efectuado ninguna venta")
         else:
-            formapago = self.cobrar()
+
+            ventana = Cobrar(self.calcularTotal())
+            signal = ventana.exec_()
+
+            if signal:
+                print "acepte los cobros"
+            else:
+                print "no acepte los cobros"
+
+            #formapago = self.cobrar()
             if self.facturaCobrada:
                 QtGui.QMessageBox.information(self,"Venta","La venta se ha realizado con exito")
                 data = {}
@@ -924,3 +933,53 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.productosAgregados=0
         self.data = []
         self.limpiarVentana()
+
+
+class Cobrar(QtGui.QDialog, Ui_Dialog):
+    """
+        Clase que modela la lógica de cobro de una factura
+    """
+
+    def __init__(self,total,parent=None):
+        """
+            Constuctor de la clase Cobrar
+        :param total:
+        :param parent:
+        :return:
+        """
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.total_a_pagar = total
+        self.actualizar_total(total)
+        self.btnAceptar.pressed.connect(self.accept)
+        self.btnCancelar.pressed.connect(self.reject)
+        self.rbtnEfectivo.pressed.connect(self.cobroEfectivo)
+        self.rbtnNC.pressed.connect(self.cobroNC)
+        self.rbtnTC.pressed.connect(self.cobroTC)
+        self.rbtnTD.pressed.connect(self.cobroTD)
+
+    def actualizar_total(self,total):
+        """
+            Actualiza el importe a pagar en
+            el line de la ventana
+        :param total:
+        :return:
+        """
+        self.lblImporte.setText("Importe a Pagar: $%.2f" % total)
+
+    def cobroNC(self):
+        pass
+
+    def cobroTC(self):
+        pass
+
+    def cobroTD(self):
+
+        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Débito","Ingrese monto a pagar",1,1,2000,5)
+        if ok:
+            nro_tarjeta,ok1=QtGui.QInputDialog.getText(self,"Cobro Tarjeta Débito","Ingrese numero tarjeta de dédito")
+
+
+
+    def cobroEfectivo(self):
+        pass

@@ -140,6 +140,7 @@ class Remito(ObjetoBase):
         return sesion.query(DetalleRemito).filter(DetalleRemito.id_remito == remito,
                                                   DetalleRemito.nro_linea == linea,
                                                   DetalleRemito.baja == False).first()
+
     @classmethod
     def obtenerTodosRemitos(cls,sesion):
         """
@@ -239,7 +240,6 @@ class DetalleRemito(ObjetoBase):
         self.eliminarLotesAsociados(sesion)
         self.borrar(sesion)
 
-
 class Factura(ObjetoBase):
     """
         Clase que modela la lógica de Factura
@@ -305,6 +305,14 @@ class Factura(ObjetoBase):
         """
         return self.fecha_emision
 
+    def getCobros(self,sesion):
+
+        query = CobroCliente.buscar(CobroCliente.id_factura,sesion,self.numero)
+        temp = []
+        for valor in query:
+            temp.append(valor)
+        return temp
+
     ##@classmethod
     ##def buscarDetalles(self,numero,sesion):
     ##    """
@@ -340,6 +348,20 @@ class Factura(ObjetoBase):
         :rtype Integer:
         """
         return sesion.query(cls).count()+1
+
+    @classmethod
+    def getDetalle(cls,factura,linea,sesion):
+        """
+            Devuelve el detalle particular de una factura dada
+        :param remito Numero de factura:
+        :param linea Numero de linea de la factura:
+        :param sesion Sesion actual con la Base de Datos:
+        :return :
+        :rtype :
+        """
+        return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura == factura,
+                                                  DetalleFactura.nro_linea == linea).first()
+                                                  #DetalleFactura.baja == False).first()
 
 class DetalleFactura(ObjetoBase):
     """

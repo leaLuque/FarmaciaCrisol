@@ -16,3 +16,4 @@ from .vtnReintegroCliente import *
 from .vtnVentanaPrincipal import *
 from .vtnVentaContado import *
 from .vtnVentaConRemito import *
+from .vtnTiposCobro import *
