@@ -510,7 +510,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             else:
                 self.cargar_productos(self.obraSocialSeleccionada)
         else:
-            data = self.getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos).values()
             data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -532,7 +532,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             else:
                 self.cargar_productos(self.obraSocialSeleccionada)
         else:
-            data = self.getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos).values()
             data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):

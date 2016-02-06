@@ -319,7 +319,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
         else:
-            data = self.getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes).values()
             newData = filter(lambda x: x[0]==dni, data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -338,7 +338,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
         else:
-            data = self.getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes).values()
             newData = filter(lambda x: x[1].upper() == nombre.upper(), data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -357,7 +357,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.cargar_clientes()
          else:
-            data = self.getContenidoTabla(self.tableClientes)
+            data = self.getContenidoTabla(self.tableClientes).values()
             newData = filter(lambda x: x[2]==apellido, data)
             self.limpiarTabla(self.tableClientes)
             for row, value in enumerate(newData):
@@ -377,7 +377,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableProductos)
             self.cargar_productos()
         else:
-            data = self.getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos).values()
             data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -397,7 +397,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableProductos)
             self.cargar_productos()
         else:
-            data = self.getContenidoTabla(self.tableProductos)
+            data = self.getContenidoTabla(self.tableProductos).values()
             data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
             self.limpiarTabla(self.tableProductos)
             for row, value in enumerate(data):
@@ -556,7 +556,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             data["numero"] = self.remito.numero
             data["fecha"] = self.remito.fecha_emision
             data["datosCliente"] = ClienteModel.getDatosCliente(self.sesion,self.dniCliente)
-            data["detalles"] = self.getContenidoTabla(self.tableRemito)
+            data["detalles"] = self.getContenidoTabla(self.tableRemito).values()
             generarRremito(data)
             self.limpiarTabla(self.tableRemito)
             self.remito=None

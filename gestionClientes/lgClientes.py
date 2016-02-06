@@ -9,23 +9,6 @@ from validarDatos import ValidarDatos
 from baseDatos import Cliente as ClienteModel
 from baseDatos import Remito as RemitoModel
 
-def getContenidoTabla(tabla):
-    """
-        Devuelve la informacion actual de la tabla en
-        un arreglo que contiene info de cada fila
-    :param tabla QTableWidget de la ventana:
-    :return Arreglo con informacion:
-    """
-    dataRow = []
-    dataTable = []
-
-    for row in range(0,tabla.rowCount()):
-        for col in range(0,tabla.columnCount()):
-            dataRow.append(str(tabla.item(row,col).text()))
-        dataTable.append(dataRow)
-        dataRow = []
-
-    return dataTable
 
 class Cliente(CRUDWidget, Ui_vtnCliente):
     """
@@ -39,7 +22,7 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
-        self.validadores(ClienteModel)
+        #self.validadores(ClienteModel)
 
     def cargarClientes(self):
         """
@@ -149,41 +132,6 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         self.lineApellido.setEnabled(False)
         self.cargarCamposMod()
 
-    #TODO supone que tenes : Leandro Luque , Leandro Williams, Eloy Williams en la tabla de clientes
-    #si pones en el filtro de nombre leandro, te trae leandro williams y leandro luque
-    #y si en el filtro de apellido le agregas williams te trae eloy williams y leandro williams
-    def buscar(self):
-        """
-        Busca al cliente de acuerdo a la información ingresada y carga los datos en la tabla (Baja y Modificaión).
-        :return:
-        """
-        obj = self.sender().objectName()
-        if obj == 'lineDni':
-            clientes = ClienteModel.buscarAlta(ClienteModel.dni, self.sesion, str(self.lineDni.text())).all()
-        elif obj == 'lineNombre':
-            clientes = ClienteModel.buscarLike(ClienteModel.nombre, self.sesion,
-                                               str(self.lineNombre.text())).all()
-        elif obj == 'lineApellido':
-            clientes = ClienteModel.buscarLike(ClienteModel.apellido, self.sesion,
-                                               str(self.lineApellido.text())).all()
-        elif obj == 'btnBuscar':
-            if str(self.lineDni.text()) != "":
-                clientes = ClienteModel.buscarAlta(ClienteModel.dni, self.sesion, str(self.lineDni.text())).all()
-            elif str(self.lineNombre.text()) != "":
-                clientes = ClienteModel.buscarLike(ClienteModel.nombre, self.sesion,
-                                               str(self.lineNombre.text())).all()
-            elif str(self.lineApellido.text()) != "":
-                clientes = ClienteModel.buscarLike(ClienteModel.apellido, self.sesion,
-                                               str(self.lineApellido.text())).all()
-            else:
-                QtGui.QMessageBox.warning(self, 'Atención', 'Ingrese DNI, Nombre o Apellido del Cliente '
-                                                            'para realizar la busqueda.', 'Aceptar')
-                return
-        self.limpiarTabla(self.tableClientes)
-        self.cargarObjetos(self.tableClientes, clientes,
-            ("dni", "nombre", "apellido", "direccion", "telefono")
-        )
-
     def actualizar(self):
         """
         Actualiza los componentes de las ventanas.
@@ -249,13 +197,13 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui = super(Cliente, cls).delete(mdi)
         gui.lineDireccion.setEnabled(False)
         gui.lineTelefono.setEnabled(False)
-        gui.lineDni.returnPressed.connect(gui.buscar)
-        gui.lineNombre.returnPressed.connect(gui.buscar)
-        gui.lineApellido.returnPressed.connect(gui.buscar)
+        gui.lineDni.returnPressed.connect(gui.buscarClt)
+        gui.lineNombre.returnPressed.connect(gui.buscarClt)
+        gui.lineApellido.returnPressed.connect(gui.buscarClt)
         gui.cargarClientes()
         gui.btnAceptar.pressed.connect(gui.eliminar)
         gui.btnCancelar.pressed.connect(gui.actualizar)
-        gui.btnBuscar.pressed.connect(gui.buscar)
+        gui.btnBuscar.pressed.connect(gui.buscarClt)
         gui.tableClientes.itemClicked.connect(gui.cargarCamposBaja)
         return gui
 
@@ -281,19 +229,25 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         dni = str(self.lineDni.text())
         nombre = str(self.lineNombre.text())
         apellido = str(self.lineApellido.text())
-        data = getContenidoTabla(self.tableClientes)
-        #TODO kargs()
-        if dni != "":
-            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data)
-        if nombre != "":
-            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), data)
-        if apellido != "":
-            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), data)
+        data = self.getContenidoTabla(self.tableClientes)
 
-        for row, value in enumerate(dataApell):
-            newDataNomb = filter(lambda x: x[2].upper() == value[2].upper(), dataNomb)
-        self.limpiarTabla(self.tableClientes)
-        for row, value in enumerate(newDataNomb):
-            self.tableClientes.insertRow(row)
-            for col in range(0, self.tableClientes.columnCount()):
-                self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+        if dni != "":
+            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data.values())
+        else:
+            dataDni = data.values()
+        if nombre != "":
+            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), dataDni)
+        else:
+            dataNomb = dataDni
+        if apellido != "":
+            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), dataNomb)
+        else:
+            dataApell = dataNomb
+
+        for dato in data:
+            self.tableClientes.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in dataApell:
+                self.tableClientes.setRowHidden(dato,True)
+
