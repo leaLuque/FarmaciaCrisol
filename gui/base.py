@@ -135,3 +135,21 @@ class MdiWidget(QtGui.QWidget):
                 dataRow = []
 
         return dataTable
+
+    def getAllTabla(self,tabla):
+        """
+            Devuelve la informacion actual de la tabla en
+            un arreglo que contiene info de cada fila
+        :param tabla QTableWidget de la ventana:
+        :return Diccionario con informacion:
+        """
+        dataRow = []
+        dataTable = {}
+
+        for row in range(0,tabla.rowCount()):
+            for col in range(0,tabla.columnCount()):
+                dataRow.append(str(tabla.item(row,col).text()))
+            dataTable[row] = dataRow
+            dataRow = []
+
+        return dataTable

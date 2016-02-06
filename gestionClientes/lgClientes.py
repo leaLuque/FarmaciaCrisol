@@ -229,7 +229,7 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         dni = str(self.lineDni.text())
         nombre = str(self.lineNombre.text())
         apellido = str(self.lineApellido.text())
-        data = self.getContenidoTabla(self.tableClientes)
+        data = self.getAllTabla(self.tableClientes)
 
         if dni != "":
             dataDni = filter(lambda x: x[0].upper() == dni.upper(), data.values())
