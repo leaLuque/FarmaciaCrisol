@@ -161,7 +161,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                         self.productosSeleccionados +=1
                         key = int(self.tableFactura.item(rowActual,0).text())
                         self.detallesDevueltos[key] = detalle
-                        self.armarItem(self.obtenerValoresItem(rowActual),cantidad_detalle,self.productosSeleccionados,key)
+                        self.armarItem(self.obtenerValoresItem(rowActual),cantidad_detalle,key)
                         self.tableFactura.removeRow(rowActual)
                         finalize_actualizacion = True
 
@@ -198,8 +198,6 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             nc = NotaCreditoModel(NotaCreditoModel.generarNumero(self.sesion))
             nc.guardar(self.sesion)
             for nro_lnc, nro_lfactura in enumerate(self.detallesDevueltos):
-                print nro_lnc
-                print nro_lfactura
                 detalle_nc = DetalleNCModel(nc.numero,nro_lnc+1,self.facturaSeleccionada.numero,nro_lfactura)
                 detalle_nc.setImporte(self.data[nro_lfactura][3])
                 detalle_nc.guardar(self.sesion)
@@ -207,6 +205,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             self.facturaSeleccionada.setNC(nc.numero)
             self.facturaSeleccionada.modificar(self.sesion)
             QtGui.QMessageBox.information(self,"Aviso","La factura ha sido devuelta")
+            self.objectModified.emit()
 
             cobros = self.facturaSeleccionada.getCobros(self.sesion)
             if len(cobros) == 1 and cobros[0].tipo == "Efectivo":
@@ -791,6 +790,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 ])
 
                 self.actualizar()
+                self.objectModified.emit()
 
     def limpiarVentana(self):
         """
@@ -862,6 +862,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                         loteVenta[0].aumentarCantidad(loteVenta[1])
                         loteVenta[0].modificar(self.sesion)
                 self.lotesVentas={}
+                self.objectModified.emit()
         self.factura=None
         self.productosAgregados=0
         self.data = []

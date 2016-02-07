@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
 __author__ = 'leandro'
 
-from datetime import date
-
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
 
 from ventanas import Ui_vtnRegistrarCobroRemito, Ui_vtnVentaConRemito, Ui_vtnRemito
 from gui import CRUDWidget,MdiWidget
@@ -19,7 +17,7 @@ from baseDatos.ventas import Factura as FacturaModel
 from baseDatos.ventas import DetalleFactura as DetalleFacturaModel
 from genComprobantes import generarFactura, generarRremito
 from validarDatos import ValidarDatos
-from signals import PoolOfWindows
+from gui.signals import PoolOfWindows
 
 
 class Remito(CRUDWidget,Ui_vtnRemito):
@@ -124,6 +122,8 @@ class Remito(CRUDWidget,Ui_vtnRemito):
                     if sum(map(lambda x: temp[x],temp)) == 0:
                         detalle.devolver(self.sesion)
                         self.tableDetalles.removeRow(rowActual)
+                        self.objectModified.emit()
+                        QtGui.QMessageBox.information(self,"Aviso","Detalle Eliminado Exitosamente")
                         finalize_actualizacion = True
 
     def eliminar(self):
@@ -142,6 +142,7 @@ class Remito(CRUDWidget,Ui_vtnRemito):
                 remitoSeleccionado.borrar(self.sesion)
                 self.tableRemito.removeRow(itemActual.row())
                 self.objectDeleted.emit()
+                QtGui.QMessageBox.information(self,"Aviso","Remito Eliminado Exitosamente")
             else:
                 QtGui.QMessageBox.information(self,"Aviso","Debe dar de baja cada detalle")
 
@@ -558,6 +559,20 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.sender1.objectDeleted.connect(self.cargar_clientes)
         self.sender2 = PoolOfWindows.getVentana("ModificarCliente")
         self.sender2.objectModified.connect(self.cargar_clientes)
+        self.sender3 = PoolOfWindows.getVentana("VentaContado")
+        self.sender3.objectModified.connect(self.cargar_productos)
+        self.sender4 = PoolOfWindows.getVentana("AltaProducto")
+        self.sender4.objectCreated.connect(self.cargar_productos)
+        self.sender5 = PoolOfWindows.getVentana("BajaProducto")
+        self.sender5.objectDeleted.connect(self.cargar_productos)
+        self.sender6 = PoolOfWindows.getVentana("ModificarProducto")
+        self.sender6.objectModified.connect(self.cargar_productos)
+        self.sender7 = PoolOfWindows.getVentana("DevolucionDeCliente")
+        self.sender7.objectModified.connect(self.cargar_productos)
+        self.sender8 = PoolOfWindows.getVentana("ModificarRemito")
+        self.sender8.objectModified.connect(self.cargar_productos)
+        self.sender9 = PoolOfWindows.getVentana("BajaRemito")
+        self.sender9.objectModified.connect(self.cargar_productos)
 
 class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 

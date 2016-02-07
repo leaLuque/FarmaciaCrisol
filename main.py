@@ -12,7 +12,7 @@ from gui import MyMdi
 from lgIngresar import Ingresar
 from lgListados import Listar
 from lgAyuda import Ayuda
-from signals import PoolOfWindows
+from gui.signals import PoolOfWindows
 
 class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
