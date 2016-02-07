@@ -5,6 +5,7 @@ from datetime import datetime
 from PyQt4 import QtCore, QtGui
 
 from gui import MdiWidget, CRUDWidget
+from gui.signals import PoolOfWindows
 from ventanas import Ui_vtnLote
 from validarDatos import ValidarDatos
 from baseDatos import Lote as LoteModel
@@ -210,9 +211,10 @@ class Lote(CRUDWidget, Ui_vtnLote):
         gui.tablaProducto.itemClicked.connect(gui.setProducto)
         gui.lineCod_Barra.returnPressed.connect(gui.buscarProducto)
         gui.btnBuscarProd.pressed.connect(gui.buscarProducto)
-        gui.btnActualizarProd.pressed.connect(gui.actualizarProd)
+        #gui.btnActualizarProd.pressed.connect(gui.actualizarProd)
         gui.btnAceptar.pressed.connect(gui.crear)
         gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnActualizarProd.hide()
         return gui
 
     @classmethod
@@ -234,3 +236,11 @@ class Lote(CRUDWidget, Ui_vtnLote):
         gui.btnCancelar.pressed.connect(gui.actualizar)
         gui.btnActualizarLote.pressed.connect(gui.actualizarLote)
         return gui
+
+    def addHandlerSignal(self):
+        self.sender = PoolOfWindows.getVentana("AltaProducto")
+        self.sender.objectCreated.connect(self.actualizarProd)
+        self.sender1 = PoolOfWindows.getVentana("BajaProducto")
+        self.sender1.objectDeleted.connect(self.actualizarProd)
+        self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
+        self.sender2.objectModified.connect(self.actualizarProd)

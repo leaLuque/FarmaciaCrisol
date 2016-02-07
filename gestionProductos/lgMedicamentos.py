@@ -4,6 +4,7 @@ __author__ = 'waldo'
 from PyQt4 import QtGui
 
 from gui import MdiWidget, CRUDWidget
+from gui.signals import PoolOfWindows
 from ventanas import Ui_vtnMedicamento
 from baseDatos import Medicamento as MedicamentoModel
 from baseDatos import Monodroga as MonodrogaModel
@@ -218,7 +219,6 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         gui.cargarMonodrogas()
         gui.lineNombre_Mon.returnPressed.connect(gui.buscarMonodroga)
         gui.btnBuscarMon.pressed.connect(gui.buscarMonodroga)
-        gui.btnActualizar.pressed.connect(gui.actualizarInfo)
         gui.btnAceptar.pressed.connect(gui.crear)
         gui.btnCancelar.pressed.connect(gui.limpiarCampos)
         gui.tablaMonodroga.itemClicked.connect(gui.setMonodroga)
@@ -254,7 +254,6 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         gui.lineNombre_Mon.returnPressed.connect(gui.buscarMonodroga)
         gui.lineNombre_Med.returnPressed.connect(gui.buscarMedicamento)
         gui.tablaMedicamento.itemClicked.connect(gui.cargarCampos)
-        gui.btnActualizar.pressed.connect(gui.actualizarInfo)
         gui.btnAceptar.pressed.connect(gui.modificar)
         gui.btnCancelar.pressed.connect(gui.actualizar)
         gui.btnBuscarMon.pressed.connect(gui.buscarMonodroga)
@@ -264,3 +263,12 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
 
     def algo(self):
         print "algo"
+
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("AltaMonodroga")
+        self.sender.objectCreated.connect(self.actualizarInfo)
+        self.sender1 = PoolOfWindows.getVentana("BajaMonodroga")
+        self.sender1.objectDeleted.connect(self.actualizarInfo)
+        self.sender2 = PoolOfWindows.getVentana("ModificarMonodroga")
+        self.sender2.objectModified.connect(self.actualizarInfo)

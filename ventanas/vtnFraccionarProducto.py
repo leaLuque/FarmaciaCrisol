@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnFraccionarProducto.ui'
 #
-# Created: Tue Jan 19 19:47:47 2016
+# Created: Sun Feb  7 14:20:12 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -69,14 +69,6 @@ class Ui_vtnFraccionarProducto(object):
         self.tablaProducto.horizontalHeader().setDefaultSectionSize(160)
         self.tablaProducto.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tablaProducto)
-        self.horizontalLayout_7 = QtGui.QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(_fromUtf8("horizontalLayout_7"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem1)
-        self.btnActualizar = QtGui.QPushButton(self.gbProducto)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_7.addWidget(self.btnActualizar)
-        self.verticalLayout_3.addLayout(self.horizontalLayout_7)
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
         self.label_7 = QtGui.QLabel(self.gbProducto)
@@ -88,8 +80,8 @@ class Ui_vtnFraccionarProducto(object):
         self.spinCantidad.setSingleStep(1)
         self.spinCantidad.setObjectName(_fromUtf8("spinCantidad"))
         self.horizontalLayout_6.addWidget(self.spinCantidad)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem2)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem1)
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
         self.verticalLayout.addWidget(self.gbProducto)
         self.gbFraccionable = QtGui.QGroupBox(vtnFraccionarProducto)
@@ -119,8 +111,8 @@ class Ui_vtnFraccionarProducto(object):
         self.verticalLayout.addWidget(self.gbFraccionable)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem3)
+        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem2)
         self.btnAceptar = QtGui.QPushButton(vtnFraccionarProducto)
         self.btnAceptar.setObjectName(_fromUtf8("btnAceptar"))
         self.horizontalLayout_5.addWidget(self.btnAceptar)
@@ -133,8 +125,7 @@ class Ui_vtnFraccionarProducto(object):
         QtCore.QMetaObject.connectSlotsByName(vtnFraccionarProducto)
         vtnFraccionarProducto.setTabOrder(self.lineCod_Barra, self.btnBuscar)
         vtnFraccionarProducto.setTabOrder(self.btnBuscar, self.tablaProducto)
-        vtnFraccionarProducto.setTabOrder(self.tablaProducto, self.btnActualizar)
-        vtnFraccionarProducto.setTabOrder(self.btnActualizar, self.spinCantidad)
+        vtnFraccionarProducto.setTabOrder(self.tablaProducto, self.spinCantidad)
         vtnFraccionarProducto.setTabOrder(self.spinCantidad, self.tablaFraccionable)
         vtnFraccionarProducto.setTabOrder(self.tablaFraccionable, self.btnAceptar)
         vtnFraccionarProducto.setTabOrder(self.btnAceptar, self.btnCancelar)
@@ -156,7 +147,6 @@ class Ui_vtnFraccionarProducto(object):
         item.setText(_translate("vtnFraccionarProducto", "Código de Lote", None))
         item = self.tablaProducto.horizontalHeaderItem(4)
         item.setText(_translate("vtnFraccionarProducto", "Cantidad", None))
-        self.btnActualizar.setText(_translate("vtnFraccionarProducto", "Actualizar", None))
         self.label_7.setText(_translate("vtnFraccionarProducto", "Cantidad", None))
         self.spinCantidad.setStatusTip(_translate("vtnFraccionarProducto", "Ingrese la cantidad del Producto para dicho lote", None))
         self.gbFraccionable.setTitle(_translate("vtnFraccionarProducto", "Fraccionable", None))

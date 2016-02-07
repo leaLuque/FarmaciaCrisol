@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnMedicamento.ui'
 #
-# Created: Mon Jan 25 16:36:35 2016
+# Created: Sun Feb  7 13:33:22 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -97,14 +97,6 @@ class Ui_vtnMedicamento(object):
         self.tablaMonodroga.horizontalHeader().setDefaultSectionSize(140)
         self.tablaMonodroga.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tablaMonodroga)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem)
-        self.btnActualizar = QtGui.QPushButton(self.gbMonodroga)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_3.addWidget(self.btnActualizar)
-        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_8 = QtGui.QHBoxLayout()
         self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
         self.label_3 = QtGui.QLabel(self.gbMonodroga)
@@ -116,14 +108,14 @@ class Ui_vtnMedicamento(object):
         self.spinCantidad.setSingleStep(10)
         self.spinCantidad.setObjectName(_fromUtf8("spinCantidad"))
         self.horizontalLayout_8.addWidget(self.spinCantidad)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem)
         self.verticalLayout_3.addLayout(self.horizontalLayout_8)
         self.verticalLayout.addWidget(self.gbMonodroga)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem2)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem1)
         self.btnAceptar = QtGui.QPushButton(vtnMedicamento)
         self.btnAceptar.setObjectName(_fromUtf8("btnAceptar"))
         self.horizontalLayout_5.addWidget(self.btnAceptar)
@@ -139,8 +131,7 @@ class Ui_vtnMedicamento(object):
         vtnMedicamento.setTabOrder(self.tablaMedicamento, self.lineNombre_Mon)
         vtnMedicamento.setTabOrder(self.lineNombre_Mon, self.btnBuscarMon)
         vtnMedicamento.setTabOrder(self.btnBuscarMon, self.tablaMonodroga)
-        vtnMedicamento.setTabOrder(self.tablaMonodroga, self.btnActualizar)
-        vtnMedicamento.setTabOrder(self.btnActualizar, self.spinCantidad)
+        vtnMedicamento.setTabOrder(self.tablaMonodroga, self.spinCantidad)
         vtnMedicamento.setTabOrder(self.spinCantidad, self.btnAceptar)
         vtnMedicamento.setTabOrder(self.btnAceptar, self.btnCancelar)
 
@@ -169,7 +160,6 @@ class Ui_vtnMedicamento(object):
         item.setText(_translate("vtnMedicamento", "Tipo de Venta", None))
         item = self.tablaMonodroga.horizontalHeaderItem(2)
         item.setText(_translate("vtnMedicamento", "Descripción", None))
-        self.btnActualizar.setText(_translate("vtnMedicamento", "Actualizar", None))
         self.label_3.setText(_translate("vtnMedicamento", "Cantidad", None))
         self.spinCantidad.setStatusTip(_translate("vtnMedicamento", "Ingrese la cantidad del Producto para dicho lote", None))
         self.btnAceptar.setText(_translate("vtnMedicamento", "Aceptar", None))

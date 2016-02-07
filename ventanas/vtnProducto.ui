@@ -239,30 +239,6 @@
         </column>
        </widget>
       </item>
-      <item row="3" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnActualizarMed">
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
      </layout>
     </widget>
    </item>
@@ -354,30 +330,6 @@
          </property>
         </column>
        </widget>
-      </item>
-      <item row="3" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnActualizarPres">
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
      </layout>
     </widget>
@@ -556,11 +508,9 @@
   <tabstop>lineNomb_Med</tabstop>
   <tabstop>btnBuscarMed</tabstop>
   <tabstop>tablaMedicamento</tabstop>
-  <tabstop>btnActualizarMed</tabstop>
   <tabstop>lineTipo_Pres</tabstop>
   <tabstop>btnBuscarPres</tabstop>
   <tabstop>tablaPresentacion</tabstop>
-  <tabstop>btnActualizarPres</tabstop>
   <tabstop>lineCod_Lote</tabstop>
   <tabstop>btnBuscarLote</tabstop>
   <tabstop>dateFechVenc</tabstop>

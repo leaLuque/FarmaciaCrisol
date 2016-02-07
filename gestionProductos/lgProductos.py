@@ -5,6 +5,7 @@ from datetime import datetime
 from PyQt4 import QtCore, QtGui
 
 from gui import MdiWidget, CRUDWidget
+from gui.signals import PoolOfWindows
 from ventanas import Ui_vtnProducto, Ui_vtnFraccionarProducto, Ui_vtnAjusteNegativoStock
 from validarDatos import ValidarDatos
 from baseDatos import Presentacion as PresentacionModel
@@ -212,7 +213,6 @@ class Producto(CRUDWidget, Ui_vtnProducto):
             ("codigo_barra", "id_medicamento", "id_presentacion", "importe")
         )
 
-
     def buscarPresentacion(self):
         """
         Busca y carga en la tabla los datos de una presentación para un tipo ingresado.
@@ -396,8 +396,6 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         gui.btnBuscarPres.pressed.connect(gui.buscarPresentacion)
         gui.tablaMedicamento.itemClicked.connect(gui.setMedicamento)
         gui.tablaPresentacion.itemClicked.connect(gui.setPresentacion)
-        gui.btnActualizarMed.pressed.connect(gui.actualizarInfoMed)
-        gui.btnActualizarPres.pressed.connect(gui.actualizarInfoPres)
         gui.btnAceptar.pressed.connect(gui.crear)
         gui.btnCancelar.pressed.connect(gui.actualizar)
         return gui
@@ -447,6 +445,21 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         gui.btnCancelar.pressed.connect(gui.actualizar)
         return gui
 
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("AltaMedicamento")
+        self.sender.objectCreated.connect(self.actualizarInfoMed)
+        self.sender1 = PoolOfWindows.getVentana("BajaMedicamento")
+        self.sender1.objectDeleted.connect(self.actualizarInfoMed)
+        self.sender2 = PoolOfWindows.getVentana("ModificarMedicamento")
+        self.sender2.objectModified.connect(self.actualizarInfoMed)
+        self.sender3 = PoolOfWindows.getVentana("AltaPresentacion")
+        self.sender3.objectCreated.connect(self.actualizarInfoPres)
+        self.sender4 = PoolOfWindows.getVentana("BajaPresentacion")
+        self.sender4.objectDeleted.connect(self.actualizarInfoPres)
+        self.sender5 = PoolOfWindows.getVentana("ModificarPresentacion")
+        self.sender5.objectModified.connect(self.actualizarInfoPres)
+
 class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
     """
     Lógica del Fraccionado de productos.
@@ -464,7 +477,7 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
         self.btnBuscar.pressed.connect(self.buscarPorProducto)
         self.cargarProductos()
         self.tablaProducto.itemClicked.connect(self.cargarFraccionables)
-        self.btnActualizar.pressed.connect(self.actualizarInfo)
+        #self.btnActualizar.pressed.connect(self.actualizarInfo)
         self.btnAceptar.pressed.connect(self.fraccionar)
         self.btnCancelar.pressed.connect(self.actualizar)
 
@@ -611,6 +624,15 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
             ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
         )
 
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("AltaProducto")
+        self.sender.objectCreated.connect(self.actualizarInfo)
+        self.sender1 = PoolOfWindows.getVentana("BajaProducto")
+        self.sender1.objectDeleted.connect(self.actualizarInfo)
+        self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
+        self.sender2.objectModified.connect(self.actualizarInfo)
+
 class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
     """
     Lógica del ajuste negativo del stock de los productos.
@@ -629,7 +651,7 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         self.btnBuscar.pressed.connect(self.buscar)
         self.cargarLoteProducto()
         self.tablaLoteProducto.itemClicked.connect(self.cargarCampos)
-        self.btnActualizar.pressed.connect(self.actualizarInfo)
+        #self.btnActualizar.pressed.connect(self.actualizarInfo)
         self.btnAceptar.pressed.connect(self.ajuste)
         self.btnCancelar.pressed.connect(self.actualizar)
 
@@ -737,3 +759,12 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         #Cargar la info del item en los lines
         self.lineCod_Barra.setText(infoItem[0])
         self.lineCod_Lote.setText(infoItem[3])
+
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("AltaProducto")
+        self.sender.objectCreated.connect(self.actualizarInfo)
+        self.sender1 = PoolOfWindows.getVentana("BajaProducto")
+        self.sender1.objectDeleted.connect(self.actualizarInfo)
+        self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
+        self.sender2.objectModified.connect(self.actualizarInfo)

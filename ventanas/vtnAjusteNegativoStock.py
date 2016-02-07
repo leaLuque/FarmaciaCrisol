@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnAjusteNegativoStock.ui'
 #
-# Created: Tue Jan 19 19:47:34 2016
+# Created: Sun Feb  7 14:20:02 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -85,14 +85,6 @@ class Ui_vtnAjusteNegativoStock(object):
         self.tablaLoteProducto.horizontalHeader().setDefaultSectionSize(120)
         self.tablaLoteProducto.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_2.addWidget(self.tablaLoteProducto)
-        self.horizontalLayout_7 = QtGui.QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(_fromUtf8("horizontalLayout_7"))
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem2)
-        self.btnActualizar = QtGui.QPushButton(self.gbProducto)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_7.addWidget(self.btnActualizar)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_7)
         self.horizontalLayout_8 = QtGui.QHBoxLayout()
         self.horizontalLayout_8.setObjectName(_fromUtf8("horizontalLayout_8"))
         self.label_2 = QtGui.QLabel(self.gbProducto)
@@ -106,14 +98,14 @@ class Ui_vtnAjusteNegativoStock(object):
         self.spinCantidad.setSingleStep(10)
         self.spinCantidad.setObjectName(_fromUtf8("spinCantidad"))
         self.horizontalLayout_8.addWidget(self.spinCantidad)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem3)
+        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem2)
         self.verticalLayout_2.addLayout(self.horizontalLayout_8)
         self.verticalLayout.addWidget(self.gbProducto)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem4)
+        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem3)
         self.btnAceptar = QtGui.QPushButton(vtnAjusteNegativoStock)
         self.btnAceptar.setObjectName(_fromUtf8("btnAceptar"))
         self.horizontalLayout_5.addWidget(self.btnAceptar)
@@ -127,8 +119,7 @@ class Ui_vtnAjusteNegativoStock(object):
         vtnAjusteNegativoStock.setTabOrder(self.lineCod_Barra, self.lineCod_Lote)
         vtnAjusteNegativoStock.setTabOrder(self.lineCod_Lote, self.btnBuscar)
         vtnAjusteNegativoStock.setTabOrder(self.btnBuscar, self.tablaLoteProducto)
-        vtnAjusteNegativoStock.setTabOrder(self.tablaLoteProducto, self.btnActualizar)
-        vtnAjusteNegativoStock.setTabOrder(self.btnActualizar, self.spinCantidad)
+        vtnAjusteNegativoStock.setTabOrder(self.tablaLoteProducto, self.spinCantidad)
         vtnAjusteNegativoStock.setTabOrder(self.spinCantidad, self.btnAceptar)
         vtnAjusteNegativoStock.setTabOrder(self.btnAceptar, self.btnCancelar)
 
@@ -153,7 +144,6 @@ class Ui_vtnAjusteNegativoStock(object):
         item.setText(_translate("vtnAjusteNegativoStock", "Código Lote", None))
         item = self.tablaLoteProducto.horizontalHeaderItem(4)
         item.setText(_translate("vtnAjusteNegativoStock", "Cantidad", None))
-        self.btnActualizar.setText(_translate("vtnAjusteNegativoStock", "Actualizar", None))
         self.label_2.setText(_translate("vtnAjusteNegativoStock", "Cantidad", None))
         self.spinCantidad.setStatusTip(_translate("vtnAjusteNegativoStock", "Ingrese la cantidad del Producto para dicho lote", None))
         self.btnAceptar.setText(_translate("vtnAjusteNegativoStock", "Aceptar", None))

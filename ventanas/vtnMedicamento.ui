@@ -169,30 +169,6 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnActualizar">
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
          <widget class="QLabel" name="label_3">
@@ -275,7 +251,6 @@
   <tabstop>lineNombre_Mon</tabstop>
   <tabstop>btnBuscarMon</tabstop>
   <tabstop>tablaMonodroga</tabstop>
-  <tabstop>btnActualizar</tabstop>
   <tabstop>spinCantidad</tabstop>
   <tabstop>btnAceptar</tabstop>
   <tabstop>btnCancelar</tabstop>
