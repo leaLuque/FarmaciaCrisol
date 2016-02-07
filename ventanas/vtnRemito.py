@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnRemito.ui'
 #
-# Created: Tue Jan 26 20:22:03 2016
+# Created: Sun Feb  7 13:01:57 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -81,9 +81,6 @@ class Ui_vtnRemito(object):
         self.formLayout.setWidget(10, QtGui.QFormLayout.FieldRole, self.tableDetalles)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.btnActualizar = QtGui.QPushButton(vtnRemito)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_2.addWidget(self.btnActualizar)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.btnAceptar = QtGui.QPushButton(vtnRemito)
@@ -124,7 +121,6 @@ class Ui_vtnRemito(object):
         item.setText(_translate("vtnRemito", "Cantidad", None))
         item = self.tableDetalles.horizontalHeaderItem(3)
         item.setText(_translate("vtnRemito", "Subtotal", None))
-        self.btnActualizar.setText(_translate("vtnRemito", "Actualizar", None))
         self.btnAceptar.setText(_translate("vtnRemito", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnRemito", "Cancelar", None))
         self.lblDetalles.setText(_translate("vtnRemito", "Detalles de Remito", None))

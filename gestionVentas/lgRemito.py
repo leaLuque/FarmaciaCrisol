@@ -173,6 +173,11 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         camposRequeridos = [getattr(self,"lineNumero")]
         ValidarDatos.setValidador(camposRequeridos)
 
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("VentaConRemito")
+        self.sender.objectCreated.connect(self.cargar_remitos)
+
     @classmethod
     def delete(cls, mdi):
         """
@@ -186,7 +191,6 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         gui.tableRemito.clicked.connect(gui.cargarDetalles)
         gui.tableDetalles.itemDoubleClicked.connect(gui.eliminarDetalle)
         gui.btnAceptar.pressed.connect(gui.eliminar)
-        gui.btnActualizar.pressed.connect(gui.actualizar)
         gui.btnBuscar.pressed.connect(gui.buscarRemito)
         gui.lineNumero.returnPressed.connect(gui.buscarRemito)
         return gui
@@ -200,7 +204,6 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         """
         gui=super(Remito,cls).update(mdi)
         gui.cargar_remitos()
-        gui.btnActualizar.pressed.connect(gui.actualizar)
         gui.tableRemito.clicked.connect(gui.cargarDetalles)
         gui.tableDetalles.itemDoubleClicked.connect(gui.eliminarDetalle)
         gui.btnBuscar.pressed.connect(gui.buscarRemito)
@@ -456,6 +459,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                     detalle.guardar(self.sesion)
                     self.detallesTabla[rows] = detalle
                     self.cargar_productos()
+                    self.objectModified.emit()
 
     def eliminarDetalle(self):
         """
@@ -478,6 +482,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.tableRemito.hideRow(itemActual.row())
             self.cargar_productos()
             self.productosAgregados -=1
+            self.objectModified.emit()
 
     def limpiarVentana(self):
         """
@@ -513,6 +518,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             QtGui.QMessageBox.information(self,"Aviso","No se ha agregado ningun producto al remito")
 
         else:
+            self.objectCreated.emit()
             QtGui.QMessageBox.information(None,"Venta","La venta se ha realizado con exito")
             ##Se envian los datos necesarios para generar el comprobante
             data = {}

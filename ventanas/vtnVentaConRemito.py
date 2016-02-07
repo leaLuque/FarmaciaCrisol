@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaConRemito.ui'
 #
-# Created: Sat Feb  6 14:17:34 2016
+# Created: Sun Feb  7 12:53:21 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -125,14 +125,6 @@ class Ui_vtnVentaConRemito(object):
         self.tableProductos.horizontalHeader().setDefaultSectionSize(120)
         self.tableProductos.horizontalHeader().setStretchLastSection(True)
         self.gridLayout_7.addWidget(self.tableProductos, 0, 0, 1, 2)
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem)
-        self.btnActualizar = QtGui.QPushButton(self.gbProducto)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_4.addWidget(self.btnActualizar)
-        self.gridLayout_7.addLayout(self.horizontalLayout_4, 1, 0, 1, 1)
         self.verticalLayout_3.addLayout(self.gridLayout_7)
         self.verticalLayout.addWidget(self.gbProducto)
         self.gbRemito = QtGui.QGroupBox(vtnVentaConRemito)
@@ -160,8 +152,8 @@ class Ui_vtnVentaConRemito(object):
         self.verticalLayout_6.addLayout(self.gridLayout_3)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.btnEliminar = QtGui.QPushButton(self.gbRemito)
         self.btnEliminar.setObjectName(_fromUtf8("btnEliminar"))
         self.horizontalLayout.addWidget(self.btnEliminar)
@@ -169,8 +161,8 @@ class Ui_vtnVentaConRemito(object):
         self.verticalLayout.addWidget(self.gbRemito)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem2)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem1)
         self.btnAceptar = QtGui.QPushButton(vtnVentaConRemito)
         self.btnAceptar.setObjectName(_fromUtf8("btnAceptar"))
         self.horizontalLayout_5.addWidget(self.btnAceptar)
@@ -188,8 +180,7 @@ class Ui_vtnVentaConRemito(object):
         vtnVentaConRemito.setTabOrder(self.tableClientes, self.lineMedicamento)
         vtnVentaConRemito.setTabOrder(self.lineMedicamento, self.lineMonodroga)
         vtnVentaConRemito.setTabOrder(self.lineMonodroga, self.tableProductos)
-        vtnVentaConRemito.setTabOrder(self.tableProductos, self.btnActualizar)
-        vtnVentaConRemito.setTabOrder(self.btnActualizar, self.tableRemito)
+        vtnVentaConRemito.setTabOrder(self.tableProductos, self.tableRemito)
         vtnVentaConRemito.setTabOrder(self.tableRemito, self.btnEliminar)
         vtnVentaConRemito.setTabOrder(self.btnEliminar, self.btnAceptar)
         vtnVentaConRemito.setTabOrder(self.btnAceptar, self.btnCancelar)
@@ -233,7 +224,6 @@ class Ui_vtnVentaConRemito(object):
         item.setText(_translate("vtnVentaConRemito", "Cantidad", None))
         item = self.tableProductos.horizontalHeaderItem(5)
         item.setText(_translate("vtnVentaConRemito", "Importe", None))
-        self.btnActualizar.setText(_translate("vtnVentaConRemito", "Actualizar", None))
         self.gbRemito.setTitle(_translate("vtnVentaConRemito", "Remito", None))
         item = self.tableRemito.horizontalHeaderItem(0)
         item.setText(_translate("vtnVentaConRemito", "Codigo", None))

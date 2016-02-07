@@ -24,6 +24,7 @@ from baseDatos.ventas import CobroCliente as CobroClienteModel
 from genComprobantes import generarNotaCredito,generarFactura
 from validarDatos import ValidarDatos
 from ventanas import Ui_Dialog
+from gui.signals import PoolOfWindows
 
 class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
 
@@ -867,6 +868,23 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.productosAgregados=0
         self.data = []
         self.limpiarVentana()
+
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("VentaConRemito")
+        self.sender.objectModified.connect(self.actualizar)
+        self.sender1 = PoolOfWindows.getVentana("AltaProducto")
+        self.sender1.objectCreated.connect(self.actualizar)
+        self.sender2 = PoolOfWindows.getVentana("BajaProducto")
+        self.sender2.objectDeleted.connect(self.actualizar)
+        self.sender3 = PoolOfWindows.getVentana("ModificarProducto")
+        self.sender3.objectModified.connect(self.actualizar)
+        self.sender4 = PoolOfWindows.getVentana("DevolucionDeCliente")
+        self.sender4.objectModified.connect(self.actualizar)
+        self.sender5 = PoolOfWindows.getVentana("ModificarRemito")
+        self.sender5.objectModified.connect(self.actualizar)
+        self.sender6 = PoolOfWindows.getVentana("BajaRemito")
+        self.sender6.objectModified.connect(self.actualizar)
 
 class Cobrar(QtGui.QDialog, Ui_Dialog):
     """
