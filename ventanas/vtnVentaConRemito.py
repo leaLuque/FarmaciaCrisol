@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaConRemito.ui'
 #
-# Created: Tue Jan 26 19:47:45 2016
+# Created: Sat Feb  6 14:17:34 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -199,13 +199,13 @@ class Ui_vtnVentaConRemito(object):
         self.gbCliente.setTitle(_translate("vtnVentaConRemito", "Cliente", None))
         self.lblNombre.setText(_translate("vtnVentaConRemito", "Nombre", None))
         self.lineNombre.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Nombre del cliente (solo letras)", None))
-        self.lineNombre.setAccessibleDescription(_translate("vtnVentaConRemito", "nya", None))
+        self.lineNombre.setAccessibleDescription(_translate("vtnVentaConRemito", "fnya", None))
         self.lblApellido.setText(_translate("vtnVentaConRemito", "Apellido", None))
         self.lineApellido.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Apellido del cliente (solo letras)", None))
-        self.lineApellido.setAccessibleDescription(_translate("vtnVentaConRemito", "nya", None))
+        self.lineApellido.setAccessibleDescription(_translate("vtnVentaConRemito", "fnya", None))
         self.lblDni.setText(_translate("vtnVentaConRemito", "DNI", None))
         self.lineDni.setStatusTip(_translate("vtnVentaConRemito", "Ingrese DNI del cliente (exactamente 8 números)", None))
-        self.lineDni.setAccessibleDescription(_translate("vtnVentaConRemito", "dni", None))
+        self.lineDni.setAccessibleDescription(_translate("vtnVentaConRemito", "fdni", None))
         self.btnBuscarCliente.setText(_translate("vtnVentaConRemito", "Buscar", None))
         self.tableClientes.setSortingEnabled(False)
         item = self.tableClientes.horizontalHeaderItem(0)

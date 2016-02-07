@@ -223,11 +223,11 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
         self.btnBuscarCliente.pressed.connect(self.buscarCliente)
-        self.lineDni.returnPressed.connect(self.buscarClienteXDNI)
-        self.lineApellido.returnPressed.connect(self.buscarClienteXApellido)
-        self.lineNombre.returnPressed.connect(self.buscarClienteXNombre)
-        self.lineMedicamento.returnPressed.connect(self.buscarXMedicamento)
-        self.lineMonodroga.returnPressed.connect(self.buscarXMonodroga)
+        self.lineDni.returnPressed.connect(self.buscarClt)
+        self.lineApellido.returnPressed.connect(self.buscarClt)
+        self.lineNombre.returnPressed.connect(self.buscarClt)
+        self.lineMedicamento.returnPressed.connect(self.buscarProd)
+        self.lineMonodroga.returnPressed.connect(self.buscarProd)
         self.tableClientes.itemDoubleClicked.connect(self.cargarLines)
         self.tableProductos.itemDoubleClicked.connect(self.agregarProducto)
         self.btnEliminar.pressed.connect(self.eliminarDetalle)
@@ -295,7 +295,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         :return:
         """
         if self.lineDni.isEnabled():
-            pass
+            self.buscarClt()
         else:
             self.lineDni.setEnabled(True)
             self.lineApellido.setEnabled(True)
@@ -307,103 +307,63 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.tableClientes.setVisible(True)
             self.cargar_clientes()
 
-    def buscarClienteXDNI(self):
+    def buscarClt(self):
         """
-            Carga en la tabla de Clientes aquellos cuyo DNI
-            sea igual al indicado por el usuario
+            Filtra la tabla de Clientes de acuerdo a los
+            criterios de busqueda impuestos
         :return:
         """
-
         dni = str(self.lineDni.text())
-        if dni == "":
-            self.limpiarTabla(self.tableClientes)
-            self.cargar_clientes()
-        else:
-            data = self.getContenidoTabla(self.tableClientes).values()
-            newData = filter(lambda x: x[0]==dni, data)
-            self.limpiarTabla(self.tableClientes)
-            for row, value in enumerate(newData):
-                    self.tableClientes.insertRow(row)
-                    for col in range(0,self.tableClientes.columnCount()):
-                         self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
-
-    def buscarClienteXNombre(self):
-        """
-            Carga en la tabla de Clientes aquellos cuyo Nombre
-            sea igual al indicado por el usuario
-        :return:
-        """
         nombre = str(self.lineNombre.text())
-        if nombre == "":
-            self.limpiarTabla(self.tableClientes)
-            self.cargar_clientes()
+        apellido = str(self.lineApellido.text())
+        data = self.getAllTabla(self.tableClientes)
+
+
+        if dni != "":
+            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data.values())
         else:
-            data = self.getContenidoTabla(self.tableClientes).values()
-            newData = filter(lambda x: x[1].upper() == nombre.upper(), data)
-            self.limpiarTabla(self.tableClientes)
-            for row, value in enumerate(newData):
-                    self.tableClientes.insertRow(row)
-                    for col in range(0,self.tableClientes.columnCount()):
-                         self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+            dataDni = data.values()
+        if nombre != "":
+            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), dataDni)
+        else:
+            dataNomb = dataDni
+        if apellido != "":
+            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), dataNomb)
+        else:
+            dataApell = dataNomb
 
-    def buscarClienteXApellido(self):
-         """
-            Carga en la tabla de Clientes aquellos cuyo Apellido
-            sea igual al indicado por el usuario
-         :return:
-         """
-         apellido = str(self.lineApellido.text())
-         if apellido == "":
-            self.limpiarTabla(self.tableClientes)
-            self.cargar_clientes()
-         else:
-            data = self.getContenidoTabla(self.tableClientes).values()
-            newData = filter(lambda x: x[2]==apellido, data)
-            self.limpiarTabla(self.tableClientes)
-            for row, value in enumerate(newData):
-                    self.tableClientes.insertRow(row)
-                    for col in range(0,self.tableClientes.columnCount()):
-                         self.tableClientes.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+        for dato in data:
+            self.tableClientes.setRowHidden(dato,False)
 
-    def buscarXMonodroga(self):
+        for dato in data:
+            if not data[dato] in dataApell:
+                self.tableClientes.setRowHidden(dato,True)
+
+    def buscarProd(self):
         """
-            Filtra los productos segun la
-            Monodroga indicada por el usuario
+            Filtra la tabla de Productos de acuerdo
+            a los criterios de busqueda impuestos
         :return:
         """
+        medicamento = str(self.lineMedicamento.text())
+        monodroga = str(self.lineMonodroga.text())
+        data = self.getAllTabla(self.tableProductos)
 
-        nombreMonodroga = str(self.lineMonodroga.text())
-        if len(nombreMonodroga) == 0:
-            self.limpiarTabla(self.tableProductos)
-            self.cargar_productos()
+        if medicamento != "":
+            dataMedic = filter(lambda x: x[1].upper() == medicamento.upper(), data.values())
         else:
-            data = self.getContenidoTabla(self.tableProductos).values()
-            data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
-            self.limpiarTabla(self.tableProductos)
-            for row, value in enumerate(data):
-                self.tableProductos.insertRow(row)
-                for col in range(0,self.tableProductos.columnCount()):
-                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
-
-    def buscarXMedicamento(self):
-        """
-            Filtra los productos segun el
-            Medicamento indicada por el usuario
-        :return:
-        """
-
-        nombreMedicamento= str(self.lineMedicamento.text())
-        if len(nombreMedicamento) == 0:
-            self.limpiarTabla(self.tableProductos)
-            self.cargar_productos()
+            dataMedic = data.values()
+        if monodroga != "":
+            dataMono = filter(lambda x: x[3].upper() == monodroga.upper(), dataMedic)
         else:
-            data = self.getContenidoTabla(self.tableProductos).values()
-            data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
-            self.limpiarTabla(self.tableProductos)
-            for row, value in enumerate(data):
-                self.tableProductos.insertRow(row)
-                for col in range(0,self.tableProductos.columnCount()):
-                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+            dataMono = dataMedic
+
+        for dato in data:
+            self.tableProductos.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in dataMono:
+                self.tableProductos.setRowHidden(dato,True)
 
     def cargarLines(self):
         """

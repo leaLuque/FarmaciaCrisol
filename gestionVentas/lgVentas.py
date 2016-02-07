@@ -260,6 +260,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.btnBuscarOs.pressed.connect(self.buscarOs)
         self.tableOs.itemDoubleClicked.connect(self.obtenerObra)
         self.btnBuscarFac.pressed.connect(self.buscarFactura)
+        self.lineRazon.returnPressed.connect(self.filtrarObra)
+        self.lineCuit.returnPressed.connect(self.filtrarObra)
         self.lineNumeroFac.returnPressed.connect(self.buscarFactura)
         self.btnAceptar.pressed.connect(self.confirmarOperacion)
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
@@ -271,6 +273,31 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.obraSocial = None
         self.facturaSeleccionada = None
 
+    def filtrarObra(self):
+        """
+            Filtra la tabla de Obras Sociales de acuerdo
+            a los criterios de busqueda impuestos
+        :return:
+        """
+        razon_social = str(self.lineRazon.text())
+        cuit = str(self.lineCuit.text())
+        data = self.getAllTabla(self.tableOs)
+
+        if razon_social != "":
+            dataRazon = filter(lambda x: x[0].upper() == razon_social.upper(), data.values())
+        else:
+            dataRazon = data.values()
+        if cuit != "":
+            dataCuit = filter(lambda x: x[1].upper() == cuit.upper(), dataRazon)
+        else:
+            dataCuit = dataRazon
+
+        for dato in data:
+            self.tableOs.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in dataCuit:
+                self.tableOs.setRowHidden(dato,True)
 
     def cargarObras(self):
         """
@@ -307,7 +334,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         """
 
         if self.lineRazon.isEnabled():
-            print("buscar por filtrado")
+            self.filtrarObra()
 
         elif not self.lineRazon.isEnabled() and self.tableNC.rowCount() != 0:
             QtGui.QMessageBox.information(self,"Aviso","Imposible cambiar de Obra Social. Ya se ha seleccionado\
@@ -474,12 +501,10 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
         self.cargar_obras()
-        self.lineCuit.setEnabled(False)
-        self.lineObra.setEnabled(False)
-        self.lineMedicamento.returnPressed.connect(self.buscarXMedicamento)
-        self.lineMonodroga.returnPressed.connect(self.buscarXMonodroga)
-        self.btnBuscar.setEnabled(False)
-        self.tableObra.setVisible(False)
+        self.lineMedicamento.returnPressed.connect(self.buscarProd)
+        self.lineMonodroga.returnPressed.connect(self.buscarProd)
+        self.lineCuit.returnPressed.connect(self.buscarObra)
+        self.lineObra.returnPressed.connect(self.buscarObra)
         self.tableObra.itemDoubleClicked.connect(self.cargarObra)
         self.tableProductos.itemDoubleClicked.connect(self.agregarProducto)
         self.btnBuscar.pressed.connect(self.limpiarObra)
@@ -487,6 +512,10 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
         self.rbtnObra.pressed.connect(self.habilitarObras)
         self.btnActualizar.pressed.connect(self.actualizar)
+        self.btnBuscar.setEnabled(False)
+        self.tableObra.setVisible(False)
+        self.lineCuit.setEnabled(False)
+        self.lineObra.setEnabled(False)
         self.productosAgregados=0
         self.lotesVentas={}
         self.facturaCobrada=False
@@ -496,49 +525,58 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.data = []
         self.cargarProductosSinObra()
 
-    def buscarXMonodroga(self):
+
+    def buscarProd(self):
         """
-            Filtra los productos segun la
-            Monodroga indicada por el usuario
+            Filtra la tabla de Productos de acuerdo
+            a los criterios de busqueda impuestos
         :return:
         """
+        medicamento = str(self.lineMedicamento.text())
+        monodroga = str(self.lineMonodroga.text())
+        data = self.getAllTabla(self.tableProductos)
 
-        nombreMonodroga = str(self.lineMonodroga.text())
-        if len(nombreMonodroga) == 0:
-            if self.obraSocialSeleccionada == None:
-                self.cargarProductosSinObra()
-            else:
-                self.cargar_productos(self.obraSocialSeleccionada)
+        if medicamento != "":
+            dataMedic = filter(lambda x: x[1].upper() == medicamento.upper(), data.values())
         else:
-            data = self.getContenidoTabla(self.tableProductos).values()
-            data = filter(lambda x: x[3].upper() == nombreMonodroga.upper() , data)
-            self.limpiarTabla(self.tableProductos)
-            for row, value in enumerate(data):
-                self.tableProductos.insertRow(row)
-                for col in range(0,self.tableProductos.columnCount()):
-                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+            dataMedic = data.values()
+        if monodroga != "":
+            dataMono = filter(lambda x: x[3].upper() == monodroga.upper(), dataMedic)
+        else:
+            dataMono = dataMedic
 
-    def buscarXMedicamento(self):
+        for dato in data:
+            self.tableProductos.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in dataMono:
+                self.tableProductos.setRowHidden(dato,True)
+
+    def buscarObra(self):
         """
-            Filtra los productos segun el
-            Medicamento indicada por el usuario
+            Filtra la tabla de Obras Sociales de acuerdo
+            a los criterios de busqueda impuestos
         :return:
         """
+        razon_social = str(self.lineObra.text())
+        cuit = str(self.lineCuit.text())
+        data = self.getAllTabla(self.tableObra)
 
-        nombreMedicamento= str(self.lineMedicamento.text())
-        if len(nombreMedicamento) == 0:
-            if self.obraSocialSeleccionada == None:
-                self.cargarProductosSinObra()
-            else:
-                self.cargar_productos(self.obraSocialSeleccionada)
+        if razon_social != "":
+            dataRazon = filter(lambda x: x[0].upper() == razon_social.upper(), data.values())
         else:
-            data = self.getContenidoTabla(self.tableProductos).values()
-            data = filter(lambda x: x[1].upper() == nombreMedicamento.upper() , data)
-            self.limpiarTabla(self.tableProductos)
-            for row, value in enumerate(data):
-                self.tableProductos.insertRow(row)
-                for col in range(0,self.tableProductos.columnCount()):
-                    self.tableProductos.setItem(row, col, QtGui.QTableWidgetItem(value[col]))
+            dataRazon = data.values()
+        if cuit != "":
+            dataCuit = filter(lambda x: x[1].upper() == cuit.upper(), dataRazon)
+        else:
+            dataCuit = dataRazon
+
+        for dato in data:
+            self.tableObra.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in dataCuit:
+                self.tableObra.setRowHidden(dato,True)
 
     def actualizar(self):
         """
@@ -655,19 +693,15 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             Obras Sociales, si ya hay una cargada.
         :return:
         """
-        if self.tableObra.isVisible():
-            #TODO Implementar la busqueda por criterio en la tabla
-            print "Implementar esto"
-            pass
+
+        if self.lineObra.isEnabled():
+            self.buscarObra()
         else:
-            self.lineObra.clear()
-            self.lineObra.clear()
             self.lineCuit.clear()
-            self.lineObra.setEnabled(True)
+            self.lineObra.clear()
             self.lineCuit.setEnabled(True)
+            self.lineObra.setEnabled(True)
             self.tableObra.setVisible(True)
-            self.limpiarTabla(self.tableProductos)
-            self.gbProducto.hide()
 
     def validadores(self):
 
