@@ -41,6 +41,7 @@ class Listar(MdiWidget, Ui_vtnListar):
         self.listado = self.cbTipoListado.currentText()
         if (self.listado=="Facturas Liquidadas Pendientes de Cobro"):
             pass
+
         elif (self.listado=="Productos en Stock"):
             if self.rbtnExcel.isChecked():
                 self.generarExcelProductos()
@@ -51,9 +52,15 @@ class Listar(MdiWidget, Ui_vtnListar):
                 self.diagramaBarras(data)
                 pdfkit.from_file('reportes/listadoProductosStock.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
+
         elif (self.listado=="Ventas Realizadas"):
             if self.rbtnExcel.isChecked():
-                self.generarExcelVentas()
+                fechaDesde = self.deFechaDesde.dateTime().toPyDateTime().date()
+                fechaHasta = self.deFechaHasta.dateTime().toPyDateTime().date()
+                if fechaDesde > fechaHasta:
+                    QtGui.QMessageBox.information(self,"Aviso","La fecha Desde es mayor a la fecha Hasta")
+                else:
+                    self.generarExcelVentas(fechaDesde,fechaHasta)
             else:
                 facturas = Factura.buscarTodos(Factura.numero, self.sesion).all()
                 remitos = Remito.buscarTodos(Remito.numero, self.sesion).all()
@@ -62,6 +69,7 @@ class Listar(MdiWidget, Ui_vtnListar):
                 self.listarVentas(ventasFact, ventasRem)
                 pdfkit.from_file('reportes/listadoVentas.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
+
         else:
             if self.rbtnExcel.isChecked():
                 self.generarExcelClientes()
@@ -421,18 +429,21 @@ class Listar(MdiWidget, Ui_vtnListar):
         })
         hoja.insert_chart('E3', grafico)
 
-    def generarExcelVentas(self):
+    def generarExcelVentas(self,fechaDesde, fechaHasta):
         """
             Crea el documento Excel correspondiente a las ventas realizadas en
             un periodo de tiempo dado
+        :param fechaDesde Fecha de inicio:
+        :param fechaHasta Fecha de fin
         :return None :
         """
         ventas={}
         for factura in (FacturaModel.buscarTodos("numero",self.sesion).all()):
-            if (factura.fecha_emision in ventas):
-                ventas[factura.fecha_emision]+=1
-            else:
-                ventas[factura.fecha_emision]=1
+            if factura.fecha_emision>= fechaDesde and factura.fecha_emision <= fechaHasta:
+                if (factura.fecha_emision in ventas):
+                    ventas[factura.fecha_emision]+=1
+                else:
+                    ventas[factura.fecha_emision]=1
         for remito in (RemitoModel.buscarTodos("numero",self.sesion).all()):
             if (remito.fecha_emision in ventas):
                 ventas[remito.fecha_emision]+=1
