@@ -12,8 +12,10 @@ from gui import MyMdi
 from lgIngresar import Ingresar
 from lgListados import Listar
 from lgAyuda import Ayuda
+from signals import PoolOfWindows
 
 class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
+
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent)
         self.setupUi(self)
@@ -124,14 +126,36 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
             (self.actionDevolucionDeCliente)
         ]
 
+        instances = []
         for action, subwin in action_subwin:
             mdi = MyMdi(self)
-            mdi.setWidget(subwin(mdi))
+            temp = subwin(mdi)
+            instances.append(temp)
+            mdi.setWidget(temp)
             self.centralWidget().addSubWindow(mdi)
             if not (action == self.actionIngresar):
                 mdi.hide()
             action.triggered.connect(mdi.show)
         self.deshabilitarMenu()
+
+        nombres_ventanas = [
+            "AltaCliente", "BajaCliente", "ModificarCliente",
+            "AltaMedicamento", "BajaMedicamento", "ModificarMedicamento",
+            "AltaMonodroga", "BajaMonodroga", "ModificarMonodroga",
+            "AltaPresentacion","BajaPresentacion", "ModificarPresentacion",
+            "AltaProducto", "BajaProducto", "ModificarProducto",
+            "AltaLote","ModificarLote", "BajaRemito",
+            "ModificarRemito", "DevolucionDeCliente", "FraccionarProducto",
+            "Ingresar", "Listar", "RegistrarCobroRemito",
+            "ReintegroCliente", "VentaContado", "VentaConRemito",
+            "AjusteNegativoStock", "Ayuda"]
+
+        dict = {}
+        for nro, obj in enumerate(instances):
+            dict[nombres_ventanas[nro]] = obj
+
+        PoolOfWindows.addPool(dict)
+        PoolOfWindows.setHandlers()
 
     # ----- muestra un mensaje en la barra de estado de la ventan principal
     def setBarraEstado(self, estado):

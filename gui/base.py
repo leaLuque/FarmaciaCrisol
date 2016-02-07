@@ -153,3 +153,6 @@ class MdiWidget(QtGui.QWidget):
             dataRow = []
 
         return dataTable
+
+    def addHandlerSignal(self):
+        pass

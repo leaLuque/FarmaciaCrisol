@@ -3,7 +3,7 @@ __author__ = 'leandro'
 
 from datetime import date
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
 from ventanas import Ui_vtnRegistrarCobroRemito, Ui_vtnVentaConRemito, Ui_vtnRemito
 from gui import CRUDWidget,MdiWidget
@@ -19,6 +19,7 @@ from baseDatos.ventas import Factura as FacturaModel
 from baseDatos.ventas import DetalleFactura as DetalleFacturaModel
 from genComprobantes import generarFactura, generarRremito
 from validarDatos import ValidarDatos
+from signals import PoolOfWindows
 
 
 class Remito(CRUDWidget,Ui_vtnRemito):
@@ -266,6 +267,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             en la Tabla de Clientes
         :return:
         """
+        self.limpiarTabla(self.tableClientes)
         self.cargarObjetos(self.tableClientes,
             ClienteModel.buscarTodos("dni", self.sesion).all(),
             ("dni", "nombre", "apellido")
@@ -547,6 +549,15 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.remito=None
         self.productosAgregados=0
         self.limpiarVentana()
+
+    def addHandlerSignal(self):
+
+        self.sender = PoolOfWindows.getVentana("AltaCliente")
+        self.sender.objectCreated.connect(self.cargar_clientes)
+        self.sender1 = PoolOfWindows.getVentana("BajaCliente")
+        self.sender1.objectDeleted.connect(self.cargar_clientes)
+        self.sender2 = PoolOfWindows.getVentana("ModificarCliente")
+        self.sender2.objectModified.connect(self.cargar_clientes)
 
 class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 

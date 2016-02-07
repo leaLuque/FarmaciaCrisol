@@ -22,7 +22,7 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
-        #self.validadores(ClienteModel)
+        self.validadores(ClienteModel)
 
     def cargarClientes(self):
         """
