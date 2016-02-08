@@ -460,7 +460,7 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.sender5 = PoolOfWindows.getVentana("ModificarPresentacion")
         self.sender5.objectModified.connect(self.actualizarInfoPres)
 
-class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
+class FraccionarProducto(CRUDWidget, Ui_vtnFraccionarProducto):
     """
     Lógica del Fraccionado de productos.
     """
@@ -545,6 +545,7 @@ class FraccionarProducto(MdiWidget, Ui_vtnFraccionarProducto):
                                     QtGui.QMessageBox.critical(self, 'Error', 'Lote/Producto ya existe.', 'Aceptar')
                             QtGui.QMessageBox.information(self, 'Info', 'La cantidad fue modificada.', 'Aceptar')
                             self.actualizar()
+                            self.objectModified.emit()
                     else:
                         QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Fraccionable de la tabla.', 'Aceptar')
                 else:
@@ -768,3 +769,5 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         self.sender1.objectDeleted.connect(self.actualizarInfo)
         self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
         self.sender2.objectModified.connect(self.actualizarInfo)
+        self.sender3 = PoolOfWindows.getVentana("FraccionarProducto")
+        self.sender3.objectModified.connect(self.actualizarInfo)

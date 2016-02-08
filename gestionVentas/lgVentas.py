@@ -885,6 +885,12 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.sender5.objectModified.connect(self.actualizar)
         self.sender6 = PoolOfWindows.getVentana("BajaRemito")
         self.sender6.objectModified.connect(self.actualizar)
+        self.sender7 = PoolOfWindows.getVentana("FraccionarProducto")
+        self.sender7.objectModified.connect(self.actualizar)
+        self.sender8 = PoolOfWindows.getVentana("AltaLote")
+        self.sender8.objectCreated.connect(self.actualizar)
+        self.sender9 = PoolOfWindows.getVentana("ModificarLote")
+        self.sender9.objectModified.connect(self.actualizar)
 
 class Cobrar(QtGui.QDialog, Ui_Dialog):
     """

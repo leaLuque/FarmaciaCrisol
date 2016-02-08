@@ -579,6 +579,12 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.sender8.objectModified.connect(self.cargar_productos)
         self.sender9 = PoolOfWindows.getVentana("BajaRemito")
         self.sender9.objectModified.connect(self.cargar_productos)
+        self.sender10 = PoolOfWindows.getVentana("FraccionarProducto")
+        self.sender10.objectModified.connect(self.cargar_productos)
+        self.sender11 = PoolOfWindows.getVentana("AltaLote")
+        self.sender11.objectCreated.connect(self.cargar_productos)
+        self.sender12 = PoolOfWindows.getVentana("ModificarLote")
+        self.sender12.objectModified.connect(self.cargar_productos)
 
 class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 
