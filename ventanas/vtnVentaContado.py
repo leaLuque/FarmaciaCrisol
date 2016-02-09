@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaContado.ui'
 #
-# Created: Fri Feb  5 16:41:20 2016
+# Created: Tue Feb  9 15:41:24 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -115,14 +115,6 @@ class Ui_vtnVentaContado(object):
         self.tableProductos.horizontalHeader().setDefaultSectionSize(120)
         self.tableProductos.horizontalHeader().setStretchLastSection(True)
         self.gridLayout_3.addWidget(self.tableProductos, 0, 0, 1, 2)
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem)
-        self.btnActualizar = QtGui.QPushButton(self.gbProducto)
-        self.btnActualizar.setObjectName(_fromUtf8("btnActualizar"))
-        self.horizontalLayout_4.addWidget(self.btnActualizar)
-        self.gridLayout_3.addLayout(self.horizontalLayout_4, 1, 0, 1, 1)
         self.verticalLayout_3.addLayout(self.gridLayout_3)
         self.verticalLayout.addWidget(self.gbProducto)
         self.gbFactura = QtGui.QGroupBox(vtnVentaContado)
@@ -152,6 +144,11 @@ class Ui_vtnVentaContado(object):
         self.tableFactura.verticalHeader().setSortIndicatorShown(False)
         self.tableFactura.verticalHeader().setStretchLastSection(False)
         self.gridLayout_6.addWidget(self.tableFactura, 0, 0, 1, 2)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout_6.addItem(spacerItem, 1, 0, 1, 1)
+        self.btnEliminar = QtGui.QPushButton(self.gbFactura)
+        self.btnEliminar.setObjectName(_fromUtf8("btnEliminar"))
+        self.gridLayout_6.addWidget(self.btnEliminar, 1, 1, 1, 1)
         self.verticalLayout_6.addLayout(self.gridLayout_6)
         self.verticalLayout.addWidget(self.gbFactura)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
@@ -202,7 +199,6 @@ class Ui_vtnVentaContado(object):
         item.setText(_translate("vtnVentaContado", "Importe", None))
         item = self.tableProductos.horizontalHeaderItem(6)
         item.setText(_translate("vtnVentaContado", "Cantidad", None))
-        self.btnActualizar.setText(_translate("vtnVentaContado", "Actualizar", None))
         self.gbFactura.setTitle(_translate("vtnVentaContado", "Factura", None))
         item = self.tableFactura.horizontalHeaderItem(0)
         item.setText(_translate("vtnVentaContado", "Código de Barra", None))
@@ -210,6 +206,7 @@ class Ui_vtnVentaContado(object):
         item.setText(_translate("vtnVentaContado", "Cantidad", None))
         item = self.tableFactura.horizontalHeaderItem(2)
         item.setText(_translate("vtnVentaContado", "Importe", None))
+        self.btnEliminar.setText(_translate("vtnVentaContado", "Eliminar", None))
         self.btnAceptar.setText(_translate("vtnVentaContado", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnVentaContado", "Cancelar", None))
 

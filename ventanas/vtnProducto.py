@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnProducto.ui'
 #
-# Created: Sun Feb  7 14:05:39 2016
+# Created: Mon Feb  8 18:56:44 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -286,9 +286,9 @@ class Ui_vtnProducto(object):
         item = self.tablaPresentacion.horizontalHeaderItem(0)
         item.setText(_translate("vtnProducto", "Tipo", None))
         item = self.tablaPresentacion.horizontalHeaderItem(1)
-        item.setText(_translate("vtnProducto", "Cantidad de Fracciones", None))
-        item = self.tablaPresentacion.horizontalHeaderItem(2)
         item.setText(_translate("vtnProducto", "Unidad de Medida", None))
+        item = self.tablaPresentacion.horizontalHeaderItem(2)
+        item.setText(_translate("vtnProducto", "Cantidad de Fracciones", None))
         item = self.tablaPresentacion.horizontalHeaderItem(3)
         item.setText(_translate("vtnProducto", "Fraccionable", None))
         self.gbLote.setTitle(_translate("vtnProducto", "Lote", None))

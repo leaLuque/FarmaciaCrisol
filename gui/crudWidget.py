@@ -56,7 +56,7 @@ class CRUDWidget(MdiWidget):
     @classmethod
     def update(cls, mdi):
         cls.instances['U'] = gui = cls(mdi)
-        gui.setWindowTitle("Modificación %s" % cls.__name__)
+        gui.setWindowTitle(QtCore.QString.fromUtf8("Modificación %s" % cls.__name__))
         alta = cls.actionWidget('C')
         if alta:
             alta.objectCreated.connect(gui.actualizar)

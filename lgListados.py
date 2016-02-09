@@ -32,6 +32,16 @@ class Listar(MdiWidget, Ui_vtnListar):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.btnListar.pressed.connect(self.Listar)
+        self.cbTipoListado.currentIndexChanged.connect(self.habilitarFecha)
+
+    def habilitarFecha(self):
+        self.listado = self.cbTipoListado.currentText()
+        if (self.listado=="Productos en Stock"):
+            self.gbFechas.setEnabled(False)
+        elif (self.listado=="Ventas Realizadas"):
+            self.gbFechas.setEnabled(True)
+        else:
+            self.gbFechas.setEnabled(False)
 
     def Listar(self):
         """
@@ -39,10 +49,7 @@ class Listar(MdiWidget, Ui_vtnListar):
         :return:
         """
         self.listado = self.cbTipoListado.currentText()
-        if (self.listado=="Facturas Liquidadas Pendientes de Cobro"):
-            pass
-
-        elif (self.listado=="Productos en Stock"):
+        if (self.listado=="Productos en Stock"):
             if self.rbtnExcel.isChecked():
                 self.generarExcelProductos()
             else:
@@ -52,24 +59,18 @@ class Listar(MdiWidget, Ui_vtnListar):
                 self.diagramaBarras(data)
                 pdfkit.from_file('reportes/listadoProductosStock.html', 'reportes/list.pdf')
                 os.system('evince reportes/list.pdf &')
-
         elif (self.listado=="Ventas Realizadas"):
-            if self.rbtnExcel.isChecked():
-                fechaDesde = self.deFechaDesde.dateTime().toPyDateTime().date()
-                fechaHasta = self.deFechaHasta.dateTime().toPyDateTime().date()
-                if fechaDesde > fechaHasta:
-                    QtGui.QMessageBox.information(self,"Aviso","La fecha Desde es mayor a la fecha Hasta")
-                else:
-                    self.generarExcelVentas(fechaDesde,fechaHasta)
+            fechaDesde = self.deFechaDesde.dateTime().toPyDateTime().date()
+            fechaHasta = self.deFechaHasta.dateTime().toPyDateTime().date()
+            if fechaDesde > fechaHasta:
+                QtGui.QMessageBox.information(self,"Aviso","La fecha Desde es mayor a la fecha Hasta")
             else:
-                facturas = Factura.buscarTodos(Factura.numero, self.sesion).all()
-                remitos = Remito.buscarTodos(Remito.numero, self.sesion).all()
-                ventasFact = self.cantidadVentasContado(facturas)
-                ventasRem = self.cantidadVentasRemito(remitos)
-                self.listarVentas(ventasFact, ventasRem)
-                pdfkit.from_file('reportes/listadoVentas.html', 'reportes/list.pdf')
-                os.system('evince reportes/list.pdf &')
-
+                if self.rbtnExcel.isChecked():
+                    self.generarExcelVentas(fechaDesde, fechaHasta)
+                else:
+                    self.listarVentas(fechaDesde, fechaHasta)
+                    pdfkit.from_file('reportes/listadoVentas.html', 'reportes/list.pdf')
+                    os.system('evince reportes/list.pdf &')
         else:
             if self.rbtnExcel.isChecked():
                 self.generarExcelClientes()
@@ -118,13 +119,18 @@ class Listar(MdiWidget, Ui_vtnListar):
         archivo.close()
 
     #TODO en este listado se pueden usar las fechas de los campos de deFechaDesde y deFechaHasta
-    def listarVentas(self, ventasFact, ventasRem):
+    def listarVentas(self, fechaDesde,fechaHasta):
         """
         Genera el html usado para generar el pdf final del listado de las Ventas realizadas.
-        :param ventasFact: arreglo que contiene todas las ventas de contado realizadas.
-        :param ventasRem: arreglo que contiene todas las ventas con remito realizadas.
         :return:
         """
+        facturas = filter(lambda x: x.fecha_emision >= fechaDesde and x.fecha_emision <= fechaHasta,
+                          Factura.buscarTodos(Factura.numero, self.sesion).all())
+        remitos = filter(lambda x: x.fecha_emision >= fechaDesde and x.fecha_emision <= fechaHasta,
+                         Remito.buscarTodos(Remito.numero, self.sesion).all())
+        ventasFact = self.cantidadVentasContado(facturas)
+        ventasRem = self.cantidadVentasRemito(remitos)
+
         archivo = open("PlantillasListados/ventas.html", "r")
         contenido = archivo.read()
         archivo.close()

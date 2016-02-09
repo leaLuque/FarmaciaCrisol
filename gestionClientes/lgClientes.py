@@ -173,6 +173,36 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         self.lineDireccion.setText(infoItem[3])
         self.lineTelefono.setText(infoItem[4])
 
+    def buscarClt(self):
+        """
+        Busca los clientes que cumplan con lo datos ingresados en los campos de filtrado.
+        :return:
+        """
+        dni = str(self.lineDni.text())
+        nombre = str(self.lineNombre.text())
+        apellido = str(self.lineApellido.text())
+        data = self.getAllTabla(self.tableClientes)
+
+        if dni != "":
+            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data.values())
+        else:
+            dataDni = data.values()
+        if nombre != "":
+            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), dataDni)
+        else:
+            dataNomb = dataDni
+        if apellido != "":
+            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), dataNomb)
+        else:
+            dataApell = dataNomb
+
+        for dato in data:
+            self.tableClientes.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataApell:
+                self.tableClientes.setRowHidden(dato, True)
+
     @classmethod
     def create(cls, mdi):
         """
@@ -224,30 +254,3 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui.btnCancelar.pressed.connect(gui.actualizar)
         gui.btnBuscar.pressed.connect(gui.buscarClt)
         return gui
-
-    def buscarClt(self):
-        dni = str(self.lineDni.text())
-        nombre = str(self.lineNombre.text())
-        apellido = str(self.lineApellido.text())
-        data = self.getAllTabla(self.tableClientes)
-
-        if dni != "":
-            dataDni = filter(lambda x: x[0].upper() == dni.upper(), data.values())
-        else:
-            dataDni = data.values()
-        if nombre != "":
-            dataNomb = filter(lambda x: x[1].upper() == nombre.upper(), dataDni)
-        else:
-            dataNomb = dataDni
-        if apellido != "":
-            dataApell = filter(lambda x: x[2].upper() == apellido.upper(), dataNomb)
-        else:
-            dataApell = dataNomb
-
-        for dato in data:
-            self.tableClientes.setRowHidden(dato,False)
-
-        for dato in data:
-            if not data[dato] in dataApell:
-                self.tableClientes.setRowHidden(dato,True)
-

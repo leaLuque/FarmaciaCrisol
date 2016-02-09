@@ -169,6 +169,7 @@ class DetalleRemito(ObjetoBase):
         self.nro_linea=nro_linea
         self.producto=producto
         self.cantidad=cantidad
+        self.baja = False
 
     def getIdRemito(self):
         """
@@ -239,6 +240,7 @@ class DetalleRemito(ObjetoBase):
             loteP.modificar(sesion)
         self.eliminarLotesAsociados(sesion)
         self.borrar(sesion)
+
 
 class Factura(ObjetoBase):
     """
@@ -313,15 +315,6 @@ class Factura(ObjetoBase):
             temp.append(valor)
         return temp
 
-    ##@classmethod
-    ##def buscarDetalles(self,numero,sesion):
-    ##    """
-    ##        Devuelve los detalles asocias
-    ##   :return:
-    ##    :rtype:
-    ##    """
-    ##   return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==numero)
-
     @classmethod
     def existeFactura(cls,numero,sesion):
         """
@@ -360,8 +353,8 @@ class Factura(ObjetoBase):
         :rtype :
         """
         return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura == factura,
-                                                  DetalleFactura.nro_linea == linea).first()
-                                                  #DetalleFactura.baja == False).first()
+                                                  DetalleFactura.nro_linea == linea,
+                                                  DetalleFactura.baja == False).first()
 
 class DetalleFactura(ObjetoBase):
     """
@@ -385,6 +378,7 @@ class DetalleFactura(ObjetoBase):
         self.descuento = descuento
         self.importe = importe
         self.nro_linea = nro_linea
+        self.baja = False
 
     def getDescuento(self):
         """
@@ -572,6 +566,7 @@ class DetalleNotaCredito(ObjetoBase):
         """
         self.descuento=descuento
 
+
 class CobroCliente(ObjetoBase):
     """
         Clase que modela la logica del Cobro al Cliente
@@ -629,6 +624,7 @@ class CobroCliente(ObjetoBase):
             total += value.importe
 
         return total
+
 
 class LoteDetallado(ObjetoBase):
     """

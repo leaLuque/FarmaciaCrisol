@@ -316,12 +316,12 @@
         </column>
         <column>
          <property name="text">
-          <string>Cantidad de Fracciones</string>
+          <string>Unidad de Medida</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Unidad de Medida</string>
+          <string>Cantidad de Fracciones</string>
          </property>
         </column>
         <column>

@@ -122,24 +122,40 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         Busca y carga en la tabla los datos de una monodroga para un nombre ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaMonodroga)
-        self.cargarObjetos(self.tablaMonodroga,
-            MonodrogaModel.buscarLike(MonodrogaModel.nombre, self.sesion,
-                                      str(self.lineNombre_Mon.text())).all(),
-            ("nombre", "tipo_venta", "descripcion")
-        )
+        nomb = str(self.lineNombre_Mon.text())
+        data = self.getAllTabla(self.tablaMonodroga)
+
+        if nomb != "":
+            dataMon = filter(lambda x: x[0].upper() == nomb.upper(), data.values())
+        else:
+            dataMon = data.values()
+
+        for dato in data:
+            self.tablaMonodroga.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataMon:
+                self.tablaMonodroga.setRowHidden(dato, True)
 
     def buscarMedicamento(self):
         """
         Busca y carga en la tabla los datos de un medicamento para un nombre ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaMedicamento)
-        self.cargarObjetos(self.tablaMedicamento,
-            MedicamentoModel.buscarLike(MedicamentoModel.nombre_comercial, self.sesion,
-                                        str(self.lineNombre_Med.text())).all(),
-            ("nombre_comercial", "id_monodroga", "cantidad_monodroga")
-        )
+        nomb = str(self.lineNombre_Med.text())
+        data = self.getAllTabla(self.tablaMedicamento)
+
+        if nomb != "":
+            dataMed = filter(lambda x: x[0].upper() == nomb.upper(), data.values())
+        else:
+            dataMed = data.values()
+
+        for dato in data:
+            self.tablaMedicamento.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataMed:
+                self.tablaMedicamento.setRowHidden(dato, True)
 
     def actualizar(self):
         """

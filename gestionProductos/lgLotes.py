@@ -88,23 +88,40 @@ class Lote(CRUDWidget, Ui_vtnLote):
         Busca y carga en la tabla los datos de un lote para un codigo ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaLote)
-        self.cargarObjetos(self.tablaLote,
-            LoteModel.buscar(LoteModel.codigo, self.sesion, str(self.lineCodigo.text())).all(),
-            ("codigo", "fecha_vencimiento")
-        )
+        codigo = str(self.lineCodigo.text())
+        data = self.getAllTabla(self.tablaLote)
+
+        if codigo != "":
+            dataLote = filter(lambda x: x[0].upper() == codigo.upper(), data.values())
+        else:
+            dataLote = data.values()
+
+        for dato in data:
+            self.tablaLote.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataLote:
+                self.tablaLote.setRowHidden(dato, True)
 
     def buscarProducto(self):
         """
         Busca y carga en la tabla los datos de un producto para un codigo de barra ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaProducto)
-        self.cargarObjetos(self.tablaProducto,
-            ProductoModel.buscarAlta(ProductoModel.codigo_barra, self.sesion,
-                                     str(self.lineCod_Barra.text())).all(),
-            ("codigo_barra", "id_medicamento", "id_presentacion", "importe")
-        )
+        cod_barra = str(self.lineCod_Barra.text())
+        data = self.getAllTabla(self.tablaProducto)
+
+        if cod_barra != "":
+            dataProd = filter(lambda x: x[0].upper() == cod_barra.upper(), data.values())
+        else:
+            dataProd = data.values()
+
+        for dato in data:
+            self.tablaProducto.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataProd:
+                self.tablaProducto.setRowHidden(dato, True)
 
     def actualizar(self):
         """

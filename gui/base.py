@@ -156,3 +156,18 @@ class MdiWidget(QtGui.QWidget):
 
     def addHandlerSignal(self):
         pass
+
+    def setVentana(self, ventana):
+        """
+        Setea el nombre de la ventana.
+        :param ventana: Nombre de la ventana.
+        :return:
+        """
+        self.ventana = ventana
+
+    def getVentana(self):
+        """
+        Devuelve el nombre de la ventana.
+        :return: Ventana.
+        """
+        return self.ventana

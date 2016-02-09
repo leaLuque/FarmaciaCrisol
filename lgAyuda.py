@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import re
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore
 from PyQt4.QtCore import QUrl, SIGNAL
 from PyQt4.QtWebKit import QWebView, QWebPage
 
@@ -49,11 +49,7 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
         self.view.load(QUrl("web/index.html"))
         self.view.show()
         self.verticalLayout.addWidget(self.view)
-        shortcut = QtGui.QShortcut(QtGui.QKeySequence("Ctrl+c"), self, self.algo)
-        shortcut.setContext(QtCore.Qt.WidgetShortcut)
 
-    def algo(self):
-        print "algo"
 
     def linkClicked(self, url):
         self.view.page().mainFrame().addToJavaScriptWindowObject("Ayuda", self)
@@ -157,3 +153,7 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
         archivo = open("web/index.html", "w")
         archivo.write(contenido_nuevo)
         archivo.close()
+
+    def ayudaVentana(self, ventana):
+        self.cargarContenido(ventana)
+        self.view.reload()

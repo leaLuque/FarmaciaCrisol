@@ -182,7 +182,8 @@ class CreacionTabla():
             Column('producto',ForeignKey("producto.codigo_barra")),
             Column('cantidad',Integer, nullable=False),
             Column('importe',Float,nullable=False),
-            Column('descuento',Float)
+            Column('descuento',Float),
+            Column('baja', Boolean, nullable=False)
         )
 
         CobroCliente.tabla=Table('cobro_cliente',metadata,

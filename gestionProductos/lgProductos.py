@@ -206,36 +206,60 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         Busca y carga en la tabla los datos de un producto para un código de barra ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaProducto)
-        self.cargarObjetos(self.tablaProducto,
-            ProductoModel.buscarAlta(ProductoModel.codigo_barra, self.sesion,
-                                     str(self.lineCodigo_Barra.text())).all(),
-            ("codigo_barra", "id_medicamento", "id_presentacion", "importe")
-        )
+        cod_barra = str(self.lineCodigo_Barra.text())
+        data = self.getAllTabla(self.tablaProducto)
+
+        if cod_barra != "":
+            dataProd = filter(lambda x: x[0].upper() == cod_barra.upper(), data.values())
+        else:
+            dataProd = data.values()
+
+        for dato in data:
+            self.tablaProducto.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataProd:
+                self.tablaProducto.setRowHidden(dato, True)
 
     def buscarPresentacion(self):
         """
         Busca y carga en la tabla los datos de una presentación para un tipo ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaPresentacion)
-        self.cargarObjetos(self.tablaPresentacion,
-            PresentacionModel.buscarLike(PresentacionModel.tipo, self.sesion,
-                                         str(self.lineTipo_Pres.text())).all(),
-            ("tipo", "unidad_medida", "cantidad_fracciones", "sub_presentacion")
-        )
+        tipo = str(self.lineTipo_Pres.text())
+        data = self.getAllTabla(self.tablaPresentacion)
+
+        if tipo != "":
+            dataPres = filter(lambda x: x[0].upper() == tipo.upper(), data.values())
+        else:
+            dataPres = data.values()
+
+        for dato in data:
+            self.tablaPresentacion.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataPres:
+                self.tablaPresentacion.setRowHidden(dato, True)
 
     def buscarMedicamento(self):
         """
         Busca y carga en la tabla los datos de un medicamento para un nombre comercial ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaMedicamento)
-        self.cargarObjetos(self.tablaMedicamento,
-            MedicamentoModel.buscarLike(MedicamentoModel.nombre_comercial, self.sesion,
-                                        str(self.lineNomb_Med.text())).all(),
-            ("nombre_comercial", "id_monodroga", "cantidad_monodroga")
-        )
+        nomb = str(self.lineNomb_Med.text())
+        data = self.getAllTabla(self.tablaMedicamento)
+
+        if nomb != "":
+            dataMed = filter(lambda x: x[0].upper() == nomb.upper(), data.values())
+        else:
+            dataMed = data.values()
+
+        for dato in data:
+            self.tablaMedicamento.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataMed:
+                self.tablaMedicamento.setRowHidden(dato, True)
 
     def buscarLote(self):
         """

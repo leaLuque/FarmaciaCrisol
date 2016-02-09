@@ -240,8 +240,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.btnCancelar.pressed.connect(self.cancelar)
         self.cargar_clientes()
         self.cargar_productos()
-        self.gbProducto.hide()
-        self.gbRemito.hide()
+        self.gbProducto.setEnabled(False)
+        self.gbRemito.setEnabled(False)
         self.remito=None
         self.productosAgregados=0
         self.lotesVentas = {}
@@ -302,6 +302,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         """
         if self.lineDni.isEnabled():
             self.buscarClt()
+        elif self.productosAgregados != 0:
+            QtGui.QMessageBox.information(self,"Aviso","No se puede cambiar Cliente. Ya hay productos agregados")
         else:
             self.lineDni.setEnabled(True)
             self.lineApellido.setEnabled(True)
@@ -312,6 +314,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.limpiarTabla(self.tableClientes)
             self.tableClientes.setVisible(True)
             self.cargar_clientes()
+            self.gbProducto.setEnabled(False)
+            self.gbRemito.setEnabled(False)
 
     def buscarClt(self):
         """
@@ -393,8 +397,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.lineNombre.setText(infoItem[1])
         self.lineApellido.setText(infoItem[2])
         self.tableClientes.hide()
-        self.gbProducto.setVisible(True)
-        self.gbRemito.setVisible(True)
+        self.gbProducto.setEnabled(True)
+        self.gbRemito.setEnabled(True)
 
     def descontarCantidad(self,detalle,producto,cantidad):
         """
@@ -440,9 +444,10 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                 else:
                     rowItemActual=itemActual.row()
                     rows=self.tableRemito.rowCount()
-                    if self.productosAgregados==0:
+                    if self.productosAgregados==0 and self.remito == None:
                         self.remito=RemitoModel(RemitoModel.obtenerNumero(self.sesion),int(self.lineDni.text()))
                         self.remito.guardar(self.sesion)
+
                     self.productosAgregados+=1
 
                     codigo = int(self.tableProductos.item(rowItemActual,0).text())
@@ -479,6 +484,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             detalle.eliminarLotesAsociados(self.sesion)
             detalle.borrar(self.sesion)
             del self.lotesVentas[detalle]
+            del self.detallesTabla[itemActual.row()]
             self.tableRemito.hideRow(itemActual.row())
             self.cargar_productos()
             self.productosAgregados -=1
@@ -489,6 +495,12 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             Limpia la ventana actual
         :return:
         """
+
+        self.remito=None
+        self.productosAgregados=0
+        self.dniCliente = None
+        self.lotesVentas = {}
+        self.detallesTabla = {}
         self.lineDni.setEnabled(True)
         self.lineDni.clear()
         self.lineNombre.setEnabled(True)
@@ -501,6 +513,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.limpiarTabla(self.tableProductos)
         self.limpiarTabla(self.tableRemito)
         self.tableClientes.setVisible(True)
+        self.gbRemito.setEnabled(False)
+        self.gbProducto.setEnabled(False)
         self.cargar_clientes()
         self.cargar_productos()
 
@@ -527,13 +541,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             data["datosCliente"] = ClienteModel.getDatosCliente(self.sesion,self.dniCliente)
             data["detalles"] = self.getContenidoTabla(self.tableRemito).values()
             generarRremito(data)
-            self.limpiarTabla(self.tableRemito)
-            self.remito=None
-            self.productosAgregados=0
-            self.lotesVentas = {}
             self.limpiarVentana()
-            self.detalles = []
-            self.dniCliente = None
 
     def cancelar(self):
         """
@@ -542,20 +550,18 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             sus valores originales.
         :return:
         """
-        if self.remito!=None:
-            ok=QtGui.QMessageBox.warning(self,"Aviso","¿Desea anular el remito creado?")
-            if ok:
+
+        ok=QtGui.QMessageBox.warning(self,"Aviso","¿Desea cancelar la operacion?",\
+                                     QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
+        if ok == QtGui.QMessageBox.Ok:
+            if self.remito!=None:
                 self.remito.anular()
-                QtGui.QMessageBox.information(self,"Aviso","Remito Anulado")
-                for detalle in self.lotesVentas:
-                    for loteVenta in self.lotesVentas[detalle]:
-                        loteVenta[0].aumentarCantidad(loteVenta[1])
-                        loteVenta[0].modificar(self.sesion)
-                self.lotesVentas={}
-                self.cargar_productos()
-        self.remito=None
-        self.productosAgregados=0
-        self.limpiarVentana()
+            for detalle in self.lotesVentas:
+                for loteVenta in self.lotesVentas[detalle]:
+                    loteVenta[0].aumentarCantidad(loteVenta[1])
+                    loteVenta[0].modificar(self.sesion)
+                detalle.borrar(self.sesion)
+            self.limpiarVentana()
 
     def addHandlerSignal(self):
 

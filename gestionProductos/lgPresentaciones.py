@@ -203,12 +203,20 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         Busca y carga en la tabla los datos de una presentación para un tipo ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaPresentacion)
-        self.cargarObjetos(self.tablaPresentacion,
-            PresentacionModel.buscarLike(PresentacionModel.tipo, self.sesion,
-                                         str(self.lineTipo.text())).all(),
-            ("tipo", "unidad_medida", "cantidad_fracciones", "sub_presentacion", "super_presentacion")
-        )
+        tipo = str(self.lineTipo.text())
+        data = self.getAllTabla(self.tablaPresentacion)
+
+        if tipo != "":
+            dataPres = filter(lambda x: x[0].upper() == tipo.upper(), data.values())
+        else:
+            dataPres = data.values()
+
+        for dato in data:
+            self.tablaPresentacion.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataPres:
+                self.tablaPresentacion.setRowHidden(dato, True)
 
     def actualizar(self):
         """

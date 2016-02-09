@@ -510,8 +510,8 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.btnBuscar.pressed.connect(self.limpiarObra)
         self.btnAceptar.pressed.connect(self.confirmarOperacion)
         self.btnCancelar.pressed.connect(self.cancelarOperacion)
+        self.btnEliminar.pressed.connect(self.eliminarDetalle)
         self.rbtnObra.pressed.connect(self.habilitarObras)
-        self.btnActualizar.pressed.connect(self.actualizar)
         self.btnBuscar.setEnabled(False)
         self.tableObra.setVisible(False)
         self.lineCuit.setEnabled(False)
@@ -524,6 +524,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.factura = None
         self.data = []
         self.cargarProductosSinObra()
+        self.detallesTabla = {}
 
 
     def buscarProd(self):
@@ -785,6 +786,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 self.tableFactura.setItem(rows, 2, QtGui.QTableWidgetItem(str("%.2f"%(subtotal*cantidad))))
 
                 detalleFactura.guardar(self.sesion)
+                self.detallesTabla[rows] = detalleFactura
 
                 self.data.append([
                     producto, cantidad, subtotal*cantidad, descuentoActual
@@ -792,6 +794,29 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
 
                 self.actualizar()
                 self.objectModified.emit()
+
+    def eliminarDetalle(self):
+        """
+            Elimina el detalle seleccionado por el usuario y actualiza
+            el stock del producto en particular.
+        :return:
+        """
+
+        itemActual = self.tableFactura.currentItem()
+        if itemActual == None:
+            self.showMsjEstado("Debe seleccionar un item para dar de baja")
+        else:
+            detalle = self.detallesTabla[itemActual.row()]
+            for loteVenta in self.lotesVentas[detalle]:
+                loteVenta[0].aumentarCantidad(loteVenta[1])
+                loteVenta[0].modificar(self.sesion)
+            detalle.eliminarLotesAsociados(self.sesion)
+            detalle.borrar(self.sesion)
+            del self.lotesVentas[detalle]
+            self.tableFactura.hideRow(itemActual.row())
+            self.actualizar()
+            self.productosAgregados -=1
+            self.objectModified.emit()
 
     def limpiarVentana(self):
         """

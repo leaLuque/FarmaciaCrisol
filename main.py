@@ -3,6 +3,8 @@ __author__ = 'waldo'
 
 import sys
 
+from PyQt4.QtGui import QGroupBox
+
 from ventanas import Ui_vtnPrincipal
 from baseDatos import Conexion, CreacionTabla
 from gestionClientes import *
@@ -28,6 +30,9 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
         self.config()
 
+        self.connect(QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_F1), self), QtCore.SIGNAL('activated()'),
+                     self.ayuda)
+
         #contenedor de ventanas internas
         self.setCentralWidget(QtGui.QMdiArea(self))
         self.centralWidget().setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
@@ -35,35 +40,35 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
         # ------ Instanciar ventanas MDI
         action_subwin = [
-            (self.actionAltaCliente, Cliente.create),
-            (self.actionBajaCliente, Cliente.delete),
-            (self.actionModificarCliente, Cliente.update),
-            (self.actionAltaMedicamento, Medicamento.create),
-            (self.actionBajaMedicamento, Medicamento.delete),
-            (self.actionModificarMedicamento, Medicamento.update),
-            (self.actionAltaMonodroga, Monodroga.create),
-            (self.actionBajaMonodroga, Monodroga.delete),
-            (self.actionModificarMonodroga, Monodroga.update),
-            (self.actionAltaPresentacion, Presentacion.create),
-            (self.actionBajaPresentacion, Presentacion.delete),
-            (self.actionModificarPresentacion, Presentacion.update),
-            (self.actionAltaProducto, Producto.create),
-            (self.actionBajaProducto, Producto.delete),
-            (self.actionModificarProducto, Producto.update),
-            (self.actionAltaLote, Lote.create),
-            (self.actionModificarLote, Lote.update),
-            (self.actionBajaRemito, Remito.delete),
-            (self.actionModificarRemito, Remito.update),
-            (self.actionDevolucionDeCliente, DevolucionDeCliente),
-            (self.actionFraccionarProducto, FraccionarProducto),
-            (self.actionIngresar, Ingresar),
-            (self.actionListar, Listar),
-            (self.actionRegistrarCobroRemito, RegistrarCobroRemito),
-            (self.actionReintegroCliente, ReintegroCliente),
-            (self.actionVentaContado, VentaContado),
-            (self.actionVentaConRemito, VentaConRemito),
-            (self.actionAjusteNegativoStock, AjusteNegativoStock),
-            (self.actionAyuda, Ayuda)
+            (self.actionAltaCliente, Cliente.create, "id_alta_clt"),
+            (self.actionBajaCliente, Cliente.delete, "id_baja_clt"),
+            (self.actionModificarCliente, Cliente.update, "id_mod_clt"),
+            (self.actionAltaMedicamento, Medicamento.create, "id_alta_med"),
+            (self.actionBajaMedicamento, Medicamento.delete, "id_baja_med"),
+            (self.actionModificarMedicamento, Medicamento.update, "id_mod_med"),
+            (self.actionAltaMonodroga, Monodroga.create, "id_alta_mon"),
+            (self.actionBajaMonodroga, Monodroga.delete, "id_baja_mon"),
+            (self.actionModificarMonodroga, Monodroga.update, "id_mod_mon"),
+            (self.actionAltaPresentacion, Presentacion.create, "id_alta_pres"),
+            (self.actionBajaPresentacion, Presentacion.delete, "id_baja_pres"),
+            (self.actionModificarPresentacion, Presentacion.update, "id_mod_pres"),
+            (self.actionAltaProducto, Producto.create, "id_alta_prod"),
+            (self.actionBajaProducto, Producto.delete, "id_baja_prod"),
+            (self.actionModificarProducto, Producto.update, "id_mod_prod"),
+            (self.actionAltaLote, Lote.create, "id_alta_lote"),
+            (self.actionModificarLote, Lote.update, "id_mod_lote"),
+            (self.actionBajaRemito, Remito.delete, "id_baja_rem"),
+            (self.actionModificarRemito, Remito.update, "id_mod_rem"),
+            (self.actionDevolucionDeCliente, DevolucionDeCliente, "id_dev_clt"),
+            (self.actionFraccionarProducto, FraccionarProducto, "id_fracc_prod"),
+            (self.actionIngresar, Ingresar, "id_ing"),
+            (self.actionListar, Listar, "id_gen_list"),
+            (self.actionRegistrarCobroRemito, RegistrarCobroRemito, "id_reg_cob_rem"),
+            (self.actionReintegroCliente, ReintegroCliente, "id_reint_clt"),
+            (self.actionVentaContado, VentaContado, "id_vent_cont"),
+            (self.actionVentaConRemito, VentaConRemito, "id_vent_rem"),
+            (self.actionAjusteNegativoStock, AjusteNegativoStock, "id_ajuste_neg_stock"),
+            (self.actionAyuda, Ayuda, "id_ayuda")
         ]
 
         # ------ Lista de ventanas disponibles para el farmaceutico
@@ -127,11 +132,14 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
         ]
 
         instances = []
-        for action, subwin in action_subwin:
+        for action, subwin, ventana in action_subwin:
             mdi = MyMdi(self)
-            temp = subwin(mdi)
-            instances.append(temp)
-            mdi.setWidget(temp)
+            subwidget = subwin(mdi)
+            subwidget.setVentana(ventana)
+            instances.append(subwidget)
+            if (type(subwidget) == Ayuda):
+                self.ayuda = subwidget
+            mdi.setWidget(subwidget)
             self.centralWidget().addSubWindow(mdi)
             if not (action == self.actionIngresar):
                 mdi.hide()
@@ -161,6 +169,13 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
     def setBarraEstado(self, estado):
         self.statusBar().showMessage(estado)
 
+    def ayuda(self):
+        if(type(self.focusWidget().parent()) is QGroupBox):
+            self.ayuda.ayudaVentana(self.focusWidget().parent().parent().getVentana())
+        else:
+            self.ayuda.ayudaVentana(self.focusWidget().parent().getVentana())
+        self.ayuda.show()
+
     # ----- deshabilita los menu y actions cada vez que se llama a la ventana ingresar
 
     def deshabilitarMenu(self):
@@ -175,7 +190,7 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
         return self.sesion
 
     def config(self):
-        from configparser import ConfigParser
+        from ConfigParser import ConfigParser
         config = ConfigParser()
         config.read("Configuracion.cfg")
         sections = config.sections() #ve las secciones del archivo (hay una sola llamada FARMACIA)
@@ -184,5 +199,5 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     myapp = MainWindow()
-    myapp.show()
+    myapp.showFullScreen()
     sys.exit(app.exec_())

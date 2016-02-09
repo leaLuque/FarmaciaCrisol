@@ -112,11 +112,20 @@ class Monodroga(CRUDWidget, Ui_vtnMonodroga):
         Busca y carga en la tabla los datos de una monodroga para un nombre ingresado.
         :return:
         """
-        self.limpiarTabla(self.tablaMonodroga)
-        self.cargarObjetos(self.tablaMonodroga,
-            MonodrogaModel.buscarLike(MonodrogaModel.nombre, self.sesion, str(self.lineNombre.text())).all(),
-            ("nombre", "tipo_venta", "descripcion")
-        )
+        nomb = str(self.lineNombre.text())
+        data = self.getAllTabla(self.tablaMonodroga)
+
+        if nomb != "":
+            dataMon = filter(lambda x: x[0].upper() == nomb.upper(), data.values())
+        else:
+            dataMon = data.values()
+
+        for dato in data:
+            self.tablaMonodroga.setRowHidden(dato, False)
+
+        for dato in data:
+            if not data[dato] in dataMon:
+                self.tablaMonodroga.setRowHidden(dato, True)
 
     def actualizar(self):
         """
