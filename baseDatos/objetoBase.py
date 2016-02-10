@@ -52,7 +52,7 @@ class ObjetoBase(object):
             sesion.commit()
             return True
 
-    # ----- Baja logica del objeto en la base
+
     def borrar(self, sesion):
         """
         Da de baja (lógica) del objeto almacenado en la base de datos.
@@ -60,6 +60,15 @@ class ObjetoBase(object):
         :return:
         """
         self.setBaja(True)
+        sesion.commit()
+
+    def bajaFisica(self,sesion):
+        """
+            Da de baja fisicamente el objeto
+        :param sesion Sesion actual con la Base de Datos:
+        :return:
+        """
+        sesion.delete(self)
         sesion.commit()
 
     def modificar(self, sesion):

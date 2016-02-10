@@ -1,6 +1,5 @@
 from datetime import date
 from baseDatos.productos import ObjetoBase
-#TODO Cambiar la ubicacion de la referencia al objeto base
 
 class ObraSocial(ObjetoBase):
 

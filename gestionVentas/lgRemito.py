@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 __author__ = 'leandro'
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
 from ventanas import Ui_vtnRegistrarCobroRemito, Ui_vtnVentaConRemito, Ui_vtnRemito
 from gui import CRUDWidget,MdiWidget
@@ -35,11 +35,10 @@ class Remito(CRUDWidget,Ui_vtnRemito):
     def actualizar(self):
         """
             Actualiza la informacion de las tablas de Remito y Detalles.
-
         :return:
         """
+
         self.limpiarTabla(self.tableDetalles)
-        self.limpiarTabla(self.tableRemito)
         self.cargar_remitos()
 
     def cargar_remitos(self):
@@ -48,6 +47,7 @@ class Remito(CRUDWidget,Ui_vtnRemito):
             en la tabla correspondiente
         :return:
         """
+        self.limpiarTabla(self.tableRemito)
         self.cargarObjetos(self.tableRemito,
             RemitoModel.obtenerTodosRemitos(self.sesion).all(),
             ("numero", "cliente", "fecha_emision")
@@ -458,7 +458,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                     self.tableRemito.setItem(rows, 1, QtGui.QTableWidgetItem(str(cantidad)))
                     self.tableRemito.setItem(rows, 2, QtGui.QTableWidgetItem(str(subtotal)))
 
-                    detalle=DetalleRemitoModel(self.remito.numero,self.productosAgregados,
+                    detalle = DetalleRemitoModel(self.remito.numero,self.productosAgregados,
                         int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
                     self.descontarCantidad(detalle,int(self.tableProductos.item(rowItemActual,0).text()),cantidad)
                     detalle.guardar(self.sesion)
@@ -482,7 +482,7 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                 loteVenta[0].aumentarCantidad(loteVenta[1])
                 loteVenta[0].modificar(self.sesion)
             detalle.eliminarLotesAsociados(self.sesion)
-            detalle.borrar(self.sesion)
+            detalle.bajaFisica(self.sesion)
             del self.lotesVentas[detalle]
             del self.detallesTabla[itemActual.row()]
             self.tableRemito.hideRow(itemActual.row())
@@ -560,8 +560,10 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                 for loteVenta in self.lotesVentas[detalle]:
                     loteVenta[0].aumentarCantidad(loteVenta[1])
                     loteVenta[0].modificar(self.sesion)
+                detalle.eliminarLotesAsociados(self.sesion)
                 detalle.borrar(self.sesion)
             self.limpiarVentana()
+            self.objectModified.emit()
 
     def addHandlerSignal(self):
 
@@ -629,14 +631,19 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         :return:
         """
         if self.lineRazonSocial.isEnabled():
-            valor = str(self.lineRazonSocial.text()).upper()
-            for i in range(0,self.tableObras.rowCount()):
-                self.tableObras.setRowHidden(i,False)
-
-            if (not valor == ""):
-                for i in range(0,self.tableObras.rowCount()):
-                    if not self.tableObras.item(i,0).text() == valor:
-                        self.tableObras.hideRow(i)
+            obra_social = str(self.lineRazonSocial.text())
+            data = self.getAllTabla(self.tableObras)
+            if obra_social != "":
+                data_temp = filter(lambda x: x[0].upper() == obra_social.upper(), data.values())
+            else:
+                data_temp = data.values()
+            for dato in data:
+                self.tableObras.setRowHidden(dato,False)
+            for dato in data:
+                if not data[dato] in data_temp:
+                    self.tableObras.setRowHidden(dato,True)
+        elif self.remitosAgregados != 0 :
+            QtGui.QMessageBox.information(self,"Aviso","Hay remitos agregados. Imposbile cambiar de Obra Social")
         else:
             self.lineRazonSocial.setEnabled(True)
 
@@ -713,23 +720,24 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             else:
                 self.remitoActual = RemitoModel.existeRemito(int(numeroRemito),self.sesion)
                 if self.remitoActual== None:
-                    QtGui.QMessageBox.warning(self,"Advertencia","El remito ingresado no existe")
+                    QtGui.QMessageBox.warning(self,"Aviso","El remito ingresado no existe")
+                elif self.remitoActual.getCobrado() == True:
+                    QtGui.QMessageBox.information(self,"Aviso","El remito ya ha sido cobrado")
+                elif self.remitoActual in self.remitosCobrados:
+                    QtGui.QMessageBox.information(self,"Aviso","El remito ya ha sido agregado a la factura")
                 else:
-                    if self.remitoActual.getCobrado() == True:
-                        QtGui.QMessageBox.information(self,"Aviso","El remito ingresado ya sido cobrado")
-                    else:
-                        detallesRemitos=RemitoModel.buscarDetalles(int(numeroRemito),self.sesion)
-                        self.limpiarTabla(self.tableRemitos)
-                        self.cargarObjetos(self.tableRemitos,
-                            detallesRemitos,("producto","cantidad")
-                        )
-                        importes=[]
-                        for a in detallesRemitos:
-                            for b in self.sesion.query(ProductoModel).filter(ProductoModel.codigo_barra==a.producto):
-                                importes.append(b.importe * a.cantidad)
-                        for row in range(0,self.tableRemitos.rowCount()):
-                            self.tableRemitos.setItem(row, 2, QtGui.QTableWidgetItem(str(importes[row])))
-                        self.lineNumero.setEnabled(False)
+                    detallesRemitos=RemitoModel.buscarDetalles(int(numeroRemito),self.sesion)
+                    self.limpiarTabla(self.tableRemitos)
+                    self.cargarObjetos(self.tableRemitos,
+                        detallesRemitos,("producto","cantidad")
+                    )
+                    importes=[]
+                    for a in detallesRemitos:
+                        for b in self.sesion.query(ProductoModel).filter(ProductoModel.codigo_barra==a.producto):
+                            importes.append(b.importe * a.cantidad)
+                    for row in range(0,self.tableRemitos.rowCount()):
+                        self.tableRemitos.setItem(row, 2, QtGui.QTableWidgetItem(str(importes[row])))
+                    self.lineNumero.setEnabled(False)
         else:
             self.lineNumero.clear()
             self.lineNumero.setEnabled(True)
@@ -808,8 +816,6 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 self.detallesAgregados+=1
                 for col,value in enumerate(self.armarItemFactura(item,obraSocial,self.factura.numero,self.detallesAgregados)):
                     self.tableFactura.setItem(row,col,QtGui.QTableWidgetItem(str(value)))
-            self.remitoActual.setCobrado(self.factura.numero)
-            self.remitoActual.modificar(self.sesion)
             self.remitosCobrados.append(self.remitoActual)
             self.mostrarTotal()
             self.limpiarTabla(self.tableRemitos)
@@ -822,6 +828,8 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             la operación.
         :return:
         """
+        self.remitosCobrados = []
+        self.itemsDeFactura = []
         self.remitosAgregados=0
         self.detallesAgregados=0
         self.factura=None
@@ -844,27 +852,32 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         :return:
         """
 
-        if self.factura==None:
+        if self.remitosAgregados == 0:
             QtGui.QMessageBox.information(self,"Aviso","No se ha realizado ningun cobro")
         else:
-            efectivo,ok=QtGui.QInputDialog.getText(self,"Importe a pagar",("El importe a pagar es: $%.2f" % self.importeTotal))
-            if float(efectivo) > self.importeTotal:
-                QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $%.2f" % (float(efectivo)-self.importeTotal))
-            else:
-                 QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $0.00")
-            cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
-            cobroCliente.guardar(self.sesion)
-            QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
+            efectivo,ok=QtGui.QInputDialog.getDouble(self,"Importe a pagar",("El importe a pagar es: $%.2f" % self.importeTotal),0,0,2000,2)
+            if ok:
+                if float(efectivo) > self.importeTotal:
+                    QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $%.2f" % (float(efectivo)-self.importeTotal))
+                elif float(efectivo) < self.importeTotal:
+                    QtGui.QMessageBox.information(self,"Aviso","El importe ingresado es menor al total")
+                else:
+                     QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $0.00")
+                for remito in self.remitosCobrados:
+                    remito.setCobrado(self.factura.numero)
+                    remito.modificar(self.sesion)
+                cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
+                cobroCliente.guardar(self.sesion)
+                QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
 
-            data = {}
-            data["numero"] = self.factura.numero
-            data["fecha"] = self.factura.fecha_emision
-            data["detalles"] = self.itemsDeFactura
-            data["formaPago"] = "Efectivo"
-            generarFactura(data)
+                data = {}
+                data["numero"] = self.factura.numero
+                data["fecha"] = self.factura.fecha_emision
+                data["detalles"] = self.itemsDeFactura
+                data["formaPago"] = "Efectivo"
+                generarFactura(data)
 
-            self.limpiarForm()
-            self.itemsDeFactura = []
+                self.limpiarForm()
 
     def cancelarOperacion(self):
         """
@@ -872,14 +885,17 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             cuando el usuario indica que quiere cancelar la operacion
         :return:
         """
-        if self.factura != None:
-            ok = QtGui.QMessageBox.warning(self,"Aviso","Existe una factura creada")
-            if ok:
+
+        ok = QtGui.QMessageBox.warning(self,"Aviso",QtCore.QString.fromUtf8("¿Desea cancelar la operacion?"),\
+                                       QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
+        if ok == QtGui.QMessageBox.Ok:
+            if self.factura != None:
                 self.factura.anular()
-                self.limpiarForm()
-                for remito in self.remitosCobrados:
-                    remito.setCobrado(None)
-                    remito.modificar(self.sesion)
+                self.factura.modificar(self.sesion)
+            self.limpiarForm()
+            #for remito in self.remitosCobrados:
+            #    remito.setCobrado(None)
+            #    remito.modificar(self.sesion)
 
 
 

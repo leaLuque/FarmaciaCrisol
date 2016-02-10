@@ -516,6 +516,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.tableObra.setVisible(False)
         self.lineCuit.setEnabled(False)
         self.lineObra.setEnabled(False)
+        self.cargarProductosSinObra()
         self.productosAgregados=0
         self.lotesVentas={}
         self.facturaCobrada=False
@@ -523,9 +524,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.formapago = None
         self.factura = None
         self.data = []
-        self.cargarProductosSinObra()
         self.detallesTabla = {}
-
 
     def buscarProd(self):
         """
@@ -597,9 +596,8 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             es posible cambiar la Obra Social actual.
         :return:
         """
-        if self.factura!=None:
-            QtGui.QMessageBox.information(self,"Aviso","Ya existe una factura. "
-                                                       "No se puede seleccionar otra obra social")
+        if self.productosAgregados != 0:
+            QtGui.QMessageBox.information(self,"Aviso","Ya se han agregado productos a la factura")
         else:
             if not self.rbtnObra.isChecked():
                 self.btnBuscar.setEnabled(True)
@@ -763,7 +761,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             if cantidad>cantidadProducto:
                 QtGui.QMessageBox.information(self,"Aviso","La cantidad ingresada es mayor que la del stock")
             else:
-                if self.productosAgregados==0:
+                if self.productosAgregados == 0 and self.factura == None:
                     self.factura=FacturaModel(FacturaModel.generarNumero(self.sesion))
                     self.factura.guardar(self.sesion)
                 self.productosAgregados+=1
@@ -811,7 +809,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 loteVenta[0].aumentarCantidad(loteVenta[1])
                 loteVenta[0].modificar(self.sesion)
             detalle.eliminarLotesAsociados(self.sesion)
-            detalle.borrar(self.sesion)
+            detalle.bajaFisica(self.sesion)
             del self.lotesVentas[detalle]
             self.tableFactura.hideRow(itemActual.row())
             self.actualizar()
@@ -823,15 +821,24 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             Limpia la ventana actual
         :return:
         """
+
+        self.productosAgregados=0
+        self.lotesVentas={}
+        self.facturaCobrada=False
+        self.obraSocialSeleccionada=None
+        self.formapago = None
+        self.factura = None
+        self.data = []
+        self.detallesTabla = {}
         self.lineObra.clear()
         self.lineObra.setEnabled(True)
         self.lineCuit.clear()
         self.lineCuit.setEnabled(True)
         self.tableObra.setVisible(False)
+        self.rbtnObra.setChecked(False)
         self.limpiarTabla(self.tableProductos)
         self.limpiarTabla(self.tableFactura)
         self.cargarProductosSinObra()
-        self.obraSocialSeleccionada=None
 
     def calcularTotal(self):
         """
@@ -851,8 +858,8 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             cobrada o que no se efectuo ninguna venta
         :return:
         """
-        if self.factura==None:
-            QtGui.QMessageBox.information(self,"Aviso","No se ha efectuado ninguna venta")
+        if self.productosAgregados == 0:
+            QtGui.QMessageBox.information(self,"Aviso","No se ha agregado ningun producto")
         else:
             ventana = Cobrar(self,self.calcularTotal(),self.factura,self.sesion)
             ventana.exec_()
@@ -864,10 +871,6 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 data["detalles"] = self.data
                 data["formaPago"] = self.formapago
                 generarFactura(data)
-                self.factura = None
-                self.facturaCobrada = False
-                self.data = []
-                self.productosAgregados=0
                 self.limpiarVentana()
             else:
                 QtGui.QMessageBox.information(self,"Aviso","La factura aun no ha sido cobrada")
@@ -878,21 +881,20 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             los stocks a sus valores originales
         :return:
         """
-        if self.factura!=None:
-            ok=QtGui.QMessageBox.warning(self,"Aviso","¿Desea anular la factura creada?")
-            if ok:
+
+        ok=QtGui.QMessageBox.warning(self,"Aviso","¿Desea cancelar la operación?",\
+                                     QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
+        if ok == QtGui.QMessageBox.Ok:
+            if self.factura != None:
                 self.factura.anular()
-                QtGui.QMessageBox.information(self,"Aviso","Factura Anulada")
-                for detalle in self.lotesVentas:
-                    for loteVenta in self.lotesVentas[detalle]:
-                        loteVenta[0].aumentarCantidad(loteVenta[1])
-                        loteVenta[0].modificar(self.sesion)
-                self.lotesVentas={}
-                self.objectModified.emit()
-        self.factura=None
-        self.productosAgregados=0
-        self.data = []
-        self.limpiarVentana()
+            for detalle in self.lotesVentas:
+                for loteVenta in self.lotesVentas[detalle]:
+                    loteVenta[0].aumentarCantidad(loteVenta[1])
+                    loteVenta[0].modificar(self.sesion)
+                detalle.eliminarLotesAsociados(self.sesion)
+                detalle.borrar(self.sesion)
+            self.objectModified.emit()
+            self.limpiarVentana()
 
     def addHandlerSignal(self):
 

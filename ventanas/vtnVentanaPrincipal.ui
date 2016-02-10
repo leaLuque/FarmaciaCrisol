@@ -187,6 +187,9 @@
    <property name="text">
     <string>Venta con Remito</string>
    </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
   </action>
   <action name="actionVentaContado">
    <property name="text">

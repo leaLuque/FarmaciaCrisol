@@ -115,14 +115,23 @@ class LoteProducto(ObjetoBase):
                lote.codigo == varBusq).\
         order_by(producto.codigo_barra)
 
-    #TODO los dos siguientes los hizo leandro.
     def descontarCantidad(self, cantidad):
+        """
+            Descuenta la cantidad del lote
+        :param cantidad Cantidad a descontar:
+        :return:
+        """
         if self.cantidad < cantidad:
             self.cantidad = 0
         else:
             self.cantidad -= cantidad
 
     def aumentarCantidad(self, cantidad):
+        """
+            Aumenta la cantidad del lote
+        :param cantidad Cantidad a aumentar:
+        :return:
+        """
         self.cantidad += cantidad
 
     @classmethod

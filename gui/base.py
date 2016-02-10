@@ -155,6 +155,10 @@ class MdiWidget(QtGui.QWidget):
         return dataTable
 
     def addHandlerSignal(self):
+        """
+            Setea los manejadores de señales que recibe una ventana
+        :return:
+        """
         pass
 
     def setVentana(self, ventana):

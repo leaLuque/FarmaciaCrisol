@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnVentanaPrincipal.ui'
 #
-# Created: Wed Apr  1 14:28:27 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Wed Feb 10 12:40:17 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -235,6 +235,7 @@ class Ui_vtnPrincipal(object):
         self.actionSalir_2.setStatusTip(_translate("vtnPrincipal", "Cerrar Aplicación", None))
         self.actionSalir_2.setShortcut(_translate("vtnPrincipal", "Ctrl+Q", None))
         self.actionVentaConRemito.setText(_translate("vtnPrincipal", "Venta con Remito", None))
+        self.actionVentaConRemito.setShortcut(_translate("vtnPrincipal", "F2", None))
         self.actionVentaContado.setText(_translate("vtnPrincipal", "Venta Contado", None))
         self.actionModificarRemito.setText(_translate("vtnPrincipal", "Modificar Remito", None))
         self.actionBajaRemito.setText(_translate("vtnPrincipal", "Baja Remito", None))
@@ -271,14 +272,4 @@ class Ui_vtnPrincipal(object):
         self.actionAyuda.setText(_translate("vtnPrincipal", "Ayuda", None))
         self.actionAcercaDe.setText(_translate("vtnPrincipal", "Acerca de ...", None))
         self.actionAltaLote.setText(_translate("vtnPrincipal", "Alta", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnPrincipal = QtGui.QMainWindow()
-    ui = Ui_vtnPrincipal()
-    ui.setupUi(vtnPrincipal)
-    vtnPrincipal.show()
-    sys.exit(app.exec_())
 
