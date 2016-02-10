@@ -384,9 +384,11 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura seleccionada no existe")
-                if self.facturaSeleccionada.getObra() != None:
+                elif self.facturaSeleccionada.getObra() != None:
                     if self.facturaSeleccionada.getObra() != self.obraSocial:
                         QtGui.QMessageBox.information(self,"Aviso","La Obra Social seleccionada no corresponde con la factura")
+                    else:
+                        QtGui.QMessageBox.information(self,"Aviso","Esta factura ya fue cobrado con Obra Social")
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
                 elif self.facturaSeleccionada.getNC()!=None:
