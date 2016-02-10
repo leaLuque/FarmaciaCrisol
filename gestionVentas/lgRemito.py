@@ -177,6 +177,8 @@ class Remito(CRUDWidget,Ui_vtnRemito):
 
         self.sender = PoolOfWindows.getVentana("VentaConRemito")
         self.sender.objectCreated.connect(self.cargar_remitos)
+        self.sender1 = PoolOfWindows.getVentana("RegistrarCobroRemito")
+        self.sender1.objectModified.connect(self.cargar_remitos)
 
     @classmethod
     def delete(cls, mdi):
@@ -869,7 +871,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
                 cobroCliente.guardar(self.sesion)
                 QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
-
+                self.objectModified.emit()
                 data = {}
                 data["numero"] = self.factura.numero
                 data["fecha"] = self.factura.fecha_emision
@@ -878,6 +880,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 generarFactura(data)
 
                 self.limpiarForm()
+
 
     def cancelarOperacion(self):
         """

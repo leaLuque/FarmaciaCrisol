@@ -244,6 +244,23 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         self.limpiarTabla(self.tablaFraccionable)
         self.cargarFraccionables()
 
+    def actualizarTablaFraccionable(self,id_presentacion):
+        """
+            Actualiza la tabla de fraccionable
+        :param id_presentacion Identificacion de presetacion:
+        :return:
+        """
+
+        data = self.getAllTabla(self.tablaFraccionable)
+        data_new = filter(lambda x: x[0] != id_presentacion, data.values())
+
+        for dato in data:
+            self.tablaFraccionable.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in data_new:
+               self.tablaFraccionable.setRowHidden(dato,True)
+
     def modificarItem(self):
         """
         Carga los campos con los datos de la presentación seleccionada.
@@ -254,6 +271,7 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         infoItem = []
         for col in range(0, self.tablaPresentacion.columnCount()):
             infoItem.append(self.tablaPresentacion.item(row, col).text())
+        self.actualizarTablaFraccionable(infoItem[0])
         #Cargar la info del item en los lines
         self.lineTipo.setText(infoItem[0])
         self.lineUnidad_Medida.setText(infoItem[1])
