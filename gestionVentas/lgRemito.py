@@ -870,6 +870,8 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                     remito.modificar(self.sesion)
                 cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
                 cobroCliente.guardar(self.sesion)
+                self.factura.setObra(self.obraSocialSeleccionada)
+                self.factura.modificar(self.sesion)
                 QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
                 self.objectModified.emit()
                 data = {}

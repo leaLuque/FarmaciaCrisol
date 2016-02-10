@@ -173,6 +173,7 @@ class CreacionTabla():
             Column('numero',Integer,primary_key=True),
             Column('fecha_emision',Date),
             Column('nota_credito',Integer,ForeignKey("nota_credito.numero")),
+            Column('obra',String),
             Column('anulado',Boolean)
         )
 

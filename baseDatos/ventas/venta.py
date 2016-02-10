@@ -253,10 +253,11 @@ class Factura(ObjetoBase):
         :param numero Numero de la Factura:
         :return:
         """
-        self.numero=numero
-        self.fecha_emision=date.today()
-        self.anulado=False
-        self.nota_credito=None
+        self.numero = numero
+        self.fecha_emision = date.today()
+        self.anulado = False
+        self.nota_credito = None
+        self.obra = None
 
     def getFechaEmision(self):
         """
@@ -315,6 +316,21 @@ class Factura(ObjetoBase):
         for valor in query:
             temp.append(valor)
         return temp
+
+    def setObra(self,obra):
+        """
+            Setea el valor de la obra
+        :param obra Razón social de la obra:
+        :return:
+        """
+        self.obra = obra
+
+    def getObra(self):
+        """
+            Devuelve la obra asociada con la factura
+        :return obra:
+        """
+        return self.obra
 
     @classmethod
     def existeFactura(cls,numero,sesion):

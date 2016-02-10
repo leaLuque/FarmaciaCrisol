@@ -384,6 +384,9 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura seleccionada no existe")
+                if self.facturaSeleccionada.getObra() != None:
+                    if self.facturaSeleccionada.getObra() != self.obraSocial:
+                        QtGui.QMessageBox.information(self,"Aviso","La Obra Social seleccionada no corresponde con la factura")
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
                 elif self.facturaSeleccionada.getNC()!=None:
@@ -871,6 +874,8 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 data["detalles"] = self.data
                 data["formaPago"] = self.formapago
                 generarFactura(data)
+                self.factura.setObra(self.obraSocialSeleccionada)
+                self.factura.modificar(self.sesion)
                 self.limpiarVentana()
             else:
                 QtGui.QMessageBox.information(self,"Aviso","La factura aun no ha sido cobrada")
