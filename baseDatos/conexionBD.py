@@ -198,7 +198,8 @@ class CreacionTabla():
         FacturaLiquidacion.tabla=Table('factura_liquidacion',metadata,
             Column('numero',Integer,primary_key=True),
             Column('fecha_emision',Date),
-            Column('nro_factura',Integer,ForeignKey("factura.numero"))
+            Column('nro_factura',Integer,ForeignKey("factura.numero")),
+            Column('baja',Boolean)
         )
 
         CobroObraSocial.tabla=Table('cobro_obra_social',metadata,

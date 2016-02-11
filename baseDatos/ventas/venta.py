@@ -6,6 +6,7 @@ from datetime import date
 from baseDatos.productos import ObjetoBase
 from baseDatos.productos import Producto
 from baseDatos.productos import LoteProducto
+from baseDatos.obraSocial import FacturaLiquidacion
 
 
 class Remito(ObjetoBase):
@@ -346,14 +347,18 @@ class Factura(ObjetoBase):
             temp.append(valor)
         return temp
 
-    ##@classmethod
-    ##def buscarDetalles(self,numero,sesion):
-    ##    """
-    ##        Devuelve los detalles asocias
-    ##   :return:
-    ##    :rtype:
-    ##    """
-    ##   return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==numero)
+    def estaLiquidada(self,sesion):
+        """
+            Indica si la factura se encuentra vinculada a
+            una factura de liquidacion a obra social
+        :param sesion Sesion actual con la Base de Datos:
+        :return Boolean:
+        """
+        query = FacturaLiquidacion.buscarAlta(FacturaLiquidacion.nro_factura,sesion,self.numero)
+        if query == None:
+            return False
+        else:
+            return True
 
     @classmethod
     def existeFactura(cls,numero,sesion):

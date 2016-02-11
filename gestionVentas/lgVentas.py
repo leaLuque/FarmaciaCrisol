@@ -77,6 +77,10 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                 elif self.facturaSeleccionada.getNC()!=None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura ya ha sido devuelta")
                     self.facturaSeleccionada = None
+                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
+                    QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para la devolución ha expirado")
+                elif self.facturaSeleccionada.estaLiquidada(self.sesion):
+                    QtGui.QMessageBox.information(self,"Aviso","La factura se encuentra liquidada a la Obra Social")
                 else:
                     self.lineNumero.setEnabled(False)
                     self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
@@ -391,6 +395,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                         QtGui.QMessageBox.information(self,"Aviso","Esta factura ya fue cobrado con Obra Social")
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
+                elif self.facturaSeleccionada.estaLiquidada(self.sesion):
+                    QtGui.QMessageBox.information(self,"Aviso","La factura se encuentra liquidada a la Obra Social")
                 elif self.facturaSeleccionada.getNC()!=None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura ya posee una Nota de Crédito")
                 else:
