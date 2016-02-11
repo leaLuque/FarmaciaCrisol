@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a183d255-c328-4064-9f8a-66480487b818" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/factura.pdf" afterPath="$PROJECT_DIR$/factura.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestionVentas/lgVentas.py" afterPath="$PROJECT_DIR$/gestionVentas/lgVentas.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Comprobantes/nota.html" afterPath="$PROJECT_DIR$/Comprobantes/nota.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FarmaciaCrisol.iws" />
@@ -31,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lgVentas.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lgVentas.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gestionVentas/lgVentas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-              <caret line="928" column="39" selection-start-line="928" selection-start-column="39" selection-end-line="928" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.41379312" vertical-offset="0" max-vertical-offset="435">
+              <caret line="1128" column="24" selection-start-line="1128" selection-start-column="24" selection-end-line="1128" selection-end-column="24" />
               <folding>
                 <element signature="e#1245#10802#0" expanded="false" />
                 <element signature="e#1245#1334#1" expanded="false" />
@@ -117,38 +119,29 @@
                 <element signature="e#37672#38494#0" expanded="false" />
                 <element signature="e#37672#37807#1" expanded="false" />
                 <element signature="e#38537#39791#0" expanded="false" />
-                <element signature="e#39837#47071#0" expanded="false" />
+                <element signature="e#39837#48565#0" expanded="false" />
                 <element signature="e#39837#39907#1" expanded="false" />
-                <element signature="e#39978#40747#0" expanded="false" />
+                <element signature="e#39978#40800#0" expanded="false" />
                 <element signature="e#39978#40147#1" expanded="false" />
-                <element signature="e#40789#40999#0" expanded="false" />
-                <element signature="e#40789#40921#1" expanded="false" />
-                <element signature="e#41032#42606#0" expanded="false" />
-                <element signature="e#41032#41102#1" expanded="false" />
-                <element signature="e#42639#43295#0" expanded="false" />
-                <element signature="e#43329#43983#0" expanded="false" />
-                <element signature="e#44022#44947#0" expanded="false" />
-                <element signature="e#44022#44122#1" expanded="false" />
-                <element signature="e#44989#45377#0" expanded="false" />
-                <element signature="e#44989#45062#1" expanded="false" />
-                <element signature="e#45412#46538#0" expanded="false" />
-                <element signature="e#45412#45540#1" expanded="false" />
-                <element signature="e#46572#47071#0" expanded="false" />
-                <element signature="e#46572#46695#1" expanded="false" />
+                <element signature="e#40842#41052#0" expanded="false" />
+                <element signature="e#40842#40974#1" expanded="false" />
+                <element signature="e#41085#42657#0" expanded="false" />
+                <element signature="e#41085#41168#1" expanded="false" />
+                <element signature="e#42690#43691#0" expanded="false" />
+                <element signature="e#42690#42789#1" expanded="false" />
+                <element signature="e#43724#44722#0" expanded="false" />
+                <element signature="e#43724#43822#1" expanded="false" />
+                <element signature="e#44761#45935#0" expanded="false" />
+                <element signature="e#44761#44861#1" expanded="false" />
+                <element signature="e#45969#46467#0" expanded="false" />
+                <element signature="e#45969#46041#1" expanded="false" />
+                <element signature="e#46509#46903#0" expanded="false" />
+                <element signature="e#46509#46582#1" expanded="false" />
+                <element signature="e#46938#48064#0" expanded="false" />
+                <element signature="e#46938#47066#1" expanded="false" />
+                <element signature="e#48098#48565#0" expanded="false" />
+                <element signature="e#48098#48221#1" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78520286" vertical-offset="31" max-vertical-offset="450">
-              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -187,8 +180,8 @@
         <option value="$PROJECT_DIR$/baseDatos/ventas/venta.py" />
         <option value="$PROJECT_DIR$/gestionVentas/lgRemito.py" />
         <option value="$PROJECT_DIR$/gestionProductos/lgProductos.py" />
-        <option value="$PROJECT_DIR$/gestionVentas/lgVentas.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/gestionVentas/lgVentas.py" />
       </list>
     </option>
   </component>
@@ -533,7 +526,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1128,10 +1121,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85714287" vertical-offset="0" max-vertical-offset="450">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gestionVentas/lgVentas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <caret line="928" column="39" selection-start-line="928" selection-start-column="39" selection-end-line="928" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.41379312" vertical-offset="0" max-vertical-offset="435">
+          <caret line="1128" column="24" selection-start-line="1128" selection-start-column="24" selection-end-line="1128" selection-end-column="24" />
           <folding>
             <element signature="e#1245#10802#0" expanded="false" />
             <element signature="e#1245#1334#1" expanded="false" />
@@ -1213,36 +1217,29 @@
             <element signature="e#37672#38494#0" expanded="false" />
             <element signature="e#37672#37807#1" expanded="false" />
             <element signature="e#38537#39791#0" expanded="false" />
-            <element signature="e#39837#47071#0" expanded="false" />
+            <element signature="e#39837#48565#0" expanded="false" />
             <element signature="e#39837#39907#1" expanded="false" />
-            <element signature="e#39978#40747#0" expanded="false" />
+            <element signature="e#39978#40800#0" expanded="false" />
             <element signature="e#39978#40147#1" expanded="false" />
-            <element signature="e#40789#40999#0" expanded="false" />
-            <element signature="e#40789#40921#1" expanded="false" />
-            <element signature="e#41032#42606#0" expanded="false" />
-            <element signature="e#41032#41102#1" expanded="false" />
-            <element signature="e#42639#43295#0" expanded="false" />
-            <element signature="e#43329#43983#0" expanded="false" />
-            <element signature="e#44022#44947#0" expanded="false" />
-            <element signature="e#44022#44122#1" expanded="false" />
-            <element signature="e#44989#45377#0" expanded="false" />
-            <element signature="e#44989#45062#1" expanded="false" />
-            <element signature="e#45412#46538#0" expanded="false" />
-            <element signature="e#45412#45540#1" expanded="false" />
-            <element signature="e#46572#47071#0" expanded="false" />
-            <element signature="e#46572#46695#1" expanded="false" />
+            <element signature="e#40842#41052#0" expanded="false" />
+            <element signature="e#40842#40974#1" expanded="false" />
+            <element signature="e#41085#42657#0" expanded="false" />
+            <element signature="e#41085#41168#1" expanded="false" />
+            <element signature="e#42690#43691#0" expanded="false" />
+            <element signature="e#42690#42789#1" expanded="false" />
+            <element signature="e#43724#44722#0" expanded="false" />
+            <element signature="e#43724#43822#1" expanded="false" />
+            <element signature="e#44761#45935#0" expanded="false" />
+            <element signature="e#44761#44861#1" expanded="false" />
+            <element signature="e#45969#46467#0" expanded="false" />
+            <element signature="e#45969#46041#1" expanded="false" />
+            <element signature="e#46509#46903#0" expanded="false" />
+            <element signature="e#46509#46582#1" expanded="false" />
+            <element signature="e#46938#48064#0" expanded="false" />
+            <element signature="e#46938#47066#1" expanded="false" />
+            <element signature="e#48098#48565#0" expanded="false" />
+            <element signature="e#48098#48221#1" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78520286" vertical-offset="31" max-vertical-offset="450">
-          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -940,18 +940,19 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
         """
         QtGui.QDialog.__init__(self,ventana_padre)
         self.setupUi(self)
+        self.btnAceptar.pressed.connect(self.confirmar)
+        self.btnCancelar.pressed.connect(self.cancelar)
+        self.btnEliminar.pressed.connect(self.eliminar)
+        self.rbtnEfectivo.pressed.connect(self.cobroEfectivo)
+        self.rbtnNC.pressed.connect(self.cobroNC)
+        self.rbtnTC.pressed.connect(self.cobroTC)
+        self.rbtnTD.pressed.connect(self.cobroTD)
         self.total_a_pagar = total
         self.padre = ventana_padre
         self.factura = factura
         self.sesion = sesion
         self.actualizar_total()
-        self.listado_de_cobros = []
-        self.btnAceptar.pressed.connect(self.confirmar)
-        self.btnCancelar.pressed.connect(self.cancelar)
-        self.rbtnEfectivo.pressed.connect(self.cobroEfectivo)
-        self.rbtnNC.pressed.connect(self.cobroNC)
-        self.rbtnTC.pressed.connect(self.cobroTC)
-        self.rbtnTD.pressed.connect(self.cobroTD)
+        self.detalles_cobro = {}
 
     def actualizar_total(self):
         """
@@ -964,80 +965,114 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
 
     def cobroNC(self):
         """
-            Cobro con Nota de Crédito
+            Se encarga de efectuar el cobro con NC
         :return:
         """
-        self.rbtnNC.setChecked(True)
-        totalFactura = self.total_a_pagar
-        numero,ok = QtGui.QInputDialog.getText(self,"Cobro c/Nota de Crédito","Ingrese número de Nota de Crédito")
-        if ok:
-            notaCredito = NotaCreditoModel.getNotaCredito(self.padre.sesion,int(numero))
-            if notaCredito == None:
-                QtGui.QMessageBox.information(self,"Aviso","La Nota de Crédito ingresada no existe")
-            elif notaCredito.getTotal(self.padre.sesion) < totalFactura:
-                QtGui.QMessageBox.information(self,"Aviso","El monto de la Nota de Credito es insuficiente")
-            elif notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero) < totalFactura:
-                 dif = notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero)
-                 QtGui.QMessageBox.information(self,"Aviso","La Nota solo posee $" + str(dif))
-            else:
-                self.listado_de_cobros.append(["Nota de Crédito",self.total_a_pagar,notaCredito.numero])
-                self.total_a_pagar = 0
-                self.actualizar_total()
-                self.actualizar_tabla()
-
-            #cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Nota Credito",totalFactura)
-            #cobroCliente.setNC(notaCredito.numero)
-            #cobroCliente.guardar(self.sesion)
-            #self.facturaCobrada=True
+        if self.total_a_pagar == 0:
+            QtGui.QMessageBox.information(self,"Aviso","El saldo restante a pagar es cero")
+        else:
+            self.rbtnNC.setChecked(True)
+            totalFactura = self.total_a_pagar
+            numero,ok = QtGui.QInputDialog.getText(self,"Cobro c/Nota de Crédito","Ingrese número de Nota de Crédito")
+            if ok:
+                notaCredito = NotaCreditoModel.getNotaCredito(self.padre.sesion,int(numero))
+                if notaCredito == None:
+                    QtGui.QMessageBox.information(self,"Aviso","La Nota de Crédito ingresada no existe")
+                elif notaCredito.getTotal(self.padre.sesion) < totalFactura:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto de la Nota de Credito es insuficiente")
+                elif notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero) < totalFactura:
+                     dif = notaCredito.getTotal(self.padre.sesion) - CobroClienteModel.getTotalNC(self.padre.sesion,notaCredito.numero)
+                     QtGui.QMessageBox.information(self,"Aviso","La Nota solo posee $" + str(dif))
+                else:
+                    temp = ["Nota de Crédito",self.total_a_pagar,notaCredito.numero]
+                    self.detalles_cobro[self.tablePagos.rowCount()] = temp
+                    self.total_a_pagar = 0
+                    self.actualizar_total()
+                    self.actualizar_tabla()
 
     def cobroTC(self):
-        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Crédito","Ingrese monto a pagar",0,0,2000,2)
-        if ok:
-            if monto_a_pagar > self.total_a_pagar:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
-            elif monto_a_pagar == 0:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
-            else:
-                self.listado_de_cobros.append(["Tarjeta de Crédito",monto_a_pagar])
-                self.total_a_pagar -= monto_a_pagar
-                self.actualizar_total()
-                self.actualizar_tabla()
+        """
+            Se encarga de efectuar el cobro con Tarjeta de Crédito
+        :return:
+        """
+        if self.total_a_pagar == 0:
+            QtGui.QMessageBox.information(self,"Aviso","El saldo restante a pagar es cero")
+        else:
+            monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Crédito","Ingrese monto a pagar",0,0,2000,2)
+            if ok:
+                if monto_a_pagar > self.total_a_pagar:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
+                elif monto_a_pagar == 0:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+                else:
+                    temp = ["Tarjeta de Crédito",monto_a_pagar]
+                    self.detalles_cobro[self.tablePagos.rowCount()] = temp
+                    self.total_a_pagar -= monto_a_pagar
+                    self.actualizar_total()
+                    self.actualizar_tabla()
 
     def cobroTD(self):
-
-        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Débito","Ingrese monto a pagar",0,0,2000,2)
-        if ok:
-            if monto_a_pagar > self.total_a_pagar:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
-            elif monto_a_pagar == 0:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
-            else:
-                self.listado_de_cobros.append(["Tarjeta de Débito",monto_a_pagar])
-                self.total_a_pagar -= monto_a_pagar
-                self.actualizar_total()
-                self.actualizar_tabla()
+        """
+            Se encarga de efectuar el cobro con Tarjeta de Débito
+        :return:
+        """
+        if self.total_a_pagar == 0:
+            QtGui.QMessageBox.information(self,"Aviso","El saldo restante a pagar es cero")
+        else:
+            monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Tarjeta Débito","Ingrese monto a pagar",0,0,2000,2)
+            if ok:
+                if monto_a_pagar > self.total_a_pagar:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado es mayor al total a pagar")
+                elif monto_a_pagar == 0:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+                else:
+                    temp = ["Tarjeta de Débito",monto_a_pagar]
+                    self.detalles_cobro[self.tablePagos.rowCount()] = temp
+                    self.total_a_pagar -= monto_a_pagar
+                    self.actualizar_total()
+                    self.actualizar_tabla()
 
     def cobroEfectivo(self):
         """
             Se encarga de efectuar el cobro en efectivo del cliente
         :return:
         """
-        self.rbtnEfectivo.setChecked(True)
-        monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Efectivo","Ingrese monto a pagar",0,0,2000,2)
+        if self.total_a_pagar == 0:
+            QtGui.QMessageBox.information(self,"Aviso","El saldo restante a pagar es cero")
+        else:
+            self.rbtnEfectivo.setChecked(True)
+            monto_a_pagar, ok = QtGui.QInputDialog.getDouble(self,"Cobro Efectivo","Ingrese monto a pagar",0,0,2000,2)
 
-        if ok:
-            if monto_a_pagar >= self.total_a_pagar:
-                QtGui.QMessageBox.information(self,"Cobro Efectivo","Su vuelto es:%.2f" % (monto_a_pagar - self.total_a_pagar))
-                self.listado_de_cobros.append(["Efectivo",self.total_a_pagar])
-                self.total_a_pagar = 0
-            elif monto_a_pagar == 0:
-                QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
-            else:
-                self.listado_de_cobros.append(["Efectivo",monto_a_pagar])
-                self.total_a_pagar -= monto_a_pagar
+            if ok:
+                if monto_a_pagar >= self.total_a_pagar:
+                    QtGui.QMessageBox.information(self,"Cobro Efectivo","Su vuelto es:%.2f" % (monto_a_pagar - self.total_a_pagar))
+                    self.listado_de_cobros.append(["Efectivo",self.total_a_pagar])
+                    self.total_a_pagar = 0
+                elif monto_a_pagar == 0:
+                    QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
+                else:
+                    temp = ["Efectivo",monto_a_pagar]
+                    self.detalles_cobro[self.tablePagos.rowCount()] = temp
+                    self.total_a_pagar -= monto_a_pagar
 
+                self.actualizar_total()
+                self.actualizar_tabla()
+
+    def eliminar(self):
+        """
+            Elimina un pago determinado
+        :return:
+        """
+
+        itemActual = self.tablePagos.currentItem()
+        if itemActual == None:
+            self.showMsjEstado("Debe seleccionar un para poder eliminar")
+        else:
+            monto = self.detalles_cobro[itemActual.row()][1]
+            del self.detalles_cobro[itemActual.row()]
+            self.total_a_pagar += monto
+            self.tablePagos.setRowHidden(itemActual.row(),True)
             self.actualizar_total()
-            self.actualizar_tabla()
 
     def actualizar_tabla(self):
         """
@@ -1046,7 +1081,7 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
         """
 
         self.padre.limpiarTabla(self.tablePagos)
-        for row, cobro in enumerate(self.listado_de_cobros):
+        for row, cobro in enumerate(self.detalles_cobro.values()):
             self.tablePagos.insertRow(row)
             self.tablePagos.setItem(row,0,QtGui.QTableWidgetItem(cobro[0]))
             self.tablePagos.setItem(row,1,QtGui.QTableWidgetItem("$"+str(cobro[1])))
@@ -1089,7 +1124,6 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
         signal = QtGui.QMessageBox.information(self,"Aviso","¿Desea cancelar la operacion?",\
                                            QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
         if signal == QtGui.QMessageBox.Ok:
-            self.listado_de_cobros = []
+            self.detalles_cobro = {}
             self.padre.limpiarTabla(self.tablePagos)
             self.close()
-        #self.parentWidget()
