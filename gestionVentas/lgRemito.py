@@ -601,6 +601,11 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
 class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 
     def __init__(self, mdi):
+        """
+            Constructor de la clase RegistrarCobroRemito
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()

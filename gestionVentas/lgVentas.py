@@ -508,6 +508,11 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
     """
 
     def __init__(self,mdi):
+        """
+            Constructor de la clase VentaContado
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
         self.validadores()
