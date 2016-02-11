@@ -50,6 +50,10 @@ class Listar(MdiWidget, Ui_vtnListar):
         self.deFechaHasta.setDate(fecha)
 
     def habilitarFecha(self):
+        """
+            Habilita las fechas Desde y Hasta
+        :return:
+        """
         self.listado = self.cbTipoListado.currentText()
         if (self.listado=="Productos en Stock"):
             self.gbFechas.setEnabled(False)

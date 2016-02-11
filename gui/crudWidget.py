@@ -6,6 +6,9 @@ from PyQt4 import QtCore
 from gui import MdiWidget
 
 class CRUDWidget(MdiWidget):
+    """
+        Clase que permite la comunicación entre ventanas de una misma clase
+    """
     objectCreated = QtCore.pyqtSignal()
     objectModified = QtCore.pyqtSignal()
     objectDeleted = QtCore.pyqtSignal()
@@ -17,14 +20,28 @@ class CRUDWidget(MdiWidget):
     }
 
     def actualizar(self):
+        """
+            Actualiza el contenido de la ventana
+        :return:
+        """
         pass
 
     @classmethod
     def actionWidget(cls, tipo):
+        """
+            Devuelve la instancia según el tipo
+        :param tipo:
+        :return:
+        """
         return cls.instances[tipo]
 
     @classmethod
     def create(cls, mdi):
+        """
+            Establece el comportamiento para la ventana de alta
+        :param mdi:
+        :return:
+        """
         cls.instances['C'] = gui = cls(mdi)
         gui.setWindowTitle("Alta %s" % cls.__name__)
         modificar = cls.actionWidget('U')
@@ -40,6 +57,11 @@ class CRUDWidget(MdiWidget):
 
     @classmethod
     def read(cls, mdi):
+        """
+            Establece el comportamiento para la ventana de lectura
+        :param mdi:
+        :return:
+        """
         cls.instances['R'] = gui = cls(mdi)
         gui.setWindowTitle("Alta %s" % cls.__name__)
         alta = cls.actionWidget('C')
@@ -55,6 +77,11 @@ class CRUDWidget(MdiWidget):
 
     @classmethod
     def update(cls, mdi):
+        """
+            Establece el comportamiento para la ventana de actualización
+        :param mdi:
+        :return:
+        """
         cls.instances['U'] = gui = cls(mdi)
         gui.setWindowTitle(QtCore.QString.fromUtf8("Modificación %s" % cls.__name__))
         alta = cls.actionWidget('C')
@@ -69,6 +96,11 @@ class CRUDWidget(MdiWidget):
 
     @classmethod
     def delete(cls, mdi):
+        """
+            Establece el comportamiento para la ventana de eliminación
+        :param mdi:
+        :return:
+        """
         cls.instances['D'] = gui = cls(mdi)
         gui.setWindowTitle("Baja %s" % cls.__name__)
         gui.objectModified.connect(gui.actualizar)
@@ -86,6 +118,14 @@ class CRUDWidget(MdiWidget):
         return gui
 
     def bajaValida(self, model, campo, var):
+        """
+            Pemite determinar si alguna asociación que
+            condicione la baja
+        :param model:
+        :param campo:
+        :param var:
+        :return:
+        """
         resultado = model.buscarAlta(campo, self.sesion, var).all()
         if resultado.__len__() > 0:
             return False

@@ -8,7 +8,15 @@ from gui import MdiWidget
 from login import Login
 
 class Ingresar(MdiWidget, Ui_vtnIngresar):
+    """
+        Clase que modela el comportamiento de Ingresar
+    """
     def __init__(self, mdi):
+        """
+            Constructor de la clase Ingresar
+        :param mdi:
+        :return:
+        """
         MdiWidget.__init__(self, mdi)
         self.btnAceptar.pressed.connect(self.validarUsuario)
         self.btnCancelar.pressed.connect(self.limpiarCampos)
@@ -16,10 +24,18 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
         self.lineContrasenia.returnPressed.connect(self.validarUsuario)
 
     def limpiarCampos(self):
+        """
+            Limpia los campos de la ventana
+        :return:
+        """
         self.lineUsuario.clear()
         self.lineContrasenia.clear()
 
     def validarUsuario(self):
+        """
+            Valida al usuario ingresada
+        :return:
+        """
         log=Login(str(self.lineUsuario.text()), str(self.lineContrasenia.text()),
                   self.mdi().window().getSesionBD())
         rol=log.loginValido()
@@ -31,6 +47,12 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
             QtGui.QMessageBox.critical(self, 'Error', 'Usuario o Contraseña incorrecta.', 'Aceptar')
 
     def habilitarPermisos(self, rol):
+        """
+            Setea los permisos a las ventanas,
+            de acuerdo al rol del usuario
+        :param rol Rol del usuario:
+        :return:
+        """
         self.mdi().window().deshabilitarMenu()
         permisos={'far': self.mdi().window().farmaceutico, 'tec': self.mdi().window().tecnico_farmaceutico,
                   'adm': self.mdi().window().administrador}

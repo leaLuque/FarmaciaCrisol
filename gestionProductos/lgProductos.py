@@ -103,6 +103,12 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                                               'Aceptar')
 
     def validarLote(self, producto):
+        """
+            Verifica si el lote ya esta asociado a un producto, entonces no
+            puede asociarse a otro producto distinto
+        :param producto Id del producto:
+        :return:
+        """
         if self.lote != None:
             loteProd = LoteProductoModel.buscar(LoteProductoModel.id_lote, self.sesion, self.lote.getCodigo()).all()
             if loteProd.__len__() == 1:
@@ -138,6 +144,11 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                                                           'No puede ser dado de baja', 'Aceptar')
 
     def stock(self, cod_barra):
+        """
+            Verifica si hay stock para el producto
+        :param cod_barra Id del producto:
+        :return:
+        """
         lote_producto = LoteProductoModel.buscar(LoteProductoModel.id_producto, self.sesion, cod_barra).all()
         for lp in lote_producto:
             if (lp.getCantidad() > 0):

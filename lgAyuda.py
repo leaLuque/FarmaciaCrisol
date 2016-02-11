@@ -9,7 +9,13 @@ from gui import MdiWidget
 from ventanas.vtnAyuda import Ui_vtnAyuda
 
 class Ayuda (MdiWidget, Ui_vtnAyuda):
+    """
+        Se encarga de mostrar la ayuda de ususario según el contexto
+    """
     def __init__(self, mdi):
+        """
+            Constructor de la clase Ayuda
+        """
         MdiWidget.__init__(self, mdi)
         self.view = QWebView(self)
         self.id_menu = [
@@ -51,13 +57,19 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
         self.verticalLayout.addWidget(self.view)
 
 
-    def linkClicked(self, url):
+    def linkClicked(self):
+        """
+            Conecta la Ventana Ayuda con el WebView, y actualiza la página
+        """
         self.view.page().mainFrame().addToJavaScriptWindowObject("Ayuda", self)
         self.view.page().mainFrame().evaluateJavaScript("id = getId(); Ayuda.cargarContenido(id);")
         self.view.reload()
 
     @QtCore.pyqtSlot(str)
     def cargarContenido(self, id):
+        """
+            Carga el contenido de la ayuda
+        """
         if (id == "id_menu_usuario" or id == "id_ing"):
             self.leerTxt("Ingresar", "img/capturas/ingresar.png", "Figura 1", "ingresar", "id_menu_usuario")
         elif (id == "id_salir"):
@@ -118,6 +130,14 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
             self.leerTxt("Generar Listado", "img/capturas/listar.png", "", "genList", "id_menu_listado")
 
     def leerTxt(self, titulo, imagen, figura, pal_clave, id_menu_onclick):
+        """
+            Lee el contenido del archivo txt
+        :param titulo Título de la ayuda:
+        :param imagen Imagen de la ayuda:
+        :param figura Tag de la imagen:
+        :param pal_clave Separador de contenido:
+        :param id_menu_onclick Opción seleccionada:
+        """
         plantilla = open("contenidoPlantilla.html", "r")
         contenido_plantilla = plantilla.read()
         plantilla.close()
@@ -155,5 +175,10 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
         archivo.close()
 
     def ayudaVentana(self, ventana):
+        """
+            Carga el contenido de acuerdo al contexto
+        :param ventana:
+        :return:
+        """
         self.cargarContenido(ventana)
         self.view.reload()

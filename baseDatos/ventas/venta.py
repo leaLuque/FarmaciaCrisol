@@ -331,16 +331,12 @@ class Factura(ObjetoBase):
         """
         return self.nota_credito
 
-    def getFechaEmision(self):
-        """
-            Devuelve la fecha de emision de la factura
-        :return Fecha de emision de la factura:
-        :rtype Datetime:
-        """
-        return self.fecha_emision
-
     def getCobros(self,sesion):
-
+        """
+            Devuelve los cobros asociados a una factura
+        :param sesion Sesion actual con la Base de Datos:
+        :return:
+        """
         query = CobroCliente.buscar(CobroCliente.id_factura,sesion,self.numero)
         temp = []
         for valor in query:
