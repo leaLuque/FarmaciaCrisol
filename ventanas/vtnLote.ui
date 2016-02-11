@@ -29,7 +29,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Código</string>
+         <string>* Código</string>
         </property>
        </widget>
       </item>
@@ -70,7 +70,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Fecha de Vencimiento</string>
+         <string>* Fecha de Vencimiento</string>
         </property>
        </widget>
       </item>
@@ -101,7 +101,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="labelCantidad">
         <property name="text">
-         <string>Cantidad</string>
+         <string>* Cantidad</string>
         </property>
        </widget>
       </item>
@@ -167,30 +167,6 @@
         </column>
        </widget>
       </item>
-      <item row="5" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnActualizarLote">
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
      </layout>
     </widget>
    </item>
@@ -209,7 +185,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>* Código de Barra</string>
+         <string>Código de Barra</string>
         </property>
        </widget>
       </item>
@@ -286,30 +262,6 @@
         </column>
        </widget>
       </item>
-      <item row="2" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnActualizarProd">
-          <property name="text">
-           <string>Actualizar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
      </layout>
     </widget>
    </item>
@@ -352,11 +304,9 @@
   <tabstop>dateFechVenc</tabstop>
   <tabstop>spinCantidad</tabstop>
   <tabstop>tablaLote</tabstop>
-  <tabstop>btnActualizarLote</tabstop>
   <tabstop>lineCod_Barra</tabstop>
   <tabstop>btnBuscarProd</tabstop>
   <tabstop>tablaProducto</tabstop>
-  <tabstop>btnActualizarProd</tabstop>
   <tabstop>btnAceptar</tabstop>
   <tabstop>btnCancelar</tabstop>
  </tabstops>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnPresentacion.ui'
 #
-# Created: Tue Jan 19 19:46:26 2016
+# Created: Thu Feb 11 12:41:16 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -141,14 +141,14 @@ class Ui_vtnPresentacion(object):
 
     def retranslateUi(self, vtnPresentacion):
         vtnPresentacion.setWindowTitle(_translate("vtnPresentacion", "Alta Presentación", None))
-        self.label.setText(_translate("vtnPresentacion", "Tipo", None))
+        self.label.setText(_translate("vtnPresentacion", "* Tipo", None))
         self.lineUnidad_Medida.setStatusTip(_translate("vtnPresentacion", "Ingrese unidad de medida (solo letras)", None))
         self.lineUnidad_Medida.setAccessibleDescription(_translate("vtnPresentacion", "texto", None))
-        self.label_2.setText(_translate("vtnPresentacion", "Unidad de Medida", None))
+        self.label_2.setText(_translate("vtnPresentacion", "* Unidad de Medida", None))
         self.lineTipo.setStatusTip(_translate("vtnPresentacion", "Ingrese el tipo de Presentación (solo letras)", None))
         self.lineTipo.setAccessibleDescription(_translate("vtnPresentacion", "texto", None))
         self.btnBuscar.setText(_translate("vtnPresentacion", "Buscar", None))
-        self.label_3.setText(_translate("vtnPresentacion", "Cantidad de Fracciones", None))
+        self.label_3.setText(_translate("vtnPresentacion", "* Cantidad de Fracciones", None))
         self.spinCantidad.setStatusTip(_translate("vtnPresentacion", "Ingrese la cantidad del Producto para dicho lote", None))
         self.groupPresentacion.setTitle(_translate("vtnPresentacion", "Presentación", None))
         item = self.tablaPresentacion.horizontalHeaderItem(0)
@@ -170,4 +170,14 @@ class Ui_vtnPresentacion(object):
         item.setText(_translate("vtnPresentacion", "Cantidad de Fracciones", None))
         self.btnAceptar.setText(_translate("vtnPresentacion", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnPresentacion", "Cancelar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnPresentacion = QtGui.QWidget()
+    ui = Ui_vtnPresentacion()
+    ui.setupUi(vtnPresentacion)
+    vtnPresentacion.show()
+    sys.exit(app.exec_())
 

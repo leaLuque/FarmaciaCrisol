@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnIngresar.ui'
 #
-# Created: Wed Apr  1 14:28:26 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Thu Feb 11 12:41:49 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -60,8 +60,8 @@ class Ui_vtnIngresar(object):
 
     def retranslateUi(self, vtnIngresar):
         vtnIngresar.setWindowTitle(_translate("vtnIngresar", "Ingresar", None))
-        self.label.setText(_translate("vtnIngresar", "Usuario", None))
-        self.label_2.setText(_translate("vtnIngresar", "Contraseña", None))
+        self.label.setText(_translate("vtnIngresar", "* Usuario", None))
+        self.label_2.setText(_translate("vtnIngresar", "* Contraseña", None))
         self.btnAceptar.setText(_translate("vtnIngresar", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnIngresar", "Cancelar", None))
 

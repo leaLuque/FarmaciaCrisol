@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnFraccionarProducto.ui'
 #
-# Created: Sun Feb  7 14:20:12 2016
+# Created: Thu Feb 11 12:41:57 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -147,7 +147,7 @@ class Ui_vtnFraccionarProducto(object):
         item.setText(_translate("vtnFraccionarProducto", "Código de Lote", None))
         item = self.tablaProducto.horizontalHeaderItem(4)
         item.setText(_translate("vtnFraccionarProducto", "Cantidad", None))
-        self.label_7.setText(_translate("vtnFraccionarProducto", "Cantidad", None))
+        self.label_7.setText(_translate("vtnFraccionarProducto", "* Cantidad", None))
         self.spinCantidad.setStatusTip(_translate("vtnFraccionarProducto", "Ingrese la cantidad del Producto para dicho lote", None))
         self.gbFraccionable.setTitle(_translate("vtnFraccionarProducto", "Fraccionable", None))
         item = self.tablaFraccionable.horizontalHeaderItem(0)
@@ -162,4 +162,14 @@ class Ui_vtnFraccionarProducto(object):
         item.setText(_translate("vtnFraccionarProducto", "Cantidad", None))
         self.btnAceptar.setText(_translate("vtnFraccionarProducto", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnFraccionarProducto", "Cancelar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnFraccionarProducto = QtGui.QWidget()
+    ui = Ui_vtnFraccionarProducto()
+    ui.setupUi(vtnFraccionarProducto)
+    vtnFraccionarProducto.show()
+    sys.exit(app.exec_())
 

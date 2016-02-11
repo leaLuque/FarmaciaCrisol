@@ -187,10 +187,16 @@
    <property name="text">
     <string>Venta con Remito</string>
    </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
   </action>
   <action name="actionVentaContado">
    <property name="text">
     <string>Venta Contado</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
   <action name="actionModificarRemito">
@@ -256,6 +262,9 @@
   <action name="actionAltaProducto">
    <property name="text">
     <string>Alta</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
    </property>
   </action>
   <action name="actionBajaProducto">
@@ -332,6 +341,9 @@
    <property name="text">
     <string>Alta</string>
    </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
   </action>
   <action name="actionBajaCliente">
    <property name="text">
@@ -351,6 +363,9 @@
   <action name="actionListar">
    <property name="text">
     <string>Generar Listado</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
    </property>
   </action>
   <action name="actionAyuda">

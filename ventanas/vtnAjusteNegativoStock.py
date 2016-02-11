@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnAjusteNegativoStock.ui'
 #
-# Created: Sun Feb  7 14:20:02 2016
+# Created: Thu Feb 11 12:40:56 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -144,8 +144,18 @@ class Ui_vtnAjusteNegativoStock(object):
         item.setText(_translate("vtnAjusteNegativoStock", "Código Lote", None))
         item = self.tablaLoteProducto.horizontalHeaderItem(4)
         item.setText(_translate("vtnAjusteNegativoStock", "Cantidad", None))
-        self.label_2.setText(_translate("vtnAjusteNegativoStock", "Cantidad", None))
+        self.label_2.setText(_translate("vtnAjusteNegativoStock", "* Cantidad", None))
         self.spinCantidad.setStatusTip(_translate("vtnAjusteNegativoStock", "Ingrese la cantidad del Producto para dicho lote", None))
         self.btnAceptar.setText(_translate("vtnAjusteNegativoStock", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnAjusteNegativoStock", "Cancelar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnAjusteNegativoStock = QtGui.QWidget()
+    ui = Ui_vtnAjusteNegativoStock()
+    ui.setupUi(vtnAjusteNegativoStock)
+    vtnAjusteNegativoStock.show()
+    sys.exit(app.exec_())
 

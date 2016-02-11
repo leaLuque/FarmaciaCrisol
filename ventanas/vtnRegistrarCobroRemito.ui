@@ -13,20 +13,14 @@
   <property name="windowTitle">
    <string>Registrar Cobro Remito</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-   </property>
-   <item row="1" column="0" colspan="2">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <widget class="QGroupBox" name="gbObraSocial">
      <property name="title">
       <string>Obra Social</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QRadioButton" name="rbtnRazonSocial">
@@ -54,7 +48,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item>
        <widget class="QTableWidget" name="tableObras">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -88,13 +82,13 @@
      </layout>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item>
     <widget class="QGroupBox" name="gbRemitos">
      <property name="title">
       <string>Remito</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_3">
-      <item row="0" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label">
@@ -122,7 +116,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item>
        <widget class="QTableWidget" name="tableRemitos">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -153,7 +147,7 @@
         </column>
        </widget>
       </item>
-      <item row="2" column="0" colspan="2">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <spacer name="horizontalSpacer">
@@ -180,16 +174,13 @@
      </layout>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item>
     <widget class="QGroupBox" name="gbFactura">
      <property name="title">
       <string>Factura</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_4">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
        <widget class="QTableWidget" name="tableFactura">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -225,7 +216,7 @@
         </column>
        </widget>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <spacer name="horizontalSpacer_3">
@@ -252,7 +243,7 @@
      </layout>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <spacer name="horizontalSpacer_2">

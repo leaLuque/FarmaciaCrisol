@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnCliente.ui'
 #
-# Created: Tue Jan 19 19:46:10 2016
+# Created: Thu Feb 11 12:42:12 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -120,19 +120,19 @@ class Ui_vtnCliente(object):
 
     def retranslateUi(self, vtnCliente):
         vtnCliente.setWindowTitle(_translate("vtnCliente", "Form", None))
-        self.label_2.setText(_translate("vtnCliente", "DNI", None))
-        self.label_5.setText(_translate("vtnCliente", "Nombre", None))
+        self.label_2.setText(_translate("vtnCliente", "* DNI", None))
+        self.label_5.setText(_translate("vtnCliente", "* Nombre", None))
         self.lineApellido.setStatusTip(_translate("vtnCliente", "Ingrese Apellido del cliente (solo letras)", None))
         self.lineApellido.setAccessibleDescription(_translate("vtnCliente", "nya", None))
-        self.label_3.setText(_translate("vtnCliente", "Dirección", None))
+        self.label_3.setText(_translate("vtnCliente", "* Dirección", None))
         self.lineTelefono.setStatusTip(_translate("vtnCliente", "Ingrese Teléfono del cliente (solo números, máximo 20 números)", None))
         self.lineTelefono.setAccessibleDescription(_translate("vtnCliente", "telefono", None))
         self.lineNombre.setStatusTip(_translate("vtnCliente", "Ingrese Nombre del cliente (solo letras)", None))
         self.lineNombre.setAccessibleDescription(_translate("vtnCliente", "nya", None))
         self.lineDni.setStatusTip(_translate("vtnCliente", "Ingrese DNI del cliente (exactamente 8 números)", None))
         self.lineDni.setAccessibleDescription(_translate("vtnCliente", "dni", None))
-        self.label.setText(_translate("vtnCliente", "Apellido", None))
-        self.label_4.setText(_translate("vtnCliente", "* Teléfono", None))
+        self.label.setText(_translate("vtnCliente", "* Apellido", None))
+        self.label_4.setText(_translate("vtnCliente", "Teléfono", None))
         self.lineDireccion.setStatusTip(_translate("vtnCliente", "Ingrese Dirección del cliente", None))
         self.lineDireccion.setAccessibleDescription(_translate("vtnCliente", "direccion", None))
         self.btnBuscar.setText(_translate("vtnCliente", "Buscar", None))
@@ -149,4 +149,14 @@ class Ui_vtnCliente(object):
         item.setText(_translate("vtnCliente", "Teléfono", None))
         self.btnAceptar.setText(_translate("vtnCliente", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnCliente", "Cancelar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnCliente = QtGui.QWidget()
+    ui = Ui_vtnCliente()
+    ui.setupUi(vtnCliente)
+    vtnCliente.show()
+    sys.exit(app.exec_())
 

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'vtnVentanaPrincipal.ui'
 #
-# Created: Wed Apr  1 14:28:27 2015
-#      by: PyQt4 UI code generator 4.11.2
+# Created: Thu Feb 11 12:41:02 2016
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -235,7 +235,9 @@ class Ui_vtnPrincipal(object):
         self.actionSalir_2.setStatusTip(_translate("vtnPrincipal", "Cerrar Aplicación", None))
         self.actionSalir_2.setShortcut(_translate("vtnPrincipal", "Ctrl+Q", None))
         self.actionVentaConRemito.setText(_translate("vtnPrincipal", "Venta con Remito", None))
+        self.actionVentaConRemito.setShortcut(_translate("vtnPrincipal", "F2", None))
         self.actionVentaContado.setText(_translate("vtnPrincipal", "Venta Contado", None))
+        self.actionVentaContado.setShortcut(_translate("vtnPrincipal", "F3", None))
         self.actionModificarRemito.setText(_translate("vtnPrincipal", "Modificar Remito", None))
         self.actionBajaRemito.setText(_translate("vtnPrincipal", "Baja Remito", None))
         self.actionRegistrarCobroRemito.setText(_translate("vtnPrincipal", "Registrar Cobro Remito", None))
@@ -249,6 +251,7 @@ class Ui_vtnPrincipal(object):
         self.actionModificar_Monodroga.setText(_translate("vtnPrincipal", "Modificar Monodroga", None))
         self.actionBaja_Presentaci_n.setText(_translate("vtnPrincipal", "Baja Presentación", None))
         self.actionAltaProducto.setText(_translate("vtnPrincipal", "Alta", None))
+        self.actionAltaProducto.setShortcut(_translate("vtnPrincipal", "F8", None))
         self.actionBajaProducto.setText(_translate("vtnPrincipal", "Baja", None))
         self.actionModificarProducto.setText(_translate("vtnPrincipal", "Modificar", None))
         self.actionAltaMedicamento.setText(_translate("vtnPrincipal", "Alta", None))
@@ -264,10 +267,12 @@ class Ui_vtnPrincipal(object):
         self.actionModificarLote.setText(_translate("vtnPrincipal", "Modificar", None))
         self.actionFraccionarProducto.setText(_translate("vtnPrincipal", "Fraccionar", None))
         self.actionAltaCliente.setText(_translate("vtnPrincipal", "Alta", None))
+        self.actionAltaCliente.setShortcut(_translate("vtnPrincipal", "F9", None))
         self.actionBajaCliente.setText(_translate("vtnPrincipal", "Baja", None))
         self.actionModificarCliente.setText(_translate("vtnPrincipal", "Modificar", None))
         self.actionAjusteNegativoStock.setText(_translate("vtnPrincipal", "Ajuste Negativo Stock", None))
         self.actionListar.setText(_translate("vtnPrincipal", "Generar Listado", None))
+        self.actionListar.setShortcut(_translate("vtnPrincipal", "F10", None))
         self.actionAyuda.setText(_translate("vtnPrincipal", "Ayuda", None))
         self.actionAcercaDe.setText(_translate("vtnPrincipal", "Acerca de ...", None))
         self.actionAltaLote.setText(_translate("vtnPrincipal", "Alta", None))

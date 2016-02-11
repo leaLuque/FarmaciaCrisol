@@ -162,7 +162,7 @@
            <enum>Qt::LeftToRight</enum>
           </property>
           <property name="text">
-           <string>Cantidad</string>
+           <string>* Cantidad</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

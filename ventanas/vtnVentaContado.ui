@@ -19,11 +19,8 @@
      <property name="title">
       <string>Obra Social</string>
      </property>
-     <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QRadioButton" name="rbtnObra">
@@ -57,7 +54,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item>
        <widget class="QTableWidget" name="tableObra">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -314,6 +311,20 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>rbtnObra</tabstop>
+  <tabstop>lineObra</tabstop>
+  <tabstop>lineCuit</tabstop>
+  <tabstop>btnBuscar</tabstop>
+  <tabstop>tableObra</tabstop>
+  <tabstop>lineMedicamento</tabstop>
+  <tabstop>lineMonodroga</tabstop>
+  <tabstop>tableProductos</tabstop>
+  <tabstop>tableFactura</tabstop>
+  <tabstop>btnEliminar</tabstop>
+  <tabstop>btnAceptar</tabstop>
+  <tabstop>btnCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

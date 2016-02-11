@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaContado.ui'
 #
-# Created: Tue Feb  9 15:41:24 2016
+# Created: Thu Feb 11 12:39:59 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,9 +31,8 @@ class Ui_vtnVentaContado(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gbObraSocial = QtGui.QGroupBox(vtnVentaContado)
         self.gbObraSocial.setObjectName(_fromUtf8("gbObraSocial"))
-        self.formLayout = QtGui.QFormLayout(self.gbObraSocial)
-        self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
-        self.formLayout.setObjectName(_fromUtf8("formLayout"))
+        self.verticalLayout_2 = QtGui.QVBoxLayout(self.gbObraSocial)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.rbtnObra = QtGui.QRadioButton(self.gbObraSocial)
@@ -52,7 +51,7 @@ class Ui_vtnVentaContado(object):
         self.btnBuscar = QtGui.QPushButton(self.gbObraSocial)
         self.btnBuscar.setObjectName(_fromUtf8("btnBuscar"))
         self.horizontalLayout_3.addWidget(self.btnBuscar)
-        self.formLayout.setLayout(0, QtGui.QFormLayout.SpanningRole, self.horizontalLayout_3)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
         self.tableObra = QtGui.QTableWidget(self.gbObraSocial)
         self.tableObra.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableObra.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
@@ -67,7 +66,7 @@ class Ui_vtnVentaContado(object):
         item = QtGui.QTableWidgetItem()
         self.tableObra.setHorizontalHeaderItem(2, item)
         self.tableObra.horizontalHeader().setStretchLastSection(True)
-        self.formLayout.setWidget(1, QtGui.QFormLayout.SpanningRole, self.tableObra)
+        self.verticalLayout_2.addWidget(self.tableObra)
         self.verticalLayout.addWidget(self.gbObraSocial)
         self.gbProducto = QtGui.QGroupBox(vtnVentaContado)
         self.gbProducto.setObjectName(_fromUtf8("gbProducto"))
@@ -165,6 +164,17 @@ class Ui_vtnVentaContado(object):
 
         self.retranslateUi(vtnVentaContado)
         QtCore.QMetaObject.connectSlotsByName(vtnVentaContado)
+        vtnVentaContado.setTabOrder(self.rbtnObra, self.lineObra)
+        vtnVentaContado.setTabOrder(self.lineObra, self.lineCuit)
+        vtnVentaContado.setTabOrder(self.lineCuit, self.btnBuscar)
+        vtnVentaContado.setTabOrder(self.btnBuscar, self.tableObra)
+        vtnVentaContado.setTabOrder(self.tableObra, self.lineMedicamento)
+        vtnVentaContado.setTabOrder(self.lineMedicamento, self.lineMonodroga)
+        vtnVentaContado.setTabOrder(self.lineMonodroga, self.tableProductos)
+        vtnVentaContado.setTabOrder(self.tableProductos, self.tableFactura)
+        vtnVentaContado.setTabOrder(self.tableFactura, self.btnEliminar)
+        vtnVentaContado.setTabOrder(self.btnEliminar, self.btnAceptar)
+        vtnVentaContado.setTabOrder(self.btnAceptar, self.btnCancelar)
 
     def retranslateUi(self, vtnVentaContado):
         vtnVentaContado.setWindowTitle(_translate("vtnVentaContado", "Venta Contado", None))

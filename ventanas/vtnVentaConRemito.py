@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaConRemito.ui'
 #
-# Created: Sun Feb  7 12:53:21 2016
+# Created: Thu Feb 11 12:39:46 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,7 +108,7 @@ class Ui_vtnVentaConRemito(object):
         self.tableProductos.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.tableProductos.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.tableProductos.setObjectName(_fromUtf8("tableProductos"))
-        self.tableProductos.setColumnCount(6)
+        self.tableProductos.setColumnCount(5)
         self.tableProductos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableProductos.setHorizontalHeaderItem(0, item)
@@ -120,8 +120,6 @@ class Ui_vtnVentaConRemito(object):
         self.tableProductos.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
         self.tableProductos.setHorizontalHeaderItem(4, item)
-        item = QtGui.QTableWidgetItem()
-        self.tableProductos.setHorizontalHeaderItem(5, item)
         self.tableProductos.horizontalHeader().setDefaultSectionSize(120)
         self.tableProductos.horizontalHeader().setStretchLastSection(True)
         self.gridLayout_7.addWidget(self.tableProductos, 0, 0, 1, 2)
@@ -138,14 +136,12 @@ class Ui_vtnVentaConRemito(object):
         self.tableRemito.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.tableRemito.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.tableRemito.setObjectName(_fromUtf8("tableRemito"))
-        self.tableRemito.setColumnCount(3)
+        self.tableRemito.setColumnCount(2)
         self.tableRemito.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableRemito.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
         self.tableRemito.setHorizontalHeaderItem(1, item)
-        item = QtGui.QTableWidgetItem()
-        self.tableRemito.setHorizontalHeaderItem(2, item)
         self.tableRemito.horizontalHeader().setDefaultSectionSize(120)
         self.tableRemito.horizontalHeader().setStretchLastSection(True)
         self.gridLayout_3.addWidget(self.tableRemito, 0, 0, 1, 1)
@@ -222,15 +218,11 @@ class Ui_vtnVentaConRemito(object):
         item.setText(_translate("vtnVentaConRemito", "Monodroga", None))
         item = self.tableProductos.horizontalHeaderItem(4)
         item.setText(_translate("vtnVentaConRemito", "Cantidad", None))
-        item = self.tableProductos.horizontalHeaderItem(5)
-        item.setText(_translate("vtnVentaConRemito", "Importe", None))
         self.gbRemito.setTitle(_translate("vtnVentaConRemito", "Remito", None))
         item = self.tableRemito.horizontalHeaderItem(0)
         item.setText(_translate("vtnVentaConRemito", "Codigo", None))
         item = self.tableRemito.horizontalHeaderItem(1)
         item.setText(_translate("vtnVentaConRemito", "Cantidad", None))
-        item = self.tableRemito.horizontalHeaderItem(2)
-        item.setText(_translate("vtnVentaConRemito", "Importe", None))
         self.btnEliminar.setText(_translate("vtnVentaConRemito", "Eliminar", None))
         self.btnAceptar.setText(_translate("vtnVentaConRemito", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnVentaConRemito", "Cancelar", None))

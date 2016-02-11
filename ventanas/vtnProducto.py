@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnProducto.ui'
 #
-# Created: Mon Feb  8 18:56:44 2016
+# Created: Thu Feb 11 12:41:11 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -252,7 +252,7 @@ class Ui_vtnProducto(object):
     def retranslateUi(self, vtnProducto):
         vtnProducto.setWindowTitle(_translate("vtnProducto", "Alta Producto", None))
         self.gpProducto.setTitle(_translate("vtnProducto", "Producto", None))
-        self.label_3.setText(_translate("vtnProducto", "Código de Barra", None))
+        self.label_3.setText(_translate("vtnProducto", "* Código de Barra", None))
         self.lineCodigo_Barra.setStatusTip(_translate("vtnProducto", "Ingrese código de barra del producto (exactamente 9 números)", None))
         self.lineCodigo_Barra.setAccessibleDescription(_translate("vtnProducto", "codigo", None))
         self.btnBuscarProd.setText(_translate("vtnProducto", "Buscar", None))
@@ -264,7 +264,7 @@ class Ui_vtnProducto(object):
         item.setText(_translate("vtnProducto", "Presentación", None))
         item = self.tablaProducto.horizontalHeaderItem(3)
         item.setText(_translate("vtnProducto", "Importe", None))
-        self.label_4.setText(_translate("vtnProducto", "Importe $", None))
+        self.label_4.setText(_translate("vtnProducto", "* Importe $", None))
         self.lineImporte.setStatusTip(_translate("vtnProducto", "Ingrese importe del producto (solo números separando los centavos por un punto (.) ejemplo 125.75)", None))
         self.lineImporte.setAccessibleDescription(_translate("vtnProducto", "importe", None))
         self.gbMedicamento.setTitle(_translate("vtnProducto", "Medicamento", None))
@@ -301,4 +301,14 @@ class Ui_vtnProducto(object):
         self.label.setText(_translate("vtnProducto", "Código", None))
         self.btnAceptar.setText(_translate("vtnProducto", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnProducto", "Cancelar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnProducto = QtGui.QWidget()
+    ui = Ui_vtnProducto()
+    ui.setupUi(vtnProducto)
+    vtnProducto.show()
+    sys.exit(app.exec_())
 

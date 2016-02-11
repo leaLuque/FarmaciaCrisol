@@ -117,16 +117,11 @@ def generarRremito(data):
     for dato in data["detalles"]:
         producto = dato[0]
         cantidad = dato[1]
-        importe = dato[2]
-        unitario = float(importe)/int(cantidad)
-        total+=float(importe)
         cadena = """<tr>
 
             <td><strong>{producto}</strong></td>
             <td class="text-right">{cantidad}</td>
-            <td class="text-right">{unitario}</td>
-            <td class="text-right">{importe}</td>
-          </tr>""".format(producto=producto,cantidad=cantidad,unitario=unitario,importe=importe)
+          </tr>""".format(producto=producto,cantidad=cantidad)
         body+=cadena
 
 

@@ -10,11 +10,8 @@
     <height>525</height>
    </rect>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="fieldGrowthPolicy">
-    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-   </property>
-   <item row="2" column="1">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label">
@@ -42,7 +39,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="1">
+   <item>
     <widget class="QTableWidget" name="tableRemito">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
@@ -73,14 +70,38 @@
      </column>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item>
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item row="10" column="1">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="lblDetalles">
+       <property name="text">
+        <string>Detalles de Remito</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTableWidget" name="tableDetalles">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
@@ -116,7 +137,7 @@
      </column>
     </widget>
    </item>
-   <item row="11" column="1">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <spacer name="horizontalSpacer">
@@ -144,30 +165,6 @@
         <string>Cancelar</string>
        </property>
       </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="8" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="lblDetalles">
-       <property name="text">
-        <string>Detalles de Remito</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>

@@ -224,11 +224,6 @@
             <string>Cantidad</string>
            </property>
           </column>
-          <column>
-           <property name="text">
-            <string>Importe</string>
-           </property>
-          </column>
          </widget>
         </item>
        </layout>
@@ -269,11 +264,6 @@
           <column>
            <property name="text">
             <string>Cantidad</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Importe</string>
            </property>
           </column>
          </widget>

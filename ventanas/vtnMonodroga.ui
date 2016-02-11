@@ -19,7 +19,7 @@
      <item row="1" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Tipo de Venta</string>
+        <string>* Tipo de Venta</string>
        </property>
       </widget>
      </item>
@@ -47,14 +47,14 @@
      <item row="0" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Nombre</string>
+        <string>* Nombre</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignTop">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>* Descripción</string>
+        <string>Descripción</string>
        </property>
       </widget>
      </item>

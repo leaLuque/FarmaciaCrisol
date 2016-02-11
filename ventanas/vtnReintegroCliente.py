@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnReintegroCliente.ui'
 #
-# Created: Wed Jan 27 12:22:13 2016
+# Created: Thu Feb 11 12:39:15 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!

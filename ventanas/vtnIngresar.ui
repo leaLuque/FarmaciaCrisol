@@ -20,7 +20,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Usuario</string>
+      <string>* Usuario</string>
      </property>
     </widget>
    </item>
@@ -30,7 +30,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Contraseña</string>
+      <string>* Contraseña</string>
      </property>
     </widget>
    </item>

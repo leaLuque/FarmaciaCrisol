@@ -240,7 +240,6 @@ class Lote(CRUDWidget, Ui_vtnLote):
         gui.btnBuscarProd.pressed.connect(gui.buscarProducto)
         gui.btnAceptar.pressed.connect(gui.crear)
         gui.btnCancelar.pressed.connect(gui.actualizar)
-        gui.btnActualizarProd.hide()
         return gui
 
     @classmethod

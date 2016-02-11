@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnAyuda.ui'
 #
-# Created: Mon Jan 18 17:27:42 2016
+# Created: Thu Feb 11 12:42:26 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,4 +35,14 @@ class Ui_vtnAyuda(object):
 
     def retranslateUi(self, vtnAyuda):
         vtnAyuda.setWindowTitle(_translate("vtnAyuda", "Ayuda", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnAyuda = QtGui.QWidget()
+    ui = Ui_vtnAyuda()
+    ui.setupUi(vtnAyuda)
+    vtnAyuda.show()
+    sys.exit(app.exec_())
 

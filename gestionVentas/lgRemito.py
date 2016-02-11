@@ -265,7 +265,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
             self.tableProductos.setItem(n, 2, QtGui.QTableWidgetItem(str(obj.id_presentacion)))
             self.tableProductos.setItem(n, 3, QtGui.QTableWidgetItem(obj.getNombreMonodroga(self.sesion)))
             self.tableProductos.setItem(n, 4, QtGui.QTableWidgetItem(str(obj.getCantidad(self.sesion))))
-            self.tableProductos.setItem(n, 5, QtGui.QTableWidgetItem(str(obj.importe)))
+            #TODO COMENTAR ESTA LINEA
+            #self.tableProductos.setItem(n, 5, QtGui.QTableWidgetItem(str(obj.importe)))
 
     def cargar_clientes(self):
         """
@@ -458,7 +459,8 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
                     self.tableRemito.insertRow(rows)
                     self.tableRemito.setItem(rows, 0, QtGui.QTableWidgetItem(str(codigo)))
                     self.tableRemito.setItem(rows, 1, QtGui.QTableWidgetItem(str(cantidad)))
-                    self.tableRemito.setItem(rows, 2, QtGui.QTableWidgetItem(str(subtotal)))
+                    #TODO comentar esta linea
+                    #self.tableRemito.setItem(rows, 2, QtGui.QTableWidgetItem(str(subtotal)))
 
                     detalle = DetalleRemitoModel(self.remito.numero,self.productosAgregados,
                         int(self.tableProductos.item(rowItemActual,0).text()),cantidad)

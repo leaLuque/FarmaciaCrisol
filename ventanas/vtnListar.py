@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnListar.ui'
 #
-# Created: Mon Feb  8 19:39:42 2016
+# Created: Thu Feb 11 12:41:43 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -97,4 +97,14 @@ class Ui_vtnListar(object):
         self.label.setText(_translate("vtnListar", "Fecha Desde", None))
         self.label_2.setText(_translate("vtnListar", "Fecha Hasta", None))
         self.btnListar.setText(_translate("vtnListar", "Listar", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    vtnListar = QtGui.QWidget()
+    ui = Ui_vtnListar()
+    ui.setupUi(vtnListar)
+    vtnListar.show()
+    sys.exit(app.exec_())
 
