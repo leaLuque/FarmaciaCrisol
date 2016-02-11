@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a183d255-c328-4064-9f8a-66480487b818" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/factura.pdf" afterPath="$PROJECT_DIR$/factura.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ventanas/vtnTiposCobro.ui" afterPath="$PROJECT_DIR$/ventanas/vtnTiposCobro.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestionProductos/lgProductos.py" afterPath="$PROJECT_DIR$/gestionProductos/lgProductos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestionVentas/lgVentas.py" afterPath="$PROJECT_DIR$/gestionVentas/lgVentas.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Comprobantes/nota.html" afterPath="$PROJECT_DIR$/Comprobantes/nota.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ventanas/vtnTiposCobro.py" afterPath="$PROJECT_DIR$/ventanas/vtnTiposCobro.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FarmaciaCrisol.iws" />
@@ -36,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lgVentas.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lgVentas.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gestionVentas/lgVentas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5691964" vertical-offset="0" max-vertical-offset="555">
-              <caret line="955" column="31" selection-start-line="955" selection-start-column="31" selection-end-line="955" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+              <caret line="928" column="39" selection-start-line="928" selection-start-column="39" selection-end-line="928" selection-end-column="39" />
               <folding>
                 <element signature="e#1245#10802#0" expanded="false" />
                 <element signature="e#1245#1334#1" expanded="false" />
@@ -122,6 +117,7 @@
                 <element signature="e#37672#38494#0" expanded="false" />
                 <element signature="e#37672#37807#1" expanded="false" />
                 <element signature="e#38537#39791#0" expanded="false" />
+                <element signature="e#39837#47071#0" expanded="false" />
                 <element signature="e#39837#39907#1" expanded="false" />
                 <element signature="e#39978#40747#0" expanded="false" />
                 <element signature="e#39978#40147#1" expanded="false" />
@@ -144,6 +140,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.78520286" vertical-offset="31" max-vertical-offset="450">
+              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -155,7 +164,6 @@
         <option value="$PROJECT_DIR$/baseDatos/clientes/cliente.py" />
         <option value="$PROJECT_DIR$/gestionVentas/genComprobantes.py" />
         <option value="$PROJECT_DIR$/Comprobantes/nota_credito.html" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/ventanas/__init__.py" />
         <option value="$PROJECT_DIR$/ventanas/vtnTiposCobro.py" />
         <option value="$PROJECT_DIR$/ventanas/vtnVentaContado.py" />
@@ -180,6 +188,7 @@
         <option value="$PROJECT_DIR$/gestionVentas/lgRemito.py" />
         <option value="$PROJECT_DIR$/gestionProductos/lgProductos.py" />
         <option value="$PROJECT_DIR$/gestionVentas/lgVentas.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -189,9 +198,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="55" />
+    <option name="x" value="59" />
     <option name="y" value="24" />
-    <option name="width" value="1311" />
+    <option name="width" value="1307" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -460,11 +469,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="55" y="24" width="1311" height="744" extended-state="6" />
+    <frame x="59" y="24" width="1307" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19147287" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19206843" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.091883615" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -680,13 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5825243" vertical-offset="0" max-vertical-offset="0">
           <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1128,8 +1130,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gestionVentas/lgVentas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5691964" vertical-offset="0" max-vertical-offset="555">
-          <caret line="955" column="31" selection-start-line="955" selection-start-column="31" selection-end-line="955" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="928" column="39" selection-start-line="928" selection-start-column="39" selection-end-line="928" selection-end-column="39" />
           <folding>
             <element signature="e#1245#10802#0" expanded="false" />
             <element signature="e#1245#1334#1" expanded="false" />
@@ -1211,6 +1213,7 @@
             <element signature="e#37672#38494#0" expanded="false" />
             <element signature="e#37672#37807#1" expanded="false" />
             <element signature="e#38537#39791#0" expanded="false" />
+            <element signature="e#39837#47071#0" expanded="false" />
             <element signature="e#39837#39907#1" expanded="false" />
             <element signature="e#39978#40747#0" expanded="false" />
             <element signature="e#39978#40147#1" expanded="false" />
@@ -1229,6 +1232,17 @@
             <element signature="e#46572#47071#0" expanded="false" />
             <element signature="e#46572#46695#1" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78520286" vertical-offset="31" max-vertical-offset="450">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
