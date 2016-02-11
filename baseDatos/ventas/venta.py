@@ -350,8 +350,9 @@ class Factura(ObjetoBase):
         :param sesion Sesion actual con la Base de Datos:
         :return Boolean:
         """
+
         query = FacturaLiquidacion.buscarAlta(FacturaLiquidacion.nro_factura,sesion,self.numero)
-        if query == None:
+        if query.count() == 0:
             return False
         else:
             return True
@@ -419,6 +420,7 @@ class DetalleFactura(ObjetoBase):
         self.descuento = descuento
         self.importe = importe
         self.nro_linea = nro_linea
+        self.baja = False
 
     def getDescuento(self):
         """

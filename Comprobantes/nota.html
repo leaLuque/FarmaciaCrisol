@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <title>Sample Invoice</title>
     <link rel="stylesheet" href="css/bootstrap.css">
   </head>
 
@@ -11,10 +12,10 @@
         <div class="col-xs-6">
             <img src="logo.png" width="300" height="100">
         </div>
-        <div class="col-xs-4 text-rright">
-          <h2><strong>REMITO</strong></h2>
-          <h10> Número: 4 </h10><br>
-          <h10> Fecha: 11/02/16 </h10>
+        <div class="col-xs-4 text-right">
+          <h2><strong>Nota de Crédito</strong></h2>
+          <h10> Número:1</h10><br>
+          <h10> Fecha:11/02/16</h10>
         </div>
       </div>
       <div class="row">
@@ -25,10 +26,9 @@
             </div>
             <div class="panel-body">
               <p>
-                Nombre: Leandro <br>
-                Apellido: Luque<br>
-                Direccion: Teniente Garcia 1947<br>
-                Telefono:  <br>
+                Nombre:---- <br>
+                Direccion:---- <br>
+                Teléfono:---- <br>
               </p>
             </div>
           </div>
@@ -40,23 +40,43 @@
         <thead>
           <tr>
             <th>
-              <h4>Descripcion</h4>
+              <h4>Código de Barra</h4>
             </th>
             <th>
               <h4>Cantidad</h4>
             </th>
+            <th>
+              <h4>Descuento(%)</h4>
+            </th>
+            <th>
+              <h4>Sub Total</h4>
+            </th>
           </tr>
         </thead>
         <tbody>
-
-            <tr>
+          <tr>
 
             <td><strong>111111111</strong></td>
             <td class="text-right">1</td>
+            <td class="text-right">0.0</td>
+            <td class="text-right">200.00</td>
           </tr>
-
         </tbody>
       </table>
+      <div class="row text-right">
+        <div class="col-xs-2 col-xs-offset-8">
+          <p>
+            <strong>
+            Total:<br>
+            </strong>
+          </p>
+        </div>
+        <div class="col-xs-2">
+          <strong>
+          200.0 <br>
+          </strong>
+        </div>
+      </div>
     </div>
   </body>
 </html>

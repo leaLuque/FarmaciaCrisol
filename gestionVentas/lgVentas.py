@@ -80,6 +80,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para la devolución ha expirado")
                 elif self.facturaSeleccionada.estaLiquidada(self.sesion):
+                    print self.facturaSeleccionada.estaLiquidada(self.sesion)
                     QtGui.QMessageBox.information(self,"Aviso","La factura se encuentra liquidada a la Obra Social")
                 else:
                     self.lineNumero.setEnabled(False)

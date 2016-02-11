@@ -653,6 +653,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         self.remitosCobrados=[]
         self.importeTotal=0
         self.itemsDeFactura = []
+        self.detallesFactura = []
 
     def buscarObra(self):
         """
@@ -807,6 +808,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         subtotal=(float(importe)*(1-descuento))
         detalleFactura=DetalleFacturaModel(nroFactura,producto,cantidad,subtotal,descuento,nroLinea)
         detalleFactura.guardar(self.sesion)
+        self.detallesFactura.append(detalleFactura)
         itemFactura=[str(producto),str(cantidad),("%.2f" % subtotal),str(descuento)]
         self.itemsDeFactura.append(itemFactura)
         return itemFactura
@@ -857,6 +859,7 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             la operación.
         :return:
         """
+        self.detallesFactura = []
         self.remitosCobrados = []
         self.itemsDeFactura = []
         self.remitosAgregados=0
@@ -923,6 +926,8 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
             if self.factura != None:
                 self.factura.anular()
                 self.factura.modificar(self.sesion)
+            for detalle in self.detallesFactura:
+                detalle.borrar(self.sesion)
             self.limpiarForm()
 
     def cancelarVentana(self):
@@ -930,6 +935,8 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         if self.factura != None:
             self.factura.anular()
             self.factura.modificar(self.sesion)
+        for detalle in self.detallesFactura:
+                detalle.borrar(self.sesion)
         self.limpiarForm()
 
 
