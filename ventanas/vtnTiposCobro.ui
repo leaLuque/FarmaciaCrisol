@@ -120,7 +120,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Importe a Pagar: $0.00</string>
+       <string>Saldo Restante: $0.00</string>
       </property>
      </widget>
     </item>

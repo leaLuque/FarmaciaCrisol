@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnTiposCobro.ui'
 #
-# Created: Fri Feb  5 12:49:55 2016
+# Created: Wed Feb 10 23:35:45 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,6 +54,8 @@ class Ui_Dialog(object):
         self.rbtnTD.setObjectName(_fromUtf8("rbtnTD"))
         self.horizontalLayout.addWidget(self.rbtnTD)
         self.rbtnNC = QtGui.QRadioButton(self.horizontalLayoutWidget)
+        self.rbtnNC.setCheckable(True)
+        self.rbtnNC.setChecked(False)
         self.rbtnNC.setObjectName(_fromUtf8("rbtnNC"))
         self.horizontalLayout.addWidget(self.rbtnNC)
         self.rbtnEfectivo = QtGui.QRadioButton(self.horizontalLayoutWidget)
@@ -106,7 +108,7 @@ class Ui_Dialog(object):
         self.rbtnTD.setText(_translate("Dialog", "Tarjeta de Débito", None))
         self.rbtnNC.setText(_translate("Dialog", "Nota de Crédito", None))
         self.rbtnEfectivo.setText(_translate("Dialog", "Efectivo", None))
-        self.lblImporte.setText(_translate("Dialog", "Importe a Pagar: $0.00", None))
+        self.lblImporte.setText(_translate("Dialog", "Saldo Restante: $0.00", None))
         self.btnAceptar.setText(_translate("Dialog", "Aceptar", None))
         self.btnCancelar.setText(_translate("Dialog", "Cancelar", None))
         self.btnEliminar.setText(_translate("Dialog", "Eliminar", None))

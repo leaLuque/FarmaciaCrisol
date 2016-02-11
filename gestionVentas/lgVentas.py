@@ -119,7 +119,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
         """
 
         rowActual=self.tableFactura.currentItem().row()
-        signal = QtGui.QMessageBox.information(self,"Confirmación","¿Desea eliminar este item?",\
+        signal = QtGui.QMessageBox.information(self,"Confirmación","¿Desea devolver este item?",\
                                                QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
 
         if signal == QtGui.QMessageBox.Ok:
@@ -960,7 +960,7 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
         :param total:
         :return:
         """
-        self.lblImporte.setText("Importe a Pagar: $%.2f" % self.total_a_pagar)
+        self.lblImporte.setText("Saldo Restante: $%.2f" % self.total_a_pagar)
 
     def cobroNC(self):
         """

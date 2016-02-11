@@ -695,7 +695,27 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         Busca y carga en la tabla los datos de un producto y su/s lote/s.
         :return:
         """
-        obj = self.sender().objectName()
+        producto = str(self.lineCod_Barra.text())
+        lote = str(self.lineCod_Lote.text())
+        data = self.getAllTabla(self.tablaLoteProducto)
+
+        if producto != "":
+            data_producto = filter(lambda x: x[0].upper() == producto.upper(), data.values())
+        else:
+            data_producto = data.values()
+        if lote != "":
+            data_lote = filter(lambda x: x[1].upper() == lote.upper(), data_producto)
+        else:
+            data_lote = data_producto
+
+        for dato in data:
+            self.tablaLoteProducto.setRowHidden(dato,False)
+
+        for dato in data:
+            if not data[dato] in data_lote:
+                self.tablaLoteProducto.setRowHidden(dato,True)
+
+        """obj = self.sender().objectName()
         if obj == 'lineCod_Barra':
             loteProducto = LoteProductoModel.buscarLoteProductoPorProducto(self.sesion, ProductoModel, LoteModel,
                                                             str(self.lineCod_Barra.text())).all()
@@ -716,7 +736,7 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
         self.limpiarTabla(self.tablaLoteProducto)
         self.cargarObjetos(self.tablaLoteProducto, loteProducto,
             ("codigo_barra", "id_medicamento", "id_presentacion", "codigo", "cantidad")
-        )
+        )"""
 
     def ajuste(self):
         """
