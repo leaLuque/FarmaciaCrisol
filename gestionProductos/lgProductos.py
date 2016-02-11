@@ -690,8 +690,10 @@ class FraccionarProducto(CRUDWidget, Ui_vtnFraccionarProducto):
         self.sender1.objectDeleted.connect(self.actualizarInfo)
         self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
         self.sender2.objectModified.connect(self.actualizarInfo)
+        self.sender3 = PoolOfWindows.getVentana("AjusteNegativo")
+        self.sender3.objectModified.connect(self.actualizarInfo)
 
-class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
+class AjusteNegativoStock(CRUDWidget, Ui_vtnAjusteNegativoStock):
     """
     Lógica del ajuste negativo del stock de los productos.
     """
@@ -768,6 +770,7 @@ class AjusteNegativoStock(MdiWidget, Ui_vtnAjusteNegativoStock):
                     self.loteProducto.setCantidad(resto)
                     self.loteProducto.modificar(self.sesion)
                     QtGui.QMessageBox.information(self, 'Info', 'La cantidad fue modificada.', 'Aceptar')
+                    self.objectModified.emit()
                     self.actualizar()
             else:
                 QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
