@@ -180,6 +180,11 @@ class Remito(CRUDWidget,Ui_vtnRemito):
         self.sender1 = PoolOfWindows.getVentana("RegistrarCobroRemito")
         self.sender1.objectModified.connect(self.cargar_remitos)
 
+    def cancelarVentana(self):
+        self.lineNumero.clear()
+        self.limpiarTabla(self.tableDetalles)
+        self.cargar_remitos()
+
     @classmethod
     def delete(cls, mdi):
         """
@@ -249,6 +254,21 @@ class VentaConRemito(CRUDWidget, Ui_vtnVentaConRemito):
         self.lotesVentas = {}
         self.dniCliente = None
         self.detallesTabla = {} #Diccionario que vincula el row de la tabla con el obj DetalleRemito Correspondiente
+
+
+    def cancelarVentana(self):
+
+        if self.remito!=None:
+            self.remito.anular()
+        for detalle in self.lotesVentas:
+            for loteVenta in self.lotesVentas[detalle]:
+                loteVenta[0].aumentarCantidad(loteVenta[1])
+                loteVenta[0].modificar(self.sesion)
+            detalle.eliminarLotesAsociados(self.sesion)
+            detalle.borrar(self.sesion)
+        self.limpiarVentana()
+        self.objectModified.emit()
+
 
     def cargar_productos(self):
         """
@@ -890,7 +910,6 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
 
                 self.limpiarForm()
 
-
     def cancelarOperacion(self):
         """
             Marca a todos los remitos afectados como No Cobrados
@@ -905,10 +924,13 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
                 self.factura.anular()
                 self.factura.modificar(self.sesion)
             self.limpiarForm()
-            #for remito in self.remitosCobrados:
-            #    remito.setCobrado(None)
-            #    remito.modificar(self.sesion)
 
+    def cancelarVentana(self):
+
+        if self.factura != None:
+            self.factura.anular()
+            self.factura.modificar(self.sesion)
+        self.limpiarForm()
 
 
 

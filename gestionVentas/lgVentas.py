@@ -249,6 +249,13 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             self.detallesDevueltos = {}
             self.limpiarVentana()
 
+    def cancelarVentana(self):
+        self.data = {}
+        self.facturaSeleccionada = None
+        self.productosSeleccionados = 0
+        self.detallesDevueltos = {}
+        self.limpiarVentana()
+
 class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
 
     """
@@ -427,6 +434,27 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.detallesImprimibles.append([producto,cantidad,descuento,importe])
         self.tableFactura.hideRow(itemActual.row())
 
+    def limpiarVentana(self):
+        """
+            Limpia la ventana una vez que la operacion finalizó
+            :return:
+        """
+        self.obraSocial = None
+        self.facturaSeleccionada = None
+        self.detallesReintegrables = []
+        self.detallesImprimibles = []
+        self.limpiarTabla(self.tableFactura)
+        self.limpiarTabla(self.tableNC)
+        self.lineCuit.clear()
+        self.lineRazon.clear()
+        self.lineNumeroFac.clear()
+        self.lineCuit.setEnabled(True)
+        self.lineRazon.setEnabled(True)
+        self.tableOs.setEnabled(True)
+        self.lineNumeroFac.setEnabled(True)
+        self.gbFactura.setEnabled(False)
+        self.gbFactura.setEnabled(False)
+
     def confirmarOperacion(self):
         """
             Confirma la operacion y asienta los datos de la
@@ -459,10 +487,6 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 data["fecha"] = notaCredito.fecha_emision
                 data["detalles"] = self.detallesImprimibles
                 generarNotaCredito(data)
-                self.obraSocial = None
-                self.facturaSeleccionada = None
-                self.detallesReintegrables = []
-                self.detallesImprimibles = []
                 self.limpiarVentana()
 
             else:
@@ -477,28 +501,11 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         ok = QtGui.QMessageBox.information(self,"Confirmacion","¿Desea cancelar la operacion?",\
                                            QtGui.QMessageBox.Cancel, QtGui.QMessageBox.Accepted)
         if (ok==1):
-            self.detallesReintegrables = []
-            self.detallesImprimibles = []
-            self.obraSocial = None
             self.limpiarVentana()
-            self.facturaSeleccionada = None
 
-    def limpiarVentana(self):
-        """
-            Limpia la ventana una vez que la operacion finalizó
-            :return:
-        """
-        self.limpiarTabla(self.tableFactura)
-        self.limpiarTabla(self.tableNC)
-        self.lineCuit.clear()
-        self.lineRazon.clear()
-        self.lineNumeroFac.clear()
-        self.lineCuit.setEnabled(True)
-        self.lineRazon.setEnabled(True)
-        self.tableOs.setEnabled(True)
-        self.lineNumeroFac.setEnabled(True)
-        self.gbFactura.setEnabled(False)
-        self.gbFactura.setEnabled(False)
+    def cancelarVentana(self):
+
+        self.limpiarVentana()
 
 class VentaContado(CRUDWidget, Ui_vtnVentaContado):
 
@@ -913,6 +920,19 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 detalle.borrar(self.sesion)
             self.objectModified.emit()
             self.limpiarVentana()
+
+    def cancelarVentana(self):
+
+        if self.factura != None:
+            self.factura.anular()
+        for detalle in self.lotesVentas:
+            for loteVenta in self.lotesVentas[detalle]:
+                loteVenta[0].aumentarCantidad(loteVenta[1])
+                loteVenta[0].modificar(self.sesion)
+            detalle.eliminarLotesAsociados(self.sesion)
+            detalle.borrar(self.sesion)
+        self.objectModified.emit()
+        self.limpiarVentana()
 
     def addHandlerSignal(self):
 

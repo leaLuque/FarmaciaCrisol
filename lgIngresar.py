@@ -6,6 +6,7 @@ from PyQt4 import QtGui
 from ventanas import Ui_vtnIngresar
 from gui import MdiWidget
 from login import Login
+from gui.signals import PoolOfWindows
 
 class Ingresar(MdiWidget, Ui_vtnIngresar):
     """
@@ -22,6 +23,7 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
         self.btnCancelar.pressed.connect(self.limpiarCampos)
         self.lineUsuario.returnPressed.connect(self.validarUsuario)
         self.lineContrasenia.returnPressed.connect(self.validarUsuario)
+        self.usuario_activo = None
 
     def limpiarCampos(self):
         """
@@ -38,13 +40,36 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
         """
         log=Login(str(self.lineUsuario.text()), str(self.lineContrasenia.text()),
                   self.mdi().window().getSesionBD())
-        rol=log.loginValido()
-        if (rol):
-            self.mdi().hide()
-            self.habilitarPermisos(rol)
-            self.limpiarCampos()
+        if self.usuario_activo != log.id_usuario:
+
+            if self.usuario_activo != None:
+                ok = QtGui.QMessageBox.information(self,"Aviso","El usuario es distinto al actual. ¿Seguro que desea salir?",\
+                                          QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
+            else:
+                ok = QtGui.QMessageBox.Ok
+
+            if ok == QtGui.QMessageBox.Ok:
+                rol=log.loginValido()
+                if (rol):
+                    self.usuario_activo = log.id_usuario
+                    self.mdi().hide()
+                    self.habilitarPermisos(rol)
+                    self.limpiarCampos()
+                    self.cerrarVentanas()
+                else:
+                    QtGui.QMessageBox.critical(self, 'Error', 'Usuario o Contraseña incorrecta.', 'Aceptar')
         else:
-            QtGui.QMessageBox.critical(self, 'Error', 'Usuario o Contraseña incorrecta.', 'Aceptar')
+            QtGui.QMessageBox.information(self,"Aviso","Este usuario ya se encuentra logueado")
+
+    def cerrarVentanas(self):
+        """
+            Cierra las ventanas del sistema
+        :return:
+        """
+        ventanas  = PoolOfWindows.getPool()
+        for ventana in ventanas:
+            ventanas[ventana].mdi().hide()
+            ventanas[ventana].cancelarVentana()
 
     def habilitarPermisos(self, rol):
         """

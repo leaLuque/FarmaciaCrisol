@@ -1,3 +1,4 @@
+# coding: utf-8
 from .objetoBase import ObjetoBase
 
 class Usuario(ObjetoBase):

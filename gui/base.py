@@ -171,3 +171,6 @@ class MdiWidget(QtGui.QWidget):
         :return: Ventana.
         """
         return self.ventana
+
+    def cancelarVentana(self):
+        pass
