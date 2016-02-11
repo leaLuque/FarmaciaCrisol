@@ -1046,7 +1046,8 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
             if ok:
                 if monto_a_pagar >= self.total_a_pagar:
                     QtGui.QMessageBox.information(self,"Cobro Efectivo","Su vuelto es:%.2f" % (monto_a_pagar - self.total_a_pagar))
-                    self.listado_de_cobros.append(["Efectivo",self.total_a_pagar])
+                    temp = ["Efectivo",monto_a_pagar]
+                    self.detalles_cobro[self.tablePagos.rowCount()] = temp
                     self.total_a_pagar = 0
                 elif monto_a_pagar == 0:
                     QtGui.QMessageBox.information(self,"Aviso","El monto ingresado no puede ser cero")
@@ -1094,7 +1095,7 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
 
         if self.total_a_pagar == 0:
 
-            for cobro in self.listado_de_cobros:
+            for cobro in self.detalles_cobro.values():
                 if len(cobro) == 3:
                     cobroCliente = CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,\
                                                      cobro[0],cobro[1])
@@ -1105,10 +1106,10 @@ class Cobrar(QtGui.QDialog, Ui_Dialog):
 
                 cobroCliente.guardar(self.sesion)
 
-            if len(self.listado_de_cobros)>1:
+            if len(self.detalles_cobro.values())>1:
                 self.padre.formapago = "Varios"
             else:
-                self.padre.formapago = self.listado_de_cobros[0][0]
+                self.padre.formapago = self.detalles_cobro.values()[0][0]
 
             self.padre.facturaCobrada = True
             self.accept()
