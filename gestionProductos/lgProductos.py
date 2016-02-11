@@ -690,7 +690,7 @@ class FraccionarProducto(CRUDWidget, Ui_vtnFraccionarProducto):
         self.sender1.objectDeleted.connect(self.actualizarInfo)
         self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
         self.sender2.objectModified.connect(self.actualizarInfo)
-        self.sender3 = PoolOfWindows.getVentana("AjusteNegativo")
+        self.sender3 = PoolOfWindows.getVentana("AjusteNegativoStock")
         self.sender3.objectModified.connect(self.actualizarInfo)
 
 class AjusteNegativoStock(CRUDWidget, Ui_vtnAjusteNegativoStock):
