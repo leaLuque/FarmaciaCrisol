@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnPresentacion.ui'
 #
-# Created: Thu Feb 11 12:41:16 2016
+# Created: Thu Feb 11 22:11:14 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -42,9 +42,9 @@ class Ui_vtnPresentacion(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.gridLayout.addLayout(self.horizontalLayout_4, 1, 1, 1, 1)
-        self.label_2 = QtGui.QLabel(vtnPresentacion)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.label_um = QtGui.QLabel(vtnPresentacion)
+        self.label_um.setObjectName(_fromUtf8("label_um"))
+        self.gridLayout.addWidget(self.label_um, 1, 0, 1, 1, QtCore.Qt.AlignRight)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.lineTipo = QtGui.QLineEdit(vtnPresentacion)
@@ -54,9 +54,9 @@ class Ui_vtnPresentacion(object):
         self.btnBuscar.setObjectName(_fromUtf8("btnBuscar"))
         self.horizontalLayout.addWidget(self.btnBuscar)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 1, 1, 1)
-        self.label_3 = QtGui.QLabel(vtnPresentacion)
-        self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.label_cf = QtGui.QLabel(vtnPresentacion)
+        self.label_cf.setObjectName(_fromUtf8("label_cf"))
+        self.gridLayout.addWidget(self.label_cf, 2, 0, 1, 1, QtCore.Qt.AlignRight)
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
         self.spinCantidad = QtGui.QSpinBox(vtnPresentacion)
@@ -144,11 +144,11 @@ class Ui_vtnPresentacion(object):
         self.label.setText(_translate("vtnPresentacion", "* Tipo", None))
         self.lineUnidad_Medida.setStatusTip(_translate("vtnPresentacion", "Ingrese unidad de medida (solo letras)", None))
         self.lineUnidad_Medida.setAccessibleDescription(_translate("vtnPresentacion", "texto", None))
-        self.label_2.setText(_translate("vtnPresentacion", "* Unidad de Medida", None))
-        self.lineTipo.setStatusTip(_translate("vtnPresentacion", "Ingrese el tipo de Presentación (solo letras)", None))
+        self.label_um.setText(_translate("vtnPresentacion", "* Unidad de Medida", None))
+        self.lineTipo.setStatusTip(_translate("vtnPresentacion", "Ingrese el tipo de Presentación (solo letras y espacios)", None))
         self.lineTipo.setAccessibleDescription(_translate("vtnPresentacion", "texto", None))
         self.btnBuscar.setText(_translate("vtnPresentacion", "Buscar", None))
-        self.label_3.setText(_translate("vtnPresentacion", "* Cantidad de Fracciones", None))
+        self.label_cf.setText(_translate("vtnPresentacion", "* Cantidad de Fracciones", None))
         self.spinCantidad.setStatusTip(_translate("vtnPresentacion", "Ingrese la cantidad del Producto para dicho lote", None))
         self.groupPresentacion.setTitle(_translate("vtnPresentacion", "Presentación", None))
         item = self.tablaPresentacion.horizontalHeaderItem(0)
@@ -170,14 +170,4 @@ class Ui_vtnPresentacion(object):
         item.setText(_translate("vtnPresentacion", "Cantidad de Fracciones", None))
         self.btnAceptar.setText(_translate("vtnPresentacion", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnPresentacion", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnPresentacion = QtGui.QWidget()
-    ui = Ui_vtnPresentacion()
-    ui.setupUi(vtnPresentacion)
-    vtnPresentacion.show()
-    sys.exit(app.exec_())
 

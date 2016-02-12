@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnMedicamento.ui'
 #
-# Created: Thu Feb 11 12:41:29 2016
+# Created: Thu Feb 11 18:42:00 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -138,8 +138,8 @@ class Ui_vtnMedicamento(object):
     def retranslateUi(self, vtnMedicamento):
         vtnMedicamento.setWindowTitle(_translate("vtnMedicamento", "Alta Medicamento", None))
         self.gbMedicamento.setTitle(_translate("vtnMedicamento", "Medicamento", None))
-        self.label_4.setText(_translate("vtnMedicamento", "* Nombre", None))
-        self.lineNombre_Med.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre del medicamento (solo letrasy númros)", None))
+        self.label_4.setText(_translate("vtnMedicamento", "* Nombre Comercial", None))
+        self.lineNombre_Med.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre del medicamento (solo números, letras y espacios)", None))
         self.lineNombre_Med.setAccessibleDescription(_translate("vtnMedicamento", "textoNumeros", None))
         self.btnBuscarMed.setText(_translate("vtnMedicamento", "Buscar", None))
         item = self.tablaMedicamento.horizontalHeaderItem(0)
@@ -150,7 +150,7 @@ class Ui_vtnMedicamento(object):
         item.setText(_translate("vtnMedicamento", "Cantidad de Monodroga", None))
         self.gbMonodroga.setTitle(_translate("vtnMedicamento", "Monodroga", None))
         self.label_5.setText(_translate("vtnMedicamento", "Nombre", None))
-        self.lineNombre_Mon.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre de la Monodroga", None))
+        self.lineNombre_Mon.setStatusTip(_translate("vtnMedicamento", "Ingrese nombre de la Monodroga (solo letras, números, \",\" y \" -\")", None))
         self.lineNombre_Mon.setAccessibleDescription(_translate("vtnMedicamento", "monodroga", None))
         self.btnBuscarMon.setText(_translate("vtnMedicamento", "Buscar", None))
         self.tablaMonodroga.setSortingEnabled(False)
@@ -164,14 +164,4 @@ class Ui_vtnMedicamento(object):
         self.spinCantidad.setStatusTip(_translate("vtnMedicamento", "Ingrese la cantidad del Producto para dicho lote", None))
         self.btnAceptar.setText(_translate("vtnMedicamento", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnMedicamento", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnMedicamento = QtGui.QWidget()
-    ui = Ui_vtnMedicamento()
-    ui.setupUi(vtnMedicamento)
-    vtnMedicamento.show()
-    sys.exit(app.exec_())
 

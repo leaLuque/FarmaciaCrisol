@@ -236,7 +236,7 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         gui.lineNombre_Mon.returnPressed.connect(gui.buscarMonodroga)
         gui.btnBuscarMon.pressed.connect(gui.buscarMonodroga)
         gui.btnAceptar.pressed.connect(gui.crear)
-        gui.btnCancelar.pressed.connect(gui.limpiarCampos)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaMonodroga.itemClicked.connect(gui.setMonodroga)
         return gui
 
@@ -253,7 +253,7 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         gui.btnBuscarMed.pressed.connect(gui.buscarMedicamento)
         gui.cargarMedicamentos()
         gui.btnAceptar.pressed.connect(gui.eliminar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaMedicamento.itemClicked.connect(gui.cargarCampos)
         return gui
 
@@ -271,17 +271,13 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         gui.lineNombre_Med.returnPressed.connect(gui.buscarMedicamento)
         gui.tablaMedicamento.itemClicked.connect(gui.cargarCampos)
         gui.btnAceptar.pressed.connect(gui.modificar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscarMon.pressed.connect(gui.buscarMonodroga)
         gui.btnBuscarMed.pressed.connect(gui.buscarMedicamento)
         gui.tablaMonodroga.itemClicked.connect(gui.setMonodroga)
         return gui
 
-    def algo(self):
-        print "algo"
-
     def addHandlerSignal(self):
-
         self.sender = PoolOfWindows.getVentana("AltaMonodroga")
         self.sender.objectCreated.connect(self.actualizarInfo)
         self.sender1 = PoolOfWindows.getVentana("BajaMonodroga")

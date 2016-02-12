@@ -25,22 +25,16 @@
      <property name="checkable">
       <bool>false</bool>
      </property>
-     <layout class="QFormLayout" name="formLayout_4">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <property name="labelAlignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>* Código de Barra</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>* Código de Barra</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLineEdit" name="lineCodigo_Barra">
           <property name="statusTip">
@@ -73,7 +67,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item>
        <widget class="QTableWidget" name="tablaProducto">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
@@ -112,15 +106,15 @@
         </column>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>* Importe $</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_imp">
+          <property name="text">
+           <string>* Importe $</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLineEdit" name="lineImporte">
           <property name="statusTip">
@@ -183,7 +177,7 @@
         <item>
          <widget class="QLineEdit" name="lineNomb_Med">
           <property name="statusTip">
-           <string>Ingrese nombre del Medicamento (solo números y letras)</string>
+           <string>Ingrese nombre del Medicamento (solo números, letras y espacios)</string>
           </property>
           <property name="accessibleDescription">
            <string>textoNumeros</string>
@@ -273,7 +267,7 @@
         <item>
          <widget class="QLineEdit" name="lineTipo_Pres">
           <property name="statusTip">
-           <string>Ingrese tipo de presentación(solo letras)</string>
+           <string>Ingrese tipo de presentación(solo letras y espacios)</string>
           </property>
           <property name="accessibleDescription">
            <string>texto</string>
@@ -353,6 +347,57 @@
       <property name="labelAlignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Código</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QLineEdit" name="lineCod_Lote">
+          <property name="statusTip">
+           <string>Ingrese código del lote (solo letras y números)</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>codLote</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnBuscarLote">
+          <property name="focusPolicy">
+           <enum>Qt::TabFocus</enum>
+          </property>
+          <property name="text">
+           <string>Buscar</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Fecha de Vencimiento</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
@@ -373,10 +418,10 @@
         </item>
        </layout>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Fecha de Vencimiento</string>
+         <string>Cantidad</string>
         </property>
        </widget>
       </item>
@@ -412,57 +457,6 @@
          </spacer>
         </item>
        </layout>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>Cantidad</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_12">
-        <item>
-         <widget class="QLineEdit" name="lineCod_Lote">
-          <property name="statusTip">
-           <string>Ingrese código del lote (solo letras y números sin espacios)</string>
-          </property>
-          <property name="accessibleDescription">
-           <string>codLote</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnBuscarLote">
-          <property name="focusPolicy">
-           <enum>Qt::TabFocus</enum>
-          </property>
-          <property name="text">
-           <string>Buscar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Código</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>

@@ -56,11 +56,8 @@ class Lote(CRUDWidget, Ui_vtnLote):
                     if lote.guardar(self.sesion):
                         QtGui.QMessageBox.information(self, 'Info', 'El Lote fue dado de alta.', 'Aceptar')
                         loteProducto = LoteProductoModel(lote.getCodigo(), self.producto,
-                                                                 int(self.spinCantidad.value()))
-                        if loteProducto.guardar(self.sesion):
-                            QtGui.QMessageBox.information(self, 'Info', 'Lote/Producto fue dado de alta.', 'Aceptar')
-                        else:
-                            QtGui.QMessageBox.critical(self, 'Error', 'Lote/Producto ya existe.', 'Aceptar')
+                                                         int(self.spinCantidad.value()))
+                        loteProducto.guardar(self.sesion)
                         self.limpiarCampos()
                         self.objectCreated.emit()
                     else:
@@ -239,7 +236,7 @@ class Lote(CRUDWidget, Ui_vtnLote):
         gui.lineCod_Barra.returnPressed.connect(gui.buscarProducto)
         gui.btnBuscarProd.pressed.connect(gui.buscarProducto)
         gui.btnAceptar.pressed.connect(gui.crear)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         return gui
 
     @classmethod
@@ -258,7 +255,7 @@ class Lote(CRUDWidget, Ui_vtnLote):
         gui.lineCodigo.returnPressed.connect(gui.buscarLote)
         gui.btnBuscarLote.pressed.connect(gui.buscarLote)
         gui.btnAceptar.pressed.connect(gui.modificar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         return gui
 
     def addHandlerSignal(self):

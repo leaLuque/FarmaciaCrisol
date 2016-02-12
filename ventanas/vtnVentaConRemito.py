@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnVentaConRemito.ui'
 #
-# Created: Thu Feb 11 12:39:46 2016
+# Created: Thu Feb 11 21:35:50 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -185,10 +185,10 @@ class Ui_vtnVentaConRemito(object):
         vtnVentaConRemito.setWindowTitle(_translate("vtnVentaConRemito", "Venta con Remito", None))
         self.gbCliente.setTitle(_translate("vtnVentaConRemito", "Cliente", None))
         self.lblNombre.setText(_translate("vtnVentaConRemito", "Nombre", None))
-        self.lineNombre.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Nombre del cliente (solo letras)", None))
+        self.lineNombre.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Nombre del cliente (solo letras y espacios)", None))
         self.lineNombre.setAccessibleDescription(_translate("vtnVentaConRemito", "fnya", None))
         self.lblApellido.setText(_translate("vtnVentaConRemito", "Apellido", None))
-        self.lineApellido.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Apellido del cliente (solo letras)", None))
+        self.lineApellido.setStatusTip(_translate("vtnVentaConRemito", "Ingrese Apellido del cliente (solo letras y espacios)", None))
         self.lineApellido.setAccessibleDescription(_translate("vtnVentaConRemito", "fnya", None))
         self.lblDni.setText(_translate("vtnVentaConRemito", "DNI", None))
         self.lineDni.setStatusTip(_translate("vtnVentaConRemito", "Ingrese DNI del cliente (exactamente 8 números)", None))

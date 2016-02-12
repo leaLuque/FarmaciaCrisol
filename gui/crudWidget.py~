@@ -1,7 +1,7 @@
 # coding=utf-8
 __author__ = 'waldo'
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore
 
 from gui import MdiWidget
 
@@ -18,12 +18,6 @@ class CRUDWidget(MdiWidget):
         'U': None,
         'D': None,
     }
-
-    def cancelar(self):
-        ok = QtGui.QMessageBox.warning(self, "Aviso", "¿Desea cancelar la operacion?",\
-                                       QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
-        if ok == QtGui.QMessageBox.Ok:
-            self.actualizar()
 
     def actualizar(self):
         """

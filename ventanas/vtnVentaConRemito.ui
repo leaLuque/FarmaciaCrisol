@@ -40,7 +40,7 @@
           <item>
            <widget class="QLineEdit" name="lineNombre">
             <property name="statusTip">
-             <string>Ingrese Nombre del cliente (solo letras)</string>
+             <string>Ingrese Nombre del cliente (solo letras y espacios)</string>
             </property>
             <property name="accessibleDescription">
              <string>fnya</string>
@@ -57,7 +57,7 @@
           <item>
            <widget class="QLineEdit" name="lineApellido">
             <property name="statusTip">
-             <string>Ingrese Apellido del cliente (solo letras)</string>
+             <string>Ingrese Apellido del cliente (solo letras y espacios)</string>
             </property>
             <property name="accessibleDescription">
              <string>fnya</string>

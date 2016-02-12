@@ -17,7 +17,7 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label_tv">
        <property name="text">
         <string>* Tipo de Venta</string>
        </property>
@@ -28,7 +28,7 @@
        <item>
         <widget class="QLineEdit" name="lineNombre">
          <property name="statusTip">
-          <string>Ingrese el nombre de la monodroga</string>
+          <string>Ingrese el nombre de la monodroga (solo letras, números, &quot;,&quot; y &quot; -&quot;)</string>
          </property>
          <property name="accessibleDescription">
           <string>monodroga</string>
@@ -52,7 +52,7 @@
       </widget>
      </item>
      <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignTop">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_desc">
        <property name="text">
         <string>Descripción</string>
        </property>

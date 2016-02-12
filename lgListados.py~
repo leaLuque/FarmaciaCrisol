@@ -38,7 +38,7 @@ class Listar(MdiWidget, Ui_vtnListar):
         self.btnListar.pressed.connect(self.Listar)
         self.cbTipoListado.currentIndexChanged.connect(self.habilitarFecha)
         self.setFecha()
-        self.gbFechas.setHidden(True)
+		self.gbFechas.setHidden(True)
 
     def setFecha(self):
         """
@@ -53,11 +53,7 @@ class Listar(MdiWidget, Ui_vtnListar):
         self.deFechaDesde.setDate(fecha)
         self.deFechaHasta.setDate(fecha)
 
-    def habilitarFecha(self):
-        """
-            Habilita las fechas Desde y Hasta
-        :return:
-        """
+     def habilitarFecha(self):
         self.listado = self.cbTipoListado.currentText()
         if self.listado == "Productos en Stock":
             self.gbFechas.setHidden(True)

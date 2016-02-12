@@ -214,7 +214,7 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui.groupBuscar.hide()
         gui.btnBuscar.hide()
         gui.btnAceptar.pressed.connect(gui.crear)
-        gui.btnCancelar.pressed.connect(gui.limpiarCampos)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         return gui
 
     @classmethod
@@ -225,14 +225,16 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         :return: gui
         """
         gui = super(Cliente, cls).delete(mdi)
-        gui.lineDireccion.setEnabled(False)
-        gui.lineTelefono.setEnabled(False)
+        gui.lineDireccion.setHidden(True)
+        gui.lineTelefono.setHidden(True)
+        gui.label_dir.setHidden(True)
+        gui.label_tel.setHidden(True)
         gui.lineDni.returnPressed.connect(gui.buscarClt)
         gui.lineNombre.returnPressed.connect(gui.buscarClt)
         gui.lineApellido.returnPressed.connect(gui.buscarClt)
         gui.cargarClientes()
         gui.btnAceptar.pressed.connect(gui.eliminar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscarClt)
         gui.tableClientes.itemClicked.connect(gui.cargarCamposBaja)
         return gui
@@ -251,6 +253,6 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui.lineNombre.returnPressed.connect(gui.buscarClt)
         gui.lineApellido.returnPressed.connect(gui.buscarClt)
         gui.btnAceptar.pressed.connect(gui.modificar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscarClt)
         return gui

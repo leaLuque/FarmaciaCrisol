@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnMonodroga.ui'
 #
-# Created: Thu Feb 11 12:41:22 2016
+# Created: Thu Feb 11 22:12:59 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,9 +31,9 @@ class Ui_vtnMonodroga(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.gridLayout = QtGui.QGridLayout()
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.label_4 = QtGui.QLabel(vtnMonodroga)
-        self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.gridLayout.addWidget(self.label_4, 1, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.label_tv = QtGui.QLabel(vtnMonodroga)
+        self.label_tv.setObjectName(_fromUtf8("label_tv"))
+        self.gridLayout.addWidget(self.label_tv, 1, 0, 1, 1, QtCore.Qt.AlignRight)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.lineNombre = QtGui.QLineEdit(vtnMonodroga)
@@ -46,9 +46,9 @@ class Ui_vtnMonodroga(object):
         self.label = QtGui.QLabel(vtnMonodroga)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1, QtCore.Qt.AlignRight)
-        self.label_2 = QtGui.QLabel(vtnMonodroga)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1, QtCore.Qt.AlignRight|QtCore.Qt.AlignTop)
+        self.label_desc = QtGui.QLabel(vtnMonodroga)
+        self.label_desc.setObjectName(_fromUtf8("label_desc"))
+        self.gridLayout.addWidget(self.label_desc, 2, 0, 1, 1, QtCore.Qt.AlignRight|QtCore.Qt.AlignTop)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.cmbTipoVenta = QtGui.QComboBox(vtnMonodroga)
@@ -109,12 +109,12 @@ class Ui_vtnMonodroga(object):
 
     def retranslateUi(self, vtnMonodroga):
         vtnMonodroga.setWindowTitle(_translate("vtnMonodroga", "Alta Monodroga", None))
-        self.label_4.setText(_translate("vtnMonodroga", "* Tipo de Venta", None))
-        self.lineNombre.setStatusTip(_translate("vtnMonodroga", "Ingrese el nombre de la monodroga", None))
+        self.label_tv.setText(_translate("vtnMonodroga", "* Tipo de Venta", None))
+        self.lineNombre.setStatusTip(_translate("vtnMonodroga", "Ingrese el nombre de la monodroga (solo letras, números, \",\" y \" -\")", None))
         self.lineNombre.setAccessibleDescription(_translate("vtnMonodroga", "monodroga", None))
         self.btnBuscar.setText(_translate("vtnMonodroga", "Buscar", None))
         self.label.setText(_translate("vtnMonodroga", "* Nombre", None))
-        self.label_2.setText(_translate("vtnMonodroga", "Descripción", None))
+        self.label_desc.setText(_translate("vtnMonodroga", "Descripción", None))
         self.cmbTipoVenta.setStatusTip(_translate("vtnMonodroga", "Seleccione el tipo de venta que la monodroga exige", None))
         self.cmbTipoVenta.setItemText(0, _translate("vtnMonodroga", "Libre", None))
         self.cmbTipoVenta.setItemText(1, _translate("vtnMonodroga", "Receta", None))
@@ -129,14 +129,4 @@ class Ui_vtnMonodroga(object):
         item.setText(_translate("vtnMonodroga", "Descripción", None))
         self.btnAceptar.setText(_translate("vtnMonodroga", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnMonodroga", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnMonodroga = QtGui.QWidget()
-    ui = Ui_vtnMonodroga()
-    ui.setupUi(vtnMonodroga)
-    vtnMonodroga.show()
-    sys.exit(app.exec_())
 

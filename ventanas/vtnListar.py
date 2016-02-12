@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnListar.ui'
 #
-# Created: Thu Feb 11 12:41:43 2016
+# Created: Thu Feb 11 21:59:50 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_vtnListar(object):
     def setupUi(self, vtnListar):
         vtnListar.setObjectName(_fromUtf8("vtnListar"))
-        vtnListar.resize(412, 220)
+        vtnListar.resize(412, 250)
         self.verticalLayout_2 = QtGui.QVBoxLayout(vtnListar)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.cbTipoListado = QtGui.QComboBox(vtnListar)
@@ -38,16 +38,18 @@ class Ui_vtnListar(object):
         self.gbOption = QtGui.QGroupBox(vtnListar)
         self.gbOption.setTitle(_fromUtf8(""))
         self.gbOption.setObjectName(_fromUtf8("gbOption"))
+        self.horizontalLayout_4 = QtGui.QHBoxLayout(self.gbOption)
+        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
         self.rbtnPDF = QtGui.QRadioButton(self.gbOption)
-        self.rbtnPDF.setGeometry(QtCore.QRect(0, 0, 116, 22))
         self.rbtnPDF.setChecked(True)
         self.rbtnPDF.setObjectName(_fromUtf8("rbtnPDF"))
+        self.horizontalLayout_4.addWidget(self.rbtnPDF)
         self.rbtnExcel = QtGui.QRadioButton(self.gbOption)
-        self.rbtnExcel.setGeometry(QtCore.QRect(160, 0, 116, 22))
         self.rbtnExcel.setObjectName(_fromUtf8("rbtnExcel"))
+        self.horizontalLayout_4.addWidget(self.rbtnExcel)
         self.verticalLayout_2.addWidget(self.gbOption)
         self.gbFechas = QtGui.QGroupBox(vtnListar)
-        self.gbFechas.setEnabled(False)
+        self.gbFechas.setEnabled(True)
         self.gbFechas.setTitle(_fromUtf8(""))
         self.gbFechas.setObjectName(_fromUtf8("gbFechas"))
         self.verticalLayout = QtGui.QVBoxLayout(self.gbFechas)
@@ -97,14 +99,4 @@ class Ui_vtnListar(object):
         self.label.setText(_translate("vtnListar", "Fecha Desde", None))
         self.label_2.setText(_translate("vtnListar", "Fecha Hasta", None))
         self.btnListar.setText(_translate("vtnListar", "Listar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnListar = QtGui.QWidget()
-    ui = Ui_vtnListar()
-    ui.setupUi(vtnListar)
-    vtnListar.show()
-    sys.exit(app.exec_())
 

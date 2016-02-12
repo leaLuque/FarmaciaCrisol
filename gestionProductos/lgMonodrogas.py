@@ -177,7 +177,7 @@ class Monodroga(CRUDWidget, Ui_vtnMonodroga):
         gui.groupMonodroga.hide()
         gui.btnBuscar.hide()
         gui.btnAceptar.pressed.connect(gui.crear)
-        gui.btnCancelar.pressed.connect(gui.limpiarCampos)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         return gui
 
     @classmethod
@@ -188,12 +188,14 @@ class Monodroga(CRUDWidget, Ui_vtnMonodroga):
         :return: gui
         """
         gui = super(Monodroga, cls).delete(mdi)
-        gui.txtDescripcion.setEnabled(False)
-        gui.cmbTipoVenta.setEnabled(False)
+        gui.txtDescripcion.setHidden(True)
+        gui.cmbTipoVenta.setHidden(True)
+        gui.label_tv.setHidden(True)
+        gui.label_desc.setHidden(True)
         gui.lineNombre.returnPressed.connect(gui.buscar)
         gui.cargarMonodrogas()
         gui.btnAceptar.pressed.connect(gui.eliminar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscar)
         gui.tablaMonodroga.itemClicked.connect(gui.cargarCampos)
         return gui
@@ -210,6 +212,6 @@ class Monodroga(CRUDWidget, Ui_vtnMonodroga):
         gui.lineNombre.returnPressed.connect(gui.buscar)
         gui.tablaMonodroga.itemClicked.connect(gui.cargarCampos)
         gui.btnAceptar.pressed.connect(gui.modificar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscar)
         return gui

@@ -36,7 +36,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_2">
+        <spacer name="horizontalSpacer_um">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -51,7 +51,7 @@
       </layout>
      </item>
      <item row="1" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_um">
        <property name="text">
         <string>* Unidad de Medida</string>
        </property>
@@ -62,7 +62,7 @@
        <item>
         <widget class="QLineEdit" name="lineTipo">
          <property name="statusTip">
-          <string>Ingrese el tipo de Presentación (solo letras)</string>
+          <string>Ingrese el tipo de Presentación (solo letras y espacios)</string>
          </property>
          <property name="accessibleDescription">
           <string>texto</string>
@@ -79,7 +79,7 @@
       </layout>
      </item>
      <item row="2" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_cf">
        <property name="text">
         <string>* Cantidad de Fracciones</string>
        </property>
@@ -104,7 +104,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_4">
+        <spacer name="horizontalSpacer_cf">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

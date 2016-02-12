@@ -336,7 +336,7 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         gui.btnBuscar.hide()
         gui.cargarFraccionables()
         gui.btnAceptar.pressed.connect(gui.crear)
-        gui.btnCancelar.pressed.connect(gui.limpiarCampos)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaFraccionable.itemClicked.connect(gui.setFraccionable)
         return gui
 
@@ -348,14 +348,16 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         :return: gui
         """
         gui = super(Presentacion, cls).delete(mdi)
-        gui.lineUnidad_Medida.setEnabled(False)
-        gui.spinCantidad.setEnabled(False)
+        gui.lineUnidad_Medida.setHidden(True)
+        gui.spinCantidad.setHidden(True)
+        gui.label_um.setHidden(True)
+        gui.label_cf.setHidden(True)
         gui.groupFraccionable.hide()
         gui.lineTipo.returnPressed.connect(gui.buscar)
         gui.btnBuscar.pressed.connect(gui.buscar)
         gui.cargarPresentaciones()
         gui.btnAceptar.pressed.connect(gui.eliminar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaPresentacion.itemClicked.connect(gui.cargarCampos)
         return gui
 
@@ -373,6 +375,6 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         gui.lineTipo.returnPressed.connect(gui.buscar)
         gui.btnBuscar.pressed.connect(gui.buscar)
         gui.btnAceptar.pressed.connect(gui.modificar)
-        gui.btnCancelar.pressed.connect(gui.actualizar)
+        gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaFraccionable.itemClicked.connect(gui.setFraccionable)
         return gui

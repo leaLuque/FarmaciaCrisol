@@ -99,22 +99,6 @@ class LoteProducto(ObjetoBase):
                producto.codigo_barra == varBusq).\
         order_by(producto.codigo_barra)
 
-    @classmethod
-    def buscarLoteProductoPorLote(cls, sesion, producto, lote, varBusq):
-        """
-        Devuelve todos los lotes/productos almacenados en la base de datos para un lote determinado.
-        :param sesion:
-        :param producto:
-        :param lote:
-        :param varBusq:
-        :return:
-        """
-        return sesion.query(producto.codigo_barra, producto.id_medicamento, producto.id_presentacion,
-                 lote.codigo, cls.cantidad).\
-        filter(cls.id_producto == producto.codigo_barra, cls.id_lote == lote.codigo,
-               lote.codigo == varBusq).\
-        order_by(producto.codigo_barra)
-
     def descontarCantidad(self, cantidad):
         """
             Descuenta la cantidad del lote

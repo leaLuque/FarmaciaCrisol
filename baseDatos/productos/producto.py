@@ -6,7 +6,6 @@ from sqlalchemy import func
 from baseDatos.objetoBase import ObjetoBase
 from baseDatos.productos import Medicamento
 from baseDatos.productos.loteProducto import LoteProducto
-from baseDatos.obraSocial import ObraSocial,Descuento
 
 class Presentacion(ObjetoBase):
     """
@@ -277,18 +276,6 @@ class Producto(ObjetoBase):
             cantidad+=a.cantidad
         return cantidad
 
-    #TODO NUEVO METODO
-    def setDescuento(self,sesion):
-        """
-            Setea el descuento a cero para cada Obra Social
-        :param sesion:
-        :return:
-        """
-        query = sesion.query(ObraSocial.razon_social)
-        for obra in query:
-            descuento =  Descuento(self.codigo_barra,obra,0)
-            descuento.guardar(sesion)
-
     def getNombreMonodroga(self,sesion):
         """
             Devuelve el nombre de la monodroga del producto.
@@ -310,3 +297,28 @@ class Producto(ObjetoBase):
         for elemento in query:
             lotes[elemento.id_lote]=elemento.cantidad
         return lotes
+
+    def setDescuento(self,sesion):
+        """
+            Setea el descuento a cero para cada Obra Social
+        :param sesion:
+        :return:
+        """
+        query = sesion.query(ObraSocial.razon_social)
+        for obra in query:
+            descuento =  Descuento(self.codigo_barra,obra,0)
+            descuento.guardar(sesion)
+
+    @classmethod
+    def buscarProductoPresMed(cls, sesion, producto, tipo, nombre_comercial):
+        """
+            Busca un producto para un determinado tipo de presentación y nombre comercial de medicamento.
+        :param sesion:
+        :param producto:
+        :param codigo_barra:
+        :param tipo:
+        :param nombre_comercial:
+        :return:
+        """
+        return sesion.query(producto.codigo_barra, producto.id_medicamento, producto.id_presentacion).\
+        filter(cls.id_medicamento == nombre_comercial, cls.id_presentacion == tipo)

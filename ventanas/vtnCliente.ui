@@ -33,7 +33,7 @@
      <item row="2" column="1">
       <widget class="QLineEdit" name="lineApellido">
        <property name="statusTip">
-        <string>Ingrese Apellido del cliente (solo letras)</string>
+        <string>Ingrese Apellido del cliente (solo letrasy espacios)</string>
        </property>
        <property name="accessibleDescription">
         <string>nya</string>
@@ -41,7 +41,7 @@
       </widget>
      </item>
      <item row="4" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_dir">
        <property name="text">
         <string>* Dirección</string>
        </property>
@@ -63,7 +63,7 @@
      <item row="1" column="1">
       <widget class="QLineEdit" name="lineNombre">
        <property name="statusTip">
-        <string>Ingrese Nombre del cliente (solo letras)</string>
+        <string>Ingrese Nombre del cliente (solo letrasy espacios)</string>
        </property>
        <property name="accessibleDescription">
         <string>nya</string>
@@ -88,7 +88,7 @@
       </widget>
      </item>
      <item row="5" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label_tel">
        <property name="text">
         <string>Teléfono</string>
        </property>

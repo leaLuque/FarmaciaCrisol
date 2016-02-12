@@ -25,14 +25,14 @@
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>* Nombre</string>
+           <string>* Nombre Comercial</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="lineNombre_Med">
           <property name="statusTip">
-           <string>Ingrese nombre del medicamento (solo letrasy númros)</string>
+           <string>Ingrese nombre del medicamento (solo números, letras y espacios)</string>
           </property>
           <property name="accessibleDescription">
            <string>textoNumeros</string>
@@ -109,7 +109,7 @@
         <item>
          <widget class="QLineEdit" name="lineNombre_Mon">
           <property name="statusTip">
-           <string>Ingrese nombre de la Monodroga</string>
+           <string>Ingrese nombre de la Monodroga (solo letras, números, &quot;,&quot; y &quot; -&quot;)</string>
           </property>
           <property name="accessibleDescription">
            <string>monodroga</string>

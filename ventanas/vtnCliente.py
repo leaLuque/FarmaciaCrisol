@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnCliente.ui'
 #
-# Created: Thu Feb 11 12:42:12 2016
+# Created: Thu Feb 11 22:02:57 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -40,9 +40,9 @@ class Ui_vtnCliente(object):
         self.lineApellido = QtGui.QLineEdit(vtnCliente)
         self.lineApellido.setObjectName(_fromUtf8("lineApellido"))
         self.gridLayout.addWidget(self.lineApellido, 2, 1, 1, 1)
-        self.label_3 = QtGui.QLabel(vtnCliente)
-        self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.label_dir = QtGui.QLabel(vtnCliente)
+        self.label_dir.setObjectName(_fromUtf8("label_dir"))
+        self.gridLayout.addWidget(self.label_dir, 4, 0, 1, 1, QtCore.Qt.AlignRight)
         self.lineTelefono = QtGui.QLineEdit(vtnCliente)
         self.lineTelefono.setEnabled(True)
         self.lineTelefono.setObjectName(_fromUtf8("lineTelefono"))
@@ -56,9 +56,9 @@ class Ui_vtnCliente(object):
         self.label = QtGui.QLabel(vtnCliente)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout.addWidget(self.label, 2, 0, 1, 1, QtCore.Qt.AlignRight)
-        self.label_4 = QtGui.QLabel(vtnCliente)
-        self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.gridLayout.addWidget(self.label_4, 5, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.label_tel = QtGui.QLabel(vtnCliente)
+        self.label_tel.setObjectName(_fromUtf8("label_tel"))
+        self.gridLayout.addWidget(self.label_tel, 5, 0, 1, 1, QtCore.Qt.AlignRight)
         self.lineDireccion = QtGui.QLineEdit(vtnCliente)
         self.lineDireccion.setObjectName(_fromUtf8("lineDireccion"))
         self.gridLayout.addWidget(self.lineDireccion, 4, 1, 1, 1)
@@ -122,17 +122,17 @@ class Ui_vtnCliente(object):
         vtnCliente.setWindowTitle(_translate("vtnCliente", "Form", None))
         self.label_2.setText(_translate("vtnCliente", "* DNI", None))
         self.label_5.setText(_translate("vtnCliente", "* Nombre", None))
-        self.lineApellido.setStatusTip(_translate("vtnCliente", "Ingrese Apellido del cliente (solo letras)", None))
+        self.lineApellido.setStatusTip(_translate("vtnCliente", "Ingrese Apellido del cliente (solo letrasy espacios)", None))
         self.lineApellido.setAccessibleDescription(_translate("vtnCliente", "nya", None))
-        self.label_3.setText(_translate("vtnCliente", "* Dirección", None))
+        self.label_dir.setText(_translate("vtnCliente", "* Dirección", None))
         self.lineTelefono.setStatusTip(_translate("vtnCliente", "Ingrese Teléfono del cliente (solo números, máximo 20 números)", None))
         self.lineTelefono.setAccessibleDescription(_translate("vtnCliente", "telefono", None))
-        self.lineNombre.setStatusTip(_translate("vtnCliente", "Ingrese Nombre del cliente (solo letras)", None))
+        self.lineNombre.setStatusTip(_translate("vtnCliente", "Ingrese Nombre del cliente (solo letrasy espacios)", None))
         self.lineNombre.setAccessibleDescription(_translate("vtnCliente", "nya", None))
         self.lineDni.setStatusTip(_translate("vtnCliente", "Ingrese DNI del cliente (exactamente 8 números)", None))
         self.lineDni.setAccessibleDescription(_translate("vtnCliente", "dni", None))
         self.label.setText(_translate("vtnCliente", "* Apellido", None))
-        self.label_4.setText(_translate("vtnCliente", "Teléfono", None))
+        self.label_tel.setText(_translate("vtnCliente", "Teléfono", None))
         self.lineDireccion.setStatusTip(_translate("vtnCliente", "Ingrese Dirección del cliente", None))
         self.lineDireccion.setAccessibleDescription(_translate("vtnCliente", "direccion", None))
         self.btnBuscar.setText(_translate("vtnCliente", "Buscar", None))
@@ -149,14 +149,4 @@ class Ui_vtnCliente(object):
         item.setText(_translate("vtnCliente", "Teléfono", None))
         self.btnAceptar.setText(_translate("vtnCliente", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnCliente", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnCliente = QtGui.QWidget()
-    ui = Ui_vtnCliente()
-    ui.setupUi(vtnCliente)
-    vtnCliente.show()
-    sys.exit(app.exec_())
 

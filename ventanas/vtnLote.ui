@@ -38,7 +38,7 @@
         <item>
          <widget class="QLineEdit" name="lineCodigo">
           <property name="statusTip">
-           <string>Ingrese el número de Lote del Producto (solo letras y números sin espacios)</string>
+           <string>Ingrese el número de Lote del Producto (solo letras y números)</string>
           </property>
           <property name="accessibleDescription">
            <string>codLote</string>

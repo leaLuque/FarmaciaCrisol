@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>412</width>
-    <height>220</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,41 +38,31 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QRadioButton" name="rbtnPDF">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>116</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>PDF</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbtnExcel">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>0</y>
-        <width>116</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Planilla Excel</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QRadioButton" name="rbtnPDF">
+        <property name="text">
+         <string>PDF</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbtnExcel">
+        <property name="text">
+         <string>Planilla Excel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="gbFechas">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string/>

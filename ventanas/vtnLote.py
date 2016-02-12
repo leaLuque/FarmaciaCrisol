@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'vtnLote.ui'
 #
-# Created: Thu Feb 11 12:41:35 2016
+# Created: Thu Feb 11 21:20:51 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -156,7 +156,7 @@ class Ui_vtnLote(object):
         vtnLote.setWindowTitle(_translate("vtnLote", "Alta Lote", None))
         self.gbLote.setTitle(_translate("vtnLote", "Lote", None))
         self.label.setText(_translate("vtnLote", "* Código", None))
-        self.lineCodigo.setStatusTip(_translate("vtnLote", "Ingrese el número de Lote del Producto (solo letras y números sin espacios)", None))
+        self.lineCodigo.setStatusTip(_translate("vtnLote", "Ingrese el número de Lote del Producto (solo letras y números)", None))
         self.lineCodigo.setAccessibleDescription(_translate("vtnLote", "codLote", None))
         self.btnBuscarLote.setText(_translate("vtnLote", "Buscar", None))
         self.label_2.setText(_translate("vtnLote", "* Fecha de Vencimiento", None))
@@ -182,14 +182,4 @@ class Ui_vtnLote(object):
         item.setText(_translate("vtnLote", "Importe", None))
         self.btnAceptar.setText(_translate("vtnLote", "Aceptar", None))
         self.btnCancelar.setText(_translate("vtnLote", "Cancelar", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    vtnLote = QtGui.QWidget()
-    ui = Ui_vtnLote()
-    ui.setupUi(vtnLote)
-    vtnLote.show()
-    sys.exit(app.exec_())
 

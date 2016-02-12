@@ -1,261 +1,328 @@
 #start_ingresar
 #parrafo
-Para acceder al sistema se debe en primer lugar ingresar el usuario en la pantalla indicada (Figura 1).
-Cada usuario tiene un tipo de rol dentro de la farmacia (Farmacéutico - Técnico Farmacéutico - Administrador).
-Luego debe ingresarse la contraseña correspondiente.
+Para acceder al sistema se debe en primer lugar ingresar el usuario en la pantalla indicada.<br>
+Cada usuario tiene un tipo de rol dentro de la farmacia (Farmacéutico - Técnico Farmacéutico - Administrador).<br>
+Luego debe ingresarse la contraseña correspondiente.<br>
 Si estos dos pasos se cumplieron correctamente, el usuario tendrá acceso a las funcionalidades que le corresponden a su
-rol en la farmacia y será libre de trabajar acorde.
+rol en la farmacia y será libre de trabajar acorde.<br>
 #parrafo
-El campo "Usuario" admite solo letras, máximo 10.
-El campo "Contraseña" admite cualquier carácter incluidos espacios, máximo de 15.
-El botón "Aceptar" confirma la operación.
+El campo "Usuario" admite solo letras, máximo 10.<br>
+El campo "Contraseña" admite cualquier carácter incluidos espacios, máximo de 15.<br>
+El botón "Aceptar" confirma la operación.<br>
 El botón "Cancelar" cancela la operación y limpia los campos.
 #end_ingresar
 #start_salir
 #parrafo
-La opción "Salir" cierra la aplicación.
+La opción "Salir" abre una ventana de confirmación.
+#parrafo
+El botón "OK" confirma la operación y cierra la aplicación.<br>
+El botón "Cancel" cancela la operación, no se cierra la aplicación.
 #end_salir
 #start_ventaRem
 #parrafo
 La opción "Venta con Remito" permite registrar una venta a un cliente registrado.
-El campo "Nombre" admite solo letras y espacios (Máximo 15)
-El campo "Documento" solo admite números (Máximo 8).
+#parrafo
+El campo "Nombre" admite solo letras y espacios (Máximo 15).<br>
+El campo "Apellido" admite solo letras y espacios (Máximo 15).<br>
+El campo "DNI" solo admite números (Máximo 8).<br>
+El botón "Buscar" busca el cliente de acuerdo a los campos cargados.<br>
+El campo "Medicamento" admite solo letras, numeros y espacios.<br>
+El campo "Monodroga" admite solo letras, numeros y espacios.<br>
+El botón "Eliminar" elimina el detalle del remito seleccionado de la tabla "Remito".<br>
+El botón "Aceptar" confirma la operación y genera el remito correspondiente.<br>
+El botón "Cancelar" cancela la operación y limpia los campos.
 #end_ventaRem
 #start_regCobroRem
 #parrafo
-En este caso el cliente tiene la opción de abonar su compra   (para alguno o todos los productos) con descuento
-debido a su obra social, si ese es el caso, se debe hacer click en la opción "Obra Social" y agregar la Razón
-Social de la misma (15 caracteres).
-En la barra de "Número" se debe ingresar el número del remito a abonar, al finalizar se hace click en "Agregar" y
-el proceso se repite para cada remito que se desee abonar.
-El botón "Aceptar" genera la factura correspondiente.
-El botón "Cancelar" anula la operación
+La opción "Registrar Cobro Remito" permite registrar el cobro de un remito a un cliente (para alguno o todos los
+productos comprados) con descuento o no de la obra social.
+#parrafo
+El chequeable "Razón Social" permite realizar la busqueda de una Obra Social si se desea registrar una Obra Social en
+el cobro.<br>
+El campo "Razón Social" admite solo letras y números.<br>
+El campo "Número" admite solo números.<br>
+El botón "Buscar" busca el remito de acuerdo al contenido del campo "Número".<br>
+El boton "Agregar" agrega los detalles del remito a los detalles de la factura.<br>
+El proceso se repite para cada remito que se desee abonar.<br>
+El botón "Aceptar" confirma la operación y genera la factura correspondiente.<br>
+El botón "Cancelar" cancela la operación y limpia los campos.
 #end_regCobroRem
 #start_modRem
 #parrafo
-En la casilla "Buscar" se ingresa el número de remito a modificar.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los remitos registrados.
-El botón "Aceptar" registra los cambios al remito
-El botón "Cancelar" anula la operación.
+La opción "Modificar Remito" permite registrar el cambio de un remito por la devolución del/los productos por parte
+del cliente.
+#parrafo
+El campo "Número" admite solo números.<br>
+El botón "Buscar" busca el remito de acuerdo al contenido del campo "Número".
 #end_modRem
 #start_bajaRem
 #parrafo
-En la casilla "Buscar" se ingresa el número de remito a modificar.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los remitos registrados.
-El botón "Aceptar" registra los cambios al remito
-El botón "Cancelar" anula la operación.
+La opción "Baja Remito" permite registrar la baja de un remito por la devolución de todos los productos por parte
+del cliente.
+#parrafo
+El campo "Número" admite solo números.<br>
+El botón "Buscar" busca el remito de acuerdo al contenido del campo "Número".
 #end_bajaRem
 #start_ventaContado
 #parrafo
-En el caso de que el cliente desee abonar sus productos con un descuento por Obra Social, se debe hacer click en
-este casillero y luego ingresar la Razón Social (15 caracteres) y el CUIT de la misma.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en las ventas registrados.
-El botón "Aceptar" registra la venta y emite y registra la factura correspondiente.
-El botón "Cancelar" anula la operación.
+La opción "Venta Contado" permite registrar una venta.
+#parrafo
+El chequeable "Razón Social" permite realizar la busqueda de una Obra Social si se desea registrar una Obra Social en
+la venta.<br>
+El campo "Razón Social" admite solo letras y números.<br>
+El campo "CUIT" admite solo números.<br>
+El campo "Medicamento" admite solo letras, numeros y espacios.<br>
+El campo "Monodroga" admite solo letras, numeros y espacios.<br>
+El botón "Eliminar" elimina el detalle de la factura seleccionado de la tabla "Factura".<br>
+El botón "Aceptar" confirma la operación y genera la factura correspondiente.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_ventaContado
 #start_reintCliente
 #parrafo
-El cliente solo puede reintegrar productos que posean descuento para una obra social. Por eso mismo debe ingresar
-la Razón Social (15 caracteres) y el CUIT de la misma en los campos correspondientes y luego hacer click en
-"Buscar" para que el sistema muestre los datos.
-En el campo "Número" se ingresa el número de la factura a reintegrar, luego se hace click en "Buscar" para que
-se muestren los datos de la factura en cuestión.
-El botón "Aceptar" registra y se emite la nota de crédito correspondiente.
-El botón "Cancelar" anula la operación.
+La opción "Reintegro Cliente" permite registrar el reintegro del/los productos vendidos a un cliente, que posean
+descuento para una determinada Obra Social.
+#parrafo
+El chequeable "Razón Social" permite realizar la busqueda de una Obra Social si se desea registrar una Obra Social en
+la venta.<br>
+El campo "Razón Social" admite solo letras y números.<br>
+El campo "CUIT" admite solo números.<br>
+El campo "Número" admite solo números.<br>
+El botón "Buscar" busca la factura a reintegrar de acuerdo al contenido del campo "Número".<br>
+El botón "Aceptar" registra el reintegro y emite la nota de crédito correspondiente.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_reintCliente
 #start_devCliente
 #parrafo
-En el campo "Número" se ingresa el número de la factura a reintegrar, luego se hace click en "Buscar" para que
-se muestren los datos de la factura en cuestión.
-El botón "Aceptar" registra y se emite la nota de crédito correspondiente.
-El botón "Cancelar" anula la operación.
+La opción "Devolución Cliente" permite registrar el cambio de una factura por la devolución del/los productos por parte
+del cliente.
+#parrafo
+El campo "Número" admite solo números.<br>
+El botón "Buscar" busca la factura de acuerdo al contenido del campo "Número".<br>
+El botón "Aceptar" confirma la operación y emite la nota de crédito correspondiente.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_devCliente
 #start_altaProd
 #parrafo
-La opción "Alta Producto" muestra la ventana y da de alta un producto con diversos datos.
-En el campo "Código de Barra" se agrega el Código de Barras del producto (solo números) y en el campo "Importe"
-el precio en pesos de cada unidad (con números y puntos. Ej: 45.30).
-En la sección "Medicamento" se añade el nombre del medicamento que posee el producto a agregar, a medida que se
-ingresa el nombre, aparecerán los resultados en la lista inferior, lo mismo sucederá con el campo "Tipo" de la
-sección "Presentación" y con el campo "Código" en la sección "Lote"
-El botón "Aceptar" registra el producto con los datos dados.
-El botón "Cancelar" anula la operación.
+La opción "Alta Producto" permite registrar un producto nuevo.
+#parrafo
+El campo "Código de Barra" admite solo números.<br>
+El campo "Importe" solo números separando los centavos por un punto (.) Ej: 45.30<br>
+El campo "Nombre Comercial" solo admite letras, números y espacios.<br>
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El botón "Buscar" busca el medicamento de acuerdo al contenido del campo "Nombre".<br>
+El campo "Tipo" admite solo letras y espacios.<br>
+El botón "Buscar" busca la presentación de acuerdo al contenido del campo "Tipo".<br>
+El campo "Código" admite solo letras y números.<br>
+El botón "Buscar" busca el lote de acuerdo al contenido del campo "Código".<br>
+El combo "Fecha de Vencimiento" permite seleccionar una fecha del calendario.<br>
+El spin "Cantidad" permite seleccionar la cantidad de productos para dicho lote.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaProd
 #start_bajaProd
 #parrafo
-La opción "Baja Producto" permite dar de baja determinado producto con diversos datos
-En el campo "Código de Barra" deja buscar el producto a dar de baja mostrándolo en la lista inferior.
-El botón "Aceptar" da de baja el producto determinado.
-El botón "Cancelar" anula la operación.
+La opción "Baja Producto" permite dar de baja un determinado producto.
+#parrafo
+El campo "Código de Barra" admite exactamente 9 números.<br>
+El botón "Buscar" busca el producto de acuerdo al contenido del campo "Código de Barra".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_bajaProd
 #start_modProd
 #parrafo
-La opción "Modificar Producto" permite editar datos de un determinado producto
-En el campo "Código de Barra" deja buscar el producto a dar de baja mostrándolo en la lista inferior.
-El botón "Aceptar" da de modifica el producto determinado.
-El botón "Cancelar" anula la operación.
+La opción "Modificar Producto" permite editar datos de un determinado producto.
+#parrafo
+El campo "Código de Barra" admite exactamente 9 números.<br>
+El botón "Buscar" busca el producto de acuerdo al contenido del campo "Código de Barra".<br>
+El campo "Importe" solo números separando los centavos por un punto (.) Ej: 45.30<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modProd
 #start_fraccProd
 #parrafo
 La opción "Fraccionar Producto" permite convertir una presentación en otra solo si el primer
-producto es fraccionable (Ej: una caja de Actrón puede fraccionarse en varias tabletas de Actrón)
-En el campo "Código de Barra" deja buscar el producto a dar de baja mostrándolo en la lista inferior.
-El botón "Aceptar" fracciona el producto determinado.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los productos registrados.
-El dato disponible en "Cantidad" se refiere a cuantas unidades de la unidad mas pequeña (Tabletas, en el ejemplo
-anterior) pueden obtenerse de la unidad mas grande (Caja en el ejemplo anterior)
+producto es fraccionable (Ej: una caja de Actrón puede fraccionarse en varias tabletas de Actrón).
+#parrafo
+El campo "Código de Barra" admite exactamente 9 números.<br>
+El botón "Buscar" busca el producto de acuerdo al contenido del campo "Código de Barra".<br>
+El spin "Cantidad" permite seleccionar la cantidad del producto a fraccionar.<br>
+El botón "Aceptar" confirma la operación.
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_fraccProd
 #start_altaMed
 #parrafo
-La opción "Alta Medicamento" se registra un medicamento con datos específicos.
-En el campo "Nombre" Se ingresa el nombre del medicamento a registrar (solo letras, máximo 15).
-En la sección "Monodroga" se ingresa el nombre de la Monodroga asociada al medicamento la cual se mostrará en el
-menú presente en esa sección si se presiona el botón "Buscar"
-El botón "Aceptar" da de alta el medicamento determinado.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los medicamentos registrados.
+La opción "Alta Medicamento" permite registrar un medicamento nuevo.
+#parrafo
+El campo "Nombre Comercial" admite solo letras, números y espacios.<br>
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El botón "Buscar" busca la monodroga de acuerdo al contenido del campo "Nombre".<br>
+El spin "Cantidad de Monodroga" permite seleccionar la cantidad de monodroga que compone el medicamento.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaMed
 #start_bajaMed
 #parrafo
-La opción "Baja Medicamento" elimina del sistema un medicamento específico mientras este no
-está asociado a ningún producto previamente
-En el campo "Nombre" Se ingresa el nombre del medicamento a dar de baja.
-El botón "Aceptar" da de baja el medicamento determinado.
-El botón "Cancelar" anula la operación.
+La opción "Baja Medicamento" permite dar de baja un determinado medicamento.
+#parrafo
+El campo "Nombre Comercial" admite solo letras, números y espacios.<br>
+El botón "Buscar" busca el medicamento de acuerdo al contenido del campo "Nombre Comercial".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_bajaMed
 #start_modMed
 #parrafo
-La opción "Modificar Medicamento" permite alterar datos de un medicamento específico,
-incluida la Monodroga asociada a el mismo
-En el campo "Nombre" Se ingresa el nombre del medicamento a modificar presionando luego "Buscar" y en la lista
-inmediatamente inferior se modifican los datos del medicamento determinado.
-En la sección "Monodroga" se ingresa el nombre de la Monodroga asociada al medicamento la cual se mostrará en el
-menú presente en esa sección si se presiona el botón "Buscar", para luego poder modificar la Monodroga asociada.
-El botón "Aceptar" registra las modificaciones en el medicamento determinado.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los medicamentos registrados.
+La opción "Modificar Medicamento" permite editar datos de un determinador medicamento.
+#parrafo
+El campo "Nombre Comercial" admite solo letras, números y espacios.<br>
+El botón "Buscar" busca el medicamento de acuerdo al contenido del campo "Nombre Comercial".<br>
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El botón "Buscar" busca la monodroga de acuerdo al contenido de campo "Nombre".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modMed
 #start_altaMon
 #parrafo
-En el campo "Nombre" se agrega el nombre de la Monodroga a registrar (letras, números, comas y/o guion alto).
-En el campo "Tipo de Venta" se selecciona si la Monodroga será de venta libre, venta con receta o con receta
-archivada.
-En el campo "Descripción" se ingresa una breve reseña del efecto de la Monodroga (Letras y números)
-El botón "Aceptar" registra las modificaciones en el medicamento determinado.
-El botón "Cancelar" anula la operación.
+La opción "Alta Monodroga" permite registrar una monodroga nueva.
+#parrafo
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El combo "Tipo de Venta" permite seleccionar el tipo de venta (libre, con receta o con receta archivada).<br>
+En el campo "Descripción" se ingresa una breve reseña de la Monodroga.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaMon
 #start_bajaMon
 #parrafo
-Permite eliminar del sistema una Monodroga que no se encuentre asociada a ningún medicamento
-En el campo "Nombre" se agrega el nombre de la Monodroga a registrar y en la tabla inferior se muestra un listado
-de las monodrogas registradas si se presiona "Buscar".
-El botón "Aceptar" da de baja el medicamento determinado.
-El botón "Cancelar" anula la operación.
+La opción "Baja Monodroga" permite dar de baja una determinada monodroga.
+#parrafo
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El botón "Buscar" busca la monodroga de acuerdo al contenido del campo "Nombre".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_bajaMon
 #start_modMon
 #parrafo
-La opción "Modificar Monodroga" permite alterar datos en una Monodroga registrada.
-En el campo "Nombre" se agrega el nombre de la Monodroga a registrar y presionando en "Buscar" muestra los datos
-de la/s monodrogas en la tabla inferior.
-En el campo "Tipo de Venta" se selecciona si la Monodroga será de venta libre, venta con receta o con receta
-archivada.
-En el campo "Descripción" se ingresa una breve reseña del efecto de la Monodroga
-El botón "Aceptar" registra las modificaciones en el medicamento determinado.
-El botón "Cancelar" anula la operación.
+La opción "Modificar Monodroga" permite editar datos de una monodroga determinada.
+#parrafo
+El campo "Nombre" admite solo letras, números, "," y " -".<br>
+El combo "Tipo de Venta" permite seleccionar el tipo de venta (libre, con receta o con receta archivada).<br>
+En el campo "Descripción" se ingresa una breve reseña de la Monodroga.<br>
+El botón "Buscar" busca la monodroga de acuerdo al contenido del campo "Nombre".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modMon
 #start_altaPres
 #parrafo
-La opción "Alta Presentación" registra en el sistema una presentación determinada con los
-datos necesarios. En la tabla inferior se muestran los datos de las presentaciones creadas
-En el campo "Tipo" se registra la forma de presentaci�n del producto. Ej: Tabletas, capsulas blandas, etc (solo
-letras)
-En el campo "Unidad de Medida" se registra la unidad en que esa Monodroga será medida (Ej: cc, ml, etc)
-El dato "Cantidad de Fracciones" especifica en cuantas sub unidades se podrá fraccionar la presentación (Ej: una
-caja de una presentación X se puede fraccionar en 10 tabletas, en ese caso la cantidad de fracciones de la
-presentación "Caja" serían 10. Si una presentación tiene 1 como Cantidad de Fracciones entonces no será
-fraccionable)
-El botón "Aceptar" registra la nueva presentación en el sistema.
-El botón "Cancelar" anula la operación.
+La opción "Alta Presentación" permite registrar una presentación nueva.
+#parrafo
+El campo "Tipo" admite solo letras y espacios.<br>
+El botón "Buscar" busca la presentación de acuerdo al contenido del campo "Tipo".<br>
+El campo "Unidad de Medida" admite solo letras y espacios.<br>
+El spin "Cantidad de Fracciones" permite seleccionar la cantidad de sub unidades en que se podrá fraccionar
+la presentación (Ej: una caja de una presentación X se puede fraccionar en 10 tabletas, en ese caso la
+cantidad de fracciones de la presentación "Caja" serían 10. Si una presentación tiene 1 como Cantidad de
+Fracciones entonces no será fraccionable).<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaPres
 #start_bajaPres
-La opción "Baja Presentación" permite eliminar del sistema una presentación específica siempre
-que esta no está asociada a un producto.
-En el campo "Tipo" se ingresa la forma de presentación del producto (Ej: Tabletas, capsulas blandas, etc).
-Mientras que el presionar "Buscar" ocasiona que la tabla inferior muestre los datos de las presentaciones que
-cumplan con ese nombre
-El botón "Aceptar" registra la nueva presentación en el sistema.
-El botón "Cancelar" anula la operación.
+La opción "Baja Presentación" permite dar de baja una determinada presentación.
+#parrafo
+El campo "Tipo" admite solo letras y espacios.<br>
+El botón "Buscar" busca la presentación de acuerdo al contenido del campo "Tipo".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_bajaPres
 #start_modPres
 #parrafo
-La opción siguiente permite alterar los datos de una presentación determinada
-En el campo "Tipo" se registra la forma de presentación del producto
-En el campo "Unidad de Medida" se registra la unidad en que esa Monodroga será medida
-El dato "Cantidad de Fracciones" especifica en cuantas sub unidades se podrá fraccionar la presentación
-El botón "Aceptar" registra las modificaciones en el sistema.
-El botón "Cancelar" anula la operación.
+La opción "Modificar Presentación" permite editar datos de una presentación determinada.
+#parrafo
+El campo "Tipo" admite solo letras y espacios.<br>
+El botón "Buscar" busca la presentación de acuerdo al contenido del campo "Tipo".<br>
+El campo "Unidad de Medida" admite solo letras y espacios.<br>
+El spin "Cantidad de Fracciones" permite seleccionar la cantidad de sub unidades en que se podrá fraccionar
+la presentación (Ej: una caja de una presentación X se puede fraccionar en 10 tabletas, en ese caso la
+cantidad de fracciones de la presentación "Caja" serían 10. Si una presentación tiene 1 como Cantidad de
+Fracciones entonces no será fraccionable).<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modPres
 #start_altaLote
 #parrafo
-Esta opción permite registrar un lote con determinados datos
-Los campos deben llenarse con el código del lote en cuestión (solo números), su fecha de vencimiento y la
-cantidad de producto que se posee de determinado lote, respectivamente.
-En la sección "Producto" se asocia el lote a un producto determinado (se escribe su código de barras y se
-presiona "Buscar")
-El botón "Aceptar" registra el lote en el sistema.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los productos registrados.
+#parrafo
+La opción "Alta Lote" permite registrar un lote nuevo.
+#parrafo
+El campo "Código" admite solo letras y números.<br>
+El combo "Fecha de Vencimiento" permite seleccionar una fecha del calendario.<br>
+El spin "Cantidad" permite seleccionar la cantidad de productos para dicho lote.<br>
+El campo "Código de Barra" admite exactamente 9 números.<br>
+El botón "Buscar" busca el producto de acuerdo al contenido del campo "Código de Barra".<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaLote
 #start_modLote
 #parrafo
-Esta sección permite realizar cambios en los datos registrados de determinado lote.
-Se ingresa el número de lote en cuestión y al presionar "Buscar" se muestran sus datos los cuales pueden ser
-modificados.
-El botón "Aceptar" registra los cambios en el sistema.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los productos registrados.
+La opción "Modificar Lote" permite editar datos de un lote determinado.
+#parrafo
+El campo "Código" admite solo letras y números.<br>
+El botón "Buscar" busca el lote de acuerdo al contenido del campo "Código".<br>
+El combo "Fecha de Vencimiento" permite seleccionar una fecha del calendario.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modLote
 #start_ajusteNegStock
 #parrafo
-Esta sección permite restar cantidad de un determinado producto, ya sea para venta,
-retiro del mercado o fraccionamiento
-Se ingresa el Código de Barras del producto y el Código del lote al que este pertenece (sólo números) en sus
-campos correspondientes y luego se presiona "Buscar" para que la tabla inferior muestre los datos del producto a
-ajustar.
-El botón "Aceptar" registra los cambios en el sistema.
-El botón "Cancelar" anula la operación.
-El botón "Actualizar" muestra los últimos cambios (si es que se produjeron) en los productos y lotes registrados.
+La opción "Ajuste Negativo Stock" permite restar la cantidad de un determinado producto, ya sea por vencimiento
+ o por ser retirado del mercado.
+#parrafo
+El campo "Código de Barra" admite exactamente 9 números.<br>
+El campo "Código" admite solo letras y números.<br>
+El botón "Buscar" busca el lote de acuerdo a los campos cargados.<br>
+El spin "Cantidad" permite seleccionar la cantidad de productos para dicho lote.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_ajusteNegStock
 #start_altaCliente
 #parrafo
-Esta sección permite registrar clientes en el sistema como lo muestra la Figura 26
-Se ingresan los datos del cliente como lo indica el formulario de la figura 26 (el Número de Teléfono es opcional,
-el DNI solo admite números y el nombre y apellido hasta 15 caracteres, solo letras)
-El botón "Aceptar" registra el cliente en el sistema.
-El botón "Cancelar" anula la operación.
+La opción "Alta Cliente" permite registrar un cliente nuevo.
+#parrafo
+El campo "DNI" admite exactamente 8 números.<br>
+El campo "Nombre" admite solo letras y espacios (Máximo 15).<br>
+El campo "Apellido" admite solo letras y espacios (Máximo 15).<br>
+El campo "Domicilio" admite texto.<br>
+El campo "Teléfono" admite solo números (Máximo 20).<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_altaCliente
 #start_bajaCliente
 #parrafo
-Esta sección Elimina a un cliente del sistema como lo muestra en la Figura 27
-Se ingresan en los campos correspondientes el nombre, apellido y documento del cliente y se presiona "Buscar"
-para que sus datos se reflejen en la tabla inferior.
-El botón "Aceptar" elimina al cliente del sistema.
-El botón "Cancelar" anula la operación.
+La opción "Baja Cliente" permite dar de baja una determinada presentación.
+#parrafo
+El campo "DNI" admite exactamente 8 números.<br>
+El campo "Nombre" admite solo letras y espacios (Máximo 15).<br>
+El campo "Apellido" admite solo letras y espacios (Máximo 15).<br>
+El botón "Buscar" busca el cliente de acuerdo a los campos cargados.<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_bajaCliente
 #start_modCliente
 #parrafo
-Esta sección permite hacer cambios en los datos de un cliente determinado.
-Se ingresan en los campos correspondientes el nombre, apellido y documento del cliente y se presiona "Buscar"
-para que sus datos se reflejen en la tabla inferior.
-El botón "Aceptar" registra los cambios en el sistema.
-El botón "Cancelar" anula la operación.
+La opción "Modificar Lote" permite editar datos de un lote determinado.
+#parrafo
+El campo "DNI" admite exactamente 8 números.<br>
+El campo "Nombre" admite solo letras y espacios (Máximo 15).<br>
+El campo "Apellido" admite solo letras y espacios (Máximo 15).<br>
+El botón "Buscar" busca el cliente de acuerdo a los campos cargados.<br>
+El campo "Domicilio" admite texto.<br>
+El campo "Teléfono" admite solo números (Máximo 20).<br>
+El botón "Aceptar" confirma la operación.<br>
+El botón "Cancelar" anula la operación y limpia los campos.
 #end_modCliente
 #start_genList
 #parrafo
-Esta sección se utiliza para mostrar la información registrada en el sistema en formato
-Planilla de Excel o Documento PDF.
-Las opciones que el sistema contempla para generar listados son: Facturas Liquidadas pendientes de Cobro,
-Productos en Stock, Ventas realizadas y Clientes registrados, además, las facturas y ventas se pueden acotar de
-acuerdo a las fechas que interesen listarse
+La opción "Modificar Lote" permite mostrar la información registrada en el sistema en formato
+Hoja de Calculo o Documento PDF.
+#parrafo
+Las opciones que el sistema contempla para generar listados son: Productos en Stock, Ventas realizadas y
+Clientes (registrados).<br>
+Las Ventas Realizadas se pueden listar para un determinado rango de fechas.
 #end_genList
