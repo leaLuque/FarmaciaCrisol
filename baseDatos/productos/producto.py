@@ -6,6 +6,8 @@ from sqlalchemy import func
 from baseDatos.objetoBase import ObjetoBase
 from baseDatos.productos import Medicamento
 from baseDatos.productos.loteProducto import LoteProducto
+from baseDatos.obraSocial import ObraSocial
+from baseDatos.obraSocial import Descuento
 
 class Presentacion(ObjetoBase):
     """
