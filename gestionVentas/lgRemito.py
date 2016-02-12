@@ -884,29 +884,27 @@ class RegistrarCobroRemito(CRUDWidget, Ui_vtnRegistrarCobroRemito):
         else:
             efectivo,ok=QtGui.QInputDialog.getDouble(self,"Importe a pagar",("El importe a pagar es: $%.2f" % self.importeTotal),0,0,2000,2)
             if ok:
-                if float(efectivo) > self.importeTotal:
-                    QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $%.2f" % (float(efectivo)-self.importeTotal))
-                elif float(efectivo) < self.importeTotal:
+                if float(efectivo) < self.importeTotal:
                     QtGui.QMessageBox.information(self,"Aviso","El importe ingresado es menor al total")
                 else:
-                     QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $0.00")
-                for remito in self.remitosCobrados:
-                    remito.setCobrado(self.factura.numero)
-                    remito.modificar(self.sesion)
-                cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
-                cobroCliente.guardar(self.sesion)
-                self.factura.setObra(self.obraSocialSeleccionada)
-                self.factura.modificar(self.sesion)
-                QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
-                self.objectModified.emit()
-                data = {}
-                data["numero"] = self.factura.numero
-                data["fecha"] = self.factura.fecha_emision
-                data["detalles"] = self.itemsDeFactura
-                data["formaPago"] = "Efectivo"
-                generarFactura(data)
+                    QtGui.QMessageBox.information(self,"Cambio","Su vuelto es: $%.2f" % (float(efectivo)-self.importeTotal))
+                    for remito in self.remitosCobrados:
+                        remito.setCobrado(self.factura.numero)
+                        remito.modificar(self.sesion)
+                    cobroCliente=CobroClienteModel(CobroClienteModel.obtenerNumero(self.sesion),self.factura.numero,"Efectivo",self.importeTotal)
+                    cobroCliente.guardar(self.sesion)
+                    self.factura.setObra(self.obraSocialSeleccionada)
+                    self.factura.modificar(self.sesion)
+                    QtGui.QMessageBox.information(self,"Venta","El cobro ha sido exitoso")
+                    self.objectModified.emit()
+                    data = {}
+                    data["numero"] = self.factura.numero
+                    data["fecha"] = self.factura.fecha_emision
+                    data["detalles"] = self.itemsDeFactura
+                    data["formaPago"] = "Efectivo"
+                    generarFactura(data)
 
-                self.limpiarForm()
+                    self.limpiarForm()
 
     def cancelarOperacion(self):
         """

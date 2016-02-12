@@ -158,7 +158,7 @@ class Remito(ObjetoBase):
         :return Remtiso actuales en el sistema:
         :rtype Coleccion de objetos tipo Remito:
         """
-        return sesion.query(cls).filter(cls.anulado==False).filter(cls.baja==False)
+        return sesion.query(cls).filter(cls.anulado==False).filter(cls.cobrado == None).filter(cls.baja==False)
 
 class DetalleRemito(ObjetoBase):
     """

@@ -4,7 +4,7 @@ __author__ = 'leandro'
 
 from datetime import *
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
 from baseDatos.ventas.venta import NotaCredito
 from gui import CRUDWidget,MdiWidget
@@ -69,16 +69,16 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
         else:
             self.numeroFacturaActual=str(self.lineNumero.text())
             if len(self.numeroFacturaActual)==0:
-                self.showMsjEstado("No se ha ingresado numero de factura")
+                QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("No se ha ingresado número de factura"))
             else:
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.warning(self,"Aviso","La factura seleccionada no existe")
                 elif self.facturaSeleccionada.getNC()!=None:
-                    QtGui.QMessageBox.information(self,"Aviso","La factura ya ha sido devuelta")
+                    QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("La factura ya ha posee una Nota de Crédito"))
                     self.facturaSeleccionada = None
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
-                    QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para la devolución ha expirado")
+                    QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("El tiempo permitido para la devolución ha expirado"))
                 elif self.facturaSeleccionada.estaLiquidada(self.sesion):
                     print self.facturaSeleccionada.estaLiquidada(self.sesion)
                     QtGui.QMessageBox.information(self,"Aviso","La factura se encuentra liquidada a la Obra Social")
@@ -241,7 +241,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
             :return:
         """
 
-        signal = QtGui.QMessageBox.warning(self,"Advertencia","¿Desea cancelar la operación?",\
+        signal = QtGui.QMessageBox.warning(self,"Advertencia",QtCore.QString.fromUtf8("¿Desea cancelar la operación?"),\
                                                QtGui.QMessageBox.Close | QtGui.QMessageBox.Ok)
         if signal == QtGui.QMessageBox.Ok:
             self.data = {}
@@ -547,7 +547,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.obraSocialSeleccionada=None
         self.formapago = None
         self.factura = None
-        self.data = []
+        self.data = {}
         self.detallesTabla = {}
 
     def buscarProd(self):
@@ -810,9 +810,9 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 detalleFactura.guardar(self.sesion)
                 self.detallesTabla[rows] = detalleFactura
 
-                self.data.append([
+                self.data[rows] = [
                     producto, cantidad, subtotal*cantidad, descuentoActual
-                ])
+                ]
 
                 self.actualizar()
                 self.objectModified.emit()
@@ -835,6 +835,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
             detalle.eliminarLotesAsociados(self.sesion)
             detalle.bajaFisica(self.sesion)
             del self.lotesVentas[detalle]
+            del self.data[itemActual.row()]
             self.tableFactura.hideRow(itemActual.row())
             self.actualizar()
             self.productosAgregados -=1
@@ -852,7 +853,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
         self.obraSocialSeleccionada=None
         self.formapago = None
         self.factura = None
-        self.data = []
+        self.data = {}
         self.detallesTabla = {}
         self.lineObra.clear()
         self.lineObra.setEnabled(True)
@@ -892,7 +893,7 @@ class VentaContado(CRUDWidget, Ui_vtnVentaContado):
                 data = {}
                 data["numero"] = self.factura.numero
                 data["fecha"] = self.factura.fecha_emision
-                data["detalles"] = self.data
+                data["detalles"] = self.data.values()
                 data["formaPago"] = self.formapago
                 generarFactura(data)
                 self.factura.setObra(self.obraSocialSeleccionada)
