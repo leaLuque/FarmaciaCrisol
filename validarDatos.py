@@ -31,7 +31,7 @@ class ValidarDatos():
             elif c == "importe":
                 regexp = QRegExp("[1-9]\d*\.\d{2}")
             elif c == "codLote":
-                regexp = QRegExp("[0-9A-Za-z]{2,10}")
+                regexp = QRegExp("[0-9A-Za-z]{1,10}")
             elif c == "cantidad":
                 regexp = QRegExp("[1-9]\d{1,6}")
             elif c == "dni":
