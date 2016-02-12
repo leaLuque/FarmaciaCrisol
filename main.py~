@@ -196,12 +196,11 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
         return self.sesion
 
     def config(self):
-		pass        
-		#from ConfigParser import ConfigParser
-        #config = ConfigParser()
-        #config.read("Configuracion.cfg")
-        #sections = config.sections() #ve las secciones del archivo (hay una sola llamada FARMACIA)
-        #a = config.get("Farmacia", "CUIT") #Asi se obtiene cada item del archivo
+        from ConfigParser import ConfigParser
+        config = ConfigParser()
+        config.read("Configuracion.cfg")
+        sections = config.sections() #ve las secciones del archivo (hay una sola llamada FARMACIA)
+        a = config.get("Farmacia", "CUIT") #Asi se obtiene cada item del archivo
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

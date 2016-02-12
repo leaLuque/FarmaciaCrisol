@@ -73,6 +73,8 @@ class Producto(CRUDWidget, Ui_vtnProducto):
                         if self.validarLote(producto):
                             if producto.guardar(self.sesion):
                                 QtGui.QMessageBox.information(self, 'Info', 'El Producto fue dado de alta.', 'Aceptar')
+                                #TODO AÑADI ESTA LINEA
+                                producto.setDescuento(self.sesion)
                                 if self.lote == None:
                                     self.lote = LoteModel(str(self.lineCod_Lote.text()),
                                                           str(self.dateFechVenc.text()))

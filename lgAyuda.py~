@@ -138,7 +138,7 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
         :param pal_clave Separador de contenido:
         :param id_menu_onclick Opción seleccionada:
         """
-        plantilla = open("./Ayuda/contenidoPlantilla.html", "r")
+        plantilla = open("contenidoPlantilla.html", "r")
         contenido_plantilla = plantilla.read()
         plantilla.close()
 
@@ -149,7 +149,7 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
                 <p> {figura} </p>
             </div>""".format(titulo=titulo, imagen=imagen, figura=figura)
 
-        archivo = open("Ayuda/ayuda.txt", "r")
+        archivo = open("ayuda.txt", "r")
         contenido_txt = archivo.read()
         archivo.close()
         # cada m es un objeto tipo matcher

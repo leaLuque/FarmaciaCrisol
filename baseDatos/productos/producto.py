@@ -6,6 +6,7 @@ from sqlalchemy import func
 from baseDatos.objetoBase import ObjetoBase
 from baseDatos.productos import Medicamento
 from baseDatos.productos.loteProducto import LoteProducto
+from baseDatos.obraSocial import ObraSocial,Descuento
 
 class Presentacion(ObjetoBase):
     """
@@ -275,6 +276,19 @@ class Producto(ObjetoBase):
         for a in query:
             cantidad+=a.cantidad
         return cantidad
+
+    def setDescuento(self,sesion):
+        """
+            Setea el descuento a cero para cada Obra Social
+        :param sesion:
+        :return:
+        """
+        query = sesion.query(ObraSocial.razon_social)
+        for obra in query:
+            descuento =  Descuento(self.codigo_barra,obra,0)
+            descuento.guardar(sesion)
+
+
 
     def getNombreMonodroga(self,sesion):
         """
