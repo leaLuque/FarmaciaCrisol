@@ -18,17 +18,22 @@ from gui.signals import PoolOfWindows
 
 class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
+    user = ""
+    host = ""
+    password = ""
+
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent)
         self.setupUi(self)
+        self.config()
         # ----- Mappea las tablas con la base y crea una sesion
-        CreacionTabla()
-        bdConexion = Conexion()
+        CreacionTabla(user = self.user,host = self.host, password = self.password)
+        bdConexion = Conexion(user = self.user,host = self.host, password = self.password)
         self.sesion = bdConexion.crearSesion()
         # Cerrar ventana con la opcion del menu
         self.actionSalir_2.triggered.connect(self.cerrar)
 
-        self.config()
+
 
         self.connect(QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_F1), self), QtCore.SIGNAL('activated()'),
                      self.ayuda)
@@ -173,6 +178,12 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
     # ----- muestra un mensaje en la barra de estado de la ventan principal
     def setBarraEstado(self, estado):
+        """
+            Muestra mensajes en la barra de estado de
+            la ventana principal
+        :param estado Mensaje:
+        :return:
+        """
         self.statusBar().showMessage(estado)
 
     def ayuda(self):
@@ -185,6 +196,11 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
     # ----- deshabilita los menu y actions cada vez que se llama a la ventana ingresar
 
     def deshabilitarMenu(self):
+        """
+            Deshabilita las opciones que no corresponden con
+            el rol del usuario
+        :return:
+        """
         for hab in self.tecnico_farmaceutico:
             if isinstance(hab, QtGui.QMenu):
                 hab.menuAction().setVisible(False)
@@ -193,15 +209,35 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
 
     # ----- Devuelve la sesion de la BD
     def getSesionBD(self):
+        """
+            Retorno la Sesion actual con la Base de Datos
+        :return Session:
+        """
         return self.sesion
 
     def config(self):
-		pass        
-		#from ConfigParser import ConfigParser
-        #config = ConfigParser()
-        #config.read("Configuracion.cfg")
-        #sections = config.sections() #ve las secciones del archivo (hay una sola llamada FARMACIA)
-        #a = config.get("Farmacia", "CUIT") #Asi se obtiene cada item del archivo
+        """
+            Configuración del programa mediante archivo externo
+        :return:
+        """
+        from configparser import ConfigParser
+        config = ConfigParser()
+        config.read("Configuracion.cfg")
+        ##
+        a = config.get("Excel", "path")
+        Listar.path_excel_files = str(a)
+        a = config.get("BaseDatos", "user")
+        self.user = a
+        a = config.get("BaseDatos", "host")
+        self.host = a
+        a = config.get("BaseDatos", "password")
+        self.password = a
+        a = config.get("PlazoDevolucion","plazo")
+        DevolucionDeCliente.plazo = a
+        a = config.get("PlazoReintegro","plazo")
+        ReintegroCliente.plazo = a
+
+
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

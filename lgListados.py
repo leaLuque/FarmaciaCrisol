@@ -23,6 +23,9 @@ class Listar(MdiWidget, Ui_vtnListar):
     """
         Genera los listados (varios) en pdf y excel.
     """
+
+    path_excel_files = "."
+
     def __init__(self, mdi):
         """Constructor de la clase Listar.
 
@@ -393,7 +396,7 @@ class Listar(MdiWidget, Ui_vtnListar):
             data[nombreProducto.upper()]=producto.getCantidad(self.sesion)
             lotesProductos[nombreProducto]=producto.buscarLotes(self.sesion)
 
-        documento=xlsxwriter.Workbook('Excel/StockProductos.xlsx')
+        documento=xlsxwriter.Workbook(Listar.path_excel_files + "/StockProductos.xlsx")
         hoja=documento.add_worksheet('General')
         bold = documento.add_format({'bold': 1,})
         bold.set_align('center')
@@ -477,7 +480,7 @@ class Listar(MdiWidget, Ui_vtnListar):
             else:
                 ventas[remito.fecha_emision]=1
 
-        documento=xlsxwriter.Workbook('Excel/Ventas.xlsx')
+        documento=xlsxwriter.Workbook(Listar.path_excel_files + "/Ventas.xlsx")
         hoja=documento.add_worksheet('Ventas')
         bold = documento.add_format({'bold': 1,})
         date_format = documento.add_format({'num_format': 'yyyy/mm/dd'})
@@ -525,7 +528,7 @@ class Listar(MdiWidget, Ui_vtnListar):
 
 
 
-        documento=xlsxwriter.Workbook('Excel/Clientes.xlsx')
+        documento=xlsxwriter.Workbook(Listar.path_excel_files + "/Clientes.xlsx")
         hoja=documento.add_worksheet('Clientes')
         bold = documento.add_format({'bold': 1,})
         bold.set_align('center')

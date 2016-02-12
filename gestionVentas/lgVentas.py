@@ -33,6 +33,8 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
 
     """
 
+    plazo = 7
+
     def __init__(self,mdi):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
@@ -77,7 +79,7 @@ class DevolucionDeCliente(CRUDWidget, Ui_vtnDevolucionDeCliente):
                 elif self.facturaSeleccionada.getNC()!=None:
                     QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("La factura ya ha posee una Nota de Crédito"))
                     self.facturaSeleccionada = None
-                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
+                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=self.plazo)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("El tiempo permitido para la devolución ha expirado"))
                 elif self.facturaSeleccionada.estaLiquidada(self.sesion):
                     print self.facturaSeleccionada.estaLiquidada(self.sesion)
@@ -264,6 +266,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
 
     """
 
+    plazo = 7
+
     def __init__(self, mdi):
         MdiWidget.__init__(self, mdi)
         self.sesion = self.mdi().window().getSesionBD()
@@ -284,6 +288,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.detallesImprimibles = []
         self.obraSocial = None
         self.facturaSeleccionada = None
+        print self.plazo
 
     def filtrarObra(self):
         """
@@ -401,7 +406,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                         QtGui.QMessageBox.information(self,"Aviso","La Obra Social seleccionada no corresponde con la factura")
                     else:
                         QtGui.QMessageBox.information(self,"Aviso","Esta factura ya fue cobrado con Obra Social")
-                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=7)<date.today():
+                elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=self.plazo)<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
                 elif self.facturaSeleccionada.estaLiquidada(self.sesion):
                     QtGui.QMessageBox.information(self,"Aviso","La factura se encuentra liquidada a la Obra Social")
