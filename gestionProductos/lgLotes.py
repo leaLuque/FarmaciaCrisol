@@ -265,3 +265,6 @@ class Lote(CRUDWidget, Ui_vtnLote):
         self.sender1.objectDeleted.connect(self.actualizar)
         self.sender2 = PoolOfWindows.getVentana("ModificarProducto")
         self.sender2.objectModified.connect(self.actualizar)
+
+    def cancelarVentana(self):
+        self.actualizar()

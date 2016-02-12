@@ -13,7 +13,7 @@ from gestionVentas import *
 from gui import MyMdi
 from lgIngresar import Ingresar
 from lgListados import Listar
-from lgAyuda import Ayuda
+from lgAyuda import Ayuda, AcercaDe
 from gui.signals import PoolOfWindows
 
 class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
@@ -73,7 +73,8 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
             (self.actionVentaContado, VentaContado, "id_vent_cont"),
             (self.actionVentaConRemito, VentaConRemito, "id_vent_rem"),
             (self.actionAjusteNegativoStock, AjusteNegativoStock, "id_ajuste_neg_stock"),
-            (self.actionAyuda, Ayuda, "id_ayuda")
+            (self.actionAyuda, Ayuda, "id_ayuda"),
+            (self.actionAcercaDe, AcercaDe, "id_acerca" )
         ]
 
         # ------ Lista de ventanas disponibles para el farmaceutico
@@ -161,7 +162,7 @@ class MainWindow(QtGui.QMainWindow, Ui_vtnPrincipal):
             "ModificarRemito", "DevolucionDeCliente", "FraccionarProducto",
             "Ingresar", "Listar", "RegistrarCobroRemito",
             "ReintegroCliente", "VentaContado", "VentaConRemito",
-            "AjusteNegativoStock", "Ayuda"]
+            "AjusteNegativoStock", "Ayuda","AcercaDe"]
 
         dict = {}
         for nro, obj in enumerate(instances):

@@ -529,6 +529,9 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         self.sender5 = PoolOfWindows.getVentana("ModificarPresentacion")
         self.sender5.objectModified.connect(self.actualizarInfoPres)
 
+    def cancelarVentana(self):
+        self.actualizar()
+
 class FraccionarProducto(CRUDWidget, Ui_vtnFraccionarProducto):
     """
     Lógica del Fraccionado de productos.
@@ -721,6 +724,9 @@ class FraccionarProducto(CRUDWidget, Ui_vtnFraccionarProducto):
         self.sender3 = PoolOfWindows.getVentana("AjusteNegativoStock")
         self.sender3.objectModified.connect(self.actualizarInfo)
 
+    def cancelarVentana(self):
+        self.actualizar()
+
 class AjusteNegativoStock(CRUDWidget, Ui_vtnAjusteNegativoStock):
     """
     Lógica del ajuste negativo del stock de los productos.
@@ -867,3 +873,6 @@ class AjusteNegativoStock(CRUDWidget, Ui_vtnAjusteNegativoStock):
         self.sender8.objectModified.connect(self.actualizarInfo)
         self.sender10 = PoolOfWindows.getVentana("ModificarRemito")
         self.sender10.objectModified.connect(self.actualizarInfo)
+
+    def cancelarVentana(self):
+        self.actualizar()

@@ -215,3 +215,6 @@ class Monodroga(CRUDWidget, Ui_vtnMonodroga):
         gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscar)
         return gui
+
+    def cancelarVentana(self):
+        self.actualizar()

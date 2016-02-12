@@ -256,3 +256,6 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.btnBuscar.pressed.connect(gui.buscarClt)
         return gui
+
+    def cancelarVentana(self):
+        self.actualizar()

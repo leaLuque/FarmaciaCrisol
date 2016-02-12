@@ -7,6 +7,7 @@ from PyQt4.QtWebKit import QWebView, QWebPage
 
 from gui import MdiWidget
 from ventanas.vtnAyuda import Ui_vtnAyuda
+from ventanas.vtnAcerca import Ui_Dialog
 
 class Ayuda (MdiWidget, Ui_vtnAyuda):
     def __init__(self, mdi):
@@ -155,3 +156,8 @@ class Ayuda (MdiWidget, Ui_vtnAyuda):
     def ayudaVentana(self, ventana):
         self.cargarContenido(ventana)
         self.view.reload()
+
+class AcercaDe(MdiWidget,Ui_Dialog):
+
+    def __init__(self,mdi):
+        MdiWidget.__init__(self, mdi)

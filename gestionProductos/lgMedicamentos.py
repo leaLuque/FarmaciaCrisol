@@ -284,3 +284,6 @@ class Medicamento(CRUDWidget, Ui_vtnMedicamento):
         self.sender1.objectDeleted.connect(self.actualizarInfo)
         self.sender2 = PoolOfWindows.getVentana("ModificarMonodroga")
         self.sender2.objectModified.connect(self.actualizarInfo)
+
+    def cancelarVentana(self):
+        self.actualizar()

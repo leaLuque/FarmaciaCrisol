@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'waldo'
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui,QtCore
 
 from ventanas import Ui_vtnIngresar
 from gui import MdiWidget
@@ -43,7 +43,7 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
         if self.usuario_activo != log.id_usuario:
 
             if self.usuario_activo != None:
-                ok = QtGui.QMessageBox.information(self,"Aviso","El usuario es distinto al actual. ¿Seguro que desea salir?",\
+                ok = QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("El usuario es distinto al actual. ¿Seguro que desea salir?"),\
                                           QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok)
             else:
                 ok = QtGui.QMessageBox.Ok
@@ -57,7 +57,7 @@ class Ingresar(MdiWidget, Ui_vtnIngresar):
                     self.limpiarCampos()
                     self.cerrarVentanas()
                 else:
-                    QtGui.QMessageBox.critical(self, 'Error', 'Usuario o Contraseña incorrecta.', 'Aceptar')
+                    QtGui.QMessageBox.critical(self, 'Error', QtCore.QString.fromUtf8('Usuario o Contraseña incorrecta.'), 'Aceptar')
         else:
             QtGui.QMessageBox.information(self,"Aviso","Este usuario ya se encuentra logueado")
 

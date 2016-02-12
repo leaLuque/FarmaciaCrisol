@@ -380,3 +380,6 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         gui.btnCancelar.pressed.connect(gui.cancelar)
         gui.tablaFraccionable.itemClicked.connect(gui.setFraccionable)
         return gui
+
+    def cancelarVentana(self):
+        self.actualizar()
