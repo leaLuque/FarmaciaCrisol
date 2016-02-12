@@ -855,3 +855,5 @@ class AjusteNegativoStock(CRUDWidget, Ui_vtnAjusteNegativoStock):
         self.sender2.objectModified.connect(self.actualizarInfo)
         self.sender3 = PoolOfWindows.getVentana("FraccionarProducto")
         self.sender3.objectModified.connect(self.actualizarInfo)
+        self.sender4 = PoolOfWindows.getVentana("AltaLote")
+        self.sender4.objectCreated.connect(self.actualizarInfo)
