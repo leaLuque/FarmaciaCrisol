@@ -288,6 +288,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.detallesImprimibles = []
         self.obraSocial = None
         self.facturaSeleccionada = None
+        print self.plazo
 
     def filtrarObra(self):
         """
