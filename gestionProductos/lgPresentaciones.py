@@ -233,6 +233,8 @@ class Presentacion(CRUDWidget, Ui_vtnPresentacion):
         self.lineTipo.clear()
         self.lineTipo.setEnabled(True)
         self.spinCantidad.setValue(1)
+        self.spinCantidad.setEnabled(True)
+        self.tablaFraccionable.setEnabled(True)
         self.lineUnidad_Medida.clear()
         self.tablaPresentacion.setCurrentItem(None)
         self.tablaFraccionable.setCurrentItem(None)
