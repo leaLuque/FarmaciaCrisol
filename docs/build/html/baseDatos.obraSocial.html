@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>baseDatos.obraSocial package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basedatos-obrasocial-package">
+<h1>baseDatos.obraSocial package<a class="headerlink" href="#basedatos-obrasocial-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-baseDatos.obraSocial.obraSocial">
+<span id="basedatos-obrasocial-obrasocial-module"></span><h2>baseDatos.obraSocial.obraSocial module<a class="headerlink" href="#module-baseDatos.obraSocial.obraSocial" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.obraSocial.obraSocial.CobroObraSocial">
+<em class="property">class </em><code class="descclassname">baseDatos.obraSocial.obraSocial.</code><code class="descname">CobroObraSocial</code><span class="sig-paren">(</span><em>numero</em>, <em>cheque_deposito</em>, <em>importe</em>, <em>id_factura_liquidacion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.CobroObraSocial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Clase que modela el cobro a la Obra Social</p>
+<dl class="method">
+<dt id="baseDatos.obraSocial.obraSocial.CobroObraSocial.getIdFacturaLiquidacion">
+<code class="descname">getIdFacturaLiquidacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.CobroObraSocial.getIdFacturaLiquidacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id de la Factura Liquidada</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Id_Factura:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.obraSocial.obraSocial.Descuento">
+<em class="property">class </em><code class="descclassname">baseDatos.obraSocial.obraSocial.</code><code class="descname">Descuento</code><span class="sig-paren">(</span><em>producto</em>, <em>obra_social</em>, <em>descuento</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.Descuento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Clase que modela el Descuento de Obra Social</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.obraSocial.obraSocial.FacturaLiquidacion">
+<em class="property">class </em><code class="descclassname">baseDatos.obraSocial.obraSocial.</code><code class="descname">FacturaLiquidacion</code><span class="sig-paren">(</span><em>numero</em>, <em>nro_factura</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.FacturaLiquidacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Clase que modela la Factura de Liquidacion</p>
+<dl class="method">
+<dt id="baseDatos.obraSocial.obraSocial.FacturaLiquidacion.getNumero">
+<code class="descname">getNumero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.FacturaLiquidacion.getNumero" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el número de la factura de liquidación</div></blockquote>
+<p>:return Id_FacturaLiquidación</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.obraSocial.obraSocial.ObraSocial">
+<em class="property">class </em><code class="descclassname">baseDatos.obraSocial.obraSocial.</code><code class="descname">ObraSocial</code><span class="sig-paren">(</span><em>razon_social</em>, <em>cuit</em>, <em>direccion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.ObraSocial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Clase que modela a la Obra Social</p>
+<dl class="method">
+<dt id="baseDatos.obraSocial.obraSocial.ObraSocial.getDescuento">
+<code class="descname">getDescuento</code><span class="sig-paren">(</span><em>producto</em>, <em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.ObraSocial.getDescuento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el descuento para el producto seleccionado</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>Id_Producto</strong> (<a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos.producto" title="baseDatos.productos.producto"><em>producto</em></a>) &#8211; </li>
+<li><strong>Sesion actual con la Base de Datos</strong> (<em>sesion</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Descuento:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.obraSocial.obraSocial.ObraSocial.getObraSocial">
+<em class="property">classmethod </em><code class="descname">getObraSocial</code><span class="sig-paren">(</span><em>obra</em>, <em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.obraSocial.obraSocial.ObraSocial.getObraSocial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la Obra Social</div></blockquote>
+<p>:param obra Razón social
+:param sesion Sesión actual con la Base de Datos:
+:return Objecto de tipo Obra Social:</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.obraSocial">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-baseDatos.obraSocial" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">baseDatos.obraSocial package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-baseDatos.obraSocial.obraSocial">baseDatos.obraSocial.obraSocial module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.obraSocial">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/baseDatos.obraSocial.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/baseDatos.obraSocial.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

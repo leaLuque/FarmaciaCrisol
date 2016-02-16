@@ -201,7 +201,7 @@ class Producto(CRUDWidget, Ui_vtnProducto):
         for dr in detalleRemito:
             remito = RemitoModel.buscarAlta(RemitoModel.numero, self.sesion, dr.getIdRemito()).first()
             if not (remito.getAnulado()):
-                if remito.getCobrado() == None:
+                if not remito.getCobrado():
                     QtGui.QMessageBox.critical(self, 'Error', 'Existen remitos pendientes de pago '
                                                               'en los que figura dicho Producto.', 'Aceptar')
                     return False

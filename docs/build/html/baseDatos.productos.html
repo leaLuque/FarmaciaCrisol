@@ -1,0 +1,1151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>baseDatos.productos package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basedatos-productos-package">
+<h1>baseDatos.productos package<a class="headerlink" href="#basedatos-productos-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-baseDatos.productos.loteProducto">
+<span id="basedatos-productos-loteproducto-module"></span><h2>baseDatos.productos.loteProducto module<a class="headerlink" href="#module-baseDatos.productos.loteProducto" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.productos.loteProducto.LoteProducto">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.loteProducto.</code><code class="descname">LoteProducto</code><span class="sig-paren">(</span><em>id_lote</em>, <em>id_producto</em>, <em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto LoteProducto a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.aumentarCantidad">
+<code class="descname">aumentarCantidad</code><span class="sig-paren">(</span><em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.aumentarCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Aumenta la cantidad del lote</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Cantidad a aumentar</strong> (<em>cantidad</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.buscarFraccionable">
+<em class="property">classmethod </em><code class="descname">buscarFraccionable</code><span class="sig-paren">(</span><em>sesion</em>, <em>producto</em>, <em>lote</em>, <em>presentacion</em>, <em>var</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.buscarFraccionable" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve los subproductos de un producto fraccionable.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>producto</strong> &#8211; </li>
+<li><strong>lote</strong> &#8211; </li>
+<li><strong>presentacion</strong> &#8211; </li>
+<li><strong>var</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return fraccionables:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.buscarLoteProducto">
+<em class="property">classmethod </em><code class="descname">buscarLoteProducto</code><span class="sig-paren">(</span><em>sesion</em>, <em>var1</em>, <em>var2</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.buscarLoteProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el lote/producto correspondiente a un lote y un producto determinado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>var1</strong> &#8211; </li>
+<li><strong>var2</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return loteProducto:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.buscarLoteProductoPorProducto">
+<em class="property">classmethod </em><code class="descname">buscarLoteProductoPorProducto</code><span class="sig-paren">(</span><em>sesion</em>, <em>producto</em>, <em>lote</em>, <em>varBusq</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.buscarLoteProductoPorProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve todos los lotes/productos almacenados en la base de datos para un producto determinado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>producto</strong> &#8211; </li>
+<li><strong>lote</strong> &#8211; </li>
+<li><strong>varBusq</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return lotesProductos:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.buscarTodosLoteProducto">
+<em class="property">classmethod </em><code class="descname">buscarTodosLoteProducto</code><span class="sig-paren">(</span><em>sesion</em>, <em>producto</em>, <em>lote</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.buscarTodosLoteProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve todos los lotes/productos almacenados en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>producto</strong> &#8211; </li>
+<li><strong>lote</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return lotesProductos:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.descontarCantidad">
+<code class="descname">descontarCantidad</code><span class="sig-paren">(</span><em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.descontarCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Descuenta la cantidad del lote</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Cantidad a descontar</strong> (<em>cantidad</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.getCantidad">
+<code class="descname">getCantidad</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.getCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la cantidad del lote/producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return id_producto:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.getIdLote">
+<code class="descname">getIdLote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.getIdLote" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return id_lote:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.getIdProducto">
+<code class="descname">getIdProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.getIdProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return id_producto:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('cod_barra', 'cod_lote')</em><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.setCantidad">
+<code class="descname">setCantidad</code><span class="sig-paren">(</span><em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.setCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la cantidad del lote/producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>cantidad</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.setIdLote">
+<code class="descname">setIdLote</code><span class="sig-paren">(</span><em>id_lote</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.setIdLote" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el id del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_lote</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.loteProducto.LoteProducto.setIdProducto">
+<code class="descname">setIdProducto</code><span class="sig-paren">(</span><em>id_producto</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.loteProducto.LoteProducto.setIdProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el id del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_producto</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.productos.medicamento">
+<span id="basedatos-productos-medicamento-module"></span><h2>baseDatos.productos.medicamento module<a class="headerlink" href="#module-baseDatos.productos.medicamento" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.productos.medicamento.Medicamento">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.medicamento.</code><code class="descname">Medicamento</code><span class="sig-paren">(</span><em>nombre_comercial</em>, <em>id_monodroga</em>, <em>cantidad_monodroga</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto Medicamento a alamacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.getCantidadMonodroga">
+<code class="descname">getCantidadMonodroga</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.getCantidadMonodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la cantidad de la monodroga de la cual se compone el medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return cantidad_monodroga:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.getIdMonodroga">
+<code class="descname">getIdMonodroga</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.getIdMonodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id de la monodroga de la cual se compone el medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return id_monodroga:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.getNombreComercial">
+<code class="descname">getNombreComercial</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.getNombreComercial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el nombre comercial del medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return nombre_comercial:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.medicamento.Medicamento.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.medicamento.Medicamento.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('nombre_med', 'nombre_mon')</em><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.setCantidadMonodroga">
+<code class="descname">setCantidadMonodroga</code><span class="sig-paren">(</span><em>cantidad_monodroga</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.setCantidadMonodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la cantidad de la monodroga de la cual se compone el medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>cantidad_monodroga</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.setIdMonodroga">
+<code class="descname">setIdMonodroga</code><span class="sig-paren">(</span><em>id_monodroga</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.setIdMonodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el id de la monodroga de la cual se compone el medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_monodroga</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Medicamento.setNombreComercial">
+<code class="descname">setNombreComercial</code><span class="sig-paren">(</span><em>nombre_comercial</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Medicamento.setNombreComercial" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el nombre comercial del medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>nombre_comercial</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.productos.medicamento.Monodroga">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.medicamento.</code><code class="descname">Monodroga</code><span class="sig-paren">(</span><em>nombre</em>, <em>tipo_venta</em>, <em>descripcion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto Monodroga a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.getDescripcion">
+<code class="descname">getDescripcion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.getDescripcion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la descripción de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return descripcion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.getNombre">
+<code class="descname">getNombre</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.getNombre" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el nombre de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body">nombre</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.getTipoVenta">
+<code class="descname">getTipoVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.getTipoVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el tipo de venta de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return tipo_venta:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.medicamento.Monodroga.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.medicamento.Monodroga.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('nombre',)</em><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.setDescripcion">
+<code class="descname">setDescripcion</code><span class="sig-paren">(</span><em>descripcion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.setDescripcion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la descripción de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>descripcion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.setNombre">
+<code class="descname">setNombre</code><span class="sig-paren">(</span><em>nombre</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.setNombre" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el nombre de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>nombre</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.medicamento.Monodroga.setTipoVenta">
+<code class="descname">setTipoVenta</code><span class="sig-paren">(</span><em>tipo_venta</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.medicamento.Monodroga.setTipoVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el tipo de venta de la monodroga.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>tipo_venta</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.productos.producto">
+<span id="basedatos-productos-producto-module"></span><h2>baseDatos.productos.producto module<a class="headerlink" href="#module-baseDatos.productos.producto" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.productos.producto.Lote">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.producto.</code><code class="descname">Lote</code><span class="sig-paren">(</span><em>codigo</em>, <em>fecha_vencimiento</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto Lote a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.producto.Lote.getCantidad">
+<code class="descname">getCantidad</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.getCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la cantidad de un producto para uno o más lotes.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Lote.getCodigo">
+<code class="descname">getCodigo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.getCodigo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el código del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return codigo:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Lote.getFechaVencimiento">
+<code class="descname">getFechaVencimiento</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.getFechaVencimiento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la fecha de vencimiento del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return fecha_vencimiento:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Lote.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.producto.Lote.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.producto.Lote.obtenerLoteProducto">
+<em class="property">classmethod </em><code class="descname">obtenerLoteProducto</code><span class="sig-paren">(</span><em>producto</em>, <em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.obtenerLoteProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve los lotes de un producto determinado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>producto</strong> &#8211; </li>
+<li><strong>sesion</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return lotes:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Lote.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('codigo', 'cod_barra')</em><a class="headerlink" href="#baseDatos.productos.producto.Lote.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Lote.setCodigo">
+<code class="descname">setCodigo</code><span class="sig-paren">(</span><em>codigo</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.setCodigo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el código del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>codigo</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Lote.setFechaVencimiento">
+<code class="descname">setFechaVencimiento</code><span class="sig-paren">(</span><em>fecha_vencimiento</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Lote.setFechaVencimiento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la fecha de vencimiento del lote.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>fecha_vencimiento</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.productos.producto.Presentacion">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.producto.</code><code class="descname">Presentacion</code><span class="sig-paren">(</span><em>tipo</em>, <em>unidad_medida</em>, <em>cantidad_fracciones</em>, <em>sub_presentacion</em>, <em>super_presentacion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto Presentacion a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.getCantidadFracciones">
+<code class="descname">getCantidadFracciones</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.getCantidadFracciones" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la cantidad de fracciones de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return cantidad_fracciones:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.getSubPresentacion">
+<code class="descname">getSubPresentacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.getSubPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la subpresentación de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return sub_presentacion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.getSuperPresentacion">
+<code class="descname">getSuperPresentacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.getSuperPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la super presentación de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return super_presentacion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.getTipo">
+<code class="descname">getTipo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.getTipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el tipo de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return tipo:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.getUnidadMedida">
+<code class="descname">getUnidadMedida</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.getUnidadMedida" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la unidad de medida de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return unidad_medida:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.producto.Presentacion.listarFraccionables">
+<em class="property">classmethod </em><code class="descname">listarFraccionables</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.listarFraccionables" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve todas las subpresentaciones del las presentaciones fraccionables.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return subpresentaciones:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Presentacion.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Presentacion.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('tipo', 'unidad_medida')</em><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.setCantidadFracciones">
+<code class="descname">setCantidadFracciones</code><span class="sig-paren">(</span><em>cantidad_fracciones</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.setCantidadFracciones" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la cantidad de fraccciones de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>cantidad_fracciones</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.setSubPresentacion">
+<code class="descname">setSubPresentacion</code><span class="sig-paren">(</span><em>sub_presentacion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.setSubPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la subpresentación de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sub_presentacion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.setSuperPresentacion">
+<code class="descname">setSuperPresentacion</code><span class="sig-paren">(</span><em>super_presentacion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.setSuperPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la super presentación de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>super_presentacion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.setTipo">
+<code class="descname">setTipo</code><span class="sig-paren">(</span><em>tipo</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.setTipo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el tipo de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>tipo</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Presentacion.setUnidadMedida">
+<code class="descname">setUnidadMedida</code><span class="sig-paren">(</span><em>unidad_medida</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Presentacion.setUnidadMedida" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea la unidad de medida de la presentación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>unidad_medida</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.productos.producto.Producto">
+<em class="property">class </em><code class="descclassname">baseDatos.productos.producto.</code><code class="descname">Producto</code><span class="sig-paren">(</span><em>codigo_barra</em>, <em>id_medicamento</em>, <em>id_presentacion</em>, <em>importe</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="baseDatos.html#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Objeto Producto a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.buscarLotes">
+<code class="descname">buscarLotes</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.buscarLotes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Busca los lotes y sus cantidades para un producto
+:param Sesion
+:return Arreglo con los lotes y cantidades correspondiente a un producto</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.productos.producto.Producto.buscarProductoPresMed">
+<em class="property">classmethod </em><code class="descname">buscarProductoPresMed</code><span class="sig-paren">(</span><em>sesion</em>, <em>producto</em>, <em>tipo</em>, <em>nombre_comercial</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.buscarProductoPresMed" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca un producto para un determinado tipo de presentación y nombre comercial de medicamento.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>producto</strong> &#8211; </li>
+<li><strong>codigo_barra</strong> &#8211; </li>
+<li><strong>tipo</strong> &#8211; </li>
+<li><strong>nombre_comercial</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return producto:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getCantidad">
+<code class="descname">getCantidad</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la cantidad del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return cantidad:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getCodigoBarra">
+<code class="descname">getCodigoBarra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getCodigoBarra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el código de barra del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return codigo_barra:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getIdMedicamento">
+<code class="descname">getIdMedicamento</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getIdMedicamento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id del medicamento del cual se compone el producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return id_medicamento:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getIdPresentacion">
+<code class="descname">getIdPresentacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getIdPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el id de la presentación de la cual se compone el producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return id_presentacion:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getImporte">
+<code class="descname">getImporte</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getImporte" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el importe del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return importe:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.getNombreMonodroga">
+<code class="descname">getNombreMonodroga</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.getNombreMonodroga" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el nombre de la monodroga del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Nombre Monodroga:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Producto.noRequeridos">
+<code class="descname">noRequeridos</code><em class="property"> = ()</em><a class="headerlink" href="#baseDatos.productos.producto.Producto.noRequeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="baseDatos.productos.producto.Producto.requeridos">
+<code class="descname">requeridos</code><em class="property"> = ('codigo_barra', 'nomb_med', 'tipo_pres', 'importe', 'cod_lote')</em><a class="headerlink" href="#baseDatos.productos.producto.Producto.requeridos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.setCodigoBarra">
+<code class="descname">setCodigoBarra</code><span class="sig-paren">(</span><em>codigo_barra</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.setCodigoBarra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el código de barra del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>codigo_barra</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.setDescuento">
+<code class="descname">setDescuento</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.setDescuento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el descuento a cero para cada Obra Social</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.setIdMedicamento">
+<code class="descname">setIdMedicamento</code><span class="sig-paren">(</span><em>id_medicamento</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.setIdMedicamento" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el id del medicamento del cual se compone el producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_medicamento</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.setIdPresentacion">
+<code class="descname">setIdPresentacion</code><span class="sig-paren">(</span><em>id_presentacion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.setIdPresentacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el id de la presentacion de la cual se compone el producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>id_presentacion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.productos.producto.Producto.setImporte">
+<code class="descname">setImporte</code><span class="sig-paren">(</span><em>importe</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.productos.producto.Producto.setImporte" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el importe del producto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>importe</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.productos">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-baseDatos.productos" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">baseDatos.productos package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-baseDatos.productos.loteProducto">baseDatos.productos.loteProducto module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.productos.medicamento">baseDatos.productos.medicamento module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.productos.producto">baseDatos.productos.producto module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.productos">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/baseDatos.productos.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/baseDatos.productos.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

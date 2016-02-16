@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gestionClientes package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gestionclientes-package">
+<h1>gestionClientes package<a class="headerlink" href="#gestionclientes-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-gestionClientes.lgClientes">
+<span id="gestionclientes-lgclientes-module"></span><h2>gestionClientes.lgClientes module<a class="headerlink" href="#module-gestionClientes.lgClientes" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gestionClientes.lgClientes.Cliente">
+<em class="property">class </em><code class="descclassname">gestionClientes.lgClientes.</code><code class="descname">Cliente</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnCliente.Ui_vtnCliente" title="ventanas.vtnCliente.Ui_vtnCliente"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnCliente.Ui_vtnCliente</span></code></a></p>
+<p>Lógica del ABM de clientes.</p>
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.actualizar">
+<code class="descname">actualizar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.actualizar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza los componentes de las ventanas.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.bajaValida">
+<code class="descname">bajaValida</code><span class="sig-paren">(</span><em>dni</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.bajaValida" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Verifica que el cliente no posea remitos sin pagar.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>DNI del cliente para el cual se realiza la verificación.</strong> (<em>dni</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return bool:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.buscarClt">
+<code class="descname">buscarClt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.buscarClt" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca los clientes que cumplan con lo datos ingresados en los campos de filtrado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.cargarCamposBaja">
+<code class="descname">cargarCamposBaja</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.cargarCamposBaja" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los campos con los datos del cliente seleccionado (Baja).</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.cargarCamposMod">
+<code class="descname">cargarCamposMod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.cargarCamposMod" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los campos con los datos del cliente seleccionado (Modificación).</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.cargarClientes">
+<code class="descname">cargarClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.cargarClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los datos de los clientes en las tablas de las ventanas (Baja y Modificación).</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.crear">
+<code class="descname">crear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.crear" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Da de alta un cliente nuevo y lo almacena en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gestionClientes.lgClientes.Cliente.create">
+<em class="property">classmethod </em><code class="descname">create</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.create" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Configuración de la ventana Alta Cliente.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Referencia a la ventana Alta Cliente.</strong> (<em>mdi.</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return gui:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gestionClientes.lgClientes.Cliente.delete">
+<em class="property">classmethod </em><code class="descname">delete</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Configuración de la ventana Baja Cliente.
+:param mdi. Referencia a la ventana Baja Cliente.:
+:return: gui</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.eliminar">
+<code class="descname">eliminar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.eliminar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Da de baja el cliente selecionado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.limpiarCampos">
+<code class="descname">limpiarCampos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.limpiarCampos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Vacia los campos de la ventana.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionClientes.lgClientes.Cliente.modificar">
+<code class="descname">modificar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.modificar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Modifica los datos del cliente seleccionado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gestionClientes.lgClientes.Cliente.update">
+<em class="property">classmethod </em><code class="descname">update</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionClientes.lgClientes.Cliente.update" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Configuración de la ventana Modificación Cliente.
+:param mdi. Referencia a la ventana Modificación Cliente.:
+:return: gui</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gestionClientes">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gestionClientes" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gestionClientes package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-gestionClientes.lgClientes">gestionClientes.lgClientes module</a></li>
+<li><a class="reference internal" href="#module-gestionClientes">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gestionClientes.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/gestionClientes.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

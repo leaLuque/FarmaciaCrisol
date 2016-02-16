@@ -1,0 +1,1515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gestionVentas package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gestionventas-package">
+<h1>gestionVentas package<a class="headerlink" href="#gestionventas-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-gestionVentas.genComprobantes">
+<span id="gestionventas-gencomprobantes-module"></span><h2>gestionVentas.genComprobantes module<a class="headerlink" href="#module-gestionVentas.genComprobantes" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="function">
+<dt id="gestionVentas.genComprobantes.generarFactura">
+<code class="descclassname">gestionVentas.genComprobantes.</code><code class="descname">generarFactura</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.genComprobantes.generarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Generar la factura correspondiente, para ser impresa
+:param data Diccionario que contiene informacion asociada con el comprobante:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gestionVentas.genComprobantes.generarNotaCredito">
+<code class="descclassname">gestionVentas.genComprobantes.</code><code class="descname">generarNotaCredito</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.genComprobantes.generarNotaCredito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Genera la Nota de Credito correspondiente
+para ser impresa.
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gestionVentas.genComprobantes.generarRremito">
+<code class="descclassname">gestionVentas.genComprobantes.</code><code class="descname">generarRremito</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.genComprobantes.generarRremito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Generar el remito correspondiente, para ser impresa
+:param data Diccionario que contiene informacion asociada con el comprobante:</p>
+<p>Estructura del diccionario</p>
+<p>numero = Contiene el numero del remito
+fecha = Contiene fecha del remito
+datosCliente = Contiene un diccionario con los datos del cliente</p>
+<blockquote>
+<div>El mismo contiene: nombre, apellido, telefono, direccion</div></blockquote>
+<p>detalles = Contiene el arreglo con los detalles del remito</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gestionVentas.lgRemito">
+<span id="gestionventas-lgremito-module"></span><h2>gestionVentas.lgRemito module<a class="headerlink" href="#module-gestionVentas.lgRemito" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgRemito.</code><code class="descname">RegistrarCobroRemito</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnRegistrarCobroRemito.Ui_vtnRegistrarCobroRemito" title="ventanas.vtnRegistrarCobroRemito.Ui_vtnRegistrarCobroRemito"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnRegistrarCobroRemito.Ui_vtnRegistrarCobroRemito</span></code></a></p>
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.agregarRemito">
+<code class="descname">agregarRemito</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.agregarRemito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Agrega el remito seleccionado por el usuario
+a un arreglo de Remitos por cobrar.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.armarItemFactura">
+<code class="descname">armarItemFactura</code><span class="sig-paren">(</span><em>itemRemito</em>, <em>obraSocial</em>, <em>nroFactura</em>, <em>nroLinea</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.armarItemFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Arma el Item de la Factura correspondiente a un Item
+del Remito seleccionado por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>Arreglo con los valores de un item del Remito actual</strong> (<em>itemRemito</em>) &#8211; </li>
+<li><strong>Obra Social seleccionada por el usuario</strong> (<a class="reference internal" href="baseDatos.obraSocial.html#module-baseDatos.obraSocial.obraSocial" title="baseDatos.obraSocial.obraSocial"><em>obraSocial</em></a>) &#8211; </li>
+<li><strong>Numero de Factura Actual</strong> (<em>nroFactura</em>) &#8211; </li>
+<li><strong>Numero de Linea de la Factura Actual</strong> (<em>nroLinea</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.buscarObra">
+<code class="descname">buscarObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.buscarObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca las obras sociales solicitadas por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.buscarRemito">
+<code class="descname">buscarRemito</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.buscarRemito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca el remito ingresado por el usuario. Si existe carga los detalles
+del mismo. Si existe pero ya fue cobrado o si no existe, se le notifica
+al usuario.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.cancelarOperacion">
+<code class="descname">cancelarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.cancelarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Marca a todos los remitos afectados como No Cobrados
+cuando el usuario indica que quiere cancelar la operacion</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.cargarLineObra">
+<code class="descname">cargarLineObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.cargarLineObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el valor del line de obra de acuerdo con
+lo seleccionado por el cliente.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.cargar_obras">
+<code class="descname">cargar_obras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.cargar_obras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga todas las Obras Sociales disponibles</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.confirmarOperacion">
+<code class="descname">confirmarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.confirmarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Verifica si el cliente acepta la operación realizada.
+Si acepta genera la factura correspondiente, si no deshace lo
+realizado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.habilitarObras">
+<code class="descname">habilitarObras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.habilitarObras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Muestra todas las Obras Sociales habilitadas,
+de acuerdo a si existe factura o no.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.limpiarForm">
+<code class="descname">limpiarForm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.limpiarForm" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Limpia la ventana una vez que se finalizó
+la operación.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.mostrarTotal">
+<code class="descname">mostrarTotal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.mostrarTotal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza el label de Importe total, mostrando
+lo que se debe cobrar</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.obtenerValoresTabla">
+<code class="descname">obtenerValoresTabla</code><span class="sig-paren">(</span><em>tabla</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.obtenerValoresTabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Obtiene un arreglo que contiene arreglos
+que representan los valores de cada row</div></blockquote>
+<p>:param tabla :
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.RegistrarCobroRemito.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.RegistrarCobroRemito.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los validadores correspondientes para
+los campos de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gestionVentas.lgRemito.Remito">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgRemito.</code><code class="descname">Remito</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnRemito.Ui_vtnRemito" title="ventanas.vtnRemito.Ui_vtnRemito"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnRemito.Ui_vtnRemito</span></code></a></p>
+<p>Clase que modela la logica de las operaciones
+Devolucion y Modificacion de Remito</p>
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.actualizar">
+<code class="descname">actualizar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.actualizar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza la informacion de las tablas de Remito y Detalles.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.addHandlerSignal">
+<code class="descname">addHandlerSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.addHandlerSignal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.buscarRemito">
+<code class="descname">buscarRemito</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.buscarRemito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra los remitos actuales por numero, de acuerdo al
+valor ingresado por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.cargarDetalles">
+<code class="descname">cargarDetalles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.cargarDetalles" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los detalles de un remito seleccionado por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.cargar_remitos">
+<code class="descname">cargar_remitos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.cargar_remitos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los remitos que se encuentran en el sistema
+en la tabla correspondiente</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gestionVentas.lgRemito.Remito.delete">
+<em class="property">classmethod </em><code class="descname">delete</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento de la ventana de Baja de Remito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.eliminar">
+<code class="descname">eliminar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.eliminar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Elimina un remito seleccionado, una vez que fueron dado de baja todos
+sus detalles</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.eliminarDetalle">
+<code class="descname">eliminarDetalle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.eliminarDetalle" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Elimina un detalle especifico del remito seleccionado por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gestionVentas.lgRemito.Remito.update">
+<em class="property">classmethod </em><code class="descname">update</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.update" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento de la ventana de Modificacion de Remito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.Remito.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.Remito.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los validadores para los campos
+de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gestionVentas.lgRemito.VentaConRemito">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgRemito.</code><code class="descname">VentaConRemito</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnVentaConRemito.Ui_vtnVentaConRemito" title="ventanas.vtnVentaConRemito.Ui_vtnVentaConRemito"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnVentaConRemito.Ui_vtnVentaConRemito</span></code></a></p>
+<p>Clase que modela la logica de la operacion
+de Venta con Remito</p>
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.aceptar">
+<code class="descname">aceptar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.aceptar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Confirma la operacion en curso, y envia
+la informacion necesaria para imprimir el comprobante.
+Si no se ha efectuado ninguna venta, se notifica</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.addHandlerSignal">
+<code class="descname">addHandlerSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.addHandlerSignal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.agregarProducto">
+<code class="descname">agregarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.agregarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Agrega un producto seleccionado al Remito creado</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.buscarCliente">
+<code class="descname">buscarCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.buscarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca los clientes de acuerdo al criterio de
+busqueda establecido por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.buscarClt">
+<code class="descname">buscarClt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.buscarClt" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra la tabla de Clientes de acuerdo a los
+criterios de busqueda impuestos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.buscarProd">
+<code class="descname">buscarProd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.buscarProd" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra la tabla de Productos de acuerdo
+a los criterios de busqueda impuestos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.cancelar">
+<code class="descname">cancelar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.cancelar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Cancela la operacion en curso, anulando el
+Remito creado y restaurando el stock de los productos a
+sus valores originales.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.cargarLines">
+<code class="descname">cargarLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.cargarLines" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los lines correspondientes con la informacion
+del cliente seleccionado</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.cargar_clientes">
+<code class="descname">cargar_clientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.cargar_clientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los clientes cargados en el sistema
+en la Tabla de Clientes</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.cargar_productos">
+<code class="descname">cargar_productos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.cargar_productos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga los productos que se encuentran en el
+sistema en la Tabla de Productos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.descontarCantidad">
+<code class="descname">descontarCantidad</code><span class="sig-paren">(</span><em>detalle</em>, <em>producto</em>, <em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.descontarCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Descuenta la cantidad especificada de un
+determinado producto</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>Detalle Remito</strong> (<em>detalle</em>) &#8211; </li>
+<li><strong>Codigo de Barra del producto</strong> (<a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos.producto" title="baseDatos.productos.producto"><em>producto</em></a>) &#8211; </li>
+<li><strong>Cantidad del Producto</strong> (<em>cantidad</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.eliminarDetalle">
+<code class="descname">eliminarDetalle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.eliminarDetalle" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Elimina el detalle seleccionado por el usuario y actualiza
+el stock del producto en particular.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.limpiarVentana">
+<code class="descname">limpiarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.limpiarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Limpia la ventana actual</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgRemito.VentaConRemito.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgRemito.VentaConRemito.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los validadores correspondientes
+para los campos de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gestionVentas.lgVentas">
+<span id="gestionventas-lgventas-module"></span><h2>gestionVentas.lgVentas module<a class="headerlink" href="#module-gestionVentas.lgVentas" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gestionVentas.lgVentas.Cobrar">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgVentas.</code><code class="descname">Cobrar</code><span class="sig-paren">(</span><em>ventana_padre</em>, <em>total</em>, <em>factura</em>, <em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></code>, <a class="reference internal" href="ventanas.html#ventanas.vtnTiposCobro.Ui_Dialog" title="ventanas.vtnTiposCobro.Ui_Dialog"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnTiposCobro.Ui_Dialog</span></code></a></p>
+<p>Clase que modela la lógica de cobro de una factura</p>
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.actualizar_tabla">
+<code class="descname">actualizar_tabla</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.actualizar_tabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza la tabla de cobros</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.actualizar_total">
+<code class="descname">actualizar_total</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.actualizar_total" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza el importe a pagar en
+el line de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>total</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.cancelar">
+<code class="descname">cancelar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.cancelar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Cancela la operacion de cobrar</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Tupla con la señal indicando cancelacion y None:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.cobroEfectivo">
+<code class="descname">cobroEfectivo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.cobroEfectivo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Se encarga de efectuar el cobro en efectivo del cliente</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.cobroNC">
+<code class="descname">cobroNC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.cobroNC" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Se encarga de efectuar el cobro con NC</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.cobroTC">
+<code class="descname">cobroTC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.cobroTC" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Se encarga de efectuar el cobro con Tarjeta de Crédito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.cobroTD">
+<code class="descname">cobroTD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.cobroTD" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Se encarga de efectuar el cobro con Tarjeta de Débito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.confirmar">
+<code class="descname">confirmar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.confirmar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Confirma los cobros efectuados</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Tupla con la señal indicando exito y lista de cobros:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.Cobrar.eliminar">
+<code class="descname">eliminar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.Cobrar.eliminar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Elimina un pago determinado</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgVentas.</code><code class="descname">DevolucionDeCliente</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnDevolucionDeCliente.Ui_vtnDevolucionDeCliente" title="ventanas.vtnDevolucionDeCliente.Ui_vtnDevolucionDeCliente"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnDevolucionDeCliente.Ui_vtnDevolucionDeCliente</span></code></a></p>
+<p>Clase encargada de modelar la funcionalidad de Devolucion al Cliente</p>
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.armarItem">
+<code class="descname">armarItem</code><span class="sig-paren">(</span><em>item</em>, <em>cantidad</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.armarItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Genera y guarda el Detalle de la Nota de Credito
+correspondiente a una devolucion</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>Arreglo con informacion del Detalle de Factura</strong> (<em>item</em>) &#8211; </li>
+<li><strong>Cantidad Devuelta</strong> (<em>cantidad</em>) &#8211; </li>
+<li><strong>Clave del detalle de factura devuelto</strong> (<em>key</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.buscarFactura">
+<code class="descname">buscarFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.buscarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca y carga los detalles correspondientes
+al Nro de Factura ingresado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.calcularTotal">
+<code class="descname">calcularTotal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.calcularTotal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Calculo el total a devolver en la
+Nota de Credito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Total a Devolver:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.cancelarOperacion">
+<code class="descname">cancelarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.cancelarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Anula la Nota de Credito creada, actuliza el stock
+de los productos a sus valores originales y limpia la ventana.
+Si la Nota de Credito no fue creada limpia la ventana.
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.confirmarOperacion">
+<code class="descname">confirmarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.confirmarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Imprime la Nota de Credito, una vez que el
+usuario confirmo la operacion.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.devolverDetalle">
+<code class="descname">devolverDetalle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.devolverDetalle" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Incorpora el Detalle de Factura seleccionado
+por el usuario a la Nota de Credito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.limpiarVentana">
+<code class="descname">limpiarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.limpiarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Limpia los componentes de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.obtenerValoresItem">
+<code class="descname">obtenerValoresItem</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.obtenerValoresItem" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Obtiene los valores de una fila de
+la Tabla de Detalles de Factura</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Numero de Fila</strong> (<em>row</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Arreglo con valores de la fila:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.plazo">
+<code class="descname">plazo</code><em class="property"> = 7</em><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.plazo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.DevolucionDeCliente.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.DevolucionDeCliente.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gestionVentas.lgVentas.ReintegroCliente">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgVentas.</code><code class="descname">ReintegroCliente</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnReintegroCliente.Ui_vtnReintegroCliente" title="ventanas.vtnReintegroCliente.Ui_vtnReintegroCliente"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnReintegroCliente.Ui_vtnReintegroCliente</span></code></a></p>
+<p>Clase encargada de modelar la funcionalidad de Reintegro al cliente</p>
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.agregarProducto">
+<code class="descname">agregarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.agregarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Agrega un producto a la Nota de Credito</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.buscarFactura">
+<code class="descname">buscarFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.buscarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca la factura indica por el usuario.
+En caso de no existir, notifica lo mismo</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.buscarOs">
+<code class="descname">buscarOs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.buscarOs" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Busca una Obra Social de acuerdo
+a los criterios del usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.cancelarOperacion">
+<code class="descname">cancelarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.cancelarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Cancela la operacion en curso y limpia la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.cargarObras">
+<code class="descname">cargarObras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.cargarObras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga las Obras Sociales disponibles
+en la tabla correspondiente</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.confirmarOperacion">
+<code class="descname">confirmarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.confirmarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Confirma la operacion y asienta los datos de la
+Nota de Credito en la BD.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.filtrarObra">
+<code class="descname">filtrarObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.filtrarObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra la tabla de Obras Sociales de acuerdo
+a los criterios de busqueda impuestos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.limpiarVentana">
+<code class="descname">limpiarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.limpiarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Limpia la ventana una vez que la operacion finalizó
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.obtenerObra">
+<code class="descname">obtenerObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.obtenerObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga la Obra Social seleccionada
+en los campos correspondientes.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.plazo">
+<code class="descname">plazo</code><em class="property"> = 7</em><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.plazo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.ReintegroCliente.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.ReintegroCliente.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los validadores correspondientes a
+los campos de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gestionVentas.lgVentas.VentaContado">
+<em class="property">class </em><code class="descclassname">gestionVentas.lgVentas.</code><code class="descname">VentaContado</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="gui.html#gui.crudWidget.CRUDWidget" title="gui.crudWidget.CRUDWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.crudWidget.CRUDWidget</span></code></a>, <a class="reference internal" href="ventanas.html#ventanas.vtnVentaContado.Ui_vtnVentaContado" title="ventanas.vtnVentaContado.Ui_vtnVentaContado"><code class="xref py py-class docutils literal"><span class="pre">ventanas.vtnVentaContado.Ui_vtnVentaContado</span></code></a></p>
+<p>Clase encargada de modelar el comportamiento de Venta al Contado</p>
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.actualizar">
+<code class="descname">actualizar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.actualizar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza la informacion de la
+tabla de Productos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.addHandlerSignal">
+<code class="descname">addHandlerSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.addHandlerSignal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.agregarProducto">
+<code class="descname">agregarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.agregarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Agrega un producto seleccionada a la Factura</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.buscarObra">
+<code class="descname">buscarObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.buscarObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra la tabla de Obras Sociales de acuerdo
+a los criterios de busqueda impuestos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.buscarProd">
+<code class="descname">buscarProd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.buscarProd" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Filtra la tabla de Productos de acuerdo
+a los criterios de busqueda impuestos</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.calcularTotal">
+<code class="descname">calcularTotal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.calcularTotal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Calcula el total a pagar</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Total a Pagar:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cancelarOperacion">
+<code class="descname">cancelarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cancelarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Cancela la operacion actual, y reestablece
+los stocks a sus valores originales</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cargarObra">
+<code class="descname">cargarObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cargarObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga la informacion de la Obra Social
+seleccionada por el usuario</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cargarProductosSinObra">
+<code class="descname">cargarProductosSinObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cargarProductosSinObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga en la tabla de Productos todos los productos
+sin descuento de Obra Social</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cargar_obras">
+<code class="descname">cargar_obras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cargar_obras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga todos las obras Sociales en el sistema
+en la tabla de Obras Sociales</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.cargar_productos">
+<code class="descname">cargar_productos</code><span class="sig-paren">(</span><em>obraSocial</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.cargar_productos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga en la tabla de Productos todos los
+productos del sistema con los correspondientes descuentos
+de la Obra Social seleccionada</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>obraSocial</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.confirmarOperacion">
+<code class="descname">confirmarOperacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.confirmarOperacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Confirma la operacion si todo ha sido exitoso.
+De lo contrario notifica que la Factura todavia no ha sido
+cobrada o que no se efectuo ninguna venta</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.descontarCantidad">
+<code class="descname">descontarCantidad</code><span class="sig-paren">(</span><em>detalle</em>, <em>producto</em>, <em>cantidad</em><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.descontarCantidad" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza el stock en una determinada cantidad,
+de un producto dado</div></blockquote>
+<p>:param detalle Detalle de la Factura :
+:param producto Codigo de barra del producto:
+:param cantidad Cantidad a descontar:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.eliminarDetalle">
+<code class="descname">eliminarDetalle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.eliminarDetalle" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Elimina el detalle seleccionado por el usuario y actualiza
+el stock del producto en particular.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.habilitarObras">
+<code class="descname">habilitarObras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.habilitarObras" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Muestra las Obras Sociales si no hay una factura creada.
+Si la factura ya se encuentra creada, notifica que no
+es posible cambiar la Obra Social actual.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.limpiarObra">
+<code class="descname">limpiarObra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.limpiarObra" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Permite buscar las obras sociales si aun
+no hay ninguna seleccionada.
+Limpia los campos correspondientes a las
+Obras Sociales, si ya hay una cargada.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.limpiarVentana">
+<code class="descname">limpiarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.limpiarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Limpia la ventana actual</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gestionVentas.lgVentas.VentaContado.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gestionVentas.lgVentas.VentaContado.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gestionVentas">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gestionVentas" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gestionVentas package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-gestionVentas.genComprobantes">gestionVentas.genComprobantes module</a></li>
+<li><a class="reference internal" href="#module-gestionVentas.lgRemito">gestionVentas.lgRemito module</a></li>
+<li><a class="reference internal" href="#module-gestionVentas.lgVentas">gestionVentas.lgVentas module</a></li>
+<li><a class="reference internal" href="#module-gestionVentas">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gestionVentas.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/gestionVentas.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -64,7 +64,7 @@ class Lote(CRUDWidget, Ui_vtnLote):
                         QtGui.QMessageBox.critical(self, 'Error', 'El Lote ya existe.', 'Aceptar')
                 else:
                     QtGui.QMessageBox.critical(self, 'Error',
-                                               'La fehca de vencimiento debe ser mayor a la fecha actual.', 'Aceptar')
+                                               'La fecha de vencimiento debe ser mayor a la fecha actual.', 'Aceptar')
             else:
                 QtGui.QMessageBox.warning(self, 'Atención', 'Hay datos obligatorios que no fueron completados.',
                                       'Aceptar')
@@ -87,7 +87,7 @@ class Lote(CRUDWidget, Ui_vtnLote):
                 self.actualizar()
             else:
                 QtGui.QMessageBox.critical(self, 'Error',
-                                           'La fehca de vencimiento debe ser mayor a la fecha actual.', 'Aceptar')
+                                           'La fecha de vencimiento debe ser mayor a la fecha actual.', 'Aceptar')
         else:
             QtGui.QMessageBox.warning(self, 'Atención', 'No se ha seleccionado un Lote de la tabla.', 'Aceptar')
 

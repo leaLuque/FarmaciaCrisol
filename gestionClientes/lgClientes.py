@@ -119,7 +119,7 @@ class Cliente(CRUDWidget, Ui_vtnCliente):
         """
         remito = RemitoModel.buscarAlta(RemitoModel.cliente, self.sesion, dni).all()
         for r in remito:
-            if r.getCobrado() == None:
+            if not r.getCobrado():
                 return False
         return True
 

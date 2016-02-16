@@ -1,0 +1,19 @@
+[Farmacia]
+Nombre = Farmacia Crisol
+Dirección = Alem 956
+Teléfono = 4458249
+
+[PlazoDevolucion]
+plazo = 7
+
+[PlazoReintegro]
+plazo = 7
+
+[Excel]
+path = /home/leandro/Escritorio/Excel
+
+[BaseDatos]
+user = postgres
+host = localhost
+password = password
+

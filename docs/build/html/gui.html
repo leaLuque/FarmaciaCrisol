@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gui package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gui-package">
+<h1>gui package<a class="headerlink" href="#gui-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-gui.base">
+<span id="gui-base-module"></span><h2>gui.base module<a class="headerlink" href="#module-gui.base" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gui.base.MdiWidget">
+<em class="property">class </em><code class="descclassname">gui.base.</code><code class="descname">MdiWidget</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QWidget</span></code></p>
+<p>Lógica de los widgets de las ventanas.</p>
+<dl class="method">
+<dt id="gui.base.MdiWidget.addHandlerSignal">
+<code class="descname">addHandlerSignal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.addHandlerSignal" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.cancelarVentana">
+<code class="descname">cancelarVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.cancelarVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Limpia los campos y actualiza las tablas de la ventana.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.cargarObjetos">
+<code class="descname">cargarObjetos</code><span class="sig-paren">(</span><em>tabla</em>, <em>queryset</em>, <em>atributos</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.cargarObjetos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Carga la tabla de la ventana con los datos recibidos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>Tabla a rellenar con los datos.</strong> (<em>tabla.</em>) &#8211; </li>
+<li><strong>Datos a colocar en la tabla.</strong> (<em>queryset.</em>) &#8211; </li>
+<li><strong>Atributos correspondientes a los datos.</strong> (<em>atributos.</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.getAllTabla">
+<code class="descname">getAllTabla</code><span class="sig-paren">(</span><em>tabla</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.getAllTabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la informacion actual de la tabla en
+un arreglo que contiene info de cada fila</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>QTableWidget de la ventana</strong> (<em>tabla</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Diccionario con informacion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.getContenidoTabla">
+<code class="descname">getContenidoTabla</code><span class="sig-paren">(</span><em>tabla</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.getContenidoTabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la informacion actual de la tabla en
+un arreglo que contiene info de cada fila</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>QTableWidget de la ventana</strong> (<em>tabla</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Diccionario con informacion:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.getVentana">
+<code class="descname">getVentana</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.getVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Devuelve el nombre de la ventana.
+:return: Ventana.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.itemSeleccionado">
+<code class="descname">itemSeleccionado</code><span class="sig-paren">(</span><em>tabla</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.itemSeleccionado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el item (fila) de la tabla que fue seleccionado.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>tabla</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.limpiarTabla">
+<code class="descname">limpiarTabla</code><span class="sig-paren">(</span><em>tabla</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.limpiarTabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Vacia la tabla.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Tabla a vaciar.</strong> (<em>tabla.</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.mdi">
+<code class="descname">mdi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.mdi" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve una referencia a la ventana padre de la ventana.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.setVentana">
+<code class="descname">setVentana</code><span class="sig-paren">(</span><em>ventana</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.setVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el nombre de la ventana.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Nombre de la ventana.</strong> (<em>ventana.</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.showMsjEstado">
+<code class="descname">showMsjEstado</code><span class="sig-paren">(</span><em>msj</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.showMsjEstado" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Muestra un mensaje en la barra de estado de la la ventana principal.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Mensaje a ser mostrado en la barra de estado.</strong> (<em>msj.</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MdiWidget.validadores">
+<code class="descname">validadores</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MdiWidget.validadores" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los campo requeridos (obligatorios) y los campos no requeridos (opcionales).
+Para una ventana determinada.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Referencia a la ventana.</strong> (<em>model.</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gui.base.MyMdi">
+<em class="property">class </em><code class="descclassname">gui.base.</code><code class="descname">MyMdi</code><span class="sig-paren">(</span><em>mainWindow</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MyMdi" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QMdiSubWindow</span></code></p>
+<p>Lógica de las ventanas.</p>
+<dl class="method">
+<dt id="gui.base.MyMdi.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MyMdi.closeEvent" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Oculta la ventana cuando se dispara el evento close.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>event</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MyMdi.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MyMdi.show" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Hace visible la ventena que se encontraba oculta.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.base.MyMdi.window">
+<code class="descname">window</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.base.MyMdi.window" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la refenrencia a la ventana principal que contiene las subventanas.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return mainWindow:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gui.crudWidget">
+<span id="gui-crudwidget-module"></span><h2>gui.crudWidget module<a class="headerlink" href="#module-gui.crudWidget" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gui.crudWidget.CRUDWidget">
+<em class="property">class </em><code class="descclassname">gui.crudWidget.</code><code class="descname">CRUDWidget</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#gui.base.MdiWidget" title="gui.base.MdiWidget"><code class="xref py py-class docutils literal"><span class="pre">gui.base.MdiWidget</span></code></a></p>
+<p>Clase que permite la comunicación entre ventanas de una misma clase</p>
+<dl class="classmethod">
+<dt id="gui.crudWidget.CRUDWidget.actionWidget">
+<em class="property">classmethod </em><code class="descname">actionWidget</code><span class="sig-paren">(</span><em>tipo</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.actionWidget" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve la instancia según el tipo</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>tipo</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.crudWidget.CRUDWidget.actualizar">
+<code class="descname">actualizar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.actualizar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Actualiza el contenido de la ventana</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.crudWidget.CRUDWidget.bajaValida">
+<code class="descname">bajaValida</code><span class="sig-paren">(</span><em>model</em>, <em>campo</em>, <em>var</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.bajaValida" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Pemite determinar si alguna asociación que
+condicione la baja</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> &#8211; </li>
+<li><strong>campo</strong> &#8211; </li>
+<li><strong>var</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.crudWidget.CRUDWidget.cancelar">
+<code class="descname">cancelar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.cancelar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.crudWidget.CRUDWidget.create">
+<em class="property">classmethod </em><code class="descname">create</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.create" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento para la ventana de alta</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.crudWidget.CRUDWidget.delete">
+<em class="property">classmethod </em><code class="descname">delete</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.delete" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento para la ventana de eliminación</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gui.crudWidget.CRUDWidget.instances">
+<code class="descname">instances</code><em class="property"> = {'C': None, 'R': None, 'U': None, 'D': None}</em><a class="headerlink" href="#gui.crudWidget.CRUDWidget.instances" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gui.crudWidget.CRUDWidget.objectCreated">
+<code class="descname">objectCreated</code><a class="headerlink" href="#gui.crudWidget.CRUDWidget.objectCreated" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gui.crudWidget.CRUDWidget.objectDeleted">
+<code class="descname">objectDeleted</code><a class="headerlink" href="#gui.crudWidget.CRUDWidget.objectDeleted" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gui.crudWidget.CRUDWidget.objectModified">
+<code class="descname">objectModified</code><a class="headerlink" href="#gui.crudWidget.CRUDWidget.objectModified" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.crudWidget.CRUDWidget.read">
+<em class="property">classmethod </em><code class="descname">read</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.read" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento para la ventana de lectura</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.crudWidget.CRUDWidget.update">
+<em class="property">classmethod </em><code class="descname">update</code><span class="sig-paren">(</span><em>mdi</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.crudWidget.CRUDWidget.update" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Establece el comportamiento para la ventana de actualización</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>mdi</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gui.signals">
+<span id="gui-signals-module"></span><h2>gui.signals module<a class="headerlink" href="#module-gui.signals" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="gui.signals.PoolOfWindows">
+<em class="property">class </em><code class="descclassname">gui.signals.</code><code class="descname">PoolOfWindows</code><a class="headerlink" href="#gui.signals.PoolOfWindows" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase que modela un Pool, en donde se mantiene referencias
+de todas las ventanas existentes.</p>
+<dl class="classmethod">
+<dt id="gui.signals.PoolOfWindows.addPool">
+<em class="property">classmethod </em><code class="descname">addPool</code><span class="sig-paren">(</span><em>pool</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.signals.PoolOfWindows.addPool" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Añade el conjunto de ventanas
+pasadas como parametro</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Diccionario que mantiene Nombre de Ventana y Referencia</strong> (<a class="reference internal" href="#gui.signals.PoolOfWindows.pool" title="gui.signals.PoolOfWindows.pool"><em>pool</em></a>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.signals.PoolOfWindows.getPool">
+<em class="property">classmethod </em><code class="descname">getPool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.signals.PoolOfWindows.getPool" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el pool de ventanas</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Diccionario con ventanas:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.signals.PoolOfWindows.getVentana">
+<em class="property">classmethod </em><code class="descname">getVentana</code><span class="sig-paren">(</span><em>name_ventana</em><span class="sig-paren">)</span><a class="headerlink" href="#gui.signals.PoolOfWindows.getVentana" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve una referencia a una ventana particular
+inficada por parametro</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Nombre de ventana</strong> (<em>name_ventana</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Referencia de ventana:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gui.signals.PoolOfWindows.pool">
+<code class="descname">pool</code><em class="property"> = {}</em><a class="headerlink" href="#gui.signals.PoolOfWindows.pool" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="gui.signals.PoolOfWindows.setHandlers">
+<em class="property">classmethod </em><code class="descname">setHandlers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gui.signals.PoolOfWindows.setHandlers" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea los manejadores de señales entre
+ventanas</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gui" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gui package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-gui.base">gui.base module</a></li>
+<li><a class="reference internal" href="#module-gui.crudWidget">gui.crudWidget module</a></li>
+<li><a class="reference internal" href="#module-gui.signals">gui.signals module</a></li>
+<li><a class="reference internal" href="#module-gui">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gui.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/gui.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

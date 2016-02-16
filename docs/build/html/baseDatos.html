@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>baseDatos package &mdash; documentación de Farmacia Crisol - 2.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de Farmacia Crisol - 2.0.1" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basedatos-package">
+<h1>baseDatos package<a class="headerlink" href="#basedatos-package" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="baseDatos.clientes.html">baseDatos.clientes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.clientes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.clientes.html#module-baseDatos.clientes.cliente">baseDatos.clientes.cliente module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.clientes.html#module-baseDatos.clientes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="baseDatos.obraSocial.html">baseDatos.obraSocial package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.obraSocial.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.obraSocial.html#module-baseDatos.obraSocial.obraSocial">baseDatos.obraSocial.obraSocial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.obraSocial.html#module-baseDatos.obraSocial">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="baseDatos.productos.html">baseDatos.productos package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.productos.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos.loteProducto">baseDatos.productos.loteProducto module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos.medicamento">baseDatos.productos.medicamento module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos.producto">baseDatos.productos.producto module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.productos.html#module-baseDatos.productos">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="baseDatos.ventas.html">baseDatos.ventas package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.ventas.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.ventas.html#module-baseDatos.ventas.venta">baseDatos.ventas.venta module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseDatos.ventas.html#module-baseDatos.ventas">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+<div class="section" id="module-baseDatos.conexionBD">
+<span id="basedatos-conexionbd-module"></span><h2>baseDatos.conexionBD module<a class="headerlink" href="#module-baseDatos.conexionBD" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.conexionBD.Conexion">
+<em class="property">class </em><code class="descclassname">baseDatos.conexionBD.</code><code class="descname">Conexion</code><span class="sig-paren">(</span><em>user='postgres'</em>, <em>host='localhost'</em>, <em>password='password'</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.conexionBD.Conexion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase encargada de establecer la comunicacion de la
+aplicacion con el motor de Base de Datos</p>
+<dl class="method">
+<dt id="baseDatos.conexionBD.Conexion.crearSesion">
+<code class="descname">crearSesion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.conexionBD.Conexion.crearSesion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Crea la sesion correspondiente para poder
+interactuar con la BD.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Return Sesion con la BD:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baseDatos.conexionBD.CreacionTabla">
+<em class="property">class </em><code class="descclassname">baseDatos.conexionBD.</code><code class="descname">CreacionTabla</code><span class="sig-paren">(</span><em>user='postgres'</em>, <em>host='localhost'</em>, <em>password='password'</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.conexionBD.CreacionTabla" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clase encargada de la creacion de las tablas en la Base de Datos</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.objetoBase">
+<span id="basedatos-objetobase-module"></span><h2>baseDatos.objetoBase module<a class="headerlink" href="#module-baseDatos.objetoBase" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.objetoBase.ObjetoBase">
+<em class="property">class </em><code class="descclassname">baseDatos.objetoBase.</code><code class="descname">ObjetoBase</code><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Objeto base del cual heredan los objetos a almacenar en la base de datos.</p>
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.alta">
+<code class="descname">alta</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.alta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Da de alta un objeto que se encuentra dado de baja en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.bajaFisica">
+<code class="descname">bajaFisica</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.bajaFisica" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Da de baja fisicamente el objeto</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>Sesion actual con la Base de Datos</strong> (<em>sesion</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.borrar">
+<code class="descname">borrar</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.borrar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Da de baja (lógica) del objeto almacenado en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.objetoBase.ObjetoBase.buscar">
+<em class="property">classmethod </em><code class="descname">buscar</code><span class="sig-paren">(</span><em>campo</em>, <em>sesion</em>, <em>varBusq</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.buscar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve un arreglo con el objeto que coincide con el contenido de la variable de busqueda,
+y que fue o no dado de baja.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>campo</strong> &#8211; </li>
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>varBusq</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return objetos:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.objetoBase.ObjetoBase.buscarAlta">
+<em class="property">classmethod </em><code class="descname">buscarAlta</code><span class="sig-paren">(</span><em>campo</em>, <em>sesion</em>, <em>varBusq</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.buscarAlta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve un arreglo con el objeto que coincide con el contenido de la variable de busqueda,
+y que no fue dado de baja.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>campo</strong> &#8211; </li>
+<li><strong>sesion</strong> &#8211; </li>
+<li><strong>varBusq</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return objetosAlta:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="baseDatos.objetoBase.ObjetoBase.buscarTodos">
+<em class="property">classmethod </em><code class="descname">buscarTodos</code><span class="sig-paren">(</span><em>campo</em>, <em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.buscarTodos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve un arreglo con todos los objetos almacenados en la base de datos que no fueron dados de baja.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><ul class="first simple">
+<li><strong>campo</strong> &#8211; </li>
+<li><strong>sesion</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return objetosAlta:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.getBaja">
+<code class="descname">getBaja</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.getBaja" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Devuelve el estado de baja del objeto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return baja:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.guardar">
+<code class="descname">guardar</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.guardar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Guarda el objeto en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return bool:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.modificar">
+<code class="descname">modificar</code><span class="sig-paren">(</span><em>sesion</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.modificar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Modifica los datos del objeto almacenado en la base de datos.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>sesion</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="baseDatos.objetoBase.ObjetoBase.setBaja">
+<code class="descname">setBaja</code><span class="sig-paren">(</span><em>baja</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.objetoBase.ObjetoBase.setBaja" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><blockquote>
+<div>Setea el estado de baja del objeto.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parámetros:</th><td class="field-body"><strong>baja</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Devuelve:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos.usuario">
+<span id="basedatos-usuario-module"></span><h2>baseDatos.usuario module<a class="headerlink" href="#module-baseDatos.usuario" title="Enlazar permanentemente con este título">¶</a></h2>
+<dl class="class">
+<dt id="baseDatos.usuario.Usuario">
+<em class="property">class </em><code class="descclassname">baseDatos.usuario.</code><code class="descname">Usuario</code><span class="sig-paren">(</span><em>id_usuario</em>, <em>password</em>, <em>role</em><span class="sig-paren">)</span><a class="headerlink" href="#baseDatos.usuario.Usuario" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Clases base: <a class="reference internal" href="#baseDatos.objetoBase.ObjetoBase" title="baseDatos.objetoBase.ObjetoBase"><code class="xref py py-class docutils literal"><span class="pre">baseDatos.objetoBase.ObjetoBase</span></code></a></p>
+<p>Clase que modela al Usuario en el sistema</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-baseDatos">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-baseDatos" title="Enlazar permanentemente con este título">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">baseDatos package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-baseDatos.conexionBD">baseDatos.conexionBD module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.objetoBase">baseDatos.objetoBase module</a></li>
+<li><a class="reference internal" href="#module-baseDatos.usuario">baseDatos.usuario module</a></li>
+<li><a class="reference internal" href="#module-baseDatos">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/baseDatos.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Eloy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/baseDatos.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

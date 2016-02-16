@@ -352,7 +352,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         if self.lineRazon.isEnabled():
             self.filtrarObra()
 
-        elif not self.lineRazon.isEnabled() and self.tableNC.rowCount() != 0:
+        elif not self.lineRazon.isEnabled() and (self.tableNC.rowCount() != 0 or self.tableFactura.rowCount() != 0):
             QtGui.QMessageBox.information(self,"Aviso","Imposible cambiar de Obra Social. Ya se ha seleccionado\
                                                        una")
         else:
@@ -400,11 +400,8 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 self.facturaSeleccionada=FacturaModel.existeFactura(int(self.numeroFacturaActual),self.sesion)
                 if self.facturaSeleccionada==None:
                     QtGui.QMessageBox.information(self,"Aviso","La factura seleccionada no existe")
-                elif self.facturaSeleccionada.getObra() != None:
-                    #if self.facturaSeleccionada.getObra() != self.obraSocial:
-                    #    QtGui.QMessageBox.information(self,"Aviso","La Obra Social seleccionada no corresponde con la factura")
-                    #else:
-                    QtGui.QMessageBox.information(self,"Aviso","Esta factura ya fue cobrada con Obra Social")
+                elif self.facturaSeleccionada.getObra() != None and self.facturaSeleccionada.getObra() != self.obraSocial:
+                    QtGui.QMessageBox.information(self,"Aviso","La Obra Social seleccionada no corresponde con la factura")
                 elif self.facturaSeleccionada.getFechaEmision()+timedelta(days=int(self.plazo))<date.today():
                     QtGui.QMessageBox.information(self,"Aviso","El tiempo permitido para el reintegro ha expirado")
                 elif self.facturaSeleccionada.estaLiquidada(self.sesion):
@@ -413,8 +410,12 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                     QtGui.QMessageBox.information(self,"Aviso","La factura ya posee una Nota de Crédito")
                 else:
                     self.lineNumeroFac.setEnabled(False)
-                    self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.sesion),
-                        ["producto","cantidad","importe"])
+                    if self.facturaSeleccionada.getObra() == None:
+                        self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetalles(self.obraSocial, self.sesion),
+                            ["producto","cantidad","importe"])
+                    else:
+                        self.cargarObjetos(self.tableFactura,self.facturaSeleccionada.getDetallesSinDescuento(self.sesion),
+                            ["producto","cantidad","importe"])
 
     def agregarProducto(self):
         """
@@ -426,16 +427,13 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         descuento = DescuentoModel.buscar(DescuentoModel.obra_social,self.sesion,self.obraSocial).\
                         filter(DescuentoModel.producto==producto)[0].descuento
         cantidad = int(self.tableFactura.item(itemActual.row(), 1).text())
-        importe = float(self.tableFactura.item(itemActual.row(), 2).text()) - \
-                    float(self.tableFactura.item(itemActual.row(), 2).text())*descuento
-        #medio = float(self.tableFactura.item(itemActual.row(),2).text())- importe
-        importeEfectivo = float("%.2f" % (importe))
+        importe = float(self.tableFactura.item(itemActual.row(), 2).text()) * descuento
         row = self.tableNC.rowCount()
         self.tableNC.insertRow(row)
         self.tableNC.setItem(row, 0, QtGui.QTableWidgetItem(str(producto)))
         self.tableNC.setItem(row, 1, QtGui.QTableWidgetItem(str(cantidad)))
-        self.tableNC.setItem(row, 2, QtGui.QTableWidgetItem(str(importeEfectivo)))
-        self.detallesReintegrables.append([int(self.numeroFacturaActual),itemActual.row()+1,descuento,importeEfectivo])
+        self.tableNC.setItem(row, 2, QtGui.QTableWidgetItem(str(importe)))
+        self.detallesReintegrables.append([int(self.numeroFacturaActual),itemActual.row()+1,descuento,importe])
         self.detallesImprimibles.append([producto,cantidad,descuento,importe])
         self.tableFactura.hideRow(itemActual.row())
 
@@ -458,7 +456,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         self.tableOs.setEnabled(True)
         self.lineNumeroFac.setEnabled(True)
         self.gbFactura.setEnabled(False)
-        self.gbFactura.setEnabled(False)
+        self.gbNotaCredito.setEnabled(False)
 
     def confirmarOperacion(self):
         """
@@ -468,10 +466,11 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
         """
 
         if self.tableNC.rowCount() == 0 :
-            QtGui.QMessageBox.information(self,"Aviso","No se han agregado productos a la Nota de Crédito")
+            QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("No se han agregado productos a la Nota de Crédito"))
 
         else:
-            ok = QtGui.QMessageBox.information(self,"Confirmacion","¿Desea generar la Nota Crédito?",\
+            ok = QtGui.QMessageBox.information(self,QtCore.QString.fromUtf8("Confirmación"),\
+                                               QtCore.QString.fromUtf8("¿Desea generar la Nota Crédito?"),\
                                                QtGui.QMessageBox.Cancel, QtGui.QMessageBox.Accepted)
 
             if (ok==1):
@@ -482,7 +481,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                     detalleNC.setImporte(data[3])
                     detalleNC.setDescuento(data[2])
                     detalleNC.guardar(self.sesion)
-                QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito ha sido generada con exito")
+                QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("La Nota de Crédito ha sido generada con éxito"))
                 self.facturaSeleccionada.setNC(notaCredito.numero)
                 self.facturaSeleccionada.modificar(self.sesion)
 
@@ -495,7 +494,7 @@ class ReintegroCliente(CRUDWidget, Ui_vtnReintegroCliente):
                 self.limpiarVentana()
 
             else:
-                QtGui.QMessageBox.information(self,"Aviso","La Nota de Credito no ha sido generada")
+                QtGui.QMessageBox.information(self,"Aviso",QtCore.QString.fromUtf8("La Nota de Crédito no ha sido generada"))
 
     def cancelarOperacion(self):
         """

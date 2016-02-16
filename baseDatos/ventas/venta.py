@@ -7,6 +7,7 @@ from baseDatos.productos import ObjetoBase
 from baseDatos.productos import Producto
 from baseDatos.productos import LoteProducto
 from baseDatos.obraSocial import FacturaLiquidacion
+from baseDatos.obraSocial import Descuento
 
 
 class Remito(ObjetoBase):
@@ -295,7 +296,37 @@ class Factura(ObjetoBase):
         :return Coleccion de los detalles de Factura:
         :rtype Coleccion de objetos tipo DetalleFactura:
         """
-        return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==self.numero)
+        return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==self.numero).\
+                                            filter(DetalleFactura.baja == False)
+
+    def getDetalles(self,obra, sesion):
+        """
+            Devuelve los detalles que no fueron facturados con descuento
+            y ahora si poseen descuento
+        :param obrasocial Nombre de la obra social:
+        :param sesion Sesion actual con la Base de Datos:
+        :return:
+        """
+
+        query = sesion.query(DetalleFactura).join(Producto).\
+                            filter(DetalleFactura.producto == Producto.codigo_barra).\
+                            filter(DetalleFactura.id_factura == self.numero).\
+                            filter(DetalleFactura.baja ==  False).\
+                            join(Descuento).filter(Descuento.producto == DetalleFactura.producto).\
+                            filter(Descuento.obra_social == obra).filter(Descuento.descuento > 0)
+
+        return query
+
+    def getDetallesSinDescuento(self,sesion):
+        """
+            Devuelve los detalles facturados sin descuento
+        :param sesion:
+        :return:
+        """
+
+        return sesion.query(DetalleFactura).filter(DetalleFactura.id_factura==self.numero).\
+                                            filter(DetalleFactura.descuento == 0).\
+                                            filter(DetalleFactura.baja == False)
 
     def getAnulado(self):
         """
@@ -499,7 +530,6 @@ class DetalleFactura(ObjetoBase):
             loteP.modificar(sesion)
         self.eliminarLotesAsociados(sesion)
         self.borrar(sesion)
-
 
 class NotaCredito(ObjetoBase):
     """
